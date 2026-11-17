@@ -1,0 +1,14 @@
+{
+  "name": "brand-hub-mcp",
+  "version": "1.0.0",
+  "description": "Model Context Protocol (MCP) server for Brand Guidelines and Assets",
+  "main": "index.js",
+  "bin": {
+    "brand-hub-mcp": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": ["mcp", "brand", "design-tokens", "llm", "claude"],
+  "license": "MIT"
+}

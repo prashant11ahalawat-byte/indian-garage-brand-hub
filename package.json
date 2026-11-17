@@ -1,0 +1,12 @@
+{
+  "name": "indian-garage-brand-hub",
+  "version": "2.0.0",
+  "description": "Interactive Digital Brand Hub & 3D Generative Asset Studio for The Indian Garage Co.",
+  "scripts": {
+    "start": "node server.js",
+    "mcp": "node mcp-server/index.js"
+  },
+  "keywords": ["brand-hub", "tigc", "indian-garage", "mcp", "brand-portal", "generative-assets"],
+  "author": "The Indian Garage Co.",
+  "license": "ISC"
+}
