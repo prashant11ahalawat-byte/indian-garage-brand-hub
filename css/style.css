@@ -1529,3 +1529,363 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================================================
+   TIGC INVESTOR & FRANCHISE PROSPECTUS ADDITIONS
+   ========================================================================== */
+
+/* Ambient Audio Visualizer Bar */
+.ambient-audio-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(11, 15, 25, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #E2E8F0;
+  transition: all 0.2s ease;
+}
+
+.ambient-audio-bar:hover {
+  border-color: var(--brand-secondary);
+}
+
+.ambient-audio-btn {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+}
+
+.audio-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #64748B;
+  transition: background 0.3s ease;
+}
+
+.audio-live-dot.active {
+  background: #10B981;
+  box-shadow: 0 0 8px #10B981;
+  animation: pulse-dot 1.5s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+/* Investment & Scale Metric Cards */
+.investor-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.investor-stat-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.investor-stat-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--brand-secondary);
+}
+
+.investor-stat-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--brand-secondary);
+}
+
+.stat-metric-huge {
+  font-family: var(--font-display);
+  font-size: 44px;
+  line-height: 1;
+  color: var(--brand-primary);
+  margin-bottom: 6px;
+  letter-spacing: 0.02em;
+}
+
+.stat-metric-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.stat-metric-subtext {
+  font-size: 13px;
+  color: var(--text-color);
+  line-height: 1.4;
+}
+
+/* Multi-Brand Portfolio Tabs */
+.brand-portfolio-tabs {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 24px;
+  overflow-x: auto;
+}
+
+.portfolio-tab-btn {
+  background: transparent;
+  border: none;
+  padding: 12px 20px;
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.portfolio-tab-btn:hover {
+  color: var(--text-color);
+}
+
+.portfolio-tab-btn.active {
+  color: var(--brand-secondary);
+  border-bottom-color: var(--brand-secondary);
+}
+
+.portfolio-panel {
+  display: none;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 28px;
+}
+
+.portfolio-panel.active {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Interactive Franchise ROI Calculator */
+.franchise-calculator-container {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 32px;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 36px;
+  margin-top: 24px;
+}
+
+.calc-slider-group {
+  margin-bottom: 24px;
+}
+
+.calc-slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.calc-slider-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.calc-slider-value {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--brand-secondary);
+}
+
+.calc-range-input {
+  width: 100%;
+  height: 6px;
+  background: var(--border-color);
+  border-radius: 3px;
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.calc-range-input::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--brand-secondary);
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  cursor: pointer;
+}
+
+.calc-output-box {
+  background: rgba(33, 51, 90, 0.04);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.calc-kpi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.calc-kpi-item {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  padding: 14px;
+  border-radius: 6px;
+}
+
+.calc-kpi-title {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.calc-kpi-val {
+  font-family: var(--font-display);
+  font-size: 26px;
+  color: var(--brand-primary);
+  line-height: 1.1;
+}
+
+.payback-highlight-banner {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid #10B981;
+  border-radius: 6px;
+  padding: 14px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.payback-highlight-banner strong {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: #047857;
+}
+
+/* Brand Ambassador SKY Banner */
+.ambassador-feature-box {
+  background: linear-gradient(135deg, #0B0F19 0%, #172033 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  padding: 40px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 32px;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.ambassador-tagline {
+  font-family: var(--font-display);
+  font-size: 42px;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  margin: 12px 0;
+  color: #FFFFFF;
+}
+
+.ambassador-badge {
+  display: inline-block;
+  background: var(--brand-secondary);
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Supply Chain Comparison Table */
+.supply-chain-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 13.5px;
+}
+
+.supply-chain-table th {
+  background: var(--bg-surface);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.supply-chain-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.supply-chain-table tr.tigc-row {
+  background: rgba(219, 33, 40, 0.04);
+  font-weight: 600;
+}
+
+.supply-chain-table tr.tigc-row td:first-child {
+  color: var(--brand-secondary);
+  border-left: 3px solid var(--brand-secondary);
+}
+
+@media (max-width: 960px) {
+  .portfolio-panel.active {
+    grid-template-columns: 1fr;
+  }
+  .franchise-calculator-container {
+    grid-template-columns: 1fr;
+  }
+  .ambassador-feature-box {
+    grid-template-columns: 1fr;
+  }
+}

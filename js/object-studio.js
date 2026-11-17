@@ -272,28 +272,90 @@ class ObjectStudio {
         }
       }
     } else if (this.modelName === 'logo') {
-      // 3D Extruded Logo (Indian Garage G-Unit Monogram)
-      const a = 12;
-      for (let z = -3; z <= 3; z++) {
-        // Left C/G-bracket
-        for (let y = -a; y <= a; y++) {
-          pushVoxel(-a, y, z, 1.0, true);
+      // Official Indian Garage Co. G-Unit Monogram (from STACK-03.svg)
+      // Vector-exact 3D voxelization via high-precision canvas sampling
+      try {
+        const offCanvas = document.createElement('canvas');
+        const gw = 38;
+        const gh = 44;
+        offCanvas.width = gw;
+        offCanvas.height = gh;
+        const octx = offCanvas.getContext('2d', { willReadFrequently: true });
+
+        const emblemSvgPaths = [
+          "M1207.66,1140.2c-.17,31.44-28.4,55.96-59.93,55.96h-59.22s-.04-.02-.04-.04v-45.84s.02-.05.04-.05h52.3c11.46,0,20.76-9.26,20.76-20.7v-33.99s-.03-.05-.05-.05h-54.43s-.04-.02-.04-.04v-45.66s.02-.05.04-.05h100.59v90.48Z",
+          "M1207.76,1015.53h-45.96s-.05-.02-.05-.04v-6.22c0-11.29-9.52-20.44-21.25-20.44h-51.98s-.04-.02-.04-.04v-46.01s.02-.04.04-.04h57.51c32.58,0,61.64,25.34,61.74,56.67l.05,16.09s-.03.04-.05.04",
+          "M953.21,1140.21c.17,31.44,28.4,55.96,59.93,55.96h59.22s.04-.02.04-.04v-45.84s-.02-.05-.04-.05h-52.3c-11.46,0-20.76-9.26-20.76-20.7v-33.99s.03-.05.05-.05h54.43s.04-.02.04-.04v-45.66s-.02-.05-.04-.05h-100.59v90.48Z",
+          "M953.12,1015.53h45.96s.05-.02.05-.04v-6.22c0-11.29,9.52-20.44,21.25-20.44h51.98s.04-.02.04-.04v-46.02s-.02-.04-.04-.04h-57.51c-32.58,0-61.64,25.34-61.74,56.67l-.05,16.09s.03.04.05.04"
+        ];
+
+        octx.clearRect(0, 0, gw, gh);
+        octx.save();
+        const padding = 3;
+        const scale = (gw - padding * 2) / 255;
+        octx.translate(padding, padding);
+        octx.scale(scale, scale);
+        octx.translate(-953, -890);
+        octx.fillStyle = '#DB2128';
+
+        emblemSvgPaths.forEach(pathStr => {
+          if (typeof Path2D !== 'undefined') {
+            octx.fill(new Path2D(pathStr));
+          }
+        });
+        octx.restore();
+
+        const imgData = octx.getImageData(0, 0, gw, gh).data;
+        const depth = 3;
+        let count = 0;
+
+        for (let py = 0; py < gh; py++) {
+          for (let px = 0; px < gw; px++) {
+            const alpha = imgData[(py * gw + px) * 4 + 3];
+            if (alpha > 70) {
+              const vx = (px - gw / 2) * 0.72;
+              const vy = -(py - gh / 2) * 0.72; // invert so top is top
+              for (let z = -depth; z <= depth; z++) {
+                const isEdge = Math.abs(z) === depth;
+                pushVoxel(vx, vy, z, isEdge ? 1.0 : 0.88, true);
+                count++;
+              }
+            }
+          }
         }
-        for (let x = -a; x <= -3; x++) {
-          pushVoxel(x, a, z, 1.0, true);
-          pushVoxel(x, -a, z, 1.0, true);
+
+        // Procedural fallback if offscreen canvas was blank
+        if (count === 0) {
+          throw new Error("Canvas raster produced 0 voxels, running procedural fallback");
         }
-        // Right G-bracket
-        for (let y = -a; y <= a; y++) {
-          pushVoxel(a, y, z, 1.0, true);
-        }
-        for (let x = 3; x <= a; x++) {
-          pushVoxel(x, a, z, 1.0, true);
-          pushVoxel(x, -a, z, 1.0, true);
-        }
-        // Center horizontal bar for G
-        for (let x = 0; x <= a - 3; x++) {
-          pushVoxel(x, 0, z, 0.95, true);
+      } catch (e) {
+        // High-precision geometric fallback for G-Unit emblem
+        const w = 11;
+        const h = 13;
+        for (let z = -3; z <= 3; z++) {
+          for (let y = -h; y <= h; y++) {
+            // Left bracket
+            pushVoxel(-w, y, z, 1.0, true);
+            pushVoxel(-w + 1, y, z, 0.95, true);
+            // Right bracket
+            pushVoxel(w, y, z, 1.0, true);
+            pushVoxel(w - 1, y, z, 0.95, true);
+          }
+          for (let x = -w; x <= -2; x++) {
+            pushVoxel(x, h, z, 1.0, true);
+            pushVoxel(x, -h, z, 1.0, true);
+          }
+          for (let x = 2; x <= w; x++) {
+            pushVoxel(x, h, z, 1.0, true);
+            pushVoxel(x, -h, z, 1.0, true);
+          }
+          // Center horizontal crossbars
+          for (let x = 1; x <= w - 3; x++) {
+            pushVoxel(x, 0, z, 1.0, true);
+          }
+          for (let x = -w + 3; x <= -1; x++) {
+            pushVoxel(x, 0, z, 1.0, true);
+          }
         }
       }
     }
