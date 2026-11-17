@@ -133,18 +133,21 @@ function renderSVGs() {
   const wordmarkColor = isDarkStage ? "#FFFFFF" : navyColor;
 
   // Exact Monogram (STACK-03.svg)
+  const isAccentStage = document.getElementById('logo-stage')?.classList.contains('stage-accent');
+  const stageSymbolColor = isAccentStage ? "#FFFFFF" : accentColor;
+
   const monogramSVG = `
-    <svg viewBox="940 885 280 320" class="brand-symbol-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path fill="${accentColor}" d="M1207.66,1140.2c-.17,31.44-28.4,55.96-59.93,55.96h-59.22s-.04-.02-.04-.04v-45.84s.02-.05.04-.05h52.3c11.46,0,20.76-9.26,20.76-20.7v-33.99s-.03-.05-.05-.05h-54.43s-.04-.02-.04-.04v-45.66s.02-.05.04-.05h100.59v90.48Z"/>
-      <path fill="${accentColor}" d="M1207.76,1015.53h-45.96s-.05-.02-.05-.04v-6.22c0-11.29-9.52-20.44-21.25-20.44h-51.98s-.04-.02-.04-.04v-46.01s.02-.04.04-.04h57.51c32.58,0,61.64,25.34,61.74,56.67l.05,16.09s-.03.04-.05.04"/>
-      <path fill="${accentColor}" d="M953.21,1140.21c.17,31.44,28.4,55.96,59.93,55.96h59.22s.04-.02.04-.04v-45.84s-.02-.05-.04-.05h-52.3c-11.46,0-20.76-9.26-20.76-20.7v-33.99s.03-.05.05-.05h54.43s.04-.02.04-.04v-45.66s-.02-.05-.04-.05h-100.59v90.48Z"/>
-      <path fill="${accentColor}" d="M953.12,1015.53h45.96s.05-.02.05-.04v-6.22c0-11.29,9.52-20.44,21.25-20.44h51.98s.04-.02.04-.04v-46.02s-.02-.04-.04-.04h-57.51c-32.58,0-61.64,25.34-61.74,56.67l-.05,16.09s.03.04.05.04"/>
+    <svg viewBox="940 885 280 320" style="width: 100%; height: 100%; display: block;" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill="${stageSymbolColor}" d="M1207.66,1140.2c-.17,31.44-28.4,55.96-59.93,55.96h-59.22s-.04-.02-.04-.04v-45.84s.02-.05.04-.05h52.3c11.46,0,20.76-9.26,20.76-20.7v-33.99s-.03-.05-.05-.05h-54.43s-.04-.02-.04-.04v-45.66s.02-.05.04-.05h100.59v90.48Z"/>
+      <path fill="${stageSymbolColor}" d="M1207.76,1015.53h-45.96s-.05-.02-.05-.04v-6.22c0-11.29-9.52-20.44-21.25-20.44h-51.98s-.04-.02-.04-.04v-46.01s.02-.04.04-.04h57.51c32.58,0,61.64,25.34,61.74,56.67l.05,16.09s-.03.04-.05.04"/>
+      <path fill="${stageSymbolColor}" d="M953.21,1140.21c.17,31.44,28.4,55.96,59.93,55.96h59.22s.04-.02.04-.04v-45.84s-.02-.05-.04-.05h-52.3c-11.46,0-20.76-9.26-20.76-20.7v-33.99s.03-.05.05-.05h54.43s.04-.02.04-.04v-45.66s-.02-.05-.04-.05h-100.59v90.48Z"/>
+      <path fill="${stageSymbolColor}" d="M953.12,1015.53h45.96s.05-.02.05-.04v-6.22c0-11.29,9.52-20.44,21.25-20.44h51.98s.04-.02.04-.04v-46.02s-.02-.04-.04-.04h-57.51c-32.58,0-61.64,25.34-61.74,56.67l-.05,16.09s.03.04.05.04"/>
     </svg>
   `;
 
   // Exact Horizontal Lockup (STACK-02.svg)
   const horizontalSVG = `
-    <svg viewBox="295 960 1570 240" style="width: 100%; height: auto; max-height: 90px; display: block;" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="295 960 1570 240" style="width: 100%; height: auto; max-height: 70px; display: block;" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g>
         <rect fill="${wordmarkColor}" x="309.88" y="977.08" width="32.35" height="205.83"/>
         <polygon fill="${wordmarkColor}" points="366.33 977.08 406.91 977.08 438.37 1100.29 438.97 1100.29 438.97 977.08 467.78 977.08 467.78 1182.92 434.55 1182.92 395.74 1032.66 395.15 1032.66 395.15 1182.92 366.33 1182.92 366.33 977.08"/>
@@ -169,6 +172,25 @@ function renderSVGs() {
     </svg>
   `;
 
+  // Monospaced Industrial Wordmark (STACK-05.svg)
+  const industrialTagSVG = `
+    <svg viewBox="540 980 1120 230" style="width: 100%; height: auto; max-height: 52px; display: block;" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g>
+        <rect fill="${wordmarkColor}" x="549.22" y="992.9" width="32.35" height="205.83"/>
+        <polygon fill="${wordmarkColor}" points="605.68 992.9 646.25 992.9 677.72 1116.1 678.31 1116.1 678.31 992.9 707.12 992.9 707.12 1198.73 673.9 1198.73 635.08 1048.47 634.49 1048.47 634.49 1198.73 605.68 1198.73 605.68 992.9"/>
+        <path fill="${wordmarkColor}" d="M731.23,992.9h49.4c32.35,0,48.23,17.94,48.23,50.87v104.09c0,32.93-15.88,50.87-48.23,50.87h-49.4v-205.83ZM780.05,1169.32c10.29,0,16.47-5.29,16.47-19.99v-107.03c0-14.7-6.17-19.99-16.47-19.99h-16.47v147.02h16.47Z"/>
+        <rect fill="${wordmarkColor}" x="850.62" y="992.9" width="32.35" height="205.83"/>
+        <path fill="${wordmarkColor}" d="M932.07,992.89h43.81l33.52,205.84h-32.35l-5.88-40.88v.59h-36.75l-5.88,40.28h-30l33.52-205.84ZM967.35,1130.51l-14.41-101.74h-.59l-14.12,101.74h29.11Z"/>
+        <polygon fill="${wordmarkColor}" points="1024.98 992.9 1065.56 992.9 1097.02 1116.1 1097.61 1116.1 1097.61 992.9 1126.43 992.9 1126.43 1198.73 1093.2 1198.73 1054.39 1048.47 1053.8 1048.47 1053.8 1198.73 1024.98 1198.73 1024.98 992.9"/>
+        <path fill="${wordmarkColor}" d="M1197.24,1149.92v-108.21c0-32.93,16.47-51.75,48.23-51.75s48.22,18.82,48.22,51.75v17.64h-30.58v-19.7c0-14.7-6.47-20.29-16.76-20.29s-16.76,5.59-16.76,20.29v112.62c0,14.7,6.47,20,16.76,20s16.76-5.29,16.76-20v-40.28h-16.17v-29.41h46.76v67.34c0,32.93-16.47,51.75-48.22,51.75s-48.23-18.82-48.23-51.75"/>
+        <path fill="${wordmarkColor}" d="M1339.56,992.89h43.81l33.52,205.84h-32.35l-5.88-40.88v.59h-36.75l-5.88,40.28h-30l33.52-205.84ZM1374.85,1130.51l-14.41-101.74h-.59l-14.12,101.74h29.11Z"/>
+        <path fill="${wordmarkColor}" d="M1432.48,992.9h47.93c33.52,0,47.93,15.58,47.93,47.34v12.65c0,21.17-6.77,34.7-21.18,40.58v.59c16.17,5,21.47,20.29,21.47,43.52v36.17c0,10,.29,17.35,3.53,25h-32.93c-1.76-5.29-2.94-8.52-2.94-25.29v-37.64c0-19.11-5.58-25.29-20.29-25.29h-11.18v88.21h-32.35v-205.83ZM1476.59,1081.11c12.06,0,19.41-5.29,19.41-21.76v-15.88c0-14.7-5-21.17-16.47-21.17h-14.7v58.81h11.76Z"/>
+        <path fill="${wordmarkColor}" d="M1575.98,992.89h43.81l33.52,205.84h-32.35l-5.88-40.88v.59h-36.75l-5.88,40.28h-30l33.52-205.84ZM1611.27,1130.51l-14.41-101.74h-.59l-14.12,101.74h29.11Z"/>
+        <polygon fill="${wordmarkColor}" points="1668.89 992.9 1758.29 992.9 1758.29 1022.31 1702.42 1022.31 1702.42 1076.71 1746.82 1076.71 1746.82 1106.12 1702.42 1106.12 1702.42 1169.32 1758.29 1169.32 1758.29 1198.73 1668.89 1198.73 1668.89 992.9"/>
+      </g>
+    </svg>
+  `;
+
   const sidebarSymbol = document.getElementById('sidebar-logo-container');
   if (sidebarSymbol) sidebarSymbol.innerHTML = monogramSVG;
 
@@ -177,6 +199,9 @@ function renderSVGs() {
 
   const lockupContainer = document.getElementById('logo-lockup-preview');
   if (lockupContainer) lockupContainer.innerHTML = horizontalSVG;
+
+  const monoPreview = document.getElementById('logo-mono-preview');
+  if (monoPreview) monoPreview.innerHTML = industrialTagSVG;
 }
 
 // --------------------------------------------------------------------------
@@ -264,78 +289,114 @@ function setupThemeToggle() {
 // --------------------------------------------------------------------------
 function setupLogoControls() {
   const stage = document.getElementById('logo-stage');
-  const btnLight = document.getElementById('btn-stage-light');
-  const btnDark = document.getElementById('btn-stage-dark');
-  const btnGrid = document.getElementById('btn-stage-grid');
-  const btnClearspace = document.getElementById('btn-stage-clearspace');
-  const btnCenterMark = document.getElementById('btn-center-mark');
-  const btnLockup = document.getElementById('btn-lockup-mode');
+  const bgButtons = document.querySelectorAll('[data-stage-bg]');
+  const btnClearspace = document.getElementById('btn-toggle-clearspace') || document.getElementById('btn-stage-clearspace');
+  const clearspaceOverlay = document.getElementById('logo-clearspace-overlay');
 
-  if (btnLight && stage) {
-    btnLight.addEventListener('click', () => {
-      stage.classList.remove('stage-dark');
-      btnLight.classList.add('active');
-      btnDark.classList.remove('active');
-      renderSVGs();
+  if (bgButtons.length > 0 && stage) {
+    bgButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        bgButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const mode = btn.getAttribute('data-stage-bg');
+        stage.classList.remove('stage-grid', 'stage-light', 'stage-dark', 'stage-accent');
+
+        if (mode === 'grid') {
+          stage.classList.add('stage-grid');
+        } else if (mode === 'light') {
+          stage.classList.add('stage-light');
+        } else if (mode === 'dark') {
+          stage.classList.add('stage-dark');
+        } else if (mode === 'accent') {
+          stage.classList.add('stage-accent');
+        }
+
+        renderSVGs();
+        if (window.soundFX && window.soundFX.playClickSnap) {
+          window.soundFX.playClickSnap();
+        }
+      });
     });
   }
 
-  if (btnDark && stage) {
-    btnDark.addEventListener('click', () => {
-      stage.classList.add('stage-dark');
-      btnDark.classList.add('active');
-      btnLight.classList.remove('active');
-      renderSVGs();
-    });
-  }
-
-  if (btnGrid && stage) {
-    btnGrid.addEventListener('click', () => {
-      stage.classList.toggle('show-grid');
-      btnGrid.classList.toggle('active');
-    });
-  }
-
-  if (btnClearspace && stage) {
+  if (btnClearspace && (clearspaceOverlay || stage)) {
     btnClearspace.addEventListener('click', () => {
-      stage.classList.toggle('show-clearspace');
       btnClearspace.classList.toggle('active');
-    });
-  }
-
-  if (btnCenterMark && btnLockup) {
-    btnCenterMark.addEventListener('click', () => {
-      btnCenterMark.classList.add('active');
-      btnLockup.classList.remove('active');
-      document.getElementById('logo-center-wrapper').style.display = 'flex';
-      document.getElementById('logo-lockup-preview').style.display = 'none';
-    });
-    btnLockup.addEventListener('click', () => {
-      btnLockup.classList.add('active');
-      btnCenterMark.classList.remove('active');
-      document.getElementById('logo-center-wrapper').style.display = 'none';
-      document.getElementById('logo-lockup-preview').style.display = 'flex';
+      if (clearspaceOverlay) {
+        clearspaceOverlay.classList.toggle('active');
+      }
+      if (stage) {
+        stage.classList.toggle('show-clearspace');
+      }
+      if (window.soundFX && window.soundFX.playClickSnap) {
+        window.soundFX.playClickSnap();
+      }
     });
   }
 }
 
 // --------------------------------------------------------------------------
-// TYPOGRAPHY TESTER
+// TYPOGRAPHY TESTER (Live Interactive Sliders)
 // --------------------------------------------------------------------------
 function setupTypographyTester() {
-  const input = document.getElementById('typo-preview-input');
+  const typeInput = document.getElementById('type-tester-input') || document.getElementById('typo-preview-input');
+  const sizeSlider = document.getElementById('type-size-slider');
+  const weightSlider = document.getElementById('type-weight-slider');
+  const lhSlider = document.getElementById('type-lh-slider');
+
+  const sizeVal = document.getElementById('type-size-val');
+  const weightVal = document.getElementById('type-weight-val');
+  const lhVal = document.getElementById('type-lh-val');
+
+  if (sizeSlider && typeInput) {
+    sizeSlider.addEventListener('input', (e) => {
+      const val = e.target.value;
+      typeInput.style.fontSize = `${val}px`;
+      if (sizeVal) sizeVal.textContent = `${val}px`;
+      if (window.soundFX && window.soundFX.playSliderChime) {
+        const norm = (val - 16) / (96 - 16);
+        window.soundFX.playSliderChime(norm);
+      }
+    });
+  }
+
+  if (weightSlider && typeInput) {
+    weightSlider.addEventListener('input', (e) => {
+      const val = e.target.value;
+      typeInput.style.fontWeight = val;
+      if (weightVal) weightVal.textContent = val;
+      if (window.soundFX && window.soundFX.playHoverTick) {
+        window.soundFX.playHoverTick();
+      }
+    });
+  }
+
+  if (lhSlider && typeInput) {
+    lhSlider.addEventListener('input', (e) => {
+      const val = e.target.value;
+      typeInput.style.lineHeight = val;
+      if (lhVal) lhVal.textContent = parseFloat(val).toFixed(2);
+      if (window.soundFX && window.soundFX.playSliderChime) {
+        const norm = (val - 0.9) / (2.0 - 0.9);
+        window.soundFX.playSliderChime(norm);
+      }
+    });
+  }
+
+  // Also support legacy display samples if present
   const displaySample = document.getElementById('sample-display');
   const monoSample = document.getElementById('sample-mono');
   const bodySample = document.getElementById('sample-body');
 
-  if (!input) return;
-
-  input.addEventListener('input', (e) => {
-    const val = e.target.value.trim() || 'FOR EVERYDAY HEROES — 2026';
-    if (displaySample) displaySample.textContent = val;
-    if (monoSample) monoSample.textContent = val;
-    if (bodySample) bodySample.textContent = val;
-  });
+  if (typeInput) {
+    typeInput.addEventListener('input', (e) => {
+      const val = e.target.value.trim() || 'KEEP BUILDING. NO SHORTCUTS.';
+      if (displaySample) displaySample.textContent = val;
+      if (monoSample) monoSample.textContent = val;
+      if (bodySample) bodySample.textContent = val;
+    });
+  }
 }
 
 // --------------------------------------------------------------------------
@@ -349,6 +410,36 @@ function setupCopyAuditor() {
   if (!btn || !input || !resultBox) return;
 
   const competitorDatabase = [
+    {
+      owner: "Amul (GCMMF)",
+      phrases: ["the taste of india", "taste of india", "amul the taste of india", "utterly butterly delicious"],
+      risk: "CRITICAL TRADEMARK COLLISION"
+    },
+    {
+      owner: "The Coca-Cola Company / Thums Up",
+      phrases: ["taste the thunder", "toofani thanda", "open happiness", "taste the feeling", "thanda matlab coca-cola", "coca cola", "coke"],
+      risk: "CRITICAL TRADEMARK COLLISION"
+    },
+    {
+      owner: "PepsiCo, Inc.",
+      phrases: ["yeh dil maange more", "har ghoont mein swag", "for the love of it", "generation next", "darr ke aage jeet hai", "pepsi", "mountain dew", "mirinda"],
+      risk: "CRITICAL TRADEMARK COLLISION"
+    },
+    {
+      owner: "Raymond Group",
+      phrases: ["the complete man", "feels like heaven", "raymond"],
+      risk: "CRITICAL TRADEMARK COLLISION"
+    },
+    {
+      owner: "Aditya Birla Fashion & Retail (Madura)",
+      phrases: ["the beginning of good things", "friday dressing", "the upper crest", "power dressing", "peter england", "allen solly", "van heusen", "louis philippe"],
+      risk: "CRITICAL TRADEMARK COLLISION"
+    },
+    {
+      owner: "Tata Consumer Products",
+      phrases: ["desh ka namak", "jaago re", "asli taazgi", "tata salt", "tata tea"],
+      risk: "CRITICAL TRADEMARK COLLISION"
+    },
     {
       owner: "Nike, Inc.",
       phrases: ["just do it", "find your greatness", "there is no finish line", "swoosh", "air jordan", "jumpman", "nike"],
@@ -378,6 +469,41 @@ function setupCopyAuditor() {
       owner: "Fast Retailing (Uniqlo)",
       phrases: ["lifewear", "life wear", "heattech", "airism", "uniqlo"],
       risk: "CRITICAL TRADEMARK COLLISION"
+    },
+    {
+      owner: "Mufti (Credo Brands)",
+      phrases: ["anything but ordinary", "mufti"],
+      risk: "CRITICAL TRADEMARK COLLISION"
+    },
+    {
+      owner: "Kewal Kiran Clothing (Killer)",
+      phrases: ["this is us", "killer jeans", "integriti"],
+      risk: "CRITICAL TRADEMARK COLLISION"
+    },
+    {
+      owner: "Arvind Fashions (Flying Machine)",
+      phrases: ["the new cool", "flying machine"],
+      risk: "CRITICAL TRADEMARK COLLISION"
+    },
+    {
+      owner: "Spykar Lifestyles",
+      phrases: ["young and restless", "restless", "spykar"],
+      risk: "CRITICAL TRADEMARK COLLISION"
+    },
+    {
+      owner: "Apple Inc.",
+      phrases: ["think different", "shot on iphone"],
+      risk: "CRITICAL TRADEMARK COLLISION"
+    },
+    {
+      owner: "McDonald's Corporation",
+      phrases: ["i'm lovin' it", "im lovin it", "i'm loving it"],
+      risk: "CRITICAL TRADEMARK COLLISION"
+    },
+    {
+      owner: "Yum! Brands (KFC)",
+      phrases: ["finger lickin' good", "finger lickin good"],
+      risk: "CRITICAL TRADEMARK COLLISION"
     }
   ];
 
@@ -389,20 +515,26 @@ function setupCopyAuditor() {
   ];
 
   btn.addEventListener('click', () => {
+    if (window.soundFX && window.soundFX.playClickSnap) {
+      window.soundFX.playClickSnap();
+    }
+
     const text = input.value.trim();
     if (!text) {
       alert("Please enter some marketing copy to audit.");
       return;
     }
 
+    // Normalized string: remove punctuation, collapse whitespace
     const lower = text.toLowerCase();
+    const cleanNormalized = lower.replace(/['’"“”\.,\/#!$%\^&\*;:{}=\-_`~()]/g, " ").replace(/\s+/g, " ").trim();
 
     // Check for competitor trademark collision
     let match = null;
     for (const comp of competitorDatabase) {
       for (const phrase of comp.phrases) {
-        const regex = new RegExp(`\\b${phrase.replace("'", "['’]?")}\\b`, 'i');
-        if (regex.test(lower)) {
+        const cleanPhrase = phrase.toLowerCase().replace(/['’"“”\.,\/#!$%\^&\*;:{}=\-_`~()]/g, " ").replace(/\s+/g, " ").trim();
+        if (cleanNormalized.includes(cleanPhrase)) {
           match = { owner: comp.owner, phrase: phrase, risk: comp.risk };
           break;
         }

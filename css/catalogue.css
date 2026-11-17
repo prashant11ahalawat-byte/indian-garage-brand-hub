@@ -5,11 +5,11 @@
  */
 
 :root {
-  --bg-deep: #07090E;
-  --bg-card: rgba(14, 18, 27, 0.75);
-  --bg-card-hover: rgba(22, 28, 42, 0.85);
+  --bg-deep: #06080D;
+  --bg-card: rgba(14, 18, 27, 0.80);
+  --bg-card-hover: rgba(22, 28, 42, 0.90);
   --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-accent: rgba(219, 33, 40, 0.4);
+  --border-accent: rgba(229, 9, 20, 0.45);
   --tigc-crimson: #E50914;
   --tigc-crimson-bright: #FF2A35;
   --tigc-navy: #18243B;
@@ -23,6 +23,90 @@
   --font-title: 'Space Grotesk', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --font-body: 'Inter', -apple-system, sans-serif;
+}
+
+/* ==========================================================================
+   DYNAMIC TIME-ADAPTIVE LIVE WALLPAPER THEMES (MacBook Dynamic Theme)
+   ========================================================================== */
+[data-time-theme="daylight"] {
+  --bg-deep: #F1F5F9;
+  --bg-card: rgba(255, 255, 255, 0.92);
+  --bg-card-hover: rgba(248, 250, 252, 0.98);
+  --border-subtle: rgba(15, 23, 42, 0.12);
+  --border-accent: rgba(229, 9, 20, 0.50);
+  --text-pure: #0F172A;
+  --text-muted: #334155;
+  --text-dim: #64748B;
+}
+
+[data-time-theme="daylight"] .catalogue-nav-dock {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(15, 23, 42, 0.12);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+[data-time-theme="daylight"] .nav-brand-title {
+  color: #0F172A;
+}
+
+[data-time-theme="daylight"] .nav-link-pill {
+  color: #475569;
+}
+
+[data-time-theme="daylight"] .nav-link-pill:hover {
+  color: #0F172A;
+}
+
+[data-time-theme="daylight"] .denim-3d-stage-wrapper {
+  background: radial-gradient(circle at center, rgba(226, 232, 240, 0.8) 0%, rgba(241, 245, 249, 0.95) 70%);
+  border-color: rgba(15, 23, 42, 0.15);
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.04);
+}
+
+[data-time-theme="daylight"] .stat-card,
+[data-time-theme="daylight"] .denim-spec-card,
+[data-time-theme="daylight"] .triforce-card,
+[data-time-theme="daylight"] .velocity-engine-box,
+[data-time-theme="daylight"] .franchise-terminal-box {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(15, 23, 42, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+[data-time-theme="daylight"] .hero-headline,
+[data-time-theme="daylight"] .section-headline,
+[data-time-theme="daylight"] .stat-val,
+[data-time-theme="daylight"] .sky-huge-callout {
+  color: #0F172A;
+}
+
+[data-time-theme="daylight"] .sky-arena-container {
+  background: linear-gradient(135deg, #FFFFFF 0%, #F1F5F9 100%);
+  border-color: rgba(229, 9, 20, 0.3);
+}
+
+/* 2. DUSK / GOLDEN HOUR THEME */
+[data-time-theme="dusk"] {
+  --bg-deep: #0D111A;
+  --bg-card: rgba(22, 28, 42, 0.84);
+  --bg-card-hover: rgba(30, 38, 58, 0.94);
+  --border-subtle: rgba(255, 140, 0, 0.18);
+  --border-accent: rgba(255, 90, 0, 0.50);
+  --tigc-crimson-bright: #FF4D30;
+  --text-pure: #FFF7ED;
+  --text-muted: #CBD5E1;
+  --text-dim: #94A3B8;
+}
+
+[data-time-theme="dusk"] .denim-3d-stage-wrapper {
+  background: radial-gradient(circle at center, rgba(38, 28, 48, 0.6) 0%, rgba(13, 17, 26, 0.9) 70%);
+}
+
+/* 3. MIDNIGHT OBSIDIAN THEME (Default) */
+[data-time-theme="midnight"] {
+  --bg-deep: #06080D;
+  --bg-card: rgba(14, 18, 27, 0.80);
+  --text-pure: #FFFFFF;
 }
 
 * {
@@ -193,26 +277,112 @@ body {
 .sound-wave-bars.pulsing span:nth-child(2) { height: 12px; background: var(--accent-emerald); }
 .sound-wave-bars.pulsing span:nth-child(3) { height: 7px; background: var(--accent-emerald); }
 
-/* Switch to Internal Guidelines Button */
-.switch-brandbook-btn {
-  background: var(--tigc-crimson);
-  color: #FFFFFF;
-  text-decoration: none;
+/* Dynamic Time-Adaptive Atmosphere Dock */
+.time-theme-dock-pill {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  padding: 3px 6px;
+  gap: 4px;
+}
+
+.live-clock-badge {
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.04em;
-  padding: 7px 16px;
+  color: var(--accent-emerald);
+  padding: 4px 10px;
+  background: rgba(0, 245, 155, 0.08);
   border-radius: 999px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: transform 0.2s ease, background 0.2s ease;
+  letter-spacing: 0.05em;
 }
 
-.switch-brandbook-btn:hover {
-  background: var(--tigc-crimson-bright);
+.time-mode-btn {
+  background: transparent;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 5px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+}
+
+.time-mode-btn:hover {
+  color: var(--text-pure);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.time-mode-btn.active {
+  background: var(--tigc-crimson);
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+/* Category Switcher Tabs */
+.category-tabs-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 32px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: none;
+}
+
+.category-tabs-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.category-tab-pill {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+}
+
+.category-tab-pill:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: var(--text-pure);
   transform: translateY(-1px);
+}
+
+.category-tab-pill.active {
+  background: rgba(229, 9, 20, 0.12);
+  border-color: var(--tigc-crimson-bright);
+  color: var(--text-pure);
+  font-weight: 700;
+}
+
+.category-tab-pill .tab-led {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-dim);
+  transition: background 0.2s ease;
+}
+
+.category-tab-pill.active .tab-led {
+  background: var(--tigc-crimson-bright);
+  box-shadow: 0 0 8px var(--tigc-crimson-bright);
 }
 
 /* ==========================================================================

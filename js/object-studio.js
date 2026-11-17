@@ -6,12 +6,13 @@
 
 class ObjectStudio {
   constructor(canvasId) {
-    this.canvas = document.getElementById(canvasId);
-    if (!this.canvas) return;
+    const el = document.getElementById(canvasId) || document.getElementById('object-studio-canvas') || document.getElementById('studio-canvas');
+    if (!el) return;
+    this.canvas = el;
     this.ctx = this.canvas.getContext('2d');
     
     // Config state
-    this.modelName = 'bridge';
+    this.modelName = 'logo'; // Default to Indian Garage Logo
     this.viewMode = '3/4'; // 'front', '3/4', 'side', 'hero'
     this.isAnimating = true;
     this.rotX = 0.35;
@@ -30,9 +31,9 @@ class ObjectStudio {
     this.l4Start = 0.82;
     this.contactAO = 0.55;
     
-    // Palette
-    this.highlightColor = '#FF4D26';
-    this.bgColor = '#FEFCEC';
+    // Palette (Indian Garage Crimson on Blueprint Dark)
+    this.highlightColor = '#DB2128';
+    this.bgColor = '#0B0F19';
     this.markerStyle = 'cross'; // 'square', 'cross', 'circle'
     
     // Mouse drag
@@ -616,3 +617,12 @@ class ObjectStudio {
 }
 
 window.ObjectStudio = ObjectStudio;
+window.BrandObjectStudio = ObjectStudio;
+
+// Auto-initialize if canvas element exists on page
+document.addEventListener('DOMContentLoaded', () => {
+  const targetCanvas = document.getElementById('object-studio-canvas') || document.getElementById('studio-canvas');
+  if (targetCanvas && !window.studio) {
+    window.studio = new ObjectStudio(targetCanvas.id);
+  }
+});
