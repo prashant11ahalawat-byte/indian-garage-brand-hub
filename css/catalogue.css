@@ -475,6 +475,10 @@ body {
   letter-spacing: 0.02em;
   color: var(--text-muted);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  margin-bottom: 0;
+}
+
+.hero-content-layer > .hero-status-pill {
   margin-bottom: 22px;
 }
 
@@ -680,12 +684,15 @@ body {
 /* ==========================================================================
    GLOBAL SECTION ARCHITECTURE
    ========================================================================== */
-.catalogue-section {
+.catalogue-section,
+#retail-network,
+#store-locator {
   position: relative;
   max-width: 1540px;
   margin: 0 auto;
   padding: 95px 6vw;
   z-index: 1;
+  scroll-margin-top: 88px;
 }
 
 .section-header-lockup {
@@ -707,6 +714,23 @@ body {
   align-items: center;
   flex-shrink: 0;
   margin-bottom: 6px;
+}
+
+.section-header-actions .hero-status-pill {
+  margin-bottom: 0;
+  height: 32px;
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.section-header-actions .nav-shop-cta-btn {
+  height: 32px;
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
 }
 
 .section-eyebrow {
@@ -2484,6 +2508,15 @@ body {
   gap: 6px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
   transition: all 0.2s ease;
+}
+
+.hero-game-btn .game-btn-sub {
+  font-size: 8px;
+  font-weight: 500;
+  opacity: 0.72;
+  letter-spacing: 0.02em;
+  color: #94a3b8;
+  margin-left: 2px;
 }
 
 .hero-game-btn:hover {

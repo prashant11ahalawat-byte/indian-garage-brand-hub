@@ -27,9 +27,7 @@ function initFastNavigation() {
         const target = document.querySelector(href);
         if (target) {
           e.preventDefault();
-          const navHeight = 78;
-          const top = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
-          window.scrollTo({ top, behavior: 'smooth' });
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
           const drawer = document.getElementById('mobile-nav-drawer');
           if (drawer) drawer.style.display = 'none';
