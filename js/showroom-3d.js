@@ -250,7 +250,7 @@ class TIGCShowroomEngine {
       for (let i = 0; i < 36; i++) {
         const frameNum = String(i).padStart(2, '0');
         const img = new Image();
-        img.src = `assets/wgsn_3d/${cat}_frames/frame_${frameNum}.webp?v=2.2`;
+        img.src = `assets/wgsn_3d/${cat}_frames/frame_${frameNum}.webp?v=2.3`;
         this.turntableFrames[cat].push(img);
       }
     });
@@ -459,7 +459,7 @@ class TIGCShowroomEngine {
     imgEl.id = 'wgsn-turntable-img';
     imgEl.className = 'wgsn-turntable-frame-img';
     imgEl.alt = 'Indian Garage 3D Apparel Model';
-    imgEl.src = `assets/wgsn_3d/${this.activeCategory}.webp?v=2.2`;
+    imgEl.src = `assets/wgsn_3d/${this.activeCategory}.webp?v=2.3`;
     imgEl.style.cssText = `
       max-width: 90%;
       max-height: 88%;
@@ -581,8 +581,8 @@ class TIGCShowroomEngine {
     const imgEl = document.getElementById('wgsn-turntable-img');
     if (imgEl) {
       const frameNum = String(this.currentFrame).padStart(2, '0');
-      const frameSrc = `assets/wgsn_3d/${this.activeCategory}_frames/frame_${frameNum}.webp?v=2.2`;
-      const staticFallback = `assets/wgsn_3d/${this.activeCategory}.webp?v=2.2`;
+      const frameSrc = `assets/wgsn_3d/${this.activeCategory}_frames/frame_${frameNum}.webp?v=2.3`;
+      const staticFallback = `assets/wgsn_3d/${this.activeCategory}.webp?v=2.3`;
       imgEl.onerror = () => { imgEl.onerror = null; imgEl.src = staticFallback; };
       imgEl.src = frameSrc;
     }
