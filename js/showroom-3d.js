@@ -31,6 +31,15 @@ class TIGCShowroomEngine {
 
     // Interaction State
     this.mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+    this.heroDrag = {
+      isDragging: false,
+      lastX: 0,
+      lastY: 0,
+      rotX: 0,
+      rotY: 0,
+      targetRotX: 0,
+      targetRotY: 0
+    };
     this.drag = {
       isDragging: false,
       lastX: 0,
@@ -139,10 +148,16 @@ class TIGCShowroomEngine {
   // INITIALIZATION
   // ==========================================================================
   init() {
+    if (this.isInitialized) return;
     if (typeof THREE === 'undefined') {
       console.warn("Three.js is not loaded.");
       return;
     }
+    this.isInitialized = true;
+
+    // Resolve containers from live DOM
+    this.heroContainer = document.getElementById('hero-3d-podium-canvas') || document.getElementById('hero-3d-canvas-container');
+    this.showroomContainer = document.getElementById('showroom-3d-stage') || document.getElementById('denim-3d-stage');
 
     this.initProceduralTextures();
     this.initHeroScene();
@@ -165,14 +180,13 @@ class TIGCShowroomEngine {
     for (let y = 0; y < 256; y++) {
       for (let x = 0; x < 256; x++) {
         const idx = (y * 256 + x) * 4;
-        // Diagonal rib pattern
         const rib = Math.sin(((x * 2 + y * 2) / 256) * Math.PI * 32);
         const cross = Math.cos((x / 256) * Math.PI * 64) * 0.25;
         const nx = 128 + rib * 40;
         const ny = 128 + cross * 25;
-        tImg.data[idx] = nx;      // Red (X normal)
-        tImg.data[idx + 1] = ny;  // Green (Y normal)
-        tImg.data[idx + 2] = 245; // Blue (Z normal up)
+        tImg.data[idx] = nx;
+        tImg.data[idx + 1] = ny;
+        tImg.data[idx + 2] = 245;
         tImg.data[idx + 3] = 255;
       }
     }
@@ -212,12 +226,13 @@ class TIGCShowroomEngine {
   // ==========================================================================
   initHeroScene() {
     if (!this.heroContainer) return;
-    const w = this.heroContainer.clientWidth || window.innerWidth;
-    const h = this.heroContainer.clientHeight || window.innerHeight;
+    this.heroContainer.innerHTML = '';
+    const w = this.heroContainer.clientWidth || 480;
+    const h = this.heroContainer.clientHeight || 520;
 
     this.heroScene = new THREE.Scene();
-    this.heroCamera = new THREE.PerspectiveCamera(45, w / h, 0.1, 1000);
-    this.heroCamera.position.set(0, 0, 24);
+    this.heroCamera = new THREE.PerspectiveCamera(40, w / h, 0.1, 1000);
+    this.heroCamera.position.set(0, 0, 22);
 
     this.heroRenderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     this.heroRenderer.setSize(w, h);
@@ -227,40 +242,39 @@ class TIGCShowroomEngine {
     this.heroContainer.appendChild(this.heroRenderer.domElement);
 
     // Hero Lights
-    this.heroAmbientLight = new THREE.AmbientLight(0xffffff, 0.7);
+    this.heroAmbientLight = new THREE.AmbientLight(0xffffff, 0.85);
     this.heroScene.add(this.heroAmbientLight);
 
-    this.heroKeyLight = new THREE.DirectionalLight(0xff2a35, 3.5);
-    this.heroKeyLight.position.set(12, 10, 14);
+    this.heroKeyLight = new THREE.DirectionalLight(0xff2a35, 3.8);
+    this.heroKeyLight.position.set(10, 12, 14);
     this.heroScene.add(this.heroKeyLight);
 
-    this.heroRimLight = new THREE.DirectionalLight(0x4080ff, 2.2);
-    this.heroRimLight.position.set(-14, -8, 10);
+    this.heroRimLight = new THREE.DirectionalLight(0x4080ff, 2.5);
+    this.heroRimLight.position.set(-12, -8, 10);
     this.heroScene.add(this.heroRimLight);
 
     // Sculpted G-Unit Monogram
     const shape = new THREE.Shape();
-    // Precise geometry conforming to STACK-03.svg
-    shape.moveTo(-3.2, 4.2);
-    shape.lineTo(3.2, 4.2);
-    shape.lineTo(3.2, 2.4);
-    shape.lineTo(1.1, 2.4);
-    shape.lineTo(1.1, 0.5);
-    shape.lineTo(3.2, 0.5);
-    shape.lineTo(3.2, -4.2);
-    shape.lineTo(-3.2, -4.2);
-    shape.lineTo(-3.2, -2.4);
-    shape.lineTo(-1.1, -2.4);
-    shape.lineTo(-1.1, -0.5);
-    shape.lineTo(-3.2, -0.5);
+    shape.moveTo(-2.8, 3.8);
+    shape.lineTo(2.8, 3.8);
+    shape.lineTo(2.8, 2.2);
+    shape.lineTo(0.95, 2.2);
+    shape.lineTo(0.95, 0.45);
+    shape.lineTo(2.8, 0.45);
+    shape.lineTo(2.8, -3.8);
+    shape.lineTo(-2.8, -3.8);
+    shape.lineTo(-2.8, -2.2);
+    shape.lineTo(-0.95, -2.2);
+    shape.lineTo(-0.95, -0.45);
+    shape.lineTo(-2.8, -0.45);
     shape.closePath();
 
     const extrudeSettings = {
       steps: 3,
-      depth: 1.5,
+      depth: 1.2,
       bevelEnabled: true,
-      bevelThickness: 0.35,
-      bevelSize: 0.28,
+      bevelThickness: 0.30,
+      bevelSize: 0.25,
       bevelSegments: 5
     };
 
@@ -269,33 +283,105 @@ class TIGCShowroomEngine {
 
     const material = new THREE.MeshStandardMaterial({
       color: 0xdb2128,
-      roughness: 0.25,
-      metalness: 0.85,
-      clearcoat: 0.7,
-      clearcoatRoughness: 0.15
+      roughness: 0.20,
+      metalness: 0.88,
+      clearcoat: 0.8,
+      clearcoatRoughness: 0.12
     });
 
     this.heroMonogram = new THREE.Mesh(geometry, material);
     this.heroScene.add(this.heroMonogram);
 
+    // Sleek Orbit Pedestal Ring
+    const ringGeo = new THREE.TorusGeometry(4.8, 0.05, 16, 64);
+    ringGeo.rotateX(Math.PI / 2);
+    const ringMat = new THREE.MeshStandardMaterial({ color: 0xff2a35, roughness: 0.3, metalness: 0.8 });
+    const ring = new THREE.Mesh(ringGeo, ringMat);
+    ring.position.y = -4.2;
+    this.heroScene.add(ring);
+
     // Ambient Stardust Dust Particles
-    const particleCount = 200;
+    const particleCount = 180;
     const particleGeo = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
     for (let i = 0; i < particleCount * 3; i += 3) {
-      positions[i] = (Math.random() - 0.5) * 45;
-      positions[i + 1] = (Math.random() - 0.5) * 35;
-      positions[i + 2] = (Math.random() - 0.5) * 25;
+      positions[i] = (Math.random() - 0.5) * 35;
+      positions[i + 1] = (Math.random() - 0.5) * 28;
+      positions[i + 2] = (Math.random() - 0.5) * 20;
     }
     particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     const particleMat = new THREE.PointsMaterial({
       color: 0xff4d54,
-      size: 0.18,
+      size: 0.15,
       transparent: true,
       opacity: 0.65
     });
     this.heroParticles = new THREE.Points(particleGeo, particleMat);
     this.heroScene.add(this.heroParticles);
+
+    // Hero Podium Container ResizeObserver
+    if (window.ResizeObserver && this.heroContainer) {
+      const roHero = new ResizeObserver(() => {
+        if (this.heroContainer && this.heroRenderer && this.heroCamera) {
+          const hw = this.heroContainer.clientWidth;
+          const hh = this.heroContainer.clientHeight;
+          if (hw > 0 && hh > 0) {
+            this.heroCamera.aspect = hw / hh;
+            this.heroCamera.updateProjectionMatrix();
+            this.heroRenderer.setSize(hw, hh);
+          }
+        }
+      });
+      roHero.observe(this.heroContainer);
+    }
+
+    // Hero Podium Interactive Drag to Spin Monogram
+    if (this.heroContainer) {
+      this.heroContainer.addEventListener('mousedown', (e) => {
+        this.heroDrag.isDragging = true;
+        this.heroDrag.lastX = e.clientX;
+        this.heroDrag.lastY = e.clientY;
+        if (window.soundFX && window.soundFX.playHoverTick) window.soundFX.playHoverTick();
+      });
+
+      this.heroContainer.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+          this.heroDrag.isDragging = true;
+          this.heroDrag.lastX = e.touches[0].clientX;
+          this.heroDrag.lastY = e.touches[0].clientY;
+        }
+      }, { passive: true });
+
+      window.addEventListener('mouseup', () => {
+        this.heroDrag.isDragging = false;
+      });
+
+      window.addEventListener('touchend', () => {
+        this.heroDrag.isDragging = false;
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!this.heroDrag.isDragging) return;
+        const dx = e.clientX - this.heroDrag.lastX;
+        const dy = e.clientY - this.heroDrag.lastY;
+        this.heroDrag.lastX = e.clientX;
+        this.heroDrag.lastY = e.clientY;
+        this.heroDrag.targetRotY += dx * 0.01;
+        this.heroDrag.targetRotX += dy * 0.008;
+        this.heroDrag.targetRotX = Math.max(-0.8, Math.min(0.8, this.heroDrag.targetRotX));
+      });
+
+      window.addEventListener('touchmove', (e) => {
+        if (!this.heroDrag.isDragging || e.touches.length !== 1) return;
+        const dx = e.touches[0].clientX - this.heroDrag.lastX;
+        const dy = e.touches[0].clientY - this.heroDrag.lastY;
+        this.heroDrag.lastX = e.touches[0].clientX;
+        this.heroDrag.lastY = e.touches[0].clientY;
+        this.heroDrag.targetRotY += dx * 0.01;
+        this.heroDrag.targetRotX += dy * 0.008;
+        this.heroDrag.targetRotX = Math.max(-0.8, Math.min(0.8, this.heroDrag.targetRotX));
+      }, { passive: true });
+    }
   }
 
   // ==========================================================================
@@ -303,6 +389,7 @@ class TIGCShowroomEngine {
   // ==========================================================================
   initShowroomScene() {
     if (!this.showroomContainer) return;
+    this.showroomContainer.innerHTML = '';
     const w = this.showroomContainer.clientWidth || 650;
     const h = this.showroomContainer.clientHeight || 560;
 
@@ -318,14 +405,14 @@ class TIGCShowroomEngine {
     this.showroomContainer.appendChild(this.showroomRenderer.domElement);
 
     // Studio Illumination
-    this.studioAmbient = new THREE.AmbientLight(0xffffff, 0.85);
+    this.studioAmbient = new THREE.AmbientLight(0xffffff, 0.9);
     this.showroomScene.add(this.studioAmbient);
 
-    this.studioKey = new THREE.DirectionalLight(0xffffff, 2.4);
+    this.studioKey = new THREE.DirectionalLight(0xffffff, 2.6);
     this.studioKey.position.set(10, 15, 14);
     this.showroomScene.add(this.studioKey);
 
-    this.studioFill = new THREE.DirectionalLight(0x7596ff, 1.4);
+    this.studioFill = new THREE.DirectionalLight(0x7596ff, 1.5);
     this.studioFill.position.set(-12, -8, -6);
     this.showroomScene.add(this.studioFill);
 
@@ -345,6 +432,22 @@ class TIGCShowroomEngine {
 
     // Set Default Active Garment
     this.setCategory('denim', true);
+
+    // Setup ResizeObserver for adaptive container responsiveness
+    if (window.ResizeObserver) {
+      const ro = new ResizeObserver(() => {
+        if (this.showroomContainer && this.showroomRenderer && this.showroomCamera) {
+          const nw = this.showroomContainer.clientWidth;
+          const nh = this.showroomContainer.clientHeight;
+          if (nw > 0 && nh > 0) {
+            this.showroomCamera.aspect = nw / nh;
+            this.showroomCamera.updateProjectionMatrix();
+            this.showroomRenderer.setSize(nw, nh);
+          }
+        }
+      });
+      ro.observe(this.showroomContainer);
+    }
   }
 
   // --------------------------------------------------------------------------
@@ -1162,11 +1265,17 @@ class TIGCShowroomEngine {
 
     const t = performance.now() * 0.001;
 
-    // 1. Hero Monogram Idle Floating & Subtle Mouse Reactivity
+    // 1. Hero Monogram Interactive Drag, Damping & Gentle Idle Orbit
+    this.heroDrag.rotX += (this.heroDrag.targetRotX - this.heroDrag.rotX) * 0.08;
+    this.heroDrag.rotY += (this.heroDrag.targetRotY - this.heroDrag.rotY) * 0.08;
+    if (!this.heroDrag.isDragging) {
+      this.heroDrag.targetRotY += 0.003;
+    }
+
     if (this.heroMonogram) {
-      this.heroMonogram.rotation.y = Math.sin(t * 0.6) * 0.25 + this.mouse.x * 0.35;
-      this.heroMonogram.rotation.x = Math.cos(t * 0.5) * 0.15 - this.mouse.y * 0.25;
-      this.heroMonogram.position.y = Math.sin(t * 1.2) * 0.35;
+      this.heroMonogram.rotation.y = this.heroDrag.rotY + Math.sin(t * 0.6) * 0.12 + this.mouse.x * 0.25;
+      this.heroMonogram.rotation.x = this.heroDrag.rotX + Math.cos(t * 0.5) * 0.10 - this.mouse.y * 0.18;
+      this.heroMonogram.position.y = Math.sin(t * 1.2) * 0.28;
     }
 
     if (this.heroParticles) {

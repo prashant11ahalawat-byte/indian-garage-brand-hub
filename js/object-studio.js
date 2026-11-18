@@ -412,13 +412,13 @@ class ObjectStudio {
 
   resetDefaults() {
     const cur = window.CURRENT_BRAND ? window.CURRENT_BRAND.objectStudio : {};
-    this.cellSize = cur.defaultCellSize || 5;
-    this.cellMargin = cur.defaultMargin || 0.15;
-    this.banding = cur.defaultBanding || 1;
+    this.cellSize = cur && cur.defaultCellSize ? cur.defaultCellSize : 5;
+    this.cellMargin = cur && cur.defaultMargin !== undefined ? cur.defaultMargin : 0.15;
+    this.banding = cur && cur.defaultBanding !== undefined ? cur.defaultBanding : 1;
     this.levels = 0.5;
-    this.highlightColor = cur.defaultHighlight || '#FF4D26';
-    this.bgColor = cur.defaultBackground || '#FEFCEC';
-    this.modelName = cur.defaultModel || 'bridge';
+    this.highlightColor = cur && cur.defaultHighlight ? cur.defaultHighlight : '#DB2128';
+    this.bgColor = cur && cur.defaultBackground ? cur.defaultBackground : '#0B0F19';
+    this.modelName = cur && cur.defaultModel ? cur.defaultModel : 'logo';
     this.viewMode = '3/4';
     this.rotX = 0.35;
     this.rotY = 0.85;

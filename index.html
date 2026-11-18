@@ -41,11 +41,13 @@
 
     <!-- Center Navigation Links -->
     <div class="nav-links-cluster">
-      <a href="#showroom" class="nav-link-pill">01 // 3D SHOWROOM</a>
-      <a href="#velocity" class="nav-link-pill">02 // 14-DAY VELOCITY</a>
-      <a href="#triforce" class="nav-link-pill">03 // HOUSE OF BRANDS</a>
-      <a href="#terminal" class="nav-link-pill">04 // FRANCHISE TERMINAL</a>
-      <a href="#sky-arena" class="nav-link-pill">05 // SKY 360</a>
+      <a href="#lookbook" class="nav-link-pill">01 // LOOKBOOK</a>
+      <a href="#showroom" class="nav-link-pill">02 // 3D LAB</a>
+      <a href="#story" class="nav-link-pill">03 // BRAND GENESIS</a>
+      <a href="#velocity" class="nav-link-pill">04 // 14-DAY VELOCITY</a>
+      <a href="#triforce" class="nav-link-pill">05 // HOUSE OF BRANDS</a>
+      <a href="#terminal" class="nav-link-pill">06 // FRANCHISE</a>
+      <a href="#sky-arena" class="nav-link-pill">07 // SKY 360</a>
     </div>
 
     <!-- Actions: Dynamic Time Theme Dock & Sound FX Toggle -->
@@ -70,12 +72,10 @@
   </nav>
 
   <!-- ======================================================================
-       HERO: KINETIC 3D WEBGL STAGE
+       HERO: ARCHITECTURAL 2-COLUMN LUXURY SHOWCASE
        ====================================================================== -->
   <section class="hero-stage-section" id="hero">
-    <!-- WebGL Three.js Full-Viewport Background Canvas -->
-    <div id="hero-3d-canvas-container"></div>
-
+    <!-- Left Column: Editorial Manifesto & Investment KPIs -->
     <div class="hero-content-layer">
       <div class="hero-status-pill">
         <span>●</span> ADITYA BIRLA GROUP (TMRW) BACKED // ₹155 CR SERIES B
@@ -94,7 +94,7 @@
       <div class="hero-kpi-ticker-row">
         <div class="kpi-ticker-item">
           <div class="kpi-ticker-val">6.5M+</div>
-          <div class="kpi-ticker-label">Annual Apparel Units (~550K/mo)</div>
+          <div class="kpi-ticker-label">Annual Apparel Volume (~550k/mo)</div>
         </div>
         <div class="kpi-ticker-item">
           <div class="kpi-ticker-val" style="color: var(--tigc-crimson-bright);">₹300+ CR</div>
@@ -110,28 +110,332 @@
         </div>
         <div class="kpi-ticker-item">
           <div class="kpi-ticker-val">20+ LIVE</div>
-          <div class="kpi-ticker-label">Flagship EBO Retail Stores</div>
+          <div class="kpi-ticker-label">Flagship EBO Retail Outlets</div>
         </div>
       </div>
 
       <div class="hero-cta-group">
-        <a href="#showroom" class="btn-catalogue-primary">
-          Explore 3D Multi-Category Showroom ↓
+        <a href="#lookbook" class="btn-catalogue-primary">
+          Explore Real Product Lookbook ↓
         </a>
-        <a href="#terminal" class="btn-catalogue-ghost">
-          Franchise ROI Terminal ↗
+        <a href="#showroom" class="btn-catalogue-ghost">
+          3D Material Lab & Anatomy ↗
         </a>
+      </div>
+    </div>
+
+    <!-- Right Column: Dedicated 3D Kinetic Podium Card -->
+    <div class="hero-3d-podium-card">
+      <div class="hero-podium-hud-top">
+        <span style="color: var(--tigc-crimson-bright); font-weight: 700;">● TIGC KINETIC EMBLEM</span>
+        <span>DRAG TO ROTATE 360°</span>
+      </div>
+
+      <div id="hero-3d-podium-canvas">
+        <!-- Three.js Hero Monogram Canvas injected here -->
+      </div>
+
+      <div class="hero-podium-hud-bottom">
+        <span>ARCHITECTURAL MORPHOLOGY</span>
+        <span>AERODYNAMIC LAB V2.5</span>
       </div>
     </div>
   </section>
 
   <!-- ======================================================================
-       CHAPTER 01: MULTI-CATEGORY 3D APPAREL SHOWROOM & MATERIAL LAB
+       CHAPTER 01: REAL PRODUCT LOOKBOOK & HIGH-VELOCITY CATALOGUE
+       ====================================================================== -->
+  <section class="catalogue-section" id="lookbook">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
+      <div>
+        <span class="section-eyebrow">CHAPTER 01 // REAL PRODUCT LOOKBOOK</span>
+        <h2 class="section-headline">Real Commercial Collections. Zero Brand Tax.</h2>
+      </div>
+      <div>
+        <span class="hero-status-pill">450+ MONTHLY DROPS // 88% SELL-THROUGH</span>
+      </div>
+    </div>
+
+    <p class="section-lead-copy">
+      Explore real Indian Garage Co. commercial collections engineered for modern South Asian contours. From our signature 100% combed cotton checked casuals and 320 GSM waffle knit polos to 13.5oz ring-spun stretch denim and utility outerwear. Select below to inspect 3D engineering or shop directly on tigc.in.
+    </p>
+
+    <!-- Lookbook Category Filter Pills -->
+    <div class="lookbook-filter-bar">
+      <button class="lookbook-filter-pill active" data-filter="all">
+        ● ALL COLLECTIONS (8)
+      </button>
+      <button class="lookbook-filter-pill" data-filter="shirt">
+        SIGNATURE SHIRTS (3)
+      </button>
+      <button class="lookbook-filter-pill" data-filter="denim">
+        13.5OZ STRETCH DENIM (1)
+      </button>
+      <button class="lookbook-filter-pill" data-filter="polo">
+        320 GSM POLOS (1)
+      </button>
+      <button class="lookbook-filter-pill" data-filter="jacket">
+        OUTERWEAR & UTILITY (1)
+      </button>
+      <button class="lookbook-filter-pill" data-filter="womenswear">
+        FREEHAND (WOMEN) (1)
+      </button>
+      <button class="lookbook-filter-pill" data-filter="plus">
+        HARDSODA (PLUS-SIZE 2XL-7XL) (1)
+      </button>
+    </div>
+
+    <!-- Product Cards Grid -->
+    <div class="lookbook-grid">
+      <!-- 1. Signature Checked Shirt -->
+      <div class="lookbook-card" data-category="shirt">
+        <div class="lookbook-img-box">
+          <img src="assets/tigc_live/shirt_01.jpg" alt="Signature Checked Casual Shirt" class="lookbook-img">
+          <div class="lookbook-badge-row">
+            <span class="lookbook-badge crimson">TOP SELLER</span>
+            <span class="lookbook-badge">100% COMBED COTTON</span>
+          </div>
+        </div>
+        <div class="lookbook-details">
+          <div>
+            <span class="lookbook-cat-tag">TOPWEAR // MENSWEAR</span>
+            <h3 class="lookbook-title">Signature Checked Casual Shirt</h3>
+            <div class="lookbook-rating-row">
+              <span class="lookbook-rating-stars">★★★★★</span>
+              <span>4.8 / 5.0 (5,400+ reviews)</span>
+            </div>
+            <div class="lookbook-price-row">
+              <span class="lookbook-price-current">₹1,099</span>
+              <span class="lookbook-price-mrp">₹2,199</span>
+              <span class="lookbook-discount-badge">50% OFF</span>
+            </div>
+          </div>
+          <div class="lookbook-actions-row">
+            <a href="#showroom" class="btn-inspect-3d" data-target-cat="shirt">Inspect 3D ↗</a>
+            <a href="https://tigc.in" target="_blank" class="btn-shop-tigc">Shop tigc.in ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Polo-licious Waffle Polo -->
+      <div class="lookbook-card" data-category="polo">
+        <div class="lookbook-img-box">
+          <img src="assets/tigc_live/polo_01.jpg" alt="Polo-licious 320 GSM Waffle Polo" class="lookbook-img">
+          <div class="lookbook-badge-row">
+            <span class="lookbook-badge emerald">HEAVYWEIGHT 320 GSM</span>
+            <span class="lookbook-badge">ANTI-CURL COLLAR</span>
+          </div>
+        </div>
+        <div class="lookbook-details">
+          <div>
+            <span class="lookbook-cat-tag">KNITWEAR // MENSWEAR</span>
+            <h3 class="lookbook-title">Polo-licious Textured Waffle Polo</h3>
+            <div class="lookbook-rating-row">
+              <span class="lookbook-rating-stars">★★★★★</span>
+              <span>4.9 / 5.0 (3,890+ reviews)</span>
+            </div>
+            <div class="lookbook-price-row">
+              <span class="lookbook-price-current">₹999</span>
+              <span class="lookbook-price-mrp">₹1,999</span>
+              <span class="lookbook-discount-badge">50% OFF</span>
+            </div>
+          </div>
+          <div class="lookbook-actions-row">
+            <a href="#showroom" class="btn-inspect-3d" data-target-cat="polo">Inspect 3D ↗</a>
+            <a href="https://tigc.in" target="_blank" class="btn-shop-tigc">Shop tigc.in ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. 13.5oz Ring-Spun Denim -->
+      <div class="lookbook-card" data-category="denim">
+        <div class="lookbook-img-box">
+          <img src="assets/brandbook_pages/page_20.jpg" alt="13.5oz Ring-Spun Comfort Stretch Denim" class="lookbook-img">
+          <div class="lookbook-badge-row">
+            <span class="lookbook-badge crimson">2.8M+ PAIRS SOLD</span>
+            <span class="lookbook-badge">ERGONOMIC RISE</span>
+          </div>
+        </div>
+        <div class="lookbook-details">
+          <div>
+            <span class="lookbook-cat-tag">BOTTOMWEAR // DENIM LAB</span>
+            <h3 class="lookbook-title">13.5oz Ring-Spun Comfort Stretch Denim</h3>
+            <div class="lookbook-rating-row">
+              <span class="lookbook-rating-stars">★★★★★</span>
+              <span>4.8 / 5.0 (12,400+ reviews)</span>
+            </div>
+            <div class="lookbook-price-row">
+              <span class="lookbook-price-current">₹1,499</span>
+              <span class="lookbook-price-mrp">₹2,999</span>
+              <span class="lookbook-discount-badge">50% OFF</span>
+            </div>
+          </div>
+          <div class="lookbook-actions-row">
+            <a href="#showroom" class="btn-inspect-3d" data-target-cat="denim">Inspect 3D ↗</a>
+            <a href="https://tigc.in" target="_blank" class="btn-shop-tigc">Shop tigc.in ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Relaxed Resort Linen Shirt -->
+      <div class="lookbook-card" data-category="shirt">
+        <div class="lookbook-img-box">
+          <img src="assets/tigc_live/shirt_02.jpg" alt="Relaxed Linen Breathable Casual" class="lookbook-img">
+          <div class="lookbook-badge-row">
+            <span class="lookbook-badge">BREATHABLE LINEN</span>
+            <span class="lookbook-badge">CAMP CUBAN COLLAR</span>
+          </div>
+        </div>
+        <div class="lookbook-details">
+          <div>
+            <span class="lookbook-cat-tag">SMART CASUAL // TOPWEAR</span>
+            <h3 class="lookbook-title">Relaxed Resort Linen Casual Shirt</h3>
+            <div class="lookbook-rating-row">
+              <span class="lookbook-rating-stars">★★★★★</span>
+              <span>4.7 / 5.0 (2,120+ reviews)</span>
+            </div>
+            <div class="lookbook-price-row">
+              <span class="lookbook-price-current">₹1,299</span>
+              <span class="lookbook-price-mrp">₹2,499</span>
+              <span class="lookbook-discount-badge">48% OFF</span>
+            </div>
+          </div>
+          <div class="lookbook-actions-row">
+            <a href="#showroom" class="btn-inspect-3d" data-target-cat="shirt">Inspect 3D ↗</a>
+            <a href="https://tigc.in" target="_blank" class="btn-shop-tigc">Shop tigc.in ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Vacation Resort Printed Shirt -->
+      <div class="lookbook-card" data-category="shirt">
+        <div class="lookbook-img-box">
+          <img src="assets/tigc_live/shirt_03.jpg" alt="Vacation Resort Printed Shirt" class="lookbook-img">
+          <div class="lookbook-badge-row">
+            <span class="lookbook-badge">FESTIVAL EDITION</span>
+            <span class="lookbook-badge">FLUID RAYON DRAPE</span>
+          </div>
+        </div>
+        <div class="lookbook-details">
+          <div>
+            <span class="lookbook-cat-tag">RESORT WEAR // TOPWEAR</span>
+            <h3 class="lookbook-title">Vacation Resort Printed Camp Shirt</h3>
+            <div class="lookbook-rating-row">
+              <span class="lookbook-rating-stars">★★★★★</span>
+              <span>4.8 / 5.0 (1,850+ reviews)</span>
+            </div>
+            <div class="lookbook-price-row">
+              <span class="lookbook-price-current">₹1,199</span>
+              <span class="lookbook-price-mrp">₹2,399</span>
+              <span class="lookbook-discount-badge">50% OFF</span>
+            </div>
+          </div>
+          <div class="lookbook-actions-row">
+            <a href="#showroom" class="btn-inspect-3d" data-target-cat="shirt">Inspect 3D ↗</a>
+            <a href="https://tigc.in" target="_blank" class="btn-shop-tigc">Shop tigc.in ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. All-Terrain Trucker Jacket -->
+      <div class="lookbook-card" data-category="jacket">
+        <div class="lookbook-img-box">
+          <img src="assets/brandbook_pages/page_13.jpg" alt="All-Terrain Utility Trucker Jacket" class="lookbook-img">
+          <div class="lookbook-badge-row">
+            <span class="lookbook-badge crimson">ALL-WEATHER UTILITY</span>
+            <span class="lookbook-badge">HEAVY CANVAS</span>
+          </div>
+        </div>
+        <div class="lookbook-details">
+          <div>
+            <span class="lookbook-cat-tag">OUTERWEAR // STREETWEAR</span>
+            <h3 class="lookbook-title">All-Terrain Utility Trucker & Overshirt</h3>
+            <div class="lookbook-rating-row">
+              <span class="lookbook-rating-stars">★★★★★</span>
+              <span>4.9 / 5.0 (980+ reviews)</span>
+            </div>
+            <div class="lookbook-price-row">
+              <span class="lookbook-price-current">₹1,899</span>
+              <span class="lookbook-price-mrp">₹3,499</span>
+              <span class="lookbook-discount-badge">45% OFF</span>
+            </div>
+          </div>
+          <div class="lookbook-actions-row">
+            <a href="#showroom" class="btn-inspect-3d" data-target-cat="jacket">Inspect 3D ↗</a>
+            <a href="https://tigc.in" target="_blank" class="btn-shop-tigc">Shop tigc.in ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. FreeHand Womenswear Co-Ords -->
+      <div class="lookbook-card" data-category="womenswear">
+        <div class="lookbook-img-box">
+          <img src="assets/brandbook_pages/page_28.jpg" alt="FreeHand Contemporary Chic Co-Ords" class="lookbook-img">
+          <div class="lookbook-badge-row">
+            <span class="lookbook-badge emerald">FREEHAND WOMEN</span>
+            <span class="lookbook-badge">35% MoM GROWTH</span>
+          </div>
+        </div>
+        <div class="lookbook-details">
+          <div>
+            <span class="lookbook-cat-tag">WOMENSWEAR // FREEHAND</span>
+            <h3 class="lookbook-title">Contemporary Chic Resort Co-Ord Set</h3>
+            <div class="lookbook-rating-row">
+              <span class="lookbook-rating-stars">★★★★★</span>
+              <span>4.8 / 5.0 (3,140+ reviews)</span>
+            </div>
+            <div class="lookbook-price-row">
+              <span class="lookbook-price-current">₹1,599</span>
+              <span class="lookbook-price-mrp">₹3,199</span>
+              <span class="lookbook-discount-badge">50% OFF</span>
+            </div>
+          </div>
+          <div class="lookbook-actions-row">
+            <a href="#triforce" class="btn-inspect-3d">Portfolio ↗</a>
+            <a href="https://tigc.in" target="_blank" class="btn-shop-tigc">Shop tigc.in ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. HardSoda Plus-Size Streetwear -->
+      <div class="lookbook-card" data-category="plus">
+        <div class="lookbook-img-box">
+          <img src="assets/brandbook_pages/page_21.jpg" alt="HardSoda Plus-Size Heavyweight Boxy Tee" class="lookbook-img">
+          <div class="lookbook-badge-row">
+            <span class="lookbook-badge">HARDSODA (2XL–7XL)</span>
+            <span class="lookbook-badge crimson">ZERO APOLOGIES</span>
+          </div>
+        </div>
+        <div class="lookbook-details">
+          <div>
+            <span class="lookbook-cat-tag">PLUS-SIZE // HARDSODA</span>
+            <h3 class="lookbook-title">HardSoda Heavyweight 280 GSM Boxy Tee</h3>
+            <div class="lookbook-rating-row">
+              <span class="lookbook-rating-stars">★★★★★</span>
+              <span>4.9 / 5.0 (2,410+ reviews)</span>
+            </div>
+            <div class="lookbook-price-row">
+              <span class="lookbook-price-current">₹999</span>
+              <span class="lookbook-price-mrp">₹1,899</span>
+              <span class="lookbook-discount-badge">47% OFF</span>
+            </div>
+          </div>
+          <div class="lookbook-actions-row">
+            <a href="#triforce" class="btn-inspect-3d">Portfolio ↗</a>
+            <a href="https://tigc.in" target="_blank" class="btn-shop-tigc">Shop tigc.in ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       CHAPTER 02: MULTI-CATEGORY 3D APPAREL MATERIAL LAB & BLUEPRINT
        ====================================================================== -->
   <section class="catalogue-section" id="showroom">
     <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
       <div>
-        <span class="section-eyebrow" id="showroom-garment-sub">CHAPTER 01 // MULTI-CATEGORY PRODUCT SHOWROOM</span>
+        <span class="section-eyebrow" id="showroom-garment-sub">CHAPTER 02 // 3D MATERIAL LAB & BLUEPRINT</span>
         <h2 class="section-headline" id="showroom-garment-title">13.5oz Ring-Spun Comfort Stretch Denim</h2>
       </div>
       <div>
@@ -163,7 +467,7 @@
       <!-- 3D Interactive WebGL Stage -->
       <div class="denim-3d-stage-wrapper">
         <div class="denim-hud-top">
-          <span style="color: var(--tigc-crimson-bright); font-weight: 700;">● LIVE 3D INSPECTOR</span> // DRAG TO ROTATE 360° // SCROLL TO ZOOM // REAL-TIME KINETIC FOLEY AUDIO
+          <span style="color: var(--tigc-crimson-bright); font-weight: 700;">● LIVE 3D INSPECTOR</span> // DRAG TO ROTATE 360° // SCROLL TO ZOOM // PROCEDURAL FOLEY AUDIO
         </div>
 
         <div id="showroom-3d-stage" style="width: 100%; height: 100%; cursor: grab;">
@@ -224,10 +528,166 @@
   </section>
 
   <!-- ======================================================================
-       CHAPTER 02: KINETIC 14-DAY VELOCITY MACHINE
+       CHAPTER 03: THE TIGC GENESIS & BRAND STORY (2011 – 2027)
+       ====================================================================== -->
+  <section class="catalogue-section" id="story">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
+      <div>
+        <span class="section-eyebrow">CHAPTER 03 // BRAND GENESIS & EMPIRE SAGA</span>
+        <h2 class="section-headline">From an Indore Garage to India's Fast-Fashion Titan</h2>
+      </div>
+      <div>
+        <span class="hero-status-pill">BOOTSTRAPPED TO ₹300+ CR // ADITYA BIRLA TMRW BACKED</span>
+      </div>
+    </div>
+
+    <p class="section-lead-copy">
+      The definitive story of Anant Tanted's ₹10 Lakh bootstrap in Indore, the revolutionary Zero Brand Tax philosophy, and the landmark ₹155 Crore Aditya Birla Group / TMRW partnership to build India's ₹1,500 Crore fashion conglomerate.
+    </p>
+
+    <!-- High-Impact Founder Quote Card -->
+    <div class="story-manifesto-card">
+      <div class="story-quote-mark">“</div>
+      <div class="story-quote-text">
+        Every self-made story starts in a garage. Four walls, raw energy, and the belief that <span>Indian men deserve world-class high-street fashion</span> without paying a brand tax.
+      </div>
+      <div class="story-founder-row">
+        <div class="story-founder-avatar">AT</div>
+        <div class="story-founder-meta">
+          <div class="story-founder-name">ANANT TANTED</div>
+          <div class="story-founder-role">FOUNDER & CEO // THE INDIAN GARAGE CO.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Narrative Core Pillars (Split View) -->
+    <div class="story-narrative-split">
+      <div class="story-narrative-block">
+        <div>
+          <div class="story-narrative-tag">THE REVOLUTION</div>
+          <h3 class="story-narrative-title">The "Zero Brand Tax" Philosophy</h3>
+          <p class="story-narrative-p">
+            In 2012, young Indian men faced a binary trap: pay a 400% inflated price for an imported label just to wear an embroidered logo, or settle for uninspired domestic garments with poor fits and low-grade poly-mix fabrics. Anant Tanted established The Indian Garage Co. on a non-negotiable premise: <strong>Zero Brand Tax</strong>. Every single rupee goes into 13.5oz ring-spun denim warp, 320 GSM combed cotton, double-needle lock stitching, and calibrated South Asian rise ergonomics.
+          </p>
+        </div>
+        <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-emerald); font-weight: 700; margin-top: 20px;">
+          ✓ HONEST VALUE // 100% PRODUCT INTEGRITY // ZERO LOGO MARKUP
+        </div>
+      </div>
+
+      <div class="story-narrative-block">
+        <div>
+          <div class="story-narrative-tag">OPERATIONAL EXCELLENCE</div>
+          <h3 class="story-narrative-title">100+ Decentralized Agile Factory Pods</h3>
+          <p class="story-narrative-p">
+            While legacy brands built monolithic, debt-heavy garment factories with 6-month rigid scheduling, TIGC architected a modern, asset-light manufacturing web across Indore, Surat, and Tirupur. Over 100 specialized decentralized pods execute synchronized micro-batches. This eliminates capital-intensive dead stock, slashes idle factory capacity, and powers our legendary 14-day concept-to-rack velocity machine.
+          </p>
+        </div>
+        <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan); font-weight: 700; margin-top: 20px;">
+          ✓ ASSET-LIGHT // 6.5M+ ANNUAL UNITS // 88% SELL-THROUGH
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 Strategic Pillars Grid -->
+    <div class="story-pillars-grid">
+      <div class="story-pillar-card">
+        <div class="story-pillar-num">01</div>
+        <div class="story-pillar-title">Agile 14-Day Velocity</div>
+        <div class="story-pillar-desc">
+          Social AI trend scrapers feed 3D CAD pattern nesting and CNC laser cutting, dropping 450+ fresh styles monthly with 88% full-price sell-through in 45 days.
+        </div>
+      </div>
+
+      <div class="story-pillar-card">
+        <div class="story-pillar-num">02</div>
+        <div class="story-pillar-title">Tailored for the Indian Body</div>
+        <div class="story-pillar-desc">
+          Proprietary morphological pattern blocks that eliminate waistband gaping when riding motorbikes or sitting, engineered specifically for South Asian bone structures.
+        </div>
+      </div>
+
+      <div class="story-pillar-card">
+        <div class="story-pillar-num">03</div>
+        <div class="story-pillar-title">Aditya Birla / TMRW Backing</div>
+        <div class="story-pillar-desc">
+          ₹155 Crore Series B partnership with Aditya Birla Group's digital venture TMRW, combining entrepreneurial speed with enterprise supply chain scale and premier mall access.
+        </div>
+      </div>
+
+      <div class="story-pillar-card">
+        <div class="story-pillar-num">04</div>
+        <div class="story-pillar-title">Omnichannel EBO Network</div>
+        <div class="story-pillar-desc">
+          Proven unit economics across 20+ live high-street and mall flagships, delivering 18–22% store EBITDA and rapid 16–20 month payback on capital.
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Chronology Timeline -->
+    <div class="story-timeline-section-title">CHRONOLOGY // THE TIGC EXPANSION SAGA (2012 — 2027 HORIZON)</div>
+    <div class="story-timeline-grid">
+      <div class="story-timeline-card">
+        <div class="story-timeline-year">2012</div>
+        <div class="story-timeline-badge">THE GARAGE BOOTSTRAP</div>
+        <div class="story-timeline-title">₹10 Lakh Loan in Indore</div>
+        <div class="story-timeline-desc">
+          Anant Tanted bootstraps with 4 sewing machines and zero external safety nets, creating high-street shirts for young Indian college students.
+        </div>
+      </div>
+
+      <div class="story-timeline-card">
+        <div class="story-timeline-year">2016</div>
+        <div class="story-timeline-badge">E-COMMERCE DOMINANCE</div>
+        <div class="story-timeline-title">#1 Fast-Fashion Menswear</div>
+        <div class="story-timeline-desc">
+          Surges to the top rankings on Myntra, Flipkart, and Amazon, establishing national customer love while remaining consistently EBITDA positive.
+        </div>
+      </div>
+
+      <div class="story-timeline-card">
+        <div class="story-timeline-year">2020</div>
+        <div class="story-timeline-badge">SUPPLY CHAIN REVOLUTION</div>
+        <div class="story-timeline-title">14-Day Micro-Batch Engine</div>
+        <div class="story-timeline-desc">
+          Pioneered decentralized pod assembly and automated replenishment algorithms, eliminating the need for 6-month speculative seasonal inventories.
+        </div>
+      </div>
+
+      <div class="story-timeline-card featured">
+        <div class="story-timeline-year">2023</div>
+        <div class="story-timeline-badge" style="color: var(--tigc-crimson-bright);">SERIES B LANDMARK</div>
+        <div class="story-timeline-title">Aditya Birla Group / TMRW</div>
+        <div class="story-timeline-desc">
+          TMRW infuses ₹155 Crore Series B growth capital into TIGC to build India's premier multi-brand fast-fashion powerhouse.
+        </div>
+      </div>
+
+      <div class="story-timeline-card">
+        <div class="story-timeline-year">2024</div>
+        <div class="story-timeline-badge">CULTURAL EXPANSION</div>
+        <div class="story-timeline-title">SKY 360 & 20+ EBOs</div>
+        <div class="story-timeline-desc">
+          Signed Indian T20 Captain Suryakumar Yadav; expanded physical flagship retail presence across Tier 1 & 2 high-streets.
+        </div>
+      </div>
+
+      <div class="story-timeline-card featured">
+        <div class="story-timeline-year">2027</div>
+        <div class="story-timeline-badge" style="color: var(--accent-cyan);">THE HORIZON TARGET</div>
+        <div class="story-timeline-title">₹1,500 Cr & 100+ Outlets</div>
+        <div class="story-timeline-desc">
+          Roadmap to 100+ Exclusive Brand Outlets nationwide and pan-Asian international expansion across GCC and Southeast Asia.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       CHAPTER 04: KINETIC 14-DAY VELOCITY MACHINE
        ====================================================================== -->
   <section class="catalogue-section" id="velocity">
-    <span class="section-eyebrow">CHAPTER 02 // SUPPLY CHAIN MASTERY</span>
+    <span class="section-eyebrow">CHAPTER 04 // SUPPLY CHAIN MASTERY</span>
     <h2 class="section-headline">The 14-Day Velocity Machine</h2>
     <p class="section-lead-copy">
       How we outperform legacy fashion conglomerates: drag the interactive timeline slider below to scrub through our 14-day concept-to-rack micro-batch sprint.
@@ -251,12 +711,12 @@
         <div>
           <div class="velocity-day-big" id="velocity-disp-day">DAY 01</div>
           <div style="font-family: var(--font-mono); font-size: 11px; color: var(--tigc-crimson-bright); font-weight: 700; margin-top: 4px;" id="velocity-disp-stage">
-            STAGE 01 // SOCIAL AI HARVESTING
+            STAGE 01 // SOCIAL AI SIGNAL HARVESTING
           </div>
         </div>
         <div>
           <div class="velocity-step-title" id="velocity-disp-title">
-            Algorithmic Runway & Streetwear Signal Detection
+            2.4M Social Signals & Global Runway Scraping
           </div>
           <div class="velocity-step-desc" id="velocity-disp-desc">
             Our neural scrapers analyze over 2.4 Million social signals, runway drops, and Pinterest boards weekly to isolate breakout silhouettes and fabric weights before legacy brands notice.
@@ -267,10 +727,10 @@
   </section>
 
   <!-- ======================================================================
-       CHAPTER 03: TRI-FORCE HOUSE OF BRANDS
+       CHAPTER 05: TRI-FORCE HOUSE OF BRANDS
        ====================================================================== -->
   <section class="catalogue-section" id="triforce">
-    <span class="section-eyebrow">CHAPTER 03 // PORTFOLIO ARCHITECTURE</span>
+    <span class="section-eyebrow">CHAPTER 05 // PORTFOLIO ARCHITECTURE</span>
     <h2 class="section-headline">The Tri-Force House of Brands</h2>
     <p class="section-lead-copy">
       Three high-velocity consumer propositions addressing India's fastest-expanding lifestyle demographics under one agile supply infrastructure. Hover over cards for 3D perspective tilts.
@@ -283,7 +743,7 @@
           <div class="triforce-share-badge">68% REVENUE SHARE // HOMEGROWN POWERHOUSE</div>
           <div class="triforce-brand-name">THE INDIAN GARAGE CO.</div>
           <p class="triforce-brand-desc">
-            The definitive fast-fashion menswear brand for modern Indian men. Trend-first 13.5oz denim, Cuban collar shirts, heavyweight 300 GSM polos, and utility streetwear engineered for everyday heroes.
+            The definitive fast-fashion menswear brand for modern Indian men. Trend-first 13.5oz denim, Cuban collar shirts, heavyweight 320 GSM polos, and utility streetwear engineered for everyday heroes.
           </p>
         </div>
         <div>
@@ -361,10 +821,10 @@
   </section>
 
   <!-- ======================================================================
-       CHAPTER 04: FRANCHISE ROI TERMINAL ENGINE
+       CHAPTER 06: FRANCHISE ROI TERMINAL ENGINE
        ====================================================================== -->
   <section class="catalogue-section" id="terminal">
-    <span class="section-eyebrow">CHAPTER 04 // FRANCHISE PARTNERSHIP</span>
+    <span class="section-eyebrow">CHAPTER 06 // FRANCHISE PARTNERSHIP</span>
     <h2 class="section-headline">The Executive Franchise Terminal</h2>
     <p class="section-lead-copy">
       Model store unit economics across Indian high streets and premier shopping malls with our real-time interactive terminal below.
@@ -454,7 +914,7 @@
   </section>
 
   <!-- ======================================================================
-       CHAPTER 05: SURYAKUMAR YADAV (SKY) KINETIC ARENA
+       CHAPTER 07: SURYAKUMAR YADAV (SKY) KINETIC ARENA
        ====================================================================== -->
   <section class="catalogue-section" id="sky-arena">
     <div class="sky-arena-container">
@@ -490,9 +950,11 @@
     <div>
       <span style="color: #FFFFFF; font-weight: 600;">THE INDIAN GARAGE CO.</span> // INSTITUTIONAL BRAND SHOWCASE 2026
     </div>
-    <div style="display: flex; gap: 24px;">
+    <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+      <a href="#lookbook" style="color: #FFFFFF; text-decoration: none;">Real Lookbook Collections</a>
       <a href="#terminal" style="color: var(--tigc-crimson-bright); text-decoration: none;">Franchise Partnership Terminal ↗</a>
       <a href="https://tigc.in" target="_blank" style="color: #FFFFFF; text-decoration: none;">Official Consumer Store (tigc.in) ↗</a>
+      <a href="brand-book.html" style="color: var(--text-muted); text-decoration: none;">Internal Guidelines Specification ↗</a>
     </div>
   </footer>
 

@@ -5,6 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initCatalogueSoundInteractions();
+  initLookbookFilter();
   initVelocityScrubber();
   initTriForceCardTilts();
   initFranchiseTerminal();
@@ -32,7 +33,7 @@ function initCatalogueSoundInteractions() {
   }
 
   // Attach hover & click sound triggers to all interactive elements
-  const hoverTargets = document.querySelectorAll('.btn-catalogue-primary, .btn-catalogue-ghost, .denim-wash-pill, .btn-explode-control, .triforce-card, .denim-spec-card, .nav-link-pill, .switch-brandbook-btn');
+  const hoverTargets = document.querySelectorAll('.btn-catalogue-primary, .btn-catalogue-ghost, .denim-wash-pill, .btn-explode-control, .triforce-card, .denim-spec-card, .nav-link-pill, .switch-brandbook-btn, .lookbook-filter-pill, .lookbook-card, .story-pillar-card, .story-timeline-card, .btn-inspect-3d, .btn-shop-tigc');
   hoverTargets.forEach(el => {
     el.addEventListener('mouseenter', () => {
       if (window.soundFX) window.soundFX.playHoverTick();
@@ -44,7 +45,7 @@ function initCatalogueSoundInteractions() {
 }
 
 // ============================================================================
-// 02. KINETIC 14-DAY VELOCITY MACHINE SCRUBBER
+// 02. KINETIC 14-DAY VELOCITY MACHINE SCRUBBER (Complete 14-Day Micro-Batch Mapping)
 // ============================================================================
 function initVelocityScrubber() {
   const scrubber = document.getElementById('velocity-scrubber');
@@ -55,57 +56,90 @@ function initVelocityScrubber() {
 
   if (!scrubber || !dispDay) return;
 
-  const velocityStages = [
-    {
-      day: "01",
-      stage: "STAGE 01 // SOCIAL AI HARVESTING",
-      title: "Algorithmic Runway & Streetwear Signal Detection",
-      desc: "Our neural scrapers analyze over 2.4 Million social signals, runway drops, and Pinterest boards weekly to isolate breakout silhouettes and fabric weights before legacy brands notice."
+  const velocityStages = {
+    1: {
+      stage: "STAGE 01 // SOCIAL AI SIGNAL HARVESTING",
+      title: "2.4M Social Signals & Global Runway Scraping",
+      desc: "Neural scrapers analyze over 2.4 Million social signals, street style drops, and Pinterest boards weekly to isolate breakout silhouettes and fabric weights before legacy brands notice."
     },
-    {
-      day: "03",
-      stage: "STAGE 02 // 3D CAD MORPHOLOGICAL DRAFTING",
+    2: {
+      stage: "STAGE 02 // MOODBOARDING & SILHOUETTE SELECT",
+      title: "Rapid Prototyping & Fabric Pairing",
+      desc: "Design pods in Indore and Bengaluru map identified trends to proven South Asian morphological pattern blocks and allocate pre-tested raw fabric stock."
+    },
+    3: {
+      stage: "STAGE 03 // 3D CAD MORPHOLOGICAL DRAFTING",
       title: "Virtual Pattern Grading & Indian Body Calibration",
-      desc: "Digital 3D samples constructed on virtual South Asian avatar avatars, refining waist-rise tension and thigh contouring without cutting physical sample fabric."
+      desc: "Digital 3D samples constructed on virtual South Asian avatars, locking waist-rise tension and thigh ease without cutting physical sample fabric."
     },
-    {
-      day: "06",
-      stage: "STAGE 03 // LASER PRECISION & OZONE WASH",
-      title: "300-Unit Micro-Batch Automated Production",
-      desc: "Fabric digitally nested and cut by automated high-speed laser tables. Denim washes undergo eco-friendly ozone bleaching, eliminating chlorine and slashing water use by 65%."
+    4: {
+      stage: "STAGE 04 // DIGITAL NESTING & TEXTILE ALLOCATION",
+      title: "Zero-Waste Fabric Optimization",
+      desc: "Automated algorithmic pattern nesting achieves 94% textile utilization across ring-spun cotton and waffle-knit rolls, eliminating cutting waste."
     },
-    {
-      day: "09",
-      stage: "STAGE 04 // AQL 1.5 INTEGRITY AUDIT",
-      title: "14-Point Stress Testing & Bartack Reinforcement",
-      desc: "Garments pass military-grade tensile pull tests, wash-shrinkage checks, and zipper cycle tests across 100+ vetted domestic manufacturing clusters."
+    5: {
+      stage: "STAGE 05 // HIGH-SPEED CNC LASER CUTTING",
+      title: "Automated Multi-Ply Precision Cutting",
+      desc: "Computer-controlled laser cutting tables slice 300-unit test batches in under 45 minutes with microscopic edge precision and zero fraying."
     },
-    {
-      day: "12",
-      stage: "STAGE 05 // FAST-TRACK METRO DEPLOYMENT",
-      title: "EBO Flagship & E-Commerce Drop Synchronization",
-      desc: "Micro-batch inventory arrives simultaneously at 20+ flagship EBO stores (Brigade Road Bengaluru, Lucknow, Kochi) and top e-commerce fulfillment hubs."
+    6: {
+      stage: "STAGE 06 // DECENTRALIZED POD ASSEMBLY",
+      title: "100+ Agile Factory Pods in Motion",
+      desc: "Specialized modular manufacturing pods in Indore, Surat, and Tirupur stitch garments with 14-point military-grade bartack reinforcements."
     },
-    {
-      day: "14",
-      stage: "STAGE 06 // ALGORITHMIC SCALE OR KILL",
-      title: "Real-Time Sell-Through Velocity Trigger",
+    7: {
+      stage: "STAGE 07 // SUSTAINABLE OZONE & LASER WASH",
+      title: "Eco-Friendly Finishing & Water Reduction",
+      desc: "Denim and casuals undergo waterless ozone bleaching and laser whiskering, slashing chemical and water use by 65% compared to conventional mills."
+    },
+    8: {
+      stage: "STAGE 08 // HEAT CURING & PEACH SOFT-FINISH",
+      title: "Shrinkage Stabilization & Velvet Touch",
+      desc: "Sanforization chambers lock shrinkage to under 1.5%, followed by an organic enzyme velvet wash for luxurious all-day skin comfort."
+    },
+    9: {
+      stage: "STAGE 09 // AQL 1.5 MILITARY INTEGRITY AUDIT",
+      title: "Tensile Pull Tests & Laundry Stress Cycles",
+      desc: "Garments pass military-grade tensile pull tests, wash-shrinkage checks, and zipper cycle endurance tests across 200+ simulated domestic laundry runs."
+    },
+    10: {
+      stage: "STAGE 10 // DIGITAL SERIALIZATION & RF TAGGING",
+      title: "Smart Inventory Tracking & Packaging",
+      desc: "Every single piece receives unique RFID serialization and barcode tracking for realtime shelf inventory reconciliation."
+    },
+    11: {
+      stage: "STAGE 11 // INDORE CENTRAL HUB DISPATCH",
+      title: "Automated Sorting & Fleet Allocation",
+      desc: "Indore central logistics facility routes batches directly to express transit networks serving metro corridors within 24 hours."
+    },
+    12: {
+      stage: "STAGE 12 // OMNICHANNEL SHELF SYNCHRONIZATION",
+      title: "Simultaneous EBO & E-Commerce Dark Store Drop",
+      desc: "Micro-batch inventory arrives simultaneously at 20+ flagship EBO stores (Bengaluru, Lucknow, Kochi) and top e-commerce fulfillment dark stores."
+    },
+    13: {
+      stage: "STAGE 13 // CAMPAIGN LAUNCH & LIVE DIGITAL DROP",
+      title: "Targeted Performance Ads & VIP Member Drop",
+      desc: "Styles go live on tigc.in, Myntra, Flipkart, and Ajio with real-time conversion pixel tracking and instant push notifications."
+    },
+    14: {
+      stage: "STAGE 14 // 48-HR ALGORITHMIC SCALE OR KILL",
+      title: "88% Sell-Through Trigger: Mass Scale or Discontinue",
       desc: "Our demand engine tracks 48-hour sell-through velocity. Top performers trigger automated mass-production repeat batches; sluggish styles are discontinued with zero dead-stock residue."
     }
-  ];
+  };
 
   scrubber.addEventListener('input', (e) => {
-    const val = parseInt(e.target.value, 10);
-    const progress = (val - 1) / 13;
-    const stageIdx = Math.min(velocityStages.length - 1, Math.floor(progress * velocityStages.length));
-    const s = velocityStages[stageIdx];
+    const dayNum = parseInt(e.target.value, 10);
+    const s = velocityStages[dayNum];
+    if (!s) return;
 
-    dispDay.textContent = `DAY ${s.day}`;
+    dispDay.textContent = `DAY ${String(dayNum).padStart(2, '0')}`;
     dispStage.textContent = s.stage;
     dispTitle.textContent = s.title;
     dispDesc.textContent = s.desc;
 
-    // Pitch-bending audio feedback
+    const progress = (dayNum - 1) / 13;
     if (window.soundFX) window.soundFX.playSliderChime(progress);
   });
 }
@@ -261,4 +295,46 @@ function init3DStudio() {
   if (window.tigc3D && typeof window.tigc3D.init === 'function') {
     window.tigc3D.init();
   }
+}
+
+// ============================================================================
+// 07. REAL PRODUCT LOOKBOOK FILTER & 3D INSPECT SYNC
+// ============================================================================
+function initLookbookFilter() {
+  const filterBtns = document.querySelectorAll('.lookbook-filter-pill');
+  const cards = document.querySelectorAll('.lookbook-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.getAttribute('data-filter');
+      cards.forEach(card => {
+        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (window.soundFX) window.soundFX.playClickSnap();
+    });
+  });
+
+  // Connect "Inspect 3D" buttons on lookbook cards to 3D Showroom category switcher
+  const inspectBtns = document.querySelectorAll('.btn-inspect-3d');
+  inspectBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const targetCat = btn.getAttribute('data-target-cat');
+      if (targetCat && window.tigcShowroom) {
+        window.tigcShowroom.setCategory(targetCat);
+        const showroomSection = document.getElementById('showroom');
+        if (showroomSection) {
+          showroomSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        if (window.soundFX) window.soundFX.playAnatomyExpand();
+      }
+    });
+  });
 }

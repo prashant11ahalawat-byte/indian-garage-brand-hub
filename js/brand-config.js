@@ -40,6 +40,15 @@ window.BRAND_PRESETS = {
       body: "'Montserrat', sans-serif"
     },
 
+    objectStudio: {
+      defaultModel: "logo",
+      defaultHighlight: "#DB2128",
+      defaultBackground: "#0B0F19",
+      defaultCellSize: 5,
+      defaultMargin: 0.15,
+      defaultBanding: 1
+    },
+
     financials: {
       seriesBInvestment: "₹155 Crore ($18.6 Million)",
       leadInvestor: "TMRW (House of Brands entity of Aditya Birla Fashion & Retail Ltd.)",
