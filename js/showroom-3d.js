@@ -95,8 +95,8 @@ class TIGCShowroomEngine {
         },
         {
           year: "2025",
-          title: "₹204 Cr Revenue & 25 Retail Stores",
-          desc: "Doubled top-line revenue year-over-year from ₹101 Cr to ₹204 Cr (FY25). Moving 550,000+ units monthly, expanding our omnichannel footprint to ~25 live Exclusive Brand Outlets, and crossing ₹100 Cr on D2C.",
+          title: "₹204 Cr Revenue & 23 Retail Stores",
+          desc: "Doubled top-line revenue year-over-year from ₹101 Cr to ₹204 Cr (FY25). Moving 550,000+ units monthly, expanding our omnichannel footprint to 23 live Exclusive Brand Outlets, and crossing ₹100 Cr on D2C.",
           highlight: "Doubled YoY to ₹204 Cr",
           unitsGain: 6500000
         },
@@ -133,102 +133,87 @@ class TIGCShowroomEngine {
     this.catalogData = {
       denim: {
         title: "13.5oz Ring-Spun Comfort Stretch Denim",
-        subtitle: "High-Velocity Bottomwear • WGSN Aged Appeal",
+        subtitle: "High-Velocity Bottomwear • WGSN 3D CAD Studio",
         badge: "2.8M+ Pairs Sold Annually",
-        description: "Engineered specifically for the South Asian morphological contour. Features an anti-gap lumbar rise, dual-tone copper chain-stitching, 14-point reinforced bartacks, and 2% memory elastane that guarantees 98.4% shape retention across 200+ washes.",
+        description: "Engineered specifically for South Asian morphology. Calibrated anti-gap lumbar rise, dual-tone copper chain-stitching, and 2% memory elastane guaranteeing 98.4% shape recovery across 200+ wear cycles.",
         specs: [
-          { label: "Fabric Weight", val: "13.5 oz / yd² Heavy Warp" },
-          { label: "Weave Structure", val: "3x1 Right-Hand Ring-Spun Twill" },
-          { label: "Tensile Resilience", val: "2% Lycra Memory Snapback" },
-          { label: "Construction", val: "14-Point Military Bartack Anchors" },
-          { label: "Sell-Through Velocity", val: "88% in 45 Days (Fast-Fashion Record)" },
+          { label: "Production Turnaround", val: "14-Day Micro-Batch Sprint (Concept-to-Rack)" },
+          { label: "Quality Standard", val: "Aditya Birla TMRW AQL 1.5 Compliance" },
+          { label: "Fit Engineering", val: "Calibrated South Asian Ergonomic Patterning" },
+          { label: "Supply Model", val: "Asset-Light 100+ Decentralized Factory Pods" },
+          { label: "Sell-Through Velocity", val: "88% in 45 Days (Fast-Fashion Benchmark)" },
           { label: "Pricing Segment", val: "₹1,199 – ₹1,899 (High-Volume Sweetspot)" }
         ],
         washes: {
-          raw: { name: "Raw Dark Indigo", filter: "brightness(1.0) contrast(1.06) saturate(1.15)" },
-          sunken: { name: "Sun-Washed Mid Blue", filter: "brightness(1.16) contrast(0.98) saturate(1.22) hue-rotate(6deg)" },
-          acid: { name: "Vintage Acid Wash", filter: "brightness(1.22) contrast(1.14) saturate(0.70) hue-rotate(12deg)" },
-          selvedge: { name: "Obsidian Black Selvedge", filter: "brightness(0.65) contrast(1.30) saturate(0.25)" }
+          raw: { name: "Raw Dark Indigo", filter: "none" }
         }
       },
       shirt: {
         title: "Tailored Solid Oxford Casuals & Resort Tops",
-        subtitle: "450+ Monthly Active Styles • Fluid Knit Drape",
+        subtitle: "450+ Monthly Active Styles • WGSN 3D CAD Studio",
         badge: "1.9M+ Units Produced",
-        description: "Our signature top-wear powerhouse. Crafted from 60s compact combed cotton and airy French linen blends, finished with a velvet peach enzyme wash. Designed with reinforced collar bands, curved hem ergonomics, and high-density lock stitching.",
+        description: "Our signature top-wear powerhouse. Crafted with compact combed cotton and airy linen blends, finished with velvet peach enzyme washing, reinforced collar bands, and curved hem ergonomics.",
         specs: [
-          { label: "Fabric Construction", val: "60s Compact Combed Cotton / Linen Blend" },
-          { label: "Finish Treatment", val: "Velvet Peach Enzyme Soft-Wash" },
-          { label: "Collar Geometry", val: "Camp Cuban / Reinforced Button-Down" },
-          { label: "Buttons & Fasteners", val: "Cross-Stitched High-Durability Pearl Trocas" },
-          { label: "Turnaround Velocity", val: "14 Days Concept-to-Rack" },
+          { label: "Production Turnaround", val: "14-Day Micro-Batch Sprint (Concept-to-Rack)" },
+          { label: "Quality Standard", val: "Aditya Birla TMRW AQL 1.5 Compliance" },
+          { label: "Fit Engineering", val: "Calibrated South Asian Ergonomic Patterning" },
+          { label: "Supply Model", val: "Asset-Light 100+ Decentralized Factory Pods" },
+          { label: "Sell-Through Velocity", val: "86% in 45 Days (Fast-Fashion Benchmark)" },
           { label: "Pricing Segment", val: "₹899 – ₹1,399 (Mass Everyday Luxury)" }
         ],
         washes: {
-          raw: { name: "Signature Resort Crimson", filter: "brightness(1.0) contrast(1.05) saturate(1.1)" },
-          sunken: { name: "Tuscan Sage Linen", filter: "brightness(1.12) contrast(0.95) saturate(0.9) hue-rotate(60deg)" },
-          acid: { name: "Deep Cobalt Oxford", filter: "brightness(0.95) contrast(1.1) saturate(1.2) hue-rotate(200deg)" },
-          selvedge: { name: "Midnight Obsidian Silk", filter: "brightness(0.68) contrast(1.25) saturate(0.2)" }
+          raw: { name: "Signature Resort Crimson", filter: "none" }
         }
       },
       polo: {
         title: "Polo-licious 320 GSM Heavyweight Knits",
-        subtitle: "Elevated Smart Casuals • WGSN Honeycomb Waffle",
+        subtitle: "Elevated Smart Casuals • WGSN 3D CAD Studio",
         badge: "Top-Rated Across Platforms",
-        description: "Indian Garage's breakthrough luxury knitwear. Custom-developed 320 GSM honeycomb waffle and double-pique cotton that provides structural drape, zero clinginess in humid climates, and micro-ribbed cuffs that never lose tension.",
+        description: "Breakthrough luxury knitwear. Custom 320 GSM honeycomb waffle and double-pique cotton providing structural drape, zero clinginess in humid climates, and micro-ribbed cuffs with lasting tension.",
         specs: [
-          { label: "Yarn Density", val: "300 – 320 GSM Ultra-Heavyweight Knit" },
-          { label: "Knit Texture", val: "Honeycomb Waffle & Combed Double Pique" },
-          { label: "Shrinkage Rate", val: "< 1.5% Guaranteed Post-Sanforization" },
-          { label: "Placket Engineering", val: "Fused 3-Button Collar with Zero Roll" },
-          { label: "Climate Resistance", val: "Anti-Microbial & High Wicking Ventilation" },
-          { label: "Pricing Segment", val: "₹799 – ₹1,299" }
+          { label: "Production Turnaround", val: "14-Day Micro-Batch Sprint (Concept-to-Rack)" },
+          { label: "Quality Standard", val: "Aditya Birla TMRW AQL 1.5 Compliance" },
+          { label: "Fit Engineering", val: "Calibrated South Asian Ergonomic Patterning" },
+          { label: "Supply Model", val: "Asset-Light 100+ Decentralized Factory Pods" },
+          { label: "Sell-Through Velocity", val: "89% in 45 Days (Fast-Fashion Benchmark)" },
+          { label: "Pricing Segment", val: "₹799 – ₹1,299 (Everyday Premium)" }
         ],
         washes: {
-          raw: { name: "Deep Navy Waffle", filter: "brightness(1.0) contrast(1.05) saturate(1.1)" },
-          sunken: { name: "Forest Moss Pique", filter: "brightness(1.05) contrast(1.0) saturate(0.95) hue-rotate(85deg)" },
-          acid: { name: "Sandstone Ecru", filter: "brightness(1.28) contrast(0.9) saturate(0.5) hue-rotate(25deg)" },
-          selvedge: { name: "Jet Carbon Black", filter: "brightness(0.64) contrast(1.3) saturate(0.2)" }
+          raw: { name: "Deep Navy Waffle", filter: "none" }
         }
       },
       jacket: {
         title: "All-Terrain Denim Truckers & Utility Overshirts",
-        subtitle: "Heavyweight All-Weather Outerwear • WGSN Denim Suite",
+        subtitle: "Heavyweight Trans-Seasonal Outerwear • WGSN 3D CAD Studio",
         badge: "High-Density Hardware",
-        description: "Heavy-duty outerwear engineered for trans-seasonal layered styling. Constructed with 14.5oz rigid broken-twill denim, anti-corrosive gunmetal shank buttons, reinforced chest bellows pockets, and adjustable waist cinches.",
+        description: "Heavy-duty outerwear engineered for trans-seasonal layered styling. Constructed with 14.5oz rigid broken-twill denim, anti-corrosive gunmetal shank buttons, reinforced chest pockets, and adjustable waist cinches.",
         specs: [
-          { label: "Outer Shell", val: "14.5 oz Rigid Broken-Twill Denim" },
-          { label: "Hardware Suite", val: "Die-Cast Matte Gunmetal Shank Buttons" },
-          { label: "Seam Construction", val: "Triple-Needle Felled Armhole & Side Seams" },
-          { label: "Storage Capacity", val: "4-Pocket Modular Utility Architecture" },
-          { label: "Abrasion Rating", val: "50,000+ Martindale Rub Endurance" },
-          { label: "Pricing Segment", val: "₹1,899 – ₹2,699" }
+          { label: "Production Turnaround", val: "14-Day Micro-Batch Sprint (Concept-to-Rack)" },
+          { label: "Quality Standard", val: "Aditya Birla TMRW AQL 1.5 Compliance" },
+          { label: "Fit Engineering", val: "Calibrated South Asian Ergonomic Patterning" },
+          { label: "Supply Model", val: "Asset-Light 100+ Decentralized Factory Pods" },
+          { label: "Sell-Through Velocity", val: "85% in 45 Days (Fast-Fashion Benchmark)" },
+          { label: "Pricing Segment", val: "₹1,899 – ₹2,699 (Outerwear Leader)" }
         ],
         washes: {
-          raw: { name: "Vintage Acid Washed Trucker", filter: "brightness(1.0) contrast(1.05) saturate(1.1)" },
-          sunken: { name: "Desert Khaki Canvas", filter: "brightness(1.15) contrast(0.95) saturate(0.9) hue-rotate(35deg)" },
-          acid: { name: "Garage Crimson Workwear", filter: "brightness(1.05) contrast(1.1) saturate(1.4) hue-rotate(-30deg)" },
-          selvedge: { name: "Stealth Obsidian Denim", filter: "brightness(0.65) contrast(1.3) saturate(0.2)" }
+          raw: { name: "Vintage Washed Trucker", filter: "none" }
         }
       },
       carpenter: {
         title: "All-Weather Heavyweight Utility Carpenter Trousers",
-        subtitle: "Multi-Pocket Modular Workwear • WGSN Trend 2026",
+        subtitle: "Multi-Pocket Modular Workwear • WGSN 3D CAD Studio",
         badge: "High-Yield Utility",
         description: "Engineered from 100% heavy compact twill with hammer loop, modular utility patch pockets, double-layer reinforced knee panels, and articulated ergonomic patterning for all-day comfort.",
         specs: [
-          { label: "Fabric Construction", val: "12.5 oz Heavyweight Cotton Canvas Twill" },
-          { label: "Pocket Suite", val: "7-Pocket Modular Carpenter Utility Layout" },
-          { label: "Structural Reinforcement", val: "Dual-Layer Knee Pockets & Heavy Bar-Tacks" },
-          { label: "Hardware Suite", val: "Anti-Corrosive Gunmetal Rivets & Heavy Zipper" },
-          { label: "Sell-Through Velocity", val: "91% in 30 Days" },
-          { label: "Pricing Segment", val: "₹1,499 – ₹2,299" }
+          { label: "Production Turnaround", val: "14-Day Micro-Batch Sprint (Concept-to-Rack)" },
+          { label: "Quality Standard", val: "Aditya Birla TMRW AQL 1.5 Compliance" },
+          { label: "Fit Engineering", val: "Calibrated South Asian Ergonomic Patterning" },
+          { label: "Supply Model", val: "Asset-Light 100+ Decentralized Factory Pods" },
+          { label: "Sell-Through Velocity", val: "91% in 30 Days (Fast-Fashion Benchmark)" },
+          { label: "Pricing Segment", val: "₹1,499 – ₹2,299 (Utility Workwear)" }
         ],
         washes: {
-          raw: { name: "Raw Umber Earth", filter: "brightness(1.0) contrast(1.05) saturate(1.1)" },
-          sunken: { name: "Washed Khaki Olive", filter: "brightness(1.12) contrast(0.96) saturate(0.9) hue-rotate(50deg)" },
-          acid: { name: "Distressed Stone Gray", filter: "brightness(1.22) contrast(1.08) saturate(0.55)" },
-          selvedge: { name: "Carbon Utility Black", filter: "brightness(0.66) contrast(1.28) saturate(0.2)" }
+          raw: { name: "Raw Umber Earth", filter: "none" }
         }
       }
     };
@@ -411,6 +396,7 @@ class TIGCShowroomEngine {
     });
 
     this.heroMonogram = new THREE.Mesh(geometry, material);
+    this.heroMonogram.scale.set(0.85, 0.85, 0.85);
     this.heroScene.add(this.heroMonogram);
 
     // Orbit Pedestal Ring for Free 3D view
@@ -473,7 +459,7 @@ class TIGCShowroomEngine {
     imgEl.id = 'wgsn-turntable-img';
     imgEl.className = 'wgsn-turntable-frame-img';
     imgEl.alt = 'Indian Garage 3D Apparel Model';
-    imgEl.src = `assets/wgsn_3d/${this.activeCategory}_frames/frame_00.webp`;
+    imgEl.src = `assets/wgsn_3d/${this.activeCategory}.webp`;
     imgEl.style.cssText = `
       max-width: 90%;
       max-height: 88%;
@@ -595,7 +581,10 @@ class TIGCShowroomEngine {
     const imgEl = document.getElementById('wgsn-turntable-img');
     if (imgEl) {
       const frameNum = String(this.currentFrame).padStart(2, '0');
-      imgEl.src = `assets/wgsn_3d/${this.activeCategory}_frames/frame_${frameNum}.webp`;
+      const frameSrc = `assets/wgsn_3d/${this.activeCategory}_frames/frame_${frameNum}.webp`;
+      const staticFallback = `assets/wgsn_3d/${this.activeCategory}.webp`;
+      imgEl.onerror = () => { imgEl.onerror = null; imgEl.src = staticFallback; };
+      imgEl.src = frameSrc;
     }
   }
 
@@ -737,10 +726,10 @@ class TIGCShowroomEngine {
     if (this.game.trackGroup) this.game.trackGroup.visible = true;
     if (this.heroOrbitRing) this.heroOrbitRing.visible = false;
 
-    // Position Player on Left Side in Side Profile
+    // Position Player on Left Side in Side Profile (Compact Scale for Precision Platforming)
     if (this.heroMonogram) {
-      this.heroMonogram.scale.set(0.55, 0.55, 0.55);
-      this.heroMonogram.position.set(this.game.playerX, -1.8, 0);
+      this.heroMonogram.scale.set(0.36, 0.36, 0.36);
+      this.heroMonogram.position.set(this.game.playerX, -2.0, 0);
       this.heroMonogram.rotation.set(0, 0.35, 0);
     }
 
@@ -942,7 +931,7 @@ class TIGCShowroomEngine {
     this.clearGameObjects();
 
     if (this.heroMonogram) {
-      this.heroMonogram.scale.set(1, 1, 1);
+      this.heroMonogram.scale.set(0.85, 0.85, 0.85);
       this.heroMonogram.position.set(0, 0, 0);
       this.heroMonogram.rotation.set(0, 0, 0);
     }
@@ -1269,9 +1258,9 @@ class TIGCShowroomEngine {
         }
 
         // Gallop running stride bobbing
-        const strideBounce = this.game.isJumping ? 0 : Math.sin(t * 14) * 0.12;
+        const strideBounce = this.game.isJumping ? 0 : Math.sin(t * 14) * 0.08;
         if (this.heroMonogram) {
-          this.heroMonogram.position.set(this.game.playerX, -1.8 + this.game.playerY + strideBounce, 0);
+          this.heroMonogram.position.set(this.game.playerX, -2.1 + this.game.playerY + strideBounce, 0);
           this.heroMonogram.rotation.z = this.game.isJumping ? this.game.playerVelY * 2.2 : Math.sin(t * 12) * 0.08;
           this.heroMonogram.rotation.y = 0.35 + Math.sin(t * 4) * 0.1;
         }
