@@ -1082,12 +1082,12 @@ class TIGCShowroomEngine {
     // Update UI Content Panels
     this.updateShowroomUI(catData);
 
-    // Update Original Product Studio Image & Tag
+    // Update 3D CAD Render Apparel Showcase
     const categoryPhotos = {
-      denim: { src: "assets/tigc_live/polo_01.jpg", tag: "ORIGINAL INDIAN GARAGE 13.5oz STRETCH DENIM • 100% REAL GARMENT" },
-      shirt: { src: "assets/tigc_live/shirt_01.jpg", tag: "ORIGINAL INDIAN GARAGE SOLID OXFORD CASUAL SHIRT • 100% REAL GARMENT" },
-      polo: { src: "assets/brandbook_pages/page_20.jpg", tag: "ORIGINAL INDIAN GARAGE 320 GSM WAFFLE KNIT POLO • 100% REAL GARMENT" },
-      jacket: { src: "assets/brandbook_pages/page_13.jpg", tag: "ORIGINAL INDIAN GARAGE ALL-TERRAIN UTILITY JACKET • 100% REAL GARMENT" }
+      denim: { src: "assets/renders_3d/denim_3d.jpg", tag: "3D CAD RENDER • 13.5oz RING-SPUN COMFORT STRETCH DENIM" },
+      shirt: { src: "assets/renders_3d/shirt_3d.jpg", tag: "3D CAD RENDER • TAILORED SOLID OXFORD CASUAL SHIRT" },
+      polo: { src: "assets/renders_3d/polo_3d.jpg", tag: "3D CAD RENDER • POLO-LICIOUS 320 GSM TEXTURED WAFFLE KNIT" },
+      jacket: { src: "assets/renders_3d/jacket_3d.jpg", tag: "3D CAD RENDER • ALL-TERRAIN UTILITY TRUCKER JACKET" }
     };
     const photoEl = document.getElementById("real-product-hero-img");
     const tagEl = document.getElementById("real-product-hud-tag");
@@ -1132,6 +1132,20 @@ class TIGCShowroomEngine {
       mat.color.copy(targetColor);
       mat.roughness = washConfig.roughness;
       mat.metalness = washConfig.metalness;
+    }
+
+    // Update 3D CAD Render Tone Grading for Selected Wash
+    const photoEl = document.getElementById("real-product-hero-img");
+    if (photoEl) {
+      const washFilters = {
+        raw: 'drop-shadow(0 20px 45px rgba(0,0,0,0.55)) brightness(1) contrast(1.05) saturate(1.1)',
+        sunken: 'drop-shadow(0 20px 45px rgba(0,0,0,0.55)) brightness(1.15) contrast(0.95) saturate(1.2) hue-rotate(8deg)',
+        acid: 'drop-shadow(0 20px 45px rgba(0,0,0,0.55)) brightness(1.25) contrast(1.12) saturate(0.65) hue-rotate(15deg)',
+        selvedge: 'drop-shadow(0 20px 45px rgba(0,0,0,0.55)) brightness(0.65) contrast(1.35) saturate(0.2)'
+      };
+      if (washFilters[washKey]) {
+        photoEl.style.filter = washFilters[washKey];
+      }
     }
 
     // Update Active Wash Pill UI
@@ -1336,34 +1350,13 @@ class TIGCShowroomEngine {
   // EVENT BINDINGS (Drag, Hover, Sound, Kinetic Rotation)
   // ==========================================================================
   bindEvents() {
-    // 0. Stage Mode Toggle (3D Digital Twin vs Original Product 360 Studio)
-    const btnView3D = document.getElementById("btn-view-3d");
-    const btnViewPhoto = document.getElementById("btn-view-photo");
-    const stage3D = document.getElementById("showroom-3d-stage");
-    const stagePhoto = document.getElementById("showroom-photo-stage");
+    // 0. 3D Perspective Tilt on CAD Apparel Blueprint Stage
+    const showroomViewport = document.getElementById("showroom-viewport") || document.getElementById("showroom-photo-stage");
     const photoCard = document.getElementById("real-product-card-3d");
 
-    if (btnView3D && btnViewPhoto && stage3D && stagePhoto) {
-      btnView3D.addEventListener("click", () => {
-        stage3D.style.display = "block";
-        stagePhoto.style.display = "none";
-        btnView3D.classList.add("active");
-        btnViewPhoto.classList.remove("active");
-        if (window.soundFX) window.soundFX.playClickSnap();
-      });
-
-      btnViewPhoto.addEventListener("click", () => {
-        stage3D.style.display = "none";
-        stagePhoto.style.display = "flex";
-        btnViewPhoto.classList.add("active");
-        btnView3D.classList.remove("active");
-        if (window.soundFX) window.soundFX.playClickSnap();
-      });
-
-      // 3D Perspective Tilt on Real Product Card
-      stagePhoto.addEventListener("mousemove", (e) => {
-        if (!photoCard) return;
-        const rect = stagePhoto.getBoundingClientRect();
+    if (showroomViewport && photoCard) {
+      showroomViewport.addEventListener("mousemove", (e) => {
+        const rect = showroomViewport.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
         const rotY = (x / (rect.width / 2)) * 14;
@@ -1371,10 +1364,81 @@ class TIGCShowroomEngine {
         photoCard.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(1.04, 1.04, 1.04)`;
       });
 
-      stagePhoto.addEventListener("mouseleave", () => {
-        if (!photoCard) return;
+      showroomViewport.addEventListener("mouseleave", () => {
         photoCard.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
       });
+    }
+
+    // 0B. Hero Kinetic G-Unit Monogram Interactive Drag & Spatial Audio Tones
+    if (this.heroContainer) {
+      this.heroContainer.addEventListener('mousedown', (e) => {
+        this.heroDrag.isDragging = true;
+        this.heroDrag.lastX = e.clientX;
+        this.heroDrag.lastY = e.clientY;
+        if (window.soundFX && window.soundFX.playEmblemTone) {
+          window.soundFX.playEmblemTone(0.65);
+        }
+      });
+
+      window.addEventListener('mouseup', () => {
+        this.heroDrag.isDragging = false;
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!this.heroDrag.isDragging) return;
+        const deltaX = e.clientX - this.heroDrag.lastX;
+        const deltaY = e.clientY - this.heroDrag.lastY;
+        this.heroDrag.lastX = e.clientX;
+        this.heroDrag.lastY = e.clientY;
+
+        this.heroDrag.targetRotY += deltaX * 0.01;
+        this.heroDrag.targetRotX += deltaY * 0.008;
+
+        const velocity = Math.hypot(deltaX, deltaY);
+        if (window.soundFX && window.soundFX.playEmblemTone && velocity > 2) {
+          window.soundFX.playEmblemTone(Math.min(1.0, velocity * 0.04));
+        }
+      });
+
+      this.heroContainer.addEventListener('mouseenter', () => {
+        if (window.soundFX && window.soundFX.playHoverTick) {
+          window.soundFX.playHoverTick();
+        }
+        if (window.soundFX && window.soundFX.playEmblemTone) {
+          window.soundFX.playEmblemTone(0.35);
+        }
+      });
+
+      this.heroContainer.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+          this.heroDrag.isDragging = true;
+          this.heroDrag.lastX = e.touches[0].clientX;
+          this.heroDrag.lastY = e.touches[0].clientY;
+          if (window.soundFX && window.soundFX.playEmblemTone) {
+            window.soundFX.playEmblemTone(0.65);
+          }
+        }
+      }, { passive: true });
+
+      window.addEventListener('touchend', () => {
+        this.heroDrag.isDragging = false;
+      });
+
+      window.addEventListener('touchmove', (e) => {
+        if (!this.heroDrag.isDragging || e.touches.length !== 1) return;
+        const deltaX = e.touches[0].clientX - this.heroDrag.lastX;
+        const deltaY = e.touches[0].clientY - this.heroDrag.lastY;
+        this.heroDrag.lastX = e.touches[0].clientX;
+        this.heroDrag.lastY = e.touches[0].clientY;
+
+        this.heroDrag.targetRotY += deltaX * 0.012;
+        this.heroDrag.targetRotX += deltaY * 0.01;
+
+        const velocity = Math.hypot(deltaX, deltaY);
+        if (window.soundFX && window.soundFX.playEmblemTone && velocity > 2) {
+          window.soundFX.playEmblemTone(Math.min(1.0, velocity * 0.04));
+        }
+      }, { passive: true });
     }
     // 1. Category Switcher Tabs
     document.querySelectorAll('.category-tab-pill').forEach(btn => {

@@ -69,7 +69,7 @@ window.BRAND_PRESETS = {
       supplyChainVelocity: "14 Days Concept-to-Shelf"
     },
 
-    houseOfBrands: [
+    portfolio: [
       {
         id: "tigc_men",
         name: "Indian Garage",
@@ -79,16 +79,6 @@ window.BRAND_PRESETS = {
         tagline: "For Everyday Heroes",
         targetAudience: "Men aged 18–35 across Metros, Tier 1 and Tier 2 cities",
         priceBand: "₹899 – ₹2,499"
-      },
-      {
-        id: "hardsoda_plus",
-        name: "HardSoda (OTB Only)",
-        category: "Inclusive Plus-Size Marketplace Catalog (2XL to 7XL)",
-        share: "OTB Marketplace Allocation",
-        description: "Inclusive sizing from 2XL to 7XL operating strictly under an Open-To-Buy (OTB) marketplace catalog model. No new product development line.",
-        tagline: "Inclusive Fit. Marketplace OTB.",
-        targetAudience: "Marketplace customers requiring 2XL to 7XL inclusive sizing",
-        priceBand: "₹999 – ₹2,499"
       }
     ],
 

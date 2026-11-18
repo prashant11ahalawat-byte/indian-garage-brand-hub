@@ -46,32 +46,34 @@
     <!-- Center Navigation Links -->
     <div class="nav-links-cluster">
       <a href="#why-partner" class="nav-link-pill">Why Partner</a>
-      <a href="#collections" class="nav-link-pill">Collections</a>
       <a href="#showroom" class="nav-link-pill">3D Studio</a>
       <a href="#story" class="nav-link-pill">Our Story</a>
-      <a href="#velocity" class="nav-link-pill">14-Day Velocity</a>
-      <a href="#triforce" class="nav-link-pill">House of Brands</a>
+      <a href="#velocity" class="nav-link-pill">Agile Velocity</a>
+      <a href="#sky-arena" class="nav-link-pill">Ambassador</a>
       <a href="#partner-hub" class="nav-link-pill">Partner Hub</a>
-      <a href="#sky-arena" class="nav-link-pill">Sky 360</a>
     </div>
 
-    <!-- Actions: Dynamic Time Theme Dock & Sound FX Toggle -->
+    <!-- Actions: Shop tigc.in CTA + Time Theme + Sound FX -->
     <div class="nav-actions-cluster">
-      <!-- MacBook-Style Dynamic Time-Adaptive Atmosphere Dock -->
-      <div class="time-theme-dock-pill" title="Dynamic Time Atmosphere (Changes dynamically like macOS Live Wallpaper)">
-        <span class="live-clock-badge" id="live-time-ticker">--:--:-- IST</span>
-        <button class="time-mode-btn active" data-time-mode="auto" title="Auto-synchronize palette with local time">⚡ Auto</button>
-        <button class="time-mode-btn" data-time-mode="daylight" title="Daylight Titanium & Ivory">☼ Day</button>
-        <button class="time-mode-btn" data-time-mode="dusk" title="Dusk Twilight & Amber Glow">◑ Dusk</button>
-        <button class="time-mode-btn" data-time-mode="midnight" title="Midnight Cyber Obsidian">☾ Night</button>
+      <a href="https://tigc.in" target="_blank" class="nav-shop-cta-btn" title="Shop Official Store on tigc.in">
+        <span>Shop tigc.in</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+      </a>
+
+      <!-- Compact Dynamic Atmosphere Switcher -->
+      <div class="nav-theme-compact" title="Dynamic Atmosphere (macOS Live Mode)">
+        <span class="nav-clock-text" id="live-time-ticker">--:-- IST</span>
+        <button class="nav-mode-icon-btn active" data-time-mode="auto" title="Auto Mode">⚡</button>
+        <button class="nav-mode-icon-btn" data-time-mode="daylight" title="Day Mode">☼</button>
+        <button class="nav-mode-icon-btn" data-time-mode="midnight" title="Night Mode">☾</button>
       </div>
 
-      <!-- Tactile Sound FX Toggle -->
-      <button class="sound-toggle-btn" id="btn-sound-toggle" title="Toggle Interactive Foley Sound Effects">
+      <!-- Tactile Sound Toggle -->
+      <button class="sound-toggle-btn compact" id="btn-sound-toggle" title="Toggle Sound FX">
         <div class="sound-wave-bars" id="sound-wave-bars">
           <span></span><span></span><span></span>
         </div>
-        <span id="sound-toggle-label">SOUND FX: ON</span>
+        <span id="sound-toggle-label">FX</span>
       </button>
     </div>
   </nav>
@@ -125,29 +127,23 @@
       </div>
 
       <div class="hero-cta-group">
-        <a href="#why-partner" class="btn-catalogue-primary">
-          Why Partner With Us ↓
+        <a href="https://tigc.in" target="_blank" class="btn-catalogue-primary">
+          Explore tigc.in ↗
         </a>
-        <a href="#partner-hub" class="btn-catalogue-ghost">
-          Partner Capacity Terminal ↗
+        <a href="#why-partner" class="btn-catalogue-ghost">
+          Why Partner With Us ↓
         </a>
       </div>
     </div>
 
-    <!-- Right Column: Dedicated 3D Kinetic Podium Card -->
-    <div class="hero-3d-podium-card">
-      <div class="hero-podium-hud-top">
-        <span style="color: var(--tigc-crimson-bright); font-weight: 700;">● Indian Garage Kinetic Emblem</span>
-        <span>Drag to Rotate 360°</span>
-      </div>
-
-      <div id="hero-3d-podium-canvas">
+    <!-- Right Column: Seamless Floating 3D Kinetic Emblem Stage -->
+    <div class="hero-emblem-stage-container">
+      <div id="hero-3d-podium-canvas" class="hero-ambient-canvas">
         <!-- Three.js Hero Monogram Canvas injected here -->
       </div>
-
-      <div class="hero-podium-hud-bottom">
-        <span>TMRW HOUSE OF BRANDS</span>
-        <span>Official Brand Introduction 2026</span>
+      <div class="hero-emblem-audio-pill">
+        <span class="emblem-audio-dot"></span>
+        <span>♫ Interactive 3D Emblem • Drag with Spatial Audio</span>
       </div>
     </div>
   </section>
@@ -170,7 +166,7 @@
       As one of India's fastest-growing D2C and fast-fashion powerhouses, we are scaling rapidly toward ₹1,000 Crore GMV. We are actively onboarding reliable manufacturing pods, textile mills, wash specialists, and retail partners to support our explosive expansion.
     </p>
 
-    <!-- 5 Bento Strategic Cards (Translating Prashant's Pitch into High-End Architecture) -->
+    <!-- 5 Bento Strategic Cards (Translating Partnership Pitch into High-End Architecture) -->
     <div class="why-partner-grid">
       <!-- 1. Proven Scale -->
       <div class="partner-bento-card featured">
@@ -265,242 +261,25 @@
   </section>
 
   <!-- ======================================================================
-       SECTION 02: REAL COMMERCIAL COLLECTIONS & LOOKBOOK
-       ====================================================================== -->
-  <section class="catalogue-section" id="collections">
-    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
-      <div>
-        <span class="section-eyebrow">COMMERCIAL APPAREL LOOKBOOK</span>
-        <h2 class="section-headline">Real High-Velocity Garments. Zero Brand Tax.</h2>
-      </div>
-      <div>
-        <span class="hero-status-pill">450+ Monthly Drops • 88% Sell-Through</span>
-      </div>
-    </div>
-
-    <p class="section-lead-copy">
-      Explore actual Indian Garage commercial collections engineered for modern South Asian contours. From our signature 100% combed cotton checked casuals and 320 GSM waffle knit polos to 13.5oz ring-spun stretch denim and utility outerwear. Inspect in 3D or browse full commercial specifications.
-    </p>
-
-    <!-- Lookbook Category Filter Pills -->
-    <div class="lookbook-filter-bar">
-      <button class="lookbook-filter-pill active" data-filter="all">
-        All Collections (6)
-      </button>
-      <button class="lookbook-filter-pill" data-filter="denim">
-        13.5oz Stretch Denim (1)
-      </button>
-      <button class="lookbook-filter-pill" data-filter="shirt">
-        Signature Casual Shirts (3)
-      </button>
-      <button class="lookbook-filter-pill" data-filter="polo">
-        320 GSM Waffle Polos (1)
-      </button>
-      <button class="lookbook-filter-pill" data-filter="jacket">
-        Outerwear & Utility (1)
-      </button>
-    </div>
-
-    <!-- Product Cards Grid: 100% Genuine Indian Garage Products with Exact Tagging -->
-    <div class="lookbook-grid">
-      <!-- 1. Genuine 13.5oz Stretch Denim -->
-      <div class="lookbook-card" data-category="denim">
-        <div class="lookbook-img-box">
-          <img src="assets/tigc_live/polo_01.jpg" alt="13.5oz Ring-Spun Comfort Stretch Denim" class="lookbook-img">
-          <div class="lookbook-badge-row">
-            <span class="lookbook-badge crimson">2.8M+ PAIRS SOLD</span>
-            <span class="lookbook-badge">ERGONOMIC RISE</span>
-          </div>
-        </div>
-        <div class="lookbook-details">
-          <div>
-            <span class="lookbook-cat-tag">Bottomwear • Denim</span>
-            <h3 class="lookbook-title">13.5oz Ring-Spun Comfort Stretch Denim</h3>
-            <div class="lookbook-rating-row">
-              <span class="lookbook-rating-stars">★★★★★</span>
-              <span>4.8 / 5.0 (12,400+ reviews)</span>
-            </div>
-            <div class="lookbook-price-row">
-              <span class="lookbook-price-current">₹1,499</span>
-              <span class="lookbook-price-mrp">₹2,999</span>
-              <span class="lookbook-discount-badge">50% OFF</span>
-            </div>
-          </div>
-          <div class="lookbook-actions-row">
-            <a href="#showroom" class="btn-inspect-3d" data-target-cat="denim">Inspect 3D ↗</a>
-            <a href="https://tigc.in" target="_blank" class="btn-shop-tigc">Shop tigc.in ↗</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- 2. Solid Wine Oxford Casual Shirt -->
-      <div class="lookbook-card" data-category="shirt">
-        <div class="lookbook-img-box">
-          <img src="assets/tigc_live/shirt_01.jpg" alt="Tailored Solid Oxford Casual Shirt" class="lookbook-img">
-          <div class="lookbook-badge-row">
-            <span class="lookbook-badge crimson">TOP SELLER</span>
-            <span class="lookbook-badge">100% COMBED COTTON</span>
-          </div>
-        </div>
-        <div class="lookbook-details">
-          <div>
-            <span class="lookbook-cat-tag">Topwear • Menswear</span>
-            <h3 class="lookbook-title">Tailored Solid Oxford Casual Shirt</h3>
-            <div class="lookbook-rating-row">
-              <span class="lookbook-rating-stars">★★★★★</span>
-              <span>4.8 / 5.0 (5,400+ reviews)</span>
-            </div>
-            <div class="lookbook-price-row">
-              <span class="lookbook-price-current">₹1,099</span>
-              <span class="lookbook-price-mrp">₹2,199</span>
-              <span class="lookbook-discount-badge">50% OFF</span>
-            </div>
-          </div>
-          <div class="lookbook-actions-row">
-            <a href="#showroom" class="btn-inspect-3d" data-target-cat="shirt">Inspect 3D ↗</a>
-            <a href="https://tigc.in" target="_blank" class="btn-shop-tigc">Shop tigc.in ↗</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- 3. Polo-licious 320 GSM Waffle Polo -->
-      <div class="lookbook-card" data-category="polo">
-        <div class="lookbook-img-box">
-          <img src="assets/brandbook_pages/page_20.jpg" alt="Polo-licious 320 GSM Textured Waffle Polo" class="lookbook-img">
-          <div class="lookbook-badge-row">
-            <span class="lookbook-badge emerald">HEAVYWEIGHT 320 GSM</span>
-            <span class="lookbook-badge">ANTI-CURL COLLAR</span>
-          </div>
-        </div>
-        <div class="lookbook-details">
-          <div>
-            <span class="lookbook-cat-tag">Knitwear • Menswear</span>
-            <h3 class="lookbook-title">Polo-licious 320 GSM Textured Waffle Polo</h3>
-            <div class="lookbook-rating-row">
-              <span class="lookbook-rating-stars">★★★★★</span>
-              <span>4.9 / 5.0 (3,890+ reviews)</span>
-            </div>
-            <div class="lookbook-price-row">
-              <span class="lookbook-price-current">₹999</span>
-              <span class="lookbook-price-mrp">₹1,999</span>
-              <span class="lookbook-discount-badge">50% OFF</span>
-            </div>
-          </div>
-          <div class="lookbook-actions-row">
-            <a href="#showroom" class="btn-inspect-3d" data-target-cat="polo">Inspect 3D ↗</a>
-            <a href="https://tigc.in" target="_blank" class="btn-shop-tigc">Shop tigc.in ↗</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- 4. Relaxed Black Linen Casual Shirt -->
-      <div class="lookbook-card" data-category="shirt">
-        <div class="lookbook-img-box">
-          <img src="assets/tigc_live/shirt_02.jpg" alt="Relaxed Black Linen Casual Shirt" class="lookbook-img">
-          <div class="lookbook-badge-row">
-            <span class="lookbook-badge">BREATHABLE LINEN</span>
-            <span class="lookbook-badge">CAMP CUBAN COLLAR</span>
-          </div>
-        </div>
-        <div class="lookbook-details">
-          <div>
-            <span class="lookbook-cat-tag">Smart Casual • Menswear</span>
-            <h3 class="lookbook-title">Relaxed Black Linen Casual Shirt</h3>
-            <div class="lookbook-rating-row">
-              <span class="lookbook-rating-stars">★★★★★</span>
-              <span>4.7 / 5.0 (2,120+ reviews)</span>
-            </div>
-            <div class="lookbook-price-row">
-              <span class="lookbook-price-current">₹1,299</span>
-              <span class="lookbook-price-mrp">₹2,499</span>
-              <span class="lookbook-discount-badge">48% OFF</span>
-            </div>
-          </div>
-          <div class="lookbook-actions-row">
-            <a href="#showroom" class="btn-inspect-3d" data-target-cat="shirt">Inspect 3D ↗</a>
-            <a href="https://tigc.in" target="_blank" class="btn-shop-tigc">Shop tigc.in ↗</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- 5. Signature White Textured Dobby Shirt -->
-      <div class="lookbook-card" data-category="shirt">
-        <div class="lookbook-img-box">
-          <img src="assets/tigc_live/shirt_03.jpg" alt="Signature White Textured Dobby Shirt" class="lookbook-img">
-          <div class="lookbook-badge-row">
-            <span class="lookbook-badge">SUMMER EDITION</span>
-            <span class="lookbook-badge">FLUID COTTON DRAPE</span>
-          </div>
-        </div>
-        <div class="lookbook-details">
-          <div>
-            <span class="lookbook-cat-tag">Resort Wear • Menswear</span>
-            <h3 class="lookbook-title">Signature White Textured Dobby Shirt</h3>
-            <div class="lookbook-rating-row">
-              <span class="lookbook-rating-stars">★★★★★</span>
-              <span>4.8 / 5.0 (1,850+ reviews)</span>
-            </div>
-            <div class="lookbook-price-row">
-              <span class="lookbook-price-current">₹1,199</span>
-              <span class="lookbook-price-mrp">₹2,399</span>
-              <span class="lookbook-discount-badge">50% OFF</span>
-            </div>
-          </div>
-          <div class="lookbook-actions-row">
-            <a href="#showroom" class="btn-inspect-3d" data-target-cat="shirt">Inspect 3D ↗</a>
-            <a href="https://tigc.in" target="_blank" class="btn-shop-tigc">Shop tigc.in ↗</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- 6. All-Terrain Utility Trucker & Overshirt -->
-      <div class="lookbook-card" data-category="jacket">
-        <div class="lookbook-img-box">
-          <img src="assets/brandbook_pages/page_13.jpg" alt="The Everyday Hero All-Terrain Utility Jacket" class="lookbook-img">
-          <div class="lookbook-badge-row">
-            <span class="lookbook-badge crimson">ALL-WEATHER UTILITY</span>
-            <span class="lookbook-badge">HEAVY HARDWARE</span>
-          </div>
-        </div>
-        <div class="lookbook-details">
-          <div>
-            <span class="lookbook-cat-tag">Outerwear • Streetwear</span>
-            <h3 class="lookbook-title">The Everyday Hero All-Terrain Utility Jacket</h3>
-            <div class="lookbook-rating-row">
-              <span class="lookbook-rating-stars">★★★★★</span>
-              <span>4.9 / 5.0 (980+ reviews)</span>
-            </div>
-            <div class="lookbook-price-row">
-              <span class="lookbook-price-current">₹1,899</span>
-              <span class="lookbook-price-mrp">₹3,499</span>
-              <span class="lookbook-discount-badge">45% OFF</span>
-            </div>
-          </div>
-          <div class="lookbook-actions-row">
-            <a href="#showroom" class="btn-inspect-3d" data-target-cat="jacket">Inspect 3D ↗</a>
-            <a href="https://tigc.in" target="_blank" class="btn-shop-tigc">Shop tigc.in ↗</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ======================================================================
-       SECTION 03: MULTI-CATEGORY 3D APPAREL MATERIAL LAB & BLUEPRINT
+       SECTION 02: MULTI-CATEGORY 3D CAD APPAREL STUDIO & BLUEPRINT
        ====================================================================== -->
   <section class="catalogue-section" id="showroom">
     <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
       <div>
-        <span class="section-eyebrow" id="showroom-garment-sub">3D MATERIAL LAB & BLUEPRINT</span>
+        <span class="section-eyebrow" id="showroom-garment-sub">3D CAD APPAREL SPECIFICATION • RAW INDIGO</span>
         <h2 class="section-headline" id="showroom-garment-title">13.5oz Ring-Spun Comfort Stretch Denim</h2>
       </div>
-      <div>
+      <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
         <span class="hero-status-pill" id="showroom-garment-badge">2.8M+ Pairs Sold Annually</span>
+        <a href="https://tigc.in" target="_blank" class="nav-shop-cta-btn" style="box-shadow: none;">
+          <span>Explore All on tigc.in</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
       </div>
     </div>
 
     <p class="section-lead-copy" id="showroom-garment-desc">
-      Inspect Indian Garage's multi-category high-velocity apparel catalog in real-time 3D. From 13.5oz comfort-stretch selvedge denim to 60s combed cotton Cuban shirts and 320 GSM waffle polos. Drag below to rotate 360° with procedural fabric friction audio, switch wash treatments, or inspect structural seam exploded anatomy.
+      Inspect Indian Garage's multi-category apparel catalog in 3D CAD precision. From 13.5oz comfort-stretch selvedge denim to tailored combed cotton casuals and 320 GSM waffle polos. Hover to inspect in 3D perspective space, or toggle wash treatments below.
     </p>
 
     <!-- Multi-Category Selection Tabs -->
@@ -520,33 +299,22 @@
     </div>
 
     <div class="denim-lab-grid">
-      <!-- 3D Interactive WebGL Stage -->
+      <!-- 3D CAD Perspective Stage Wrapper -->
       <div class="denim-3d-stage-wrapper">
         <div class="denim-hud-top" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
           <div style="display: flex; align-items: center; gap: 8px;">
-            <span style="color: var(--apple-ruby); font-weight: 700;">● Interactive 3D Inspector</span>
-            <span style="color: var(--text-muted); font-size: 12px;">• Real Product Render • Drag to Rotate 360°</span>
+            <span style="color: var(--tigc-crimson-bright); font-weight: 700;">● 3D CAD APPAREL STUDIO</span>
+            <span style="color: var(--text-muted); font-size: 12px;">• Interactive Blueprint Inspector</span>
           </div>
-          <div class="inspector-stage-toggle" style="display: flex; gap: 6px;">
-            <button class="stage-view-btn active" id="btn-view-3d" data-view="3d">3D DIGITAL TWIN</button>
-            <button class="stage-view-btn" id="btn-view-photo" data-view="photo">ORIGINAL PRODUCT 360°</button>
+          <div class="real-product-hud-tag" id="real-product-hud-tag" style="font-family: var(--font-body); font-size: 11px; font-weight: 700; color: var(--text-pure); background: var(--glass-thin); border: 1px solid var(--glass-border); padding: 4px 12px; border-radius: 9999px;">
+            3D CAD RENDER • 13.5oz RING-SPUN COMFORT STRETCH DENIM
           </div>
         </div>
 
-        <div class="showroom-viewport-container" style="position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 20px;">
-          <!-- Mode A: Three.js Interactive WebGL 3D Mesh (Digital Twin) -->
-          <div id="showroom-3d-stage" style="width: 100%; height: 100%; cursor: grab; position: absolute; inset: 0; z-index: 2;">
-            <!-- Three.js Multi-Category Canvas injected here -->
-          </div>
-
-          <!-- Mode B: Original Product 360 High-Res Studio Showcase -->
-          <div id="showroom-photo-stage" style="display: none; width: 100%; height: 100%; position: absolute; inset: 0; z-index: 3; align-items: center; justify-content: center; background: radial-gradient(circle at center, rgba(30, 41, 59, 0.4) 0%, rgba(10, 15, 26, 0.95) 100%);">
-            <div class="real-product-card-3d" id="real-product-card-3d" style="max-width: 420px; width: 85%; height: 90%; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: transform 0.15s ease-out;">
-              <img id="real-product-hero-img" src="assets/tigc_live/polo_01.jpg" alt="Real Indian Garage Product" style="max-height: 85%; max-width: 100%; object-fit: contain; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.7)); border-radius: 16px;">
-              <div class="real-product-hud-tag" id="real-product-hud-tag" style="margin-top: 12px; font-family: var(--font-body); font-size: 12px; color: var(--text-pure); background: var(--glass-thin); border: 1px solid var(--glass-border); padding: 6px 14px; border-radius: 9999px; backdrop-filter: blur(20px);">
-                ORIGINAL PRODUCT STUDIO CAPTURE • 100% AUTHENTIC GARMENT
-              </div>
-            </div>
+        <div class="showroom-viewport-container" id="showroom-viewport" style="position: relative; width: 100%; height: 500px; overflow: hidden; border-radius: 20px; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at center, rgba(30, 41, 59, 0.35) 0%, rgba(10, 15, 26, 0.95) 100%);">
+          <!-- 3D Perspective Card Stage -->
+          <div class="real-product-card-3d" id="real-product-card-3d" style="max-width: 440px; width: 90%; height: 92%; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: transform 0.12s cubic-bezier(0.16, 1, 0.3, 1);">
+            <img id="real-product-hero-img" src="assets/renders_3d/denim_3d.jpg" alt="3D CAD Render" style="max-height: 90%; max-width: 100%; object-fit: contain; filter: drop-shadow(0 20px 50px rgba(0,0,0,0.65)); border-radius: 16px; transition: filter 0.3s ease;">
           </div>
         </div>
 
@@ -559,10 +327,9 @@
             <button class="denim-wash-pill" data-wash="selvedge">OBSIDIAN BLACK SELVEDGE</button>
           </div>
 
-          <!-- Explode Anatomy Button -->
-          <button class="btn-explode-control" id="btn-explode-anatomy">
-            EXPLODE 3D ANATOMY
-          </button>
+          <a href="https://tigc.in" target="_blank" class="btn-shop-tigc" style="padding: 9px 18px; font-size: 12.5px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+            <span>Shop on tigc.in</span> ↗
+          </a>
         </div>
       </div>
 
@@ -667,9 +434,9 @@
     <div class="story-pillars-grid">
       <div class="story-pillar-card">
         <div class="story-pillar-num">01</div>
-        <div class="story-pillar-title">Agile 14-Day Velocity</div>
+        <div class="story-pillar-title">Agile Micro-Batch Supply</div>
         <div class="story-pillar-desc">
-          Social AI trend scrapers feed 3D CAD pattern nesting and CNC laser cutting, dropping 450+ fresh styles monthly with 88% full-price sell-through in 45 days.
+          Operating an asset-light decentralized manufacturing web of 100+ specialized factory pods across Indore, Surat, and Tirupur. Real-time marketplace demand analytics guide rapid 14-day re-orders, keeping inventory lean with an 88% sell-through rate.
         </div>
       </div>
 
@@ -785,15 +552,15 @@
         <div>
           <div class="velocity-day-big" id="velocity-disp-day">DAY 01</div>
           <div style="font-family: var(--font-mono); font-size: 11px; color: var(--tigc-crimson-bright); font-weight: 700; margin-top: 4px;" id="velocity-disp-stage">
-            Phase 01 • Social AI Signal Harvesting
+            Phase 01 • Live Marketplace Demand Intelligence
           </div>
         </div>
         <div>
           <div class="velocity-step-title" id="velocity-disp-title">
-            2.4M Social Signals & Global Runway Scraping
+            Real-Time Search & Consumer Sell-Through Signals
           </div>
           <div class="velocity-step-desc" id="velocity-disp-desc">
-            Our neural scrapers analyze over 2.4 Million social signals, runway drops, and Pinterest boards weekly to isolate breakout silhouettes and fabric weights before legacy brands notice.
+            Rather than relying on speculative 6-month seasonal forecasts, our data desk continuously tracks live search trends, cart additions, and category sell-through velocity across Myntra, Ajio, and tigc.in to spot breakout styles instantly.
           </div>
         </div>
       </div>
@@ -801,65 +568,92 @@
   </section>
 
   <!-- ======================================================================
-       SECTION 06: BRAND ARCHITECTURE (CORE FLAGSHIP & OTB CATALOGUE)
+       SECTION 05: THE INDIAN GARAGE COMMERCIAL ECOSYSTEM & SCALE
        ====================================================================== -->
-  <section class="catalogue-section" id="triforce">
-    <span class="section-eyebrow">BRAND ARCHITECTURE</span>
-    <h2 class="section-headline">The Indian Garage Powerhouse & Portfolio</h2>
+  <section class="catalogue-section" id="ecosystem">
+    <span class="section-eyebrow">OMNICHANNEL DOMINANCE</span>
+    <h2 class="section-headline">The Indian Garage Commercial Ecosystem</h2>
     <p class="section-lead-copy">
-      Indian Garage is the core high-growth fast-fashion engine driving ₹500 Crore GMV, with HardSoda operating strictly as an Open-To-Buy (OTB) marketplace catalog line.
+      A compounding fashion enterprise: from #1 rankings across top marketplaces to our rapid 100-store offline retail rollout and ₹100 Crore D2C flagship platform.
     </p>
 
-    <div class="triforce-grid" style="grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));">
-      <!-- Brand 1: Indian Garage Menswear -->
+    <div class="triforce-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+      <!-- Pillar 1: Marketplaces -->
       <div class="triforce-card featured">
         <div>
-          <div class="triforce-share-badge">CORE FLAGSHIP • ₹500 CR GMV POWERHOUSE</div>
-          <div class="triforce-brand-name">INDIAN GARAGE</div>
+          <div class="triforce-share-badge">MARKETPLACE DOMINANCE</div>
+          <div class="triforce-brand-name">#1 ON AJIO • TOP 10 MYNTRA</div>
           <p class="triforce-brand-desc">
-            The definitive fast-fashion menswear brand for modern Indian men. Trend-first 13.5oz denim, Cuban collar casuals, heavyweight 320 GSM polos, and utility streetwear engineered for everyday heroes. Doubling revenue to ₹204 Crore (FY25) and backed by Aditya Birla Group's TMRW.
+            Consistently ranked as the #1 external fashion brand on AJIO and a permanent Top 10 bestseller on Myntra. High-velocity volume across Flipkart and Amazon, moving 500,000 to 600,000 garments every month.
           </p>
         </div>
         <div>
           <div class="triforce-stats-row">
             <div class="triforce-stat-item">
-              <strong>18–35</strong>
-              <span>Target Male Demographic</span>
+              <strong>550K+</strong>
+              <span>Monthly Units Sold</span>
             </div>
             <div class="triforce-stat-item">
-              <strong>₹1,499</strong>
-              <span>Average Basket Size</span>
+              <strong>#1 AJIO</strong>
+              <span>External Ranking</span>
             </div>
             <div class="triforce-stat-item">
-              <strong>18 EBOs</strong>
-              <span>Live Retail Footprint</span>
+              <strong>Top 10</strong>
+              <span>Myntra Menswear</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Brand 2: HardSoda (OTB ONLY) -->
+      <!-- Pillar 2: Retail EBO Network -->
       <div class="triforce-card">
         <div>
-          <div class="triforce-share-badge" style="color: var(--accent-cyan);">MARKETPLACE OTB LINE • INCLUSIVE SIZING</div>
-          <div class="triforce-brand-name">HARDSODA (OTB ONLY)</div>
+          <div class="triforce-share-badge" style="color: var(--accent-emerald);">OMNICHANNEL OFFLINE</div>
+          <div class="triforce-brand-name">18 LIVE RETAIL STORES</div>
           <p class="triforce-brand-desc">
-            Inclusive plus-size catalog from 2XL to 7XL operating strictly under an Open-To-Buy (OTB) marketplace model for Flipkart, Amazon, and Myntra fulfillment. No new product development pipeline—fulfillment of dedicated high-volume OTB demand only.
+            High-street and premier shopping mall presence across Bengaluru, Indore, Lucknow, and Mumbai. Aggressively expanding toward a target of 100 Exclusive Brand Outlets (EBOs) across Tier 1, 2, and 3 cities.
           </p>
         </div>
         <div>
           <div class="triforce-stats-row">
             <div class="triforce-stat-item">
-              <strong>2XL–7XL</strong>
-              <span>Size Matrix</span>
+              <strong>18 Live</strong>
+              <span>Current Footprint</span>
             </div>
             <div class="triforce-stat-item">
-              <strong>OTB Only</strong>
-              <span>No New Drops</span>
+              <strong>100 EBOs</strong>
+              <span>Expansion Target</span>
             </div>
             <div class="triforce-stat-item">
-              <strong>Marketplaces</strong>
-              <span>Distribution Channel</span>
+              <strong>Tier 1–3</strong>
+              <span>City Coverage</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pillar 3: D2C Flagship -->
+      <div class="triforce-card">
+        <div>
+          <div class="triforce-share-badge" style="color: var(--accent-cyan);">PROPRIETARY D2C</div>
+          <div class="triforce-brand-name">₹100 CRORE D2C (tigc.in)</div>
+          <p class="triforce-brand-desc">
+            Our direct-to-consumer flagship at tigc.in operates at a ₹100 Crore run-rate with high repeat customer loyalty, rapid trend testing, and direct consumer engagement with zero intermediary brand tax.
+          </p>
+        </div>
+        <div>
+          <div class="triforce-stats-row">
+            <div class="triforce-stat-item">
+              <strong>₹100 CR</strong>
+              <span>Annual D2C Scale</span>
+            </div>
+            <div class="triforce-stat-item">
+              <strong>Direct</strong>
+              <span>Consumer Channel</span>
+            </div>
+            <div class="triforce-stat-item">
+              <strong>tigc.in</strong>
+              <span>Official Hub</span>
             </div>
           </div>
         </div>
@@ -970,14 +764,14 @@
         </p>
       </div>
 
-      <div style="display: flex; flex-direction: column; gap: 20px;">
-        <div style="background: rgba(0,0,0,0.5); border: 1px solid var(--border-subtle); padding: 20px; border-radius: 8px;">
-          <div style="font-family: var(--font-display); font-size: 42px; color: #FFFFFF; line-height: 1;">1.5M+</div>
-          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); text-transform: uppercase;">Social Community Reach</div>
+      <div class="sky-stats-cluster">
+        <div class="sky-stat-card">
+          <div class="sky-stat-number">1.5M+</div>
+          <div class="sky-stat-caption">Social Community Reach</div>
         </div>
-        <div style="background: rgba(0,0,0,0.5); border: 1px solid var(--border-subtle); padding: 20px; border-radius: 8px;">
-          <div style="font-family: var(--font-display); font-size: 42px; color: var(--accent-emerald); line-height: 1;">85M+</div>
-          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); text-transform: uppercase;">Campaign Video Impressions</div>
+        <div class="sky-stat-card">
+          <div class="sky-stat-number emerald">85M+</div>
+          <div class="sky-stat-caption">Campaign Video Impressions</div>
         </div>
       </div>
     </div>
@@ -1004,19 +798,19 @@
 
       <div class="hq-designer-block">
         <div class="designer-avatar-row">
-          <div class="designer-avatar-circle">P</div>
+          <div class="designer-avatar-circle" style="background: var(--apple-crimson-gradient); font-size: 16px; font-weight: 800;">IG</div>
           <div>
-            <div class="designer-meta-name">Prashant</div>
-            <div class="designer-meta-role">DESIGNER & CREATIVE DIRECTION</div>
+            <div class="designer-meta-name">Corporate Sourcing & BD Desk</div>
+            <div class="designer-meta-role">THE INDIAN GARAGE COMPANY PVT. LTD.</div>
           </div>
         </div>
 
         <p class="designer-quote-text">
-          "We are building India's most unstoppable fast-fashion machine. Reach out directly to collaborate on manufacturing, sourcing, or retail expansion."
+          "We are actively onboarding high-capacity garment manufacturing pods, textile mills, and retail mall partners. Connect directly with our sourcing desk."
         </p>
 
         <button class="btn-contact-direct btn-open-partner-modal">
-          Connect With Prashant & Sourcing ↗
+          Initiate Sourcing Inquiry ↗
         </button>
       </div>
     </div>
@@ -1045,7 +839,7 @@
       <div style="font-family: var(--font-mono); font-size: 11px; color: var(--tigc-crimson-bright); font-weight: 700; margin-bottom: 6px;">INDIAN GARAGE • SOURCING & STRATEGIC PARTNERSHIPS</div>
       <h3 style="font-family: var(--font-display); font-size: 32px; color: #FFFFFF; margin-bottom: 8px;">Partner With Indian Garage</h3>
       <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.5;">
-        Connect directly with Prashant and our Sourcing Directorate. We are reviewing capacity allocations for 500,000 to 1,000,000 units/month scaling across India.
+        Connect directly with our Corporate Sourcing Directorate. We are reviewing capacity allocations for 500,000 to 1,000,000 units/month scaling across India.
       </p>
 
       <div style="display: flex; flex-direction: column; gap: 14px;">
@@ -1066,7 +860,7 @@
       </div>
 
       <div id="partner-success-msg" style="display: none; margin-top: 16px; font-family: var(--font-mono); font-size: 13px; color: var(--accent-emerald); text-align: center;">
-        ✓ Proposal received. Prashant & the Sourcing Directorate will connect via WhatsApp within 24 hours.
+        ✓ Proposal received. The Indian Garage Sourcing Directorate will connect via WhatsApp within 24 hours.
       </div>
     </div>
   </div>

@@ -58,74 +58,74 @@ function initVelocityScrubber() {
 
   const velocityStages = {
     1: {
-      stage: "Phase 01 • Social AI Signal Harvesting",
-      title: "2.4M Social Signals & Global Runway Scraping",
-      desc: "Neural scrapers analyze over 2.4 Million social signals, street style drops, and Pinterest boards weekly to isolate breakout silhouettes and fabric weights before legacy brands notice."
+      stage: "Phase 01 • Marketplace Demand Intelligence",
+      title: "Real-Time Search & Sell-Through Signal Tracking",
+      desc: "Rather than guessing 6 months in advance, our merchandising desk tracks live search queries, cart additions, and category sell-through velocity across Myntra (#1 external brand), Ajio, and tigc.in to identify breakout styles immediately."
     },
     2: {
-      stage: "Phase 02 • Rapid Prototyping & Fabric Pairing",
-      title: "Rapid Prototyping & Fabric Pairing",
-      desc: "Design pods in Indore and Bengaluru map identified trends to proven South Asian morphological pattern blocks and allocate pre-tested raw fabric stock."
+      stage: "Phase 02 • Rapid Design Sprints & Spec Sheets",
+      title: "In-House Bengaluru & Indore Design Studios",
+      desc: "Design pods rapidly translate breakout global silhouettes into South Asian ergonomic pattern blocks, generating precision CAD tech-packs with detailed seam, stitch, and wash parameters."
     },
     3: {
-      stage: "Phase 03 • Virtual Pattern Calibration",
-      title: "Virtual Pattern Grading & Indian Body Calibration",
-      desc: "Digital 3D samples constructed on virtual South Asian avatars, locking waist-rise tension and thigh ease without cutting physical sample fabric."
+      stage: "Phase 03 • Pre-Committed Raw Fabric Allocation",
+      title: "Direct Strategic Sourcing from Textile Hubs",
+      desc: "Pre-tested, certified fabric inventory (13.5oz ring-spun denim, 60s combed cotton, 320 GSM waffle knits) is immediately allocated from partner mills in Surat, Tirupur, and Ahmedabad."
     },
     4: {
-      stage: "Phase 04 • Zero-Waste Digital Nesting",
-      title: "Zero-Waste Fabric Optimization",
-      desc: "Automated algorithmic pattern nesting achieves 94% textile utilization across ring-spun cotton and waffle-knit rolls, eliminating cutting waste."
+      stage: "Phase 04 • High-Yield CAD Marker Optimization",
+      title: "94%+ Fabric Utilization with Minimal Waste",
+      desc: "Digital marker engineering algorithms calculate high-density nesting across fabric rolls, ensuring maximum yield, optimal grain alignment, and minimal cutting room scrap."
     },
     5: {
-      stage: "Phase 05 • High-Speed CNC Laser Cutting",
-      title: "Automated Multi-Ply Precision Cutting",
-      desc: "Computer-controlled laser cutting tables slice 300-unit test batches in under 45 minutes with microscopic edge precision and zero fraying."
+      stage: "Phase 05 • Precision Multi-Ply Cutting Sprints",
+      title: "Tight-Tolerance Pilot Micro-Batches",
+      desc: "Dedicated cutting tables process pilot micro-batches of 500 to 1,000 units with strict dimensional tolerances and clean edge binding."
     },
     6: {
-      stage: "Phase 06 • Decentralized Factory Pod Assembly",
-      title: "100+ Agile Factory Pods in Motion",
-      desc: "Specialized modular manufacturing pods in Indore, Surat, and Tirupur stitch garments with 14-point military-grade bartack reinforcements."
+      stage: "Phase 06 • 100+ Decentralized Factory Pod Assembly",
+      title: "Modular Sewing Pods in Indore, Surat & Tirupur",
+      desc: "Our asset-light network of 100+ dedicated garment pods handles rapid stitching, integrating 14-point military-grade bartack reinforcements and dual-tone copper chain-stitching."
     },
     7: {
-      stage: "Phase 07 • Sustainable Waterless Ozone Wash",
-      title: "Eco-Friendly Finishing & Water Reduction",
-      desc: "Denim and casuals undergo waterless ozone bleaching and laser whiskering, slashing chemical and water use by 65% compared to conventional mills."
+      stage: "Phase 07 • Industrial Enzyme & Specialty Finishing",
+      title: "Authentic Hand-Feel & Controlled Abrasion",
+      desc: "Denim and woven tops undergo precision enzyme washing, whiskering, and softening baths to achieve authentic vintage character with strict effluent compliance."
     },
     8: {
-      stage: "Phase 08 • Heat Curing & Peach Soft-Finish",
-      title: "Shrinkage Stabilization & Velvet Touch",
-      desc: "Sanforization chambers lock shrinkage to under 1.5%, followed by an organic enzyme velvet wash for luxurious all-day skin comfort."
+      stage: "Phase 08 • Sanforization & AQL 1.5 Quality Gates",
+      title: "Dimensional Stability & Tensile Verification",
+      desc: "Post-wash heat drying limits residual shrinkage to < 1.5%. Experienced QA inspectors conduct 100% seam integrity, tensile snapback, and colour-fastness audits."
     },
     9: {
-      stage: "Phase 09 • AQL 1.5 Integrity Audit",
-      title: "Tensile Pull Tests & Laundry Stress Cycles",
-      desc: "Garments pass military-grade tensile pull tests, wash-shrinkage checks, and zipper cycle endurance tests across 200+ simulated domestic laundry runs."
+      stage: "Phase 09 • Signature Hardware & Dual-Tone Labeling",
+      title: "Die-Cast Matte Gunmetal Shanks & Rivets",
+      desc: "Official Indian Garage branding elements, reinforced waistband patches, and premium gunmetal buttons are securely attached with pneumatic presses."
     },
     10: {
-      stage: "Phase 10 • Digital RFID Serialization",
-      title: "Smart Inventory Tracking & Packaging",
-      desc: "Every single piece receives unique RFID serialization and barcode tracking for realtime shelf inventory reconciliation."
+      stage: "Phase 10 • Barcoding & Increff WMS Serialization",
+      title: "99.99% Inventory Accuracy & Smart Bagging",
+      desc: "Every single piece is serialized and scanned into our Increff WMS/OMS inventory infrastructure, enabling real-time stock visibility across all fulfillment centers."
     },
     11: {
-      stage: "Phase 11 • Central Hub Express Dispatch",
-      title: "Automated Sorting & Fleet Allocation",
-      desc: "Indore central logistics facility routes batches directly to express transit networks serving metro corridors within 24 hours."
+      stage: "Phase 11 • Central DC Hub Transit & Cross-Docking",
+      title: "Rapid Dispatch via Dedicated Logistics Lines",
+      desc: "Finished batches arrive at our Bengaluru central fulfillment hub for high-speed cross-dock sorting within 24 hours of factory gate dispatch."
     },
     12: {
-      stage: "Phase 12 • Omnichannel Shelf Synchronization",
-      title: "Simultaneous EBO & E-Commerce Dark Store Drop",
-      desc: "Micro-batch inventory arrives simultaneously at 20+ flagship EBO stores (Bengaluru, Lucknow, Kochi) and top e-commerce fulfillment dark stores."
+      stage: "Phase 12 • Marketplace Dark Store & EBO Stocking",
+      title: "Simultaneous Multi-Channel Ingestion",
+      desc: "Micro-batch inventory is cross-docked simultaneously to Myntra, Ajio, Flipkart, and Amazon fulfillment dark stores, as well as 18+ live retail stores."
     },
     13: {
-      stage: "Phase 13 • Performance Digital Drop",
-      title: "Targeted Performance Ads & VIP Member Drop",
-      desc: "Styles go live on tigc.in, Myntra, Flipkart, and Ajio with real-time conversion pixel tracking and instant push notifications."
+      stage: "Phase 13 • Digital Go-Live & Conversion Push",
+      title: "Instant Merchandising on tigc.in & Marketplaces",
+      desc: "Styles go live with rich product imagery, accurate size charts, and targeted digital acquisition campaigns, capturing early consumer demand instantly."
     },
     14: {
-      stage: "Phase 14 • 48-Hour Algorithmic Scale or Kill",
-      title: "88% Sell-Through Trigger: Mass Scale or Discontinue",
-      desc: "Our demand engine tracks 48-hour sell-through velocity. Top performers trigger automated mass-production repeat batches; sluggish styles are discontinued with zero dead-stock residue."
+      stage: "Phase 14 • 48-Hour Sell-Through: Repeat or Kill",
+      title: "88% Sell-Through Benchmark • Zero Dead Stock",
+      desc: "48-hour sell-through telemetry determines next steps: high-demand winners trigger automated 10,000+ unit mass production runs, while slow movers are discontinued with zero trapped capital."
     }
   };
 

@@ -267,6 +267,48 @@ class InteractiveSoundFX {
     }
   }
 
+  // 6. Kinetic 3D Emblem Resonant Shimmer (Futuristic titanium resonance for G-unit emblem)
+  playEmblemTone(intensity = 0.5) {
+    if (!this.isEnabled) return;
+    this.ensureContext();
+    if (!this.ctx) return;
+    try {
+      const t = this.ctx.currentTime;
+      const osc1 = this.ctx.createOscillator();
+      const osc2 = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      const filter = this.ctx.createBiquadFilter();
+
+      // Dual titanium ring frequencies
+      osc1.type = 'sine';
+      osc1.frequency.setValueAtTime(587.33, t); // D5
+      osc1.frequency.exponentialRampToValueAtTime(880, t + 0.15); // A5
+
+      osc2.type = 'triangle';
+      osc2.frequency.setValueAtTime(1174.66, t); // D6
+      osc2.frequency.exponentialRampToValueAtTime(1760, t + 0.15);
+
+      filter.type = 'bandpass';
+      filter.frequency.setValueAtTime(1200 + intensity * 800, t);
+      filter.Q.setValueAtTime(4.0, t);
+
+      const vol = Math.min(0.12, 0.04 + intensity * 0.08);
+      gain.gain.setValueAtTime(vol, t);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.28);
+
+      osc1.connect(filter);
+      osc2.connect(filter);
+      filter.connect(gain);
+      gain.connect(this.masterGain);
+
+      osc1.start(t);
+      osc2.start(t);
+      osc1.stop(t + 0.28);
+      osc2.stop(t + 0.28);
+      this.triggerWaveVisual();
+    } catch (e) {}
+  }
+
   // 6. Mechanical Explosion / Disassembly Sound
   playAnatomyExplode() {
     if (!this.isEnabled) return;
