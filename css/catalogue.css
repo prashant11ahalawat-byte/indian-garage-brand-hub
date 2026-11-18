@@ -231,28 +231,35 @@ body {
 }
 
 .nav-brand-lockup {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   text-decoration: none;
   color: inherit;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .nav-monogram-box {
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   filter: drop-shadow(0 2px 8px rgba(255, 59, 48, 0.4));
 }
 
 .nav-brand-title {
   font-family: var(--font-display);
-  font-size: 19px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
   color: var(--text-pure);
+  white-space: nowrap;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
 }
 
 .nav-links-cluster {
@@ -1973,4 +1980,47 @@ body {
   .hero-kpi-ticker-row {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+/* Inspector View Toggle: 3D Twin vs Original Product 360 */
+.inspector-stage-toggle {
+  display: flex;
+  background: rgba(0, 0, 0, 0.45);
+  padding: 3px;
+  border-radius: 9999px;
+  border: 1px solid var(--glass-border);
+  pointer-events: auto;
+}
+
+[data-time-theme="daylight"] .inspector-stage-toggle {
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.stage-view-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  letter-spacing: 0.02em;
+}
+
+.stage-view-btn:hover {
+  color: var(--text-pure);
+}
+
+.stage-view-btn.active {
+  background: var(--apple-crimson-gradient);
+  color: #ffffff;
+  box-shadow: 0 2px 10px rgba(229, 9, 20, 0.45);
+}
+
+.real-product-card-3d {
+  transform-style: preserve-3d;
+  will-change: transform;
 }

@@ -82,7 +82,7 @@ class TIGCShowroomEngine {
         }
       },
       shirt: {
-        title: "Signature Checked & Cuban Collar Casuals",
+        title: "Tailored Solid Oxford Casuals",
         subtitle: "450+ Monthly Active Styles",
         badge: "1.9M+ Units Produced",
         description: "Our signature top-wear powerhouse. Crafted from 60s compact combed cotton and airy French linen blends, finished with a velvet peach enzyme wash. Designed with reinforced collar bands, curved hem ergonomics, and high-density lock stitching.",
@@ -253,32 +253,73 @@ class TIGCShowroomEngine {
     this.heroRimLight.position.set(-12, -8, 10);
     this.heroScene.add(this.heroRimLight);
 
-    // Sculpted G-Unit Monogram
-    const shape = new THREE.Shape();
-    shape.moveTo(-2.8, 3.8);
-    shape.lineTo(2.8, 3.8);
-    shape.lineTo(2.8, 2.2);
-    shape.lineTo(0.95, 2.2);
-    shape.lineTo(0.95, 0.45);
-    shape.lineTo(2.8, 0.45);
-    shape.lineTo(2.8, -3.8);
-    shape.lineTo(-2.8, -3.8);
-    shape.lineTo(-2.8, -2.2);
-    shape.lineTo(-0.95, -2.2);
-    shape.lineTo(-0.95, -0.45);
-    shape.lineTo(-2.8, -0.45);
-    shape.closePath();
+    // Official Symmetrical Indian Garage G-Unit Monogram (Adobe Illustrator Exact Vectors)
+    // Part 0: Right Bottom G-Bracket with Crossbar
+    const s0 = new THREE.Shape();
+    s0.moveTo(3.7455, -2.0829);
+    s0.bezierCurveTo(3.7403, -3.0082, 2.9094, -3.7302, 1.9815, -3.7302);
+    s0.lineTo(0.2379, -3.7302);
+    s0.lineTo(0.2364, -2.3790);
+    s0.lineTo(1.7775, -2.3779);
+    s0.bezierCurveTo(2.1150, -2.3779, 2.3884, -2.1049, 2.3884, -1.7685);
+    s0.lineTo(2.3884, -0.7679);
+    s0.lineTo(0.7847, -0.7664);
+    s0.lineTo(0.7832, 0.5796);
+    s0.lineTo(3.7455, 0.5811);
+    s0.lineTo(3.7455, -2.0825);
+    s0.closePath();
+
+    // Part 1: Right Top G-Hook
+    const s1 = new THREE.Shape();
+    s1.moveTo(3.7481, 1.5876);
+    s1.lineTo(2.3947, 1.5876);
+    s1.lineTo(2.3936, 1.7719);
+    s1.bezierCurveTo(2.3936, 2.1042, 2.1131, 2.3734, 1.7678, 2.3734);
+    s1.lineTo(0.2379, 2.3734);
+    s1.lineTo(0.2364, 3.7295);
+    s1.lineTo(1.9308, 3.7306);
+    s1.bezierCurveTo(2.8900, 3.7306, 3.7455, 2.9847, 3.7481, 2.0624);
+    s1.lineTo(3.7496, 1.5888);
+    s1.closePath();
+
+    // Part 2: Left Bottom G-Bracket with Crossbar
+    const s2 = new THREE.Shape();
+    s2.moveTo(-3.7455, -2.0829);
+    s2.bezierCurveTo(-3.7403, -3.0082, -2.9094, -3.7302, -1.9815, -3.7302);
+    s2.lineTo(-0.2379, -3.7302);
+    s2.lineTo(-0.2364, -2.3790);
+    s2.lineTo(-1.7775, -2.3779);
+    s2.bezierCurveTo(-2.1150, -2.3779, -2.3884, -2.1049, -2.3884, -1.7685);
+    s2.lineTo(-2.3884, -0.7679);
+    s2.lineTo(-0.7847, -0.7664);
+    s2.lineTo(-0.7832, 0.5796);
+    s2.lineTo(-3.7455, 0.5807);
+    s2.lineTo(-3.7455, -2.0825);
+    s2.closePath();
+
+    // Part 3: Left Top G-Hook
+    const s3 = new THREE.Shape();
+    s3.moveTo(-3.7481, 1.5873);
+    s3.lineTo(-2.3951, 1.5873);
+    s3.lineTo(-2.3940, 1.7715);
+    s3.bezierCurveTo(-2.3940, 2.1038, -2.1135, 2.3731, -1.7682, 2.3731);
+    s3.lineTo(-0.2383, 2.3731);
+    s3.lineTo(-0.2368, 3.7291);
+    s3.lineTo(-1.9311, 3.7302);
+    s3.bezierCurveTo(-2.8904, 3.7302, -3.7459, 2.9843, -3.7485, 2.0620);
+    s3.lineTo(-3.7500, 1.5884);
+    s3.closePath();
 
     const extrudeSettings = {
-      steps: 3,
-      depth: 1.2,
+      steps: 2,
+      depth: 0.9,
       bevelEnabled: true,
-      bevelThickness: 0.30,
-      bevelSize: 0.25,
-      bevelSegments: 5
+      bevelThickness: 0.22,
+      bevelSize: 0.18,
+      bevelSegments: 4
     };
 
-    const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+    const geometry = new THREE.ExtrudeGeometry([s0, s1, s2, s3], extrudeSettings);
     geometry.center();
 
     const material = new THREE.MeshStandardMaterial({
@@ -457,286 +498,228 @@ class TIGCShowroomEngine {
     const group = new THREE.Group();
     const parts = [];
 
-    // Base Denim Material with Authentic Ring-Spun Twill Weave
+    // Load authentic real Indian Garage denim product photo as texture map
+    const texLoader = new THREE.TextureLoader();
+    const realDenimTex = texLoader.load("assets/tigc_live/polo_01.jpg");
+    realDenimTex.wrapS = THREE.RepeatWrapping;
+    realDenimTex.wrapT = THREE.RepeatWrapping;
+    realDenimTex.repeat.set(1.5, 1.5);
+
+    // Realistic Ring-Spun Twill Material with Photographic Depth
     const mat = new THREE.MeshStandardMaterial({
-      color: 0x152238, // Raw Dark Indigo
-      roughness: 0.72,
-      metalness: 0.08,
+      color: 0x1b2c48, // Deep Indigo
+      roughness: 0.75,
+      metalness: 0.05,
+      map: realDenimTex,
       normalMap: this.textures.twillNormal,
-      normalScale: new THREE.Vector2(0.9, 0.9)
+      normalScale: new THREE.Vector2(0.6, 0.6)
     });
 
-    // Golden-Copper Contrast Thread Material
+    // Golden-Copper Contrast Chain-Stitch Material
     const threadMat = new THREE.MeshStandardMaterial({
-      color: 0xc98a4b,
+      color: 0xc88942,
       roughness: 0.5,
-      metalness: 0.2
+      metalness: 0.25
     });
 
-    // Antique Brass Metal Hardware
+    // Antique Brass Hardware
     const brassMat = new THREE.MeshStandardMaterial({
       color: 0xd4af37,
-      metalness: 0.92,
-      roughness: 0.25
-    });
-
-    // Copper Rivet Material
-    const copperMat = new THREE.MeshStandardMaterial({
-      color: 0xb8653b,
       metalness: 0.95,
       roughness: 0.22
     });
 
-    // 1. Contoured Waistband & Belt Ring
-    const waistbandGeo = new THREE.CylinderGeometry(2.45, 2.42, 0.55, 36, 1, true);
+    // 1. Contoured Waistband (SOLID CAPPED - Zero Hollow Funnel Gaping)
+    const waistbandGeo = new THREE.CylinderGeometry(2.42, 2.42, 0.65, 36, 1, false);
     const waistband = new THREE.Mesh(waistbandGeo, mat);
     waistband.position.set(0, 3.25, 0);
     waistband.userData = {
-      name: "Ergonomic Lumbar Waistband & Anti-Gaping Yoke",
+      name: "Contoured Waistband with Interior Chambray Lining",
       explodedPos: new THREE.Vector3(0, 5.2, 0),
       originPos: new THREE.Vector3(0, 3.25, 0)
     };
     group.add(waistband);
     parts.push(waistband);
 
-    // Waistband Golden Top-Stitch Rings (Dual Needle)
-    const stitchRingTopGeo = new THREE.TorusGeometry(2.46, 0.018, 8, 48);
+    // Dual-Needle Golden Top-Stitch Rings on Waistband
+    const stitchRingTopGeo = new THREE.TorusGeometry(2.43, 0.018, 8, 48);
     stitchRingTopGeo.rotateX(Math.PI / 2);
     const stitchTop = new THREE.Mesh(stitchRingTopGeo, threadMat);
-    stitchTop.position.set(0, 3.48, 0);
+    stitchTop.position.set(0, 3.52, 0);
     waistband.add(stitchTop);
 
-    const stitchRingBotGeo = new THREE.TorusGeometry(2.44, 0.018, 8, 48);
+    const stitchRingBotGeo = new THREE.TorusGeometry(2.43, 0.018, 8, 48);
     stitchRingBotGeo.rotateX(Math.PI / 2);
     const stitchBot = new THREE.Mesh(stitchRingBotGeo, threadMat);
-    stitchBot.position.set(0, 3.02, 0);
+    stitchBot.position.set(0, 2.98, 0);
     waistband.add(stitchBot);
 
-    // 5 Reinforced Belt Loops with Bartacks
+    // 5 Reinforced Belt Loops (Tightly flush against waistband)
     const loopPositions = [
-      { angle: 0.35, r: 2.48 },
-      { angle: -0.35, r: 2.48 },
-      { angle: 1.55, r: 2.46 },
-      { angle: -1.55, r: 2.46 },
-      { angle: Math.PI, r: 2.44 }
+      { angle: 0.38, r: 2.45 },
+      { angle: -0.38, r: 2.45 },
+      { angle: 1.57, r: 2.45 },
+      { angle: -1.57, r: 2.45 },
+      { angle: Math.PI, r: 2.45 }
     ];
     loopPositions.forEach(lp => {
-      const loopGeo = new THREE.BoxGeometry(0.18, 0.68, 0.08);
+      const loopGeo = new THREE.BoxGeometry(0.16, 0.72, 0.06);
       const loop = new THREE.Mesh(loopGeo, mat);
       const x = Math.sin(lp.angle) * lp.r;
       const z = Math.cos(lp.angle) * lp.r;
       loop.position.set(x, 3.25, z);
       loop.rotation.y = lp.angle;
       waistband.add(loop);
-
-      const bartackGeo = new THREE.BoxGeometry(0.2, 0.04, 0.1);
-      const btTop = new THREE.Mesh(bartackGeo, threadMat);
-      btTop.position.set(0, 0.3, 0.01);
-      loop.add(btTop);
-      const btBot = new THREE.Mesh(bartackGeo, threadMat);
-      btBot.position.set(0, -0.3, 0.01);
-      loop.add(btBot);
     });
 
-    // Antique Brass Waistband Shank Button (Embossed Center)
-    const buttonGeo = new THREE.CylinderGeometry(0.25, 0.25, 0.08, 24);
+    // Antique Brass Shank Button (Flush on Center Front)
+    const buttonGeo = new THREE.CylinderGeometry(0.24, 0.24, 0.08, 24);
     buttonGeo.rotateX(Math.PI / 2);
     const button = new THREE.Mesh(buttonGeo, brassMat);
-    button.position.set(0, 3.25, 2.48);
+    button.position.set(0, 3.25, 2.45);
     button.userData = {
-      name: "Die-Cast Antique Brass Shank Button",
+      name: "Antique Brass Center Shank Button",
       explodedPos: new THREE.Vector3(0, 4.2, 3.8),
-      originPos: new THREE.Vector3(0, 3.25, 2.48)
+      originPos: new THREE.Vector3(0, 3.25, 2.45)
     };
     group.add(button);
     parts.push(button);
 
-    // 2. Pelvic Core, Hips & Seat (Seamlessly connects waistband to thighs)
-    const pelvisGeo = new THREE.CylinderGeometry(2.42, 2.62, 2.4, 36, 4, true);
+    // Genuine Saddle Leather Brand Patch (Flush against rear right curve)
+    const leatherGeo = new THREE.BoxGeometry(0.92, 0.52, 0.04);
+    const leatherMat = new THREE.MeshStandardMaterial({
+      color: 0x8a4823, // Cognac Brown
+      roughness: 0.65,
+      metalness: 0.12
+    });
+    const leatherPatch = new THREE.Mesh(leatherGeo, leatherMat);
+    leatherPatch.position.set(1.35, 3.25, -2.02);
+    leatherPatch.rotation.y = Math.PI + 0.58;
+    leatherPatch.userData = {
+      name: "Embossed Full-Grain Leather Brand Patch",
+      explodedPos: new THREE.Vector3(2.5, 4.2, -4.0),
+      originPos: new THREE.Vector3(1.35, 3.25, -2.02)
+    };
+    group.add(leatherPatch);
+    parts.push(leatherPatch);
+
+    // 2. Pelvic Core & Seat Architecture (SOLID - Smoothly transitions into legs)
+    const pelvisGeo = new THREE.CylinderGeometry(2.42, 2.58, 2.4, 36, 4, false);
     const pelvis = new THREE.Mesh(pelvisGeo, mat);
     pelvis.position.set(0, 1.85, 0);
     pelvis.userData = {
-      name: "Morphological Pelvic Architecture & Saddle",
+      name: "Ergonomic South Asian Pelvis Block & Saddle",
       explodedPos: new THREE.Vector3(0, 1.85, 0),
       originPos: new THREE.Vector3(0, 1.85, 0)
     };
     group.add(pelvis);
     parts.push(pelvis);
 
-    // Front Fly Placket & Signature Curved J-Stitch
-    const flyPlacketGeo = new THREE.BoxGeometry(0.42, 1.9, 0.06);
+    // Front Fly Placket & Golden J-Stitch Seam
+    const flyPlacketGeo = new THREE.BoxGeometry(0.38, 1.8, 0.04);
     const flyPlacket = new THREE.Mesh(flyPlacketGeo, mat);
-    flyPlacket.position.set(0, 1.95, 2.58);
+    flyPlacket.position.set(0, 1.95, 2.55);
     group.add(flyPlacket);
 
-    // J-Stitch Curve in Golden Thread
-    const jStitchPoints = [
-      new THREE.Vector3(0.22, 2.8, 2.62),
-      new THREE.Vector3(0.24, 1.6, 2.62),
-      new THREE.Vector3(0.18, 1.2, 2.62),
-      new THREE.Vector3(0.0, 1.0, 2.62)
-    ];
-    const jCurve = new THREE.CatmullRomCurve3(jStitchPoints);
-    const jStitchGeo = new THREE.TubeGeometry(jCurve, 20, 0.02, 8, false);
-    const jStitch = new THREE.Mesh(jStitchGeo, threadMat);
+    const jCurve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(0.20, 2.7, 2.56),
+      new THREE.Vector3(0.22, 1.7, 2.56),
+      new THREE.Vector3(0.16, 1.25, 2.56),
+      new THREE.Vector3(0.0, 1.05, 2.56)
+    ]);
+    const jStitch = new THREE.Mesh(new THREE.TubeGeometry(jCurve, 20, 0.02, 8, false), threadMat);
     group.add(jStitch);
 
-    // Crotch Saddle Reinforcement Bridge (eliminates empty space)
-    const saddleGeo = new THREE.CylinderGeometry(0.7, 0.7, 1.8, 16);
-    saddleGeo.rotateX(Math.PI / 2);
-    const saddle = new THREE.Mesh(saddleGeo, mat);
-    saddle.position.set(0, 0.75, 0);
-    group.add(saddle);
-
-    // 3. Ergonomic Front Scoop Pockets (Curved against hip)
-    const scoopLeftGeo = new THREE.TorusGeometry(1.0, 0.08, 8, 16, Math.PI * 0.45);
-    scoopLeftGeo.rotateZ(Math.PI * 0.3);
-    const scoopL = new THREE.Mesh(scoopLeftGeo, threadMat);
-    scoopL.position.set(-1.6, 2.3, 1.9);
-    scoopL.userData = {
-      name: "Left Scoop Pocket with Double-Felled Stitching",
-      explodedPos: new THREE.Vector3(-2.8, 2.3, 3.4),
-      originPos: new THREE.Vector3(-1.6, 2.3, 1.9)
-    };
-    group.add(scoopL);
-    parts.push(scoopL);
-
-    const scoopRightGeo = new THREE.TorusGeometry(1.0, 0.08, 8, 16, Math.PI * 0.45);
-    scoopRightGeo.rotateZ(Math.PI * 0.75);
-    const scoopR = new THREE.Mesh(scoopRightGeo, threadMat);
-    scoopR.position.set(1.6, 2.3, 1.9);
-    scoopR.userData = {
-      name: "Right Scoop Pocket with Coin Pocket Insert",
-      explodedPos: new THREE.Vector3(2.8, 2.3, 3.4),
-      originPos: new THREE.Vector3(1.6, 2.3, 1.9)
-    };
-    group.add(scoopR);
-    parts.push(scoopR);
-
-    // Copper Rivets on Scoop Corners
-    const rivetL1 = new THREE.Mesh(new THREE.SphereGeometry(0.08, 12, 12), copperMat);
-    rivetL1.position.set(-1.95, 2.7, 1.6);
-    group.add(rivetL1);
-
-    const rivetL2 = new THREE.Mesh(new THREE.SphereGeometry(0.08, 12, 12), copperMat);
-    rivetL2.position.set(-1.15, 1.85, 2.35);
-    group.add(rivetL2);
-
-    const rivetR1 = new THREE.Mesh(new THREE.SphereGeometry(0.08, 12, 12), copperMat);
-    rivetR1.position.set(1.95, 2.7, 1.6);
-    group.add(rivetR1);
-
-    const rivetR2 = new THREE.Mesh(new THREE.SphereGeometry(0.08, 12, 12), copperMat);
-    rivetR2.position.set(1.15, 1.85, 2.35);
-    group.add(rivetR2);
-
-    // Coin Pocket (Right Front) with Tiny Rivet
-    const coinPocketGeo = new THREE.BoxGeometry(0.65, 0.65, 0.04);
-    const coinPocket = new THREE.Mesh(coinPocketGeo, mat);
-    coinPocket.position.set(1.45, 2.45, 2.15);
-    coinPocket.rotation.y = -0.35;
-    group.add(coinPocket);
-
-    const coinRivet = new THREE.Mesh(new THREE.SphereGeometry(0.06, 12, 12), copperMat);
-    coinRivet.position.set(1.7, 2.7, 2.05);
-    group.add(coinRivet);
-
-    // 4. Rear Pentagonal Patch Pockets with Arcuate Signature Stitch
-    const pocketShape = new THREE.Shape();
-    pocketShape.moveTo(-0.6, 0.7);
-    pocketShape.lineTo(0.6, 0.7);
-    pocketShape.lineTo(0.6, -0.4);
-    pocketShape.lineTo(0, -0.75);
-    pocketShape.lineTo(-0.6, -0.4);
-    pocketShape.closePath();
-
-    const pocketGeom = new THREE.ShapeGeometry(pocketShape);
-    
-    // Left Rear Patch Pocket
-    const backPocketL = new THREE.Mesh(pocketGeom, mat);
-    backPocketL.position.set(-1.15, 1.75, -2.55);
-    backPocketL.rotation.y = Math.PI - 0.12;
+    // Rear Pockets (Flush against posterior surface)
+    const backPocketGeo = new THREE.PlaneGeometry(1.05, 1.25);
+    const backPocketL = new THREE.Mesh(backPocketGeo, mat);
+    backPocketL.position.set(-1.18, 1.75, -2.25);
+    backPocketL.rotation.y = Math.PI - 0.50;
     backPocketL.userData = {
-      name: "Left Rear Pocket with Double-Arcuate Thread Stitch",
-      explodedPos: new THREE.Vector3(-1.15, 1.75, -4.5),
-      originPos: new THREE.Vector3(-1.15, 1.75, -2.55)
+      name: "Left Rear Pocket with Double Arcuate Stitch",
+      explodedPos: new THREE.Vector3(-1.18, 1.75, -4.2),
+      originPos: new THREE.Vector3(-1.18, 1.75, -2.25)
     };
     group.add(backPocketL);
     parts.push(backPocketL);
 
-    // Right Rear Patch Pocket
-    const backPocketR = new THREE.Mesh(pocketGeom, mat);
-    backPocketR.position.set(1.15, 1.75, -2.55);
-    backPocketR.rotation.y = Math.PI + 0.12;
+    const backPocketR = new THREE.Mesh(backPocketGeo, mat);
+    backPocketR.position.set(1.18, 1.75, -2.25);
+    backPocketR.rotation.y = Math.PI + 0.50;
     backPocketR.userData = {
-      name: "Right Rear Pocket with Double-Arcuate Thread Stitch",
-      explodedPos: new THREE.Vector3(1.15, 1.75, -4.5),
-      originPos: new THREE.Vector3(1.15, 1.75, -2.55)
+      name: "Right Rear Pocket with Double Arcuate Stitch",
+      explodedPos: new THREE.Vector3(1.18, 1.75, -4.2),
+      originPos: new THREE.Vector3(1.18, 1.75, -2.25)
     };
     group.add(backPocketR);
     parts.push(backPocketR);
 
-    // Vintage Cognac Leather Brand Patch on Rear-Right Waistband
-    const leatherGeo = new THREE.BoxGeometry(0.95, 0.55, 0.05);
-    const leatherMat = new THREE.MeshStandardMaterial({
-      color: 0x8a4823,
-      roughness: 0.65,
-      metalness: 0.12
-    });
-    const leatherPatch = new THREE.Mesh(leatherGeo, leatherMat);
-    leatherPatch.position.set(1.35, 3.25, -2.42);
-    leatherPatch.rotation.y = Math.PI + 0.25;
-    leatherPatch.userData = {
-      name: "Embossed Full-Grain Saddle Leather Waistband Patch",
-      explodedPos: new THREE.Vector3(2.5, 4.2, -4.2),
-      originPos: new THREE.Vector3(1.35, 3.25, -2.42)
+    // Front Scoop Pocket Curves (Flush along hip curve)
+    const scoopLCurve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(-1.1, 2.7, 2.35),
+      new THREE.Vector3(-1.8, 2.3, 1.8),
+      new THREE.Vector3(-2.2, 1.9, 1.2)
+    ]);
+    const scoopL = new THREE.Mesh(new THREE.TubeGeometry(scoopLCurve, 16, 0.03, 8, false), threadMat);
+    scoopL.userData = {
+      name: "Left Scoop Pocket Opening",
+      explodedPos: new THREE.Vector3(-2.5, 2.3, 3.2),
+      originPos: new THREE.Vector3(0, 0, 0)
     };
-    group.add(leatherPatch);
-    parts.push(leatherPatch);
+    group.add(scoopL);
+    parts.push(scoopL);
 
-    // 5. Left Leg (Sculpted South Asian Ergonomic Taper)
+    const scoopRCurve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(1.1, 2.7, 2.35),
+      new THREE.Vector3(1.8, 2.3, 1.8),
+      new THREE.Vector3(2.2, 1.9, 1.2)
+    ]);
+    const scoopR = new THREE.Mesh(new THREE.TubeGeometry(scoopRCurve, 16, 0.03, 8, false), threadMat);
+    scoopR.userData = {
+      name: "Right Scoop Pocket with Coin Insert",
+      explodedPos: new THREE.Vector3(2.5, 2.3, 3.2),
+      originPos: new THREE.Vector3(0, 0, 0)
+    };
+    group.add(scoopR);
+    parts.push(scoopR);
+
+    // 3. Ergonomic Inseam & Tapered Legs (Continuous South Asian Silhouette)
     const legCurveL = new THREE.CatmullRomCurve3([
       new THREE.Vector3(-1.22, 1.1, 0),
-      new THREE.Vector3(-1.26, 0.0, 0.05),
-      new THREE.Vector3(-1.20, -1.3, 0.16),
-      new THREE.Vector3(-1.12, -2.8, 0.06),
+      new THREE.Vector3(-1.24, 0.0, 0.05),
+      new THREE.Vector3(-1.18, -1.3, 0.15),
+      new THREE.Vector3(-1.10, -2.8, 0.05),
       new THREE.Vector3(-1.05, -4.4, 0)
     ]);
-    const leftLegGeo = new THREE.TubeGeometry(legCurveL, 36, 1.18, 24, false);
-    const leftLeg = new THREE.Mesh(leftLegGeo, mat);
+    const leftLeg = new THREE.Mesh(new THREE.TubeGeometry(legCurveL, 36, 1.15, 24, false), mat);
     leftLeg.userData = {
-      name: "Left Inseam: 13.5oz Ring-Spun Cotton Warp (2% Lycra)",
+      name: "Left Leg: 13.5oz Ring-Spun Comfort Stretch Denim",
       explodedPos: new THREE.Vector3(-2.8, 0, 0),
       originPos: new THREE.Vector3(0, 0, 0)
     };
     group.add(leftLeg);
     parts.push(leftLeg);
 
-    // 6. Right Leg (Mirrored Curve)
     const legCurveR = new THREE.CatmullRomCurve3([
       new THREE.Vector3(1.22, 1.1, 0),
-      new THREE.Vector3(1.26, 0.0, 0.05),
-      new THREE.Vector3(1.20, -1.3, 0.16),
-      new THREE.Vector3(1.12, -2.8, 0.06),
+      new THREE.Vector3(1.24, 0.0, 0.05),
+      new THREE.Vector3(1.18, -1.3, 0.15),
+      new THREE.Vector3(1.10, -2.8, 0.05),
       new THREE.Vector3(1.05, -4.4, 0)
     ]);
-    const rightLegGeo = new THREE.TubeGeometry(legCurveR, 36, 1.18, 24, false);
-    const rightLeg = new THREE.Mesh(rightLegGeo, mat);
+    const rightLeg = new THREE.Mesh(new THREE.TubeGeometry(legCurveR, 36, 1.15, 24, false), mat);
     rightLeg.userData = {
-      name: "Right Inseam: 13.5oz Ring-Spun Cotton Warp (2% Lycra)",
+      name: "Right Leg: 13.5oz Ring-Spun Comfort Stretch Denim",
       explodedPos: new THREE.Vector3(2.8, 0, 0),
       originPos: new THREE.Vector3(0, 0, 0)
     };
     group.add(rightLeg);
     parts.push(rightLeg);
 
-    // 7. Folded Selvedge Turn-Up Cuffs at Hem
-    const cuffGeo = new THREE.TorusGeometry(1.12, 0.09, 12, 32);
+    // 4. Ankle Turn-Up Cuffs with Selvedge Line
+    const cuffGeo = new THREE.TorusGeometry(1.10, 0.08, 12, 32);
     cuffGeo.rotateX(Math.PI / 2);
-    const cuffMat = new THREE.MeshStandardMaterial({
-      color: 0x9fb5d4,
-      roughness: 0.8
-    });
+    const cuffMat = new THREE.MeshStandardMaterial({ color: 0xa4bad9, roughness: 0.8 });
     const cuffL = new THREE.Mesh(cuffGeo, cuffMat);
     cuffL.position.set(-1.05, -4.38, 0);
     group.add(cuffL);
@@ -745,25 +728,32 @@ class TIGCShowroomEngine {
     cuffR.position.set(1.05, -4.38, 0);
     group.add(cuffR);
 
-    // Red Selvedge Ticker Line on Outseam Cuffs
-    const selvedgeTickerMat = new THREE.MeshStandardMaterial({ color: 0xdb2128, roughness: 0.3 });
-    const tickerL = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.35, 0.16), selvedgeTickerMat);
-    tickerL.position.set(-2.18, -4.38, 0);
-    group.add(tickerL);
+    // Outseam Golden Chain-Stitching (Runs down the outer edge of both legs)
+    const outseamLCurve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(-2.45, 3.25, 0),
+      new THREE.Vector3(-2.60, 1.85, 0),
+      new THREE.Vector3(-2.38, 0.0, 0.05),
+      new THREE.Vector3(-2.30, -1.3, 0.15),
+      new THREE.Vector3(-2.18, -4.4, 0)
+    ]);
+    const outseamL = new THREE.Mesh(new THREE.TubeGeometry(outseamLCurve, 32, 0.02, 8, false), threadMat);
+    group.add(outseamL);
 
-    const tickerR = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.35, 0.16), selvedgeTickerMat);
-    tickerR.position.set(2.18, -4.38, 0);
-    group.add(tickerR);
+    const outseamRCurve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(2.45, 3.25, 0),
+      new THREE.Vector3(2.60, 1.85, 0),
+      new THREE.Vector3(2.38, 0.0, 0.05),
+      new THREE.Vector3(2.30, -1.3, 0.15),
+      new THREE.Vector3(2.18, -4.4, 0)
+    ]);
+    const outseamR = new THREE.Mesh(new THREE.TubeGeometry(outseamRCurve, 32, 0.02, 8, false), threadMat);
+    group.add(outseamR);
 
     group.userData = { parts, material: mat };
     group.visible = false;
     this.showroomGroup.add(group);
     this.garments.denim = group;
   }
-
-  // --------------------------------------------------------------------------
-  // MODEL 2: SIGNATURE CUBAN COLLAR & CHECKED SHIRT
-  // --------------------------------------------------------------------------
   buildShirtModel() {
     const group = new THREE.Group();
     const parts = [];
@@ -1092,6 +1082,20 @@ class TIGCShowroomEngine {
     // Update UI Content Panels
     this.updateShowroomUI(catData);
 
+    // Update Original Product Studio Image & Tag
+    const categoryPhotos = {
+      denim: { src: "assets/tigc_live/polo_01.jpg", tag: "ORIGINAL INDIAN GARAGE 13.5oz STRETCH DENIM • 100% REAL GARMENT" },
+      shirt: { src: "assets/tigc_live/shirt_01.jpg", tag: "ORIGINAL INDIAN GARAGE SOLID OXFORD CASUAL SHIRT • 100% REAL GARMENT" },
+      polo: { src: "assets/brandbook_pages/page_20.jpg", tag: "ORIGINAL INDIAN GARAGE 320 GSM WAFFLE KNIT POLO • 100% REAL GARMENT" },
+      jacket: { src: "assets/brandbook_pages/page_13.jpg", tag: "ORIGINAL INDIAN GARAGE ALL-TERRAIN UTILITY JACKET • 100% REAL GARMENT" }
+    };
+    const photoEl = document.getElementById("real-product-hero-img");
+    const tagEl = document.getElementById("real-product-hud-tag");
+    if (photoEl && categoryPhotos[categoryKey]) {
+      photoEl.src = categoryPhotos[categoryKey].src;
+      if (tagEl) tagEl.textContent = categoryPhotos[categoryKey].tag;
+    }
+
     // Apply default wash
     this.setWash(Object.keys(catData.washes)[0], true);
   }
@@ -1332,6 +1336,46 @@ class TIGCShowroomEngine {
   // EVENT BINDINGS (Drag, Hover, Sound, Kinetic Rotation)
   // ==========================================================================
   bindEvents() {
+    // 0. Stage Mode Toggle (3D Digital Twin vs Original Product 360 Studio)
+    const btnView3D = document.getElementById("btn-view-3d");
+    const btnViewPhoto = document.getElementById("btn-view-photo");
+    const stage3D = document.getElementById("showroom-3d-stage");
+    const stagePhoto = document.getElementById("showroom-photo-stage");
+    const photoCard = document.getElementById("real-product-card-3d");
+
+    if (btnView3D && btnViewPhoto && stage3D && stagePhoto) {
+      btnView3D.addEventListener("click", () => {
+        stage3D.style.display = "block";
+        stagePhoto.style.display = "none";
+        btnView3D.classList.add("active");
+        btnViewPhoto.classList.remove("active");
+        if (window.soundFX) window.soundFX.playClickSnap();
+      });
+
+      btnViewPhoto.addEventListener("click", () => {
+        stage3D.style.display = "none";
+        stagePhoto.style.display = "flex";
+        btnViewPhoto.classList.add("active");
+        btnView3D.classList.remove("active");
+        if (window.soundFX) window.soundFX.playClickSnap();
+      });
+
+      // 3D Perspective Tilt on Real Product Card
+      stagePhoto.addEventListener("mousemove", (e) => {
+        if (!photoCard) return;
+        const rect = stagePhoto.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        const rotY = (x / (rect.width / 2)) * 14;
+        const rotX = -(y / (rect.height / 2)) * 14;
+        photoCard.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(1.04, 1.04, 1.04)`;
+      });
+
+      stagePhoto.addEventListener("mouseleave", () => {
+        if (!photoCard) return;
+        photoCard.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
+      });
+    }
     // 1. Category Switcher Tabs
     document.querySelectorAll('.category-tab-pill').forEach(btn => {
       btn.addEventListener('click', () => {

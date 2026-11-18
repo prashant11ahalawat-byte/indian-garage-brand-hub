@@ -74,31 +74,21 @@ window.BRAND_PRESETS = {
         id: "tigc_men",
         name: "Indian Garage",
         category: "Fast-Fashion Menswear & Signature Denim",
-        share: "68% of Total Volume",
-        description: "Rugged, trend-first casual wear engineered for Indian men. Key categories: 13.5oz Stretch Denim, Cuban & Checked Shirts, Heavyweight 300 GSM Polos, Utility Cargos.",
+        share: "Core Powerhouse (₹500 Cr GMV)",
+        description: "Rugged, trend-first casual wear engineered for Indian men. Key categories: 13.5oz Stretch Denim, Cuban & Casual Shirts, Heavyweight 320 GSM Polos, Utility Outerwear.",
         tagline: "For Everyday Heroes",
         targetAudience: "Men aged 18–35 across Metros, Tier 1 and Tier 2 cities",
         priceBand: "₹899 – ₹2,499"
       },
       {
-        id: "freehand_women",
-        name: "FreeHand",
-        category: "Contemporary Fast-Fashion Womenswear",
-        share: "20% of Total Volume",
-        description: "Effortless everyday styles, modern fusion co-ords, flowy casual dresses, and chic urban workwear designed for the aspirational Indian woman.",
-        tagline: "Breathe Free, Dress Bold",
-        targetAudience: "Women aged 19–32 seeking runway trends without luxury markups",
-        priceBand: "₹799 – ₹2,199"
-      },
-      {
         id: "hardsoda_plus",
-        name: "HardSoda",
-        category: "Plus-Size & Inclusive Streetwear (2XL to 7XL)",
-        share: "12% of Total Volume",
-        description: "Disrupting India's underserved plus-size category with drop-shoulder oversized tees, boxy jackets, and relaxed parachute pants. Zero compromising on cool.",
-        tagline: "Big Energy. Zero Apologies.",
-        targetAudience: "Gen-Z & Millennials demanding high-street streetwear in inclusive sizing",
-        priceBand: "₹999 – ₹2,799"
+        name: "HardSoda (OTB Only)",
+        category: "Inclusive Plus-Size Marketplace Catalog (2XL to 7XL)",
+        share: "OTB Marketplace Allocation",
+        description: "Inclusive sizing from 2XL to 7XL operating strictly under an Open-To-Buy (OTB) marketplace catalog model. No new product development line.",
+        tagline: "Inclusive Fit. Marketplace OTB.",
+        targetAudience: "Marketplace customers requiring 2XL to 7XL inclusive sizing",
+        priceBand: "₹999 – ₹2,499"
       }
     ],
 
