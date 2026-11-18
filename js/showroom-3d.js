@@ -105,7 +105,7 @@ class TIGCShowroomEngine {
         title: "Polo-licious 320 GSM Heavyweight Knits",
         subtitle: "CHAPTER 03 // ELEVATED SMART CASUALS",
         badge: "TOP-RATED ACROSS ALL PLATFORMS",
-        description: "The Indian Garage Co.'s breakthrough luxury knitwear. Custom-developed 320 GSM honeycomb waffle and double-pique cotton that provides structural drape, zero clinginess in humid climates, and micro-ribbed cuffs that never lose tension.",
+        description: "Indian Garage's breakthrough luxury knitwear. Custom-developed 320 GSM honeycomb waffle and double-pique cotton that provides structural drape, zero clinginess in humid climates, and micro-ribbed cuffs that never lose tension.",
         specs: [
           { label: "Yarn Density", val: "300 – 320 GSM Ultra-Heavyweight Knit" },
           { label: "Knit Texture", val: "Honeycomb Waffle & Combed Double Pique" },

@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initLookbookFilter();
   initVelocityScrubber();
   initTriForceCardTilts();
-  initFranchiseTerminal();
-  initFranchiseModal();
+  initPartnershipTerminal();
+  initPartnershipModal();
   init3DStudio();
 });
 
@@ -170,63 +170,48 @@ function initTriForceCardTilts() {
 }
 
 // ============================================================================
-// 04. FRANCHISE ROI TERMINAL ENGINE
+// 04. STRATEGIC SOURCING & PARTNERSHIP SIMULATOR
 // ============================================================================
-function initFranchiseTerminal() {
-  const sliderArea = document.getElementById('term-slider-area');
-  const sliderFootfall = document.getElementById('term-slider-footfall');
-  const sliderAov = document.getElementById('term-slider-aov');
-  const selectTier = document.getElementById('term-select-tier');
+function initPartnershipTerminal() {
+  const sliderCapacity = document.getElementById('term-slider-capacity') || document.getElementById('term-slider-area');
+  const sliderRate = document.getElementById('term-slider-rate') || document.getElementById('term-slider-aov');
+  const selectCategory = document.getElementById('term-select-category') || document.getElementById('term-select-tier');
 
-  const dispArea = document.getElementById('term-disp-area');
-  const dispFootfall = document.getElementById('term-disp-footfall');
-  const dispAov = document.getElementById('term-disp-aov');
+  const dispCapacity = document.getElementById('term-disp-capacity') || document.getElementById('term-disp-area');
+  const dispRate = document.getElementById('term-disp-rate') || document.getElementById('term-disp-aov');
 
-  const outPayback = document.getElementById('term-out-payback');
-  const outMonthly = document.getElementById('term-out-monthly');
-  const outAnnual = document.getElementById('term-out-annual');
-  const outEbitda = document.getElementById('term-out-ebitda');
-  const outCapex = document.getElementById('term-out-capex');
+  const outAnnualUnits = document.getElementById('term-out-annual-units') || document.getElementById('term-out-payback');
+  const outMonthlyVal = document.getElementById('term-out-monthly-val') || document.getElementById('term-out-monthly');
+  const outAnnualVal = document.getElementById('term-out-annual-val') || document.getElementById('term-out-annual');
+  const outPayment = document.getElementById('term-out-payment') || document.getElementById('term-out-ebitda');
+  const outVelocity = document.getElementById('term-out-velocity') || document.getElementById('term-out-capex');
 
-  if (!sliderArea || !sliderFootfall || !sliderAov || !selectTier) return;
+  if (!sliderCapacity || !sliderRate) return;
 
   function recalculate() {
-    const area = parseFloat(sliderArea.value);
-    const footfall = parseFloat(sliderFootfall.value);
-    const aov = parseFloat(sliderAov.value);
-    const tier = parseFloat(selectTier.value);
+    const monthlyUnits = parseFloat(sliderCapacity.value);
+    const unitRate = parseFloat(sliderRate.value);
+    const multiplier = selectCategory ? parseFloat(selectCategory.value) || 1.0 : 1.0;
 
-    dispArea.textContent = `${area.toLocaleString()} SQ.FT`;
-    dispFootfall.textContent = `${footfall.toLocaleString()} VISITORS / DAY`;
-    dispAov.textContent = `₹${aov.toLocaleString()} / TICKET`;
+    if (dispCapacity) dispCapacity.textContent = `${monthlyUnits.toLocaleString()} UNITS / MONTH`;
+    if (dispRate) dispRate.textContent = `₹${unitRate.toLocaleString()} / PIECE`;
 
-    // Benchmark formulas
-    const conversion = 0.185;
-    const monthlyBills = footfall * 30 * conversion * tier;
-    const monthlyRev = monthlyBills * aov;
-    const annualRev = monthlyRev * 12;
+    const effectiveMonthlyUnits = Math.round(monthlyUnits * multiplier);
+    const annualUnits = effectiveMonthlyUnits * 12;
+    const monthlyVal = effectiveMonthlyUnits * unitRate;
+    const annualVal = monthlyVal * 12;
 
-    const grossMargin = monthlyRev * 0.44;
-    const rentRate = tier >= 1.15 ? 140 : (tier < 0.95 ? 65 : 95);
-    const rentCost = area * rentRate;
-    const staffCost = Math.max(4, Math.round(area / 350)) * 28000;
-    const opsCost = (area * 32) + (monthlyRev * 0.02);
-
-    const monthlyEbitda = Math.max(120000, grossMargin - (rentCost + staffCost + opsCost));
-    const capex = (area * 2200) + (area * 1800) + 500000;
-    const paybackMonths = (capex / monthlyEbitda).toFixed(1);
-
-    outPayback.textContent = `${paybackMonths} MO`;
-    outMonthly.textContent = `₹${(monthlyRev / 100000).toFixed(1)} L`;
-    outAnnual.textContent = `₹${(annualRev / 10000000).toFixed(2)} CR`;
-    outEbitda.textContent = `₹${(monthlyEbitda / 100000).toFixed(1)} L`;
-    outCapex.textContent = `₹${(capex / 100000).toFixed(1)} L`;
+    if (outAnnualUnits) outAnnualUnits.textContent = `${(annualUnits / 1000).toFixed(0)}K UNITS / YR`;
+    if (outMonthlyVal) outMonthlyVal.textContent = `₹${(monthlyVal / 100000).toFixed(1)} L`;
+    if (outAnnualVal) outAnnualVal.textContent = `₹${(annualVal / 10000000).toFixed(2)} CR`;
+    if (outPayment) outPayment.textContent = `30–45 DAYS (TMRW)`;
+    if (outVelocity) outVelocity.textContent = `14-DAY SPRINT`;
   }
 
-  [sliderArea, sliderFootfall, sliderAov, selectTier].forEach(input => {
+  [sliderCapacity, sliderRate, selectCategory].filter(Boolean).forEach(input => {
     input.addEventListener('input', () => {
       recalculate();
-      if (window.soundFX) window.soundFX.playSliderChime(input.value / input.max);
+      if (window.soundFX) window.soundFX.playSliderChime(input.value / (input.max || 100));
     });
   });
 
@@ -234,23 +219,24 @@ function initFranchiseTerminal() {
 }
 
 // ============================================================================
-// 05. FRANCHISE INQUIRY MODAL
+// 05. SOURCING & PARTNERSHIP INQUIRY MODAL
 // ============================================================================
-function initFranchiseModal() {
-  const modal = document.getElementById('franchise-lead-modal');
-  const btnOpen = document.getElementById('btn-open-franchise-lead');
-  const btnClose = document.getElementById('btn-close-lead-modal');
-  const btnSubmit = document.getElementById('btn-submit-lead');
-  const msgSuccess = document.getElementById('lead-success-msg');
+function initPartnershipModal() {
+  const modal = document.getElementById('partner-pitch-modal') || document.getElementById('franchise-lead-modal');
+  const openButtons = document.querySelectorAll('.btn-open-partner-modal, #btn-open-partner-pitch, #btn-open-franchise-lead');
+  const btnClose = document.getElementById('btn-close-partner-modal') || document.getElementById('btn-close-lead-modal');
+  const btnSubmit = document.getElementById('btn-submit-partner-pitch') || document.getElementById('btn-submit-lead');
+  const msgSuccess = document.getElementById('partner-success-msg') || document.getElementById('lead-success-msg');
 
   if (!modal) return;
 
-  if (btnOpen) {
-    btnOpen.addEventListener('click', () => {
+  openButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
       modal.style.display = 'flex';
       if (window.soundFX) window.soundFX.playClickSnap();
     });
-  }
+  });
 
   if (btnClose) {
     btnClose.addEventListener('click', () => {
@@ -265,14 +251,14 @@ function initFranchiseModal() {
 
   if (btnSubmit) {
     btnSubmit.addEventListener('click', () => {
-      const name = document.getElementById('lead-name')?.value.trim();
-      const phone = document.getElementById('lead-phone')?.value.trim();
+      const name = document.getElementById('partner-name')?.value.trim() || document.getElementById('lead-name')?.value.trim();
+      const phone = document.getElementById('partner-phone')?.value.trim() || document.getElementById('lead-phone')?.value.trim();
       if (!name || !phone) {
-        alert("Please enter your name and phone/WhatsApp number.");
+        alert("Please enter your name/entity and phone/WhatsApp number.");
         return;
       }
 
-      btnSubmit.textContent = "TRANSMITTING APPLICATION...";
+      btnSubmit.textContent = "TRANSMITTING PROPOSAL...";
       btnSubmit.disabled = true;
 
       setTimeout(() => {
@@ -280,9 +266,9 @@ function initFranchiseModal() {
         if (window.soundFX) window.soundFX.playAnatomyCollapse();
         setTimeout(() => {
           modal.style.display = 'none';
-          btnSubmit.textContent = "SUBMIT FRANCHISE APPLICATION";
+          btnSubmit.textContent = "SUBMIT PARTNERSHIP PROPOSAL";
           btnSubmit.disabled = false;
-        }, 2200);
+        }, 2400);
       }, 600);
     });
   }

@@ -7,16 +7,21 @@
 window.BRAND_PRESETS = {
   indian_garage: {
     id: "indian_garage",
-    name: "The Indian Garage Co.",
+    name: "Indian Garage",
     legalEntity: "The Indian Garage Company Pvt. Ltd.",
+    corporateParent: "TMRW (Aditya Birla Group) House of Brands",
     founded: "2012 (Indore, Madhya Pradesh)",
     founder: "Anant Tanted",
     tagline: "For Everyday Heroes",
-    institutionalBacking: "Aditya Birla Group / TMRW (₹155 Crore Series B, Oct 2023)",
-    annualVolume: "6,500,000+ Apparel Units / Year (~550,000 units/month)",
-    currentRunRate: "₹300+ Crore GMV (Targeting ₹1,500 Crore by 2027)",
+    headquarters: "No. 3/A, SY No. 38/3, 38/4, GB Palya, Hongasandra, Bangalore South, Begur, Bangalore - 560068",
+    annualVolume: "6,500,000 – 7,200,000 Units / Year (500,000 to 600,000 units/month)",
+    currentRunRate: "₹500 Crore GMV (Targeting ₹1,000 Crore)",
+    fy25Revenue: "₹204 Crore (More than doubled from ₹101 Crore)",
+    d2cScale: "₹100 Crore D2C (tigc.in)",
+    marketDominance: "#1 External Brand on AJIO // Top 10 on Myntra",
+    retailFootprint: "18 Live Retail Stores (Targeting 100 EBOs)",
     brandAmbassador: "Suryakumar Yadav (SKY) — Indian T20 Captain",
-    version: "v2.5 Institutional Edition",
+    version: "v2.5 Brand Dossier Edition",
     updated: "November 2026",
     
     colors: {
@@ -50,22 +55,24 @@ window.BRAND_PRESETS = {
     },
 
     financials: {
-      seriesBInvestment: "₹155 Crore ($18.6 Million)",
-      leadInvestor: "TMRW (House of Brands entity of Aditya Birla Fashion & Retail Ltd.)",
-      gmv2023: "₹300+ Crore",
-      gmv2027Target: "₹1,500 Crore",
-      monthlyUnitsProduced: "500,000 – 600,000 units",
-      denimUnitsSold: "2,800,000+ pairs",
+      corporateParent: "TMRW (House of Brands entity of Aditya Birla Group)",
+      gmvCurrent: "₹500 Crore GMV",
+      gmvTarget: "Targeting ₹1,000 Crore",
+      fy25Revenue: "₹204 Crore (up from ₹101 Crore in FY24 — 102% YoY growth)",
+      monthlyUnitsProduced: "500,000 to 600,000 garments / month",
+      marketRankings: "#1 External Brand on AJIO // Top 10 on Myntra",
+      d2cScale: "₹100 Crore D2C Business (tigc.in)",
+      denimUnitsSold: "2,800,000+ pairs annually",
       averageSellThrough: "88% in 45 days",
-      ebosLive: "20+ Flagships",
-      ebosRoadmap: "100+ Exclusive Brand Outlets across Tier 1, 2 & 3",
+      ebosLive: "18 Live Retail Stores across India",
+      ebosRoadmap: "100 Exclusive Brand Outlets (EBOs) Target",
       supplyChainVelocity: "14 Days Concept-to-Shelf"
     },
 
     houseOfBrands: [
       {
         id: "tigc_men",
-        name: "The Indian Garage Co.",
+        name: "Indian Garage",
         category: "Fast-Fashion Menswear & Signature Denim",
         share: "68% of Total Volume",
         description: "Rugged, trend-first casual wear engineered for Indian men. Key categories: 13.5oz Stretch Denim, Cuban & Checked Shirts, Heavyweight 300 GSM Polos, Utility Cargos.",
@@ -96,12 +103,12 @@ window.BRAND_PRESETS = {
     ],
 
     strategy: {
-      story: "In 2012, a young entrepreneur from Indore named Anant Tanted noticed something simple: Most Indian men had two choices—pay a steep premium for international labels or settle for outdated domestic styles. With a ₹10 lakh bootstrap loan and a team of four, he built The Indian Garage Co. from the ground up into one of India's largest fast-fashion powerhouses. In October 2023, Aditya Birla Group's digital venture TMRW backed TIGC with a landmark ₹155 Crore investment to fuel massive omnichannel and international expansion.",
-      purpose: "To democratize high-street global trends for 10 Crore young Indians through agile, tech-led manufacturing and honest pricing.",
+      story: "In 2012, a young entrepreneur from Indore named Anant Tanted noticed something simple: Most Indian men had two choices—pay a steep premium for international labels or settle for outdated domestic styles. With a ₹10 lakh bootstrap loan and a team of four, he built Indian Garage from the ground up into one of India's largest fast-fashion powerhouses. Today, as part of the TMRW (Aditya Birla Group) House of Brands, Indian Garage generates ₹500 Crore GMV, sells 500,000 to 600,000 units monthly, and is rapidly scaling toward ₹1,000 Crore with 100 Exclusive Brand Outlets across India.",
+      purpose: "To democratize high-street global trends for young India through agile, tech-led manufacturing and honest zero brand tax pricing.",
       mission: "To deliver runway-grade, ergonomically tailored fashion to every corner of India within 14 days of conception.",
-      vision: "To build India's definitive ₹1,500 Crore fashion conglomerate with 100+ flagship retail stores and pan-Asian dominance.",
+      vision: "To build India's definitive ₹1,000 Crore fashion conglomerate with 100+ flagship retail stores and pan-Asian dominance.",
       promise: "Trend-first fashion engineered for the Indian lifestyle at unbeatable value.",
-      positioning: "For the ambitious Indian man building his future, The Indian Garage Co. delivers world-class fit, durable craft, and weekly trend drops at honest price points.",
+      positioning: "For the ambitious Indian man building his future, Indian Garage delivers world-class fit, durable craft, and weekly trend drops at honest price points.",
       
       pillars: [
         {

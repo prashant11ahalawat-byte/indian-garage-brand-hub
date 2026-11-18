@@ -1633,6 +1633,265 @@ body {
   border-color: rgba(15, 23, 42, 0.15);
 }
 
+/* ==========================================================================
+   WHY PARTNER WITH INDIAN GARAGE: BENTO SHOWCASE
+   ========================================================================== */
+.why-partner-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 36px;
+}
+
+.partner-bento-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 18px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.partner-bento-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(229, 9, 20, 0.4);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 24px rgba(229, 9, 20, 0.12);
+}
+
+.partner-bento-card.span-2 {
+  grid-column: span 2;
+}
+
+.partner-bento-card.featured {
+  background: linear-gradient(135deg, rgba(26, 34, 52, 0.85) 0%, rgba(12, 16, 26, 0.95) 100%);
+  border-color: var(--border-accent);
+}
+
+.partner-bento-card.featured::after {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, rgba(229, 9, 20, 0.25) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.partner-bento-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--tigc-crimson-bright);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.partner-bento-badge.emerald {
+  color: var(--accent-emerald);
+}
+
+.partner-bento-badge.cyan {
+  color: var(--accent-cyan);
+}
+
+.partner-bento-metric {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 3.6vw, 54px);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--text-pure);
+  margin: 10px 0 6px 0;
+}
+
+.partner-bento-metric.crimson {
+  color: var(--tigc-crimson-bright);
+}
+
+.partner-bento-title {
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-pure);
+  margin-bottom: 10px;
+}
+
+.partner-bento-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.partner-bento-footnote {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ==========================================================================
+   HEADQUARTERS & DESIGNER SIGNATURE CARD
+   ========================================================================== */
+.headquarters-showcase-box {
+  background: linear-gradient(135deg, rgba(16, 22, 34, 0.9) 0%, rgba(8, 11, 18, 0.95) 100%);
+  border: 1px solid var(--border-accent);
+  border-radius: 18px;
+  padding: 44px;
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: 1.3fr 0.9fr;
+  gap: 40px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.hq-title-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--tigc-crimson-bright);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+.hq-headline {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 3.8vw, 56px);
+  line-height: 1;
+  color: var(--text-pure);
+  margin-bottom: 16px;
+}
+
+.hq-address-p {
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--text-muted);
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-top: 16px;
+}
+
+.hq-designer-block {
+  background: rgba(22, 28, 42, 0.85);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.designer-avatar-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.designer-avatar-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FF2A35 0%, #FF7844 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 0 18px rgba(229, 9, 20, 0.4);
+}
+
+.designer-meta-name {
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-pure);
+}
+
+.designer-meta-role {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--tigc-crimson-bright);
+}
+
+.designer-quote-text {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.btn-contact-direct {
+  background: var(--tigc-crimson);
+  color: #FFFFFF;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 14px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 16px rgba(229, 9, 20, 0.35);
+}
+
+.btn-contact-direct:hover {
+  background: var(--tigc-crimson-bright);
+  transform: translateY(-2px);
+}
+
+/* Daylight / Light Theme adaptations for new cards */
+[data-time-theme="daylight"] .partner-bento-card,
+[data-time-theme="daylight"] .headquarters-showcase-box,
+[data-time-theme="daylight"] .hq-designer-block {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(15, 23, 42, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+[data-time-theme="daylight"] .partner-bento-metric,
+[data-time-theme="daylight"] .partner-bento-title,
+[data-time-theme="daylight"] .hq-headline,
+[data-time-theme="daylight"] .designer-meta-name {
+  color: #0F172A;
+}
+
+[data-time-theme="daylight"] .hq-address-p {
+  background: #F8FAFC;
+  border-color: rgba(15, 23, 42, 0.1);
+  color: #1E293B;
+}
+
 /* Responsive updates */
 @media (max-width: 1024px) {
   .hero-stage-section {
@@ -1648,6 +1907,16 @@ body {
   }
   .nav-links-cluster {
     display: none;
+  }
+  .why-partner-grid {
+    grid-template-columns: 1fr;
+  }
+  .partner-bento-card.span-2 {
+    grid-column: span 1;
+  }
+  .headquarters-showcase-box {
+    grid-template-columns: 1fr;
+    padding: 32px 24px;
   }
   .denim-lab-grid {
     grid-template-columns: 1fr;
