@@ -1,36 +1,53 @@
 /**
- * The Indian Garage Co. — 3D Kinetic Multi-Category Showroom & Hero Engine
- * Built with Three.js, GSAP & Web Audio Procedural Foley
+ * The Indian Garage Co. — 3D Kinetic Multi-Category Showroom & Side-Scroller Journey Engine
+ * Powered by WGSN 3D Fashion Asset Library, Three.js, Web Audio Procedural Foley & GSAP
  * Inspired by Lusion.co, Active Theory & Bruno Simon
  */
 
 class TIGCShowroomEngine {
   constructor() {
-    this.heroContainer = document.getElementById('hero-3d-canvas-container');
-    this.showroomContainer = document.getElementById('showroom-3d-stage') || document.getElementById('denim-3d-stage');
-    
-    // Three.js Scenes
+    this.heroContainer = null;
+    this.showroomContainer = null;
+    this.isInitialized = false;
+
+    // Three.js Hero Scene (Playable Journey Runner & Monogram)
     this.heroScene = null;
     this.heroCamera = null;
     this.heroRenderer = null;
     this.heroMonogram = null;
     this.heroParticles = null;
-    
+    this.heroTrack = null;
+
+    // Three.js Showroom Scene (Ambient Studio Environment)
     this.showroomScene = null;
     this.showroomCamera = null;
     this.showroomRenderer = null;
-    this.showroomGroup = null;
-    this.activeGarmentGroup = null;
+    this.showroomPedestal = null;
+    this.showroomParticles = null;
 
-    // Garment Models & Categories
-    this.garments = {};
-    this.activeCategory = 'denim'; // 'denim', 'shirt', 'polo', 'jacket'
+    // Active Category & Garment State
+    this.activeCategory = 'denim'; // 'denim', 'shirt', 'polo', 'jacket', 'carpenter'
     this.activeWash = 'raw';
-    this.viewMode = 'surface'; // 'surface', 'wireframe', 'xray'
     this.isExploded = false;
 
-    // Interaction State
-    this.mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+    // WGSN 3D Turntable State (36 frames per category, 360-degree rotation)
+    this.wgsnCategories = ['denim', 'shirt', 'polo', 'jacket', 'carpenter'];
+    this.turntableFrames = {
+      denim: [],
+      shirt: [],
+      polo: [],
+      jacket: [],
+      carpenter: []
+    };
+    this.currentFrame = 0;
+    this.turntableAngle = 0;
+    this.turntableTargetAngle = 0;
+    this.isTurntableDragging = false;
+    this.turntableStartX = 0;
+    this.turntableVelocity = 0;
+
+    // Hero Drag & Parallax State (for Free 3D Orbit View)
+    this.mouse = { x: 0, y: 0 };
     this.heroDrag = {
       isDragging: false,
       lastX: 0,
@@ -40,59 +57,83 @@ class TIGCShowroomEngine {
       targetRotX: 0,
       targetRotY: 0
     };
-    this.drag = {
-      isDragging: false,
-      lastX: 0,
-      lastY: 0,
-      rotVelX: 0,
-      rotVelY: 0,
-      targetRotX: 0.1,
-      targetRotY: 0.35,
-      currentRotX: 0.1,
-      currentRotY: 0.35
-    };
 
-    // Playable 3D Journey Runner Game Engine (Chrome Dino / Flappy Bird in 3D)
+    // Playable 3D Side-Scroller Journey Runner Engine (Left to Right, Dino/Flappy Bird Style)
     this.game = {
-      mode: 'orbit', // 'orbit', 'playing', 'gameover'
+      mode: 'orbit', // 'orbit', 'playing', 'paused', 'gameover'
       score: 0,
-      units: 0,
+      units: 10000,
       currentYearIndex: 0,
       years: [
-        { year: "2012", title: "Indore Garage Bootstrap", desc: "₹10 Lakh Seed • 4-Person Pod", unitsGain: 10000 },
-        { year: "2015", title: "E-Commerce Velocity Surge", desc: "Top 10 on Myntra • #1 External on Ajio", unitsGain: 120000 },
-        { year: "2020", title: "14-Day Micro-Batch Engine", desc: "2.8M Pairs Denim Sold • Zero Trapped Stock", unitsGain: 2800000 },
-        { year: "2023", title: "Aditya Birla Group TMRW Union", desc: "₹155 Crore Series B Growth Capital", unitsGain: 4500000 },
-        { year: "2025", title: "₹204 Cr Revenue & 18 Retail Stores", desc: "Doubled YoY Revenue • 600K Units/Month", unitsGain: 6500000 },
-        { year: "2027", title: "The ₹1,000 Crore Horizon", desc: "100 Exclusive Brand Outlets Nationwide", unitsGain: 12000000 }
+        {
+          year: "2012",
+          title: "Indore Garage Bootstrap",
+          desc: "Founded in an Indore garage with ₹10 Lakh seed capital by Anant Tanted. A tight 4-person pod set out with a relentless vision: eliminate unfair brand taxes and deliver world-class trendwear to young India.",
+          highlight: "₹10 Lakh Seed Capital",
+          unitsGain: 25000
+        },
+        {
+          year: "2015",
+          title: "E-Commerce Velocity Surge",
+          desc: "Scaled explosive marketplace dominance across Myntra and AJIO. Emerged as the #1 external brand on AJIO and a permanent Top 10 fixture on Myntra, proving massive national product-market fit.",
+          highlight: "#1 External Brand on AJIO",
+          unitsGain: 180000
+        },
+        {
+          year: "2020",
+          title: "14-Day Micro-Batch Engine",
+          desc: "Pioneered decentralized, asset-light 14-day concept-to-rack manufacturing across 100+ specialized factory pods. Sold over 2.8 Million pairs of denim annually with an industry-record 88% sell-through in 45 days.",
+          highlight: "2.8M Pairs Denim Sold",
+          unitsGain: 2800000
+        },
+        {
+          year: "2023",
+          title: "Aditya Birla Group (TMRW) Alliance",
+          desc: "Joined forces with Aditya Birla Group's digital House of Brands venture TMRW in a landmark ₹155 Crore Series B partnership. Unlocked institutional capital, ERP integration, and disciplined corporate governance.",
+          highlight: "₹155 Cr Series B Backing",
+          unitsGain: 4500000
+        },
+        {
+          year: "2025",
+          title: "₹204 Cr Revenue & 18 Retail Stores",
+          desc: "Doubled top-line revenue year-over-year from ₹101 Cr to ₹204 Cr (FY25). Moving 550,000+ units monthly, expanding our omnichannel footprint to 18 live Exclusive Brand Outlets, and crossing ₹100 Cr on D2C.",
+          highlight: "Doubled YoY to ₹204 Cr",
+          unitsGain: 6500000
+        },
+        {
+          year: "2027",
+          title: "The ₹1,000 Crore Horizon",
+          desc: "Targeting ₹1,000 Crore GMV and a nationwide network of 100 Exclusive Brand Outlets. Setting the standard as India's premier high-velocity, trend-first fashion house.",
+          highlight: "100 EBOs • ₹1,000 Cr Target",
+          unitsGain: 12000000
+        }
       ],
       lap: 1,
-      speed: 0.26,
+      speed: 0.17, // Balanced side-scroller scroll speed
+      playerX: -5.2, // Left side of stage
       playerY: 0,
       playerVelY: 0,
       isJumping: false,
-      gravity: -0.018,
-      jumpForce: 0.40,
+      gravity: -0.016,
+      jumpForce: 0.38,
       obstacles: [],
       milestones: [],
-      trackGrid: null,
-      worldGroup: null,
       obstacleSpawnTimer: 0,
-      milestoneSpawnTimer: 0
+      milestoneSpawnTimer: 0,
+      isMilestonePaused: false,
+      milestoneCountdown: 7,
+      milestoneTimerId: null
     };
 
-    // Textures Cache
-    this.textures = {};
-
     // Dynamic Time-Adaptive Atmosphere
-    this.timeTheme = 'midnight'; // 'daylight', 'dusk', 'midnight'
+    this.timeTheme = 'midnight';
     this.autoTimeSync = true;
 
-    // Multi-Category Catalog Database
+    // Multi-Category Catalog Database (Linked to WGSN 3D Library)
     this.catalogData = {
       denim: {
         title: "13.5oz Ring-Spun Comfort Stretch Denim",
-        subtitle: "High-Velocity Bottomwear",
+        subtitle: "High-Velocity Bottomwear • WGSN Aged Appeal",
         badge: "2.8M+ Pairs Sold Annually",
         description: "Engineered specifically for the South Asian morphological contour. Features an anti-gap lumbar rise, dual-tone copper chain-stitching, 14-point reinforced bartacks, and 2% memory elastane that guarantees 98.4% shape retention across 200+ washes.",
         specs: [
@@ -104,15 +145,15 @@ class TIGCShowroomEngine {
           { label: "Pricing Segment", val: "₹1,199 – ₹1,899 (High-Volume Sweetspot)" }
         ],
         washes: {
-          raw: { name: "Raw Dark Indigo", color: 0x152238, roughness: 0.72, metalness: 0.08 },
-          sunken: { name: "Sun-Washed Mid Blue", color: 0x2b4c7e, roughness: 0.78, metalness: 0.05 },
-          acid: { name: "Vintage Acid Wash", color: 0x546e8e, roughness: 0.84, metalness: 0.02 },
-          selvedge: { name: "Obsidian Black Selvedge", color: 0x141619, roughness: 0.68, metalness: 0.12 }
+          raw: { name: "Raw Dark Indigo", filter: "brightness(1.0) contrast(1.06) saturate(1.15)" },
+          sunken: { name: "Sun-Washed Mid Blue", filter: "brightness(1.16) contrast(0.98) saturate(1.22) hue-rotate(6deg)" },
+          acid: { name: "Vintage Acid Wash", filter: "brightness(1.22) contrast(1.14) saturate(0.70) hue-rotate(12deg)" },
+          selvedge: { name: "Obsidian Black Selvedge", filter: "brightness(0.65) contrast(1.30) saturate(0.25)" }
         }
       },
       shirt: {
-        title: "Tailored Solid Oxford Casuals",
-        subtitle: "450+ Monthly Active Styles",
+        title: "Tailored Solid Oxford Casuals & Resort Tops",
+        subtitle: "450+ Monthly Active Styles • Fluid Knit Drape",
         badge: "1.9M+ Units Produced",
         description: "Our signature top-wear powerhouse. Crafted from 60s compact combed cotton and airy French linen blends, finished with a velvet peach enzyme wash. Designed with reinforced collar bands, curved hem ergonomics, and high-density lock stitching.",
         specs: [
@@ -124,15 +165,15 @@ class TIGCShowroomEngine {
           { label: "Pricing Segment", val: "₹899 – ₹1,399 (Mass Everyday Luxury)" }
         ],
         washes: {
-          raw: { name: "Signature Crimson Plaid", color: 0x9e1b21, roughness: 0.82, metalness: 0.02 },
-          sunken: { name: "Tuscan Sage Linen", color: 0x58705a, roughness: 0.88, metalness: 0.01 },
-          acid: { name: "Deep Cobalt Oxford", color: 0x223c6b, roughness: 0.80, metalness: 0.03 },
-          selvedge: { name: "Midnight Obsidian Silk", color: 0x16181f, roughness: 0.60, metalness: 0.15 }
+          raw: { name: "Signature Resort Crimson", filter: "brightness(1.0) contrast(1.05) saturate(1.1)" },
+          sunken: { name: "Tuscan Sage Linen", filter: "brightness(1.12) contrast(0.95) saturate(0.9) hue-rotate(60deg)" },
+          acid: { name: "Deep Cobalt Oxford", filter: "brightness(0.95) contrast(1.1) saturate(1.2) hue-rotate(200deg)" },
+          selvedge: { name: "Midnight Obsidian Silk", filter: "brightness(0.68) contrast(1.25) saturate(0.2)" }
         }
       },
       polo: {
         title: "Polo-licious 320 GSM Heavyweight Knits",
-        subtitle: "Elevated Smart Casuals",
+        subtitle: "Elevated Smart Casuals • WGSN Honeycomb Waffle",
         badge: "Top-Rated Across Platforms",
         description: "Indian Garage's breakthrough luxury knitwear. Custom-developed 320 GSM honeycomb waffle and double-pique cotton that provides structural drape, zero clinginess in humid climates, and micro-ribbed cuffs that never lose tension.",
         specs: [
@@ -144,15 +185,15 @@ class TIGCShowroomEngine {
           { label: "Pricing Segment", val: "₹799 – ₹1,299" }
         ],
         washes: {
-          raw: { name: "Deep Navy Waffle", color: 0x1b2845, roughness: 0.85, metalness: 0.02 },
-          sunken: { name: "Forest Moss Pique", color: 0x2f4838, roughness: 0.86, metalness: 0.02 },
-          acid: { name: "Sandstone Ecru", color: 0xd4cbb9, roughness: 0.90, metalness: 0.01 },
-          selvedge: { name: "Jet Carbon Black", color: 0x181a1d, roughness: 0.80, metalness: 0.05 }
+          raw: { name: "Deep Navy Waffle", filter: "brightness(1.0) contrast(1.05) saturate(1.1)" },
+          sunken: { name: "Forest Moss Pique", filter: "brightness(1.05) contrast(1.0) saturate(0.95) hue-rotate(85deg)" },
+          acid: { name: "Sandstone Ecru", filter: "brightness(1.28) contrast(0.9) saturate(0.5) hue-rotate(25deg)" },
+          selvedge: { name: "Jet Carbon Black", filter: "brightness(0.64) contrast(1.3) saturate(0.2)" }
         }
       },
       jacket: {
         title: "All-Terrain Denim Truckers & Utility Overshirts",
-        subtitle: "Heavyweight All-Weather Outerwear",
+        subtitle: "Heavyweight All-Weather Outerwear • WGSN Denim Suite",
         badge: "High-Density Hardware",
         description: "Heavy-duty outerwear engineered for trans-seasonal layered styling. Constructed with 14.5oz rigid broken-twill denim, anti-corrosive gunmetal shank buttons, reinforced chest bellows pockets, and adjustable waist cinches.",
         specs: [
@@ -164,10 +205,30 @@ class TIGCShowroomEngine {
           { label: "Pricing Segment", val: "₹1,899 – ₹2,699" }
         ],
         washes: {
-          raw: { name: "Vintage Acid Washed Trucker", color: 0x4a6a96, roughness: 0.74, metalness: 0.08 },
-          sunken: { name: "Desert Khaki Canvas", color: 0x8a7759, roughness: 0.82, metalness: 0.04 },
-          acid: { name: "Garage Crimson Workwear", color: 0xa81c22, roughness: 0.76, metalness: 0.05 },
-          selvedge: { name: "Stealth Obsidian Denim", color: 0x151619, roughness: 0.68, metalness: 0.12 }
+          raw: { name: "Vintage Acid Washed Trucker", filter: "brightness(1.0) contrast(1.05) saturate(1.1)" },
+          sunken: { name: "Desert Khaki Canvas", filter: "brightness(1.15) contrast(0.95) saturate(0.9) hue-rotate(35deg)" },
+          acid: { name: "Garage Crimson Workwear", filter: "brightness(1.05) contrast(1.1) saturate(1.4) hue-rotate(-30deg)" },
+          selvedge: { name: "Stealth Obsidian Denim", filter: "brightness(0.65) contrast(1.3) saturate(0.2)" }
+        }
+      },
+      carpenter: {
+        title: "All-Weather Heavyweight Utility Carpenter Trousers",
+        subtitle: "Multi-Pocket Modular Workwear • WGSN Trend 2026",
+        badge: "High-Yield Utility",
+        description: "Engineered from 100% heavy compact twill with hammer loop, modular utility patch pockets, double-layer reinforced knee panels, and articulated ergonomic patterning for all-day comfort.",
+        specs: [
+          { label: "Fabric Construction", val: "12.5 oz Heavyweight Cotton Canvas Twill" },
+          { label: "Pocket Suite", val: "7-Pocket Modular Carpenter Utility Layout" },
+          { label: "Structural Reinforcement", val: "Dual-Layer Knee Pockets & Heavy Bar-Tacks" },
+          { label: "Hardware Suite", val: "Anti-Corrosive Gunmetal Rivets & Heavy Zipper" },
+          { label: "Sell-Through Velocity", val: "91% in 30 Days" },
+          { label: "Pricing Segment", val: "₹1,499 – ₹2,299" }
+        ],
+        washes: {
+          raw: { name: "Raw Umber Earth", filter: "brightness(1.0) contrast(1.05) saturate(1.1)" },
+          sunken: { name: "Washed Khaki Olive", filter: "brightness(1.12) contrast(0.96) saturate(0.9) hue-rotate(50deg)" },
+          acid: { name: "Distressed Stone Gray", filter: "brightness(1.22) contrast(1.08) saturate(0.55)" },
+          selvedge: { name: "Carbon Utility Black", filter: "brightness(0.66) contrast(1.28) saturate(0.2)" }
         }
       }
     };
@@ -179,16 +240,15 @@ class TIGCShowroomEngine {
   init() {
     if (this.isInitialized) return;
     if (typeof THREE === 'undefined') {
-      console.warn("Three.js is not loaded.");
+      console.warn("Three.js not loaded.");
       return;
     }
     this.isInitialized = true;
 
-    // Resolve containers from live DOM
     this.heroContainer = document.getElementById('hero-3d-podium-canvas') || document.getElementById('hero-3d-canvas-container');
-    this.showroomContainer = document.getElementById('showroom-3d-stage') || document.getElementById('denim-3d-stage');
+    this.showroomContainer = document.getElementById('showroom-3d-stage');
 
-    this.initProceduralTextures();
+    this.initWGSNTurntable();
     this.initHeroScene();
     this.initShowroomScene();
     this.initTimeAdaptiveTheme();
@@ -197,61 +257,22 @@ class TIGCShowroomEngine {
   }
 
   // ==========================================================================
-  // PROCEDURAL PBR TEXTURES (Authentic Cloth Twill & Waffle Normal Maps)
+  // PRELOAD WGSN 3D TURNTABLE FRAMES (36 FRAMES PER CATEGORY)
   // ==========================================================================
-  initProceduralTextures() {
-    // 1. Denim Twill Normal Map (Diagonal 3x1 Weave)
-    const twillCanvas = document.createElement('canvas');
-    twillCanvas.width = 256;
-    twillCanvas.height = 256;
-    const tCtx = twillCanvas.getContext('2d');
-    const tImg = tCtx.createImageData(256, 256);
-    for (let y = 0; y < 256; y++) {
-      for (let x = 0; x < 256; x++) {
-        const idx = (y * 256 + x) * 4;
-        const rib = Math.sin(((x * 2 + y * 2) / 256) * Math.PI * 32);
-        const cross = Math.cos((x / 256) * Math.PI * 64) * 0.25;
-        const nx = 128 + rib * 40;
-        const ny = 128 + cross * 25;
-        tImg.data[idx] = nx;
-        tImg.data[idx + 1] = ny;
-        tImg.data[idx + 2] = 245;
-        tImg.data[idx + 3] = 255;
+  initWGSNTurntable() {
+    this.wgsnCategories.forEach(cat => {
+      this.turntableFrames[cat] = [];
+      for (let i = 0; i < 36; i++) {
+        const frameNum = String(i).padStart(2, '0');
+        const img = new Image();
+        img.src = `assets/wgsn_3d/${cat}_frames/frame_${frameNum}.webp`;
+        this.turntableFrames[cat].push(img);
       }
-    }
-    tCtx.putImageData(tImg, 0, 0);
-    this.textures.twillNormal = new THREE.CanvasTexture(twillCanvas);
-    this.textures.twillNormal.wrapS = THREE.RepeatWrapping;
-    this.textures.twillNormal.wrapT = THREE.RepeatWrapping;
-    this.textures.twillNormal.repeat.set(16, 16);
-
-    // 2. Waffle Knit Normal Map (Honeycomb Pique)
-    const waffleCanvas = document.createElement('canvas');
-    waffleCanvas.width = 256;
-    waffleCanvas.height = 256;
-    const wCtx = waffleCanvas.getContext('2d');
-    const wImg = wCtx.createImageData(256, 256);
-    for (let y = 0; y < 256; y++) {
-      for (let x = 0; x < 256; x++) {
-        const idx = (y * 256 + x) * 4;
-        const wx = Math.sin((x / 256) * Math.PI * 32);
-        const wy = Math.sin((y / 256) * Math.PI * 32);
-        const depth = wx * wy;
-        wImg.data[idx] = 128 + wx * 35;
-        wImg.data[idx + 1] = 128 + wy * 35;
-        wImg.data[idx + 2] = 240 + depth * 15;
-        wImg.data[idx + 3] = 255;
-      }
-    }
-    wCtx.putImageData(wImg, 0, 0);
-    this.textures.waffleNormal = new THREE.CanvasTexture(waffleCanvas);
-    this.textures.waffleNormal.wrapS = THREE.RepeatWrapping;
-    this.textures.waffleNormal.wrapT = THREE.RepeatWrapping;
-    this.textures.waffleNormal.repeat.set(24, 24);
+    });
   }
 
   // ==========================================================================
-  // SCENE 1: HERO SCULPTED G-UNIT MONOGRAM WITH AMBIENT PARTICLES
+  // SCENE 1: HERO G-UNIT MONOGRAM & SIDE-SCROLLER JOURNEY RUNNER
   // ==========================================================================
   initHeroScene() {
     if (!this.heroContainer) return;
@@ -270,8 +291,8 @@ class TIGCShowroomEngine {
     this.heroRenderer.toneMappingExposure = 1.05;
     this.heroContainer.appendChild(this.heroRenderer.domElement);
 
-    // Hero Luxury Studio Illumination (Apple Titanium & Ruby Speculars)
-    this.heroAmbientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    // Studio Illumination
+    this.heroAmbientLight = new THREE.AmbientLight(0xffffff, 0.55);
     this.heroScene.add(this.heroAmbientLight);
 
     this.heroKeyLight = new THREE.DirectionalLight(0xff3344, 1.6);
@@ -282,18 +303,41 @@ class TIGCShowroomEngine {
     this.heroRimLight.position.set(-12, -8, 10);
     this.heroScene.add(this.heroRimLight);
 
-    // Playable 3D Journey Game World Group & Perspective Grid
+    // Side-Scroller Game World Group
     this.game.worldGroup = new THREE.Group();
     this.heroScene.add(this.game.worldGroup);
 
-    const trackGrid = new THREE.GridHelper(240, 50, 0xe50914, 0x1e293b);
-    trackGrid.position.y = -3.6;
-    trackGrid.visible = false;
-    this.game.trackGrid = trackGrid;
-    this.game.worldGroup.add(trackGrid);
+    // Horizontal Track Platform (Extending along X from -30 to +30)
+    const trackGroup = new THREE.Group();
+    const floorGeo = new THREE.BoxGeometry(70, 0.35, 8);
+    const floorMat = new THREE.MeshStandardMaterial({
+      color: 0x0a0f1d,
+      roughness: 0.5,
+      metalness: 0.8
+    });
+    const floor = new THREE.Mesh(floorGeo, floorMat);
+    floor.position.set(0, -3.2, 0);
+    trackGroup.add(floor);
+
+    // Neon Edge Rails
+    const railMat = new THREE.MeshStandardMaterial({
+      color: 0xff1e27,
+      emissive: 0xff0011,
+      emissiveIntensity: 0.9
+    });
+    const railFront = new THREE.Mesh(new THREE.BoxGeometry(70, 0.1, 0.2), railMat);
+    railFront.position.set(0, -3.0, 3.8);
+    trackGroup.add(railFront);
+
+    const railBack = new THREE.Mesh(new THREE.BoxGeometry(70, 0.1, 0.2), railMat);
+    railBack.position.set(0, -3.0, -3.8);
+    trackGroup.add(railBack);
+
+    trackGroup.visible = false;
+    this.game.trackGroup = trackGroup;
+    this.game.worldGroup.add(trackGroup);
 
     // Official Symmetrical Indian Garage G-Unit Monogram (Adobe Illustrator Exact Vectors)
-    // Part 0: Right Bottom G-Bracket with Crossbar
     const s0 = new THREE.Shape();
     s0.moveTo(3.7455, -2.0829);
     s0.bezierCurveTo(3.7403, -3.0082, 2.9094, -3.7302, 1.9815, -3.7302);
@@ -308,7 +352,6 @@ class TIGCShowroomEngine {
     s0.lineTo(3.7455, -2.0825);
     s0.closePath();
 
-    // Part 1: Right Top G-Hook
     const s1 = new THREE.Shape();
     s1.moveTo(3.7481, 1.5876);
     s1.lineTo(2.3947, 1.5876);
@@ -321,7 +364,6 @@ class TIGCShowroomEngine {
     s1.lineTo(3.7496, 1.5888);
     s1.closePath();
 
-    // Part 2: Left Bottom G-Bracket with Crossbar
     const s2 = new THREE.Shape();
     s2.moveTo(-3.7455, -2.0829);
     s2.bezierCurveTo(-3.7403, -3.0082, -2.9094, -3.7302, -1.9815, -3.7302);
@@ -336,7 +378,6 @@ class TIGCShowroomEngine {
     s2.lineTo(-3.7455, -2.0825);
     s2.closePath();
 
-    // Part 3: Left Top G-Hook
     const s3 = new THREE.Shape();
     s3.moveTo(-3.7481, 1.5873);
     s3.lineTo(-2.3951, 1.5873);
@@ -372,16 +413,16 @@ class TIGCShowroomEngine {
     this.heroMonogram = new THREE.Mesh(geometry, material);
     this.heroScene.add(this.heroMonogram);
 
-    // Sleek Orbit Pedestal Ring
+    // Orbit Pedestal Ring for Free 3D view
     const ringGeo = new THREE.TorusGeometry(4.8, 0.05, 16, 64);
     ringGeo.rotateX(Math.PI / 2);
     const ringMat = new THREE.MeshStandardMaterial({ color: 0xff2a35, roughness: 0.3, metalness: 0.8 });
-    const ring = new THREE.Mesh(ringGeo, ringMat);
-    ring.position.y = -4.2;
-    this.heroScene.add(ring);
+    this.heroOrbitRing = new THREE.Mesh(ringGeo, ringMat);
+    this.heroOrbitRing.position.y = -4.2;
+    this.heroScene.add(this.heroOrbitRing);
 
     // Ambient Stardust Dust Particles
-    const particleCount = 180;
+    const particleCount = 160;
     const particleGeo = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
     for (let i = 0; i < particleCount * 3; i += 3) {
@@ -398,81 +439,81 @@ class TIGCShowroomEngine {
     });
     this.heroParticles = new THREE.Points(particleGeo, particleMat);
     this.heroScene.add(this.heroParticles);
-
-    // Hero Podium Container ResizeObserver
-    if (window.ResizeObserver && this.heroContainer) {
-      const roHero = new ResizeObserver(() => {
-        if (this.heroContainer && this.heroRenderer && this.heroCamera) {
-          const hw = this.heroContainer.clientWidth;
-          const hh = this.heroContainer.clientHeight;
-          if (hw > 0 && hh > 0) {
-            this.heroCamera.aspect = hw / hh;
-            this.heroCamera.updateProjectionMatrix();
-            this.heroRenderer.setSize(hw, hh);
-          }
-        }
-      });
-      roHero.observe(this.heroContainer);
-    }
-
-    // Hero Podium Interactive Drag to Spin Monogram
-    if (this.heroContainer) {
-      this.heroContainer.addEventListener('mousedown', (e) => {
-        this.heroDrag.isDragging = true;
-        this.heroDrag.lastX = e.clientX;
-        this.heroDrag.lastY = e.clientY;
-        if (window.soundFX && window.soundFX.playHoverTick) window.soundFX.playHoverTick();
-      });
-
-      this.heroContainer.addEventListener('touchstart', (e) => {
-        if (e.touches.length === 1) {
-          this.heroDrag.isDragging = true;
-          this.heroDrag.lastX = e.touches[0].clientX;
-          this.heroDrag.lastY = e.touches[0].clientY;
-        }
-      }, { passive: true });
-
-      window.addEventListener('mouseup', () => {
-        this.heroDrag.isDragging = false;
-      });
-
-      window.addEventListener('touchend', () => {
-        this.heroDrag.isDragging = false;
-      });
-
-      window.addEventListener('mousemove', (e) => {
-        if (!this.heroDrag.isDragging) return;
-        const dx = e.clientX - this.heroDrag.lastX;
-        const dy = e.clientY - this.heroDrag.lastY;
-        this.heroDrag.lastX = e.clientX;
-        this.heroDrag.lastY = e.clientY;
-        this.heroDrag.targetRotY += dx * 0.01;
-        this.heroDrag.targetRotX += dy * 0.008;
-        this.heroDrag.targetRotX = Math.max(-0.8, Math.min(0.8, this.heroDrag.targetRotX));
-      });
-
-      window.addEventListener('touchmove', (e) => {
-        if (!this.heroDrag.isDragging || e.touches.length !== 1) return;
-        const dx = e.touches[0].clientX - this.heroDrag.lastX;
-        const dy = e.touches[0].clientY - this.heroDrag.lastY;
-        this.heroDrag.lastX = e.touches[0].clientX;
-        this.heroDrag.lastY = e.touches[0].clientY;
-        this.heroDrag.targetRotY += dx * 0.01;
-        this.heroDrag.targetRotX += dy * 0.008;
-        this.heroDrag.targetRotX = Math.max(-0.8, Math.min(0.8, this.heroDrag.targetRotX));
-      }, { passive: true });
-    }
   }
 
   // ==========================================================================
-  // SCENE 2: INTERACTIVE 3D MULTI-CATEGORY APPAREL SHOWROOM
+  // SCENE 2: INTERACTIVE 3D MULTI-CATEGORY WGSN APPAREL STUDIO
   // ==========================================================================
   initShowroomScene() {
     if (!this.showroomContainer) return;
     this.showroomContainer.innerHTML = '';
-    const w = this.showroomContainer.clientWidth || 650;
-    const h = this.showroomContainer.clientHeight || 560;
 
+    // Create Stage Structure: Three.js ambient background + high-res 360 WGSN canvas
+    const w = this.showroomContainer.clientWidth || 650;
+    const h = this.showroomContainer.clientHeight || 520;
+
+    // 1. Interactive 360 Turntable Frame Canvas
+    const canvasWrap = document.createElement('div');
+    canvasWrap.id = 'wgsn-turntable-wrapper';
+    canvasWrap.className = 'wgsn-turntable-stage-wrapper';
+    canvasWrap.style.cssText = `
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+      cursor: grab;
+      touch-action: pan-y;
+      user-select: none;
+      -webkit-user-select: none;
+    `;
+
+    const imgEl = document.createElement('img');
+    imgEl.id = 'wgsn-turntable-img';
+    imgEl.className = 'wgsn-turntable-frame-img';
+    imgEl.alt = 'Indian Garage 3D Apparel Model';
+    imgEl.src = `assets/wgsn_3d/${this.activeCategory}_frames/frame_00.webp`;
+    imgEl.style.cssText = `
+      max-width: 90%;
+      max-height: 88%;
+      object-fit: contain;
+      pointer-events: none;
+      filter: drop-shadow(0 20px 45px rgba(0,0,0,0.55));
+      transition: filter 0.3s ease, transform 0.2s ease;
+      will-change: transform, filter;
+    `;
+    canvasWrap.appendChild(imgEl);
+
+    // Exploded Blueprint Overlay Pins (Shown when Explode 3D is toggled)
+    const pinsOverlay = document.createElement('div');
+    pinsOverlay.id = 'wgsn-anatomy-pins';
+    pinsOverlay.className = 'wgsn-anatomy-pins-layer';
+    pinsOverlay.style.cssText = `
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      display: none;
+      z-index: 8;
+    `;
+    pinsOverlay.innerHTML = `
+      <div class="blueprint-pin" style="top: 22%; left: 32%;">
+        <span class="pin-dot"></span>
+        <div class="pin-card">14.5oz Rigid Broken-Twill Denim</div>
+      </div>
+      <div class="blueprint-pin" style="top: 45%; right: 28%;">
+        <span class="pin-dot"></span>
+        <div class="pin-card">14-Point Military Bartack Reinforcements</div>
+      </div>
+      <div class="blueprint-pin" style="bottom: 25%; left: 38%;">
+        <span class="pin-dot"></span>
+        <div class="pin-card">Anti-Gap Lumbar Contour & Dual Chain-Stitch</div>
+      </div>
+    `;
+    canvasWrap.appendChild(pinsOverlay);
+    this.showroomContainer.appendChild(canvasWrap);
+
+    // 2. Three.js Ambient 3D Studio Pedestal & Floating Lighting Behind Garment
     this.showroomScene = new THREE.Scene();
     this.showroomCamera = new THREE.PerspectiveCamera(40, w / h, 0.1, 100);
     this.showroomCamera.position.set(0, 0, 18);
@@ -480,15 +521,19 @@ class TIGCShowroomEngine {
     this.showroomRenderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     this.showroomRenderer.setSize(w, h);
     this.showroomRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    this.showroomRenderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.showroomRenderer.toneMappingExposure = 1.0;
+    this.showroomRenderer.domElement.style.cssText = `
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+    `;
     this.showroomContainer.appendChild(this.showroomRenderer.domElement);
 
-    // Photographic Studio Illumination (Balanced Soft Light, Zero White Bleaching)
-    this.studioAmbient = new THREE.AmbientLight(0xffffff, 0.45);
+    // Studio Lights
+    this.studioAmbient = new THREE.AmbientLight(0xffffff, 0.5);
     this.showroomScene.add(this.studioAmbient);
 
-    this.studioKey = new THREE.DirectionalLight(0xfff8f0, 1.35);
+    this.studioKey = new THREE.DirectionalLight(0xfff8f0, 1.4);
     this.studioKey.position.set(8, 14, 12);
     this.showroomScene.add(this.studioKey);
 
@@ -496,747 +541,157 @@ class TIGCShowroomEngine {
     this.studioFill.position.set(-10, -4, -6);
     this.showroomScene.add(this.studioFill);
 
-    this.studioCrimsonRim = new THREE.DirectionalLight(0xe50914, 0.65);
-    this.studioCrimsonRim.position.set(0, 10, -12);
-    this.showroomScene.add(this.studioCrimsonRim);
+    // Glowing Circular Glass Pedestal Floor
+    const pedGeo = new THREE.CylinderGeometry(5.2, 5.5, 0.35, 48);
+    const pedMat = new THREE.MeshStandardMaterial({
+      color: 0x111625,
+      roughness: 0.3,
+      metalness: 0.85
+    });
+    this.showroomPedestal = new THREE.Mesh(pedGeo, pedMat);
+    this.showroomPedestal.position.set(0, -4.2, 0);
+    this.showroomScene.add(this.showroomPedestal);
 
-    // Showroom Root Group
-    this.showroomGroup = new THREE.Group();
-    this.showroomScene.add(this.showroomGroup);
+    // Pedestal Rim Halo
+    const pedHaloGeo = new THREE.TorusGeometry(5.4, 0.05, 16, 64);
+    pedHaloGeo.rotateX(Math.PI / 2);
+    const pedHaloMat = new THREE.MeshStandardMaterial({
+      color: 0xe50914,
+      emissive: 0xff0011,
+      emissiveIntensity: 0.8
+    });
+    const pedHalo = new THREE.Mesh(pedHaloGeo, pedHaloMat);
+    pedHalo.position.set(0, -4.0, 0);
+    this.showroomScene.add(pedHalo);
 
-    // Build All 4 High-Fidelity 3D Garments
-    this.buildDenimModel();
-    this.buildShirtModel();
-    this.buildPoloModel();
-    this.buildJacketModel();
+    // Ambient floating sparks
+    const spCount = 70;
+    const spGeo = new THREE.BufferGeometry();
+    const spPos = new Float32Array(spCount * 3);
+    for (let i = 0; i < spCount * 3; i += 3) {
+      spPos[i] = (Math.random() - 0.5) * 22;
+      spPos[i + 1] = (Math.random() - 0.5) * 16;
+      spPos[i + 2] = (Math.random() - 0.5) * 12;
+    }
+    spGeo.setAttribute('position', new THREE.BufferAttribute(spPos, 3));
+    const spMat = new THREE.PointsMaterial({
+      color: 0xff4d54,
+      size: 0.12,
+      transparent: true,
+      opacity: 0.6
+    });
+    this.showroomParticles = new THREE.Points(spGeo, spMat);
+    this.showroomScene.add(this.showroomParticles);
 
-    // Set Default Active Garment
+    // Initialize UI for Default Category
     this.setCategory('denim', true);
-
-    // Setup ResizeObserver for adaptive container responsiveness
-    if (window.ResizeObserver) {
-      const ro = new ResizeObserver(() => {
-        if (this.showroomContainer && this.showroomRenderer && this.showroomCamera) {
-          const nw = this.showroomContainer.clientWidth;
-          const nh = this.showroomContainer.clientHeight;
-          if (nw > 0 && nh > 0) {
-            this.showroomCamera.aspect = nw / nh;
-            this.showroomCamera.updateProjectionMatrix();
-            this.showroomRenderer.setSize(nw, nh);
-          }
-        }
-      });
-      ro.observe(this.showroomContainer);
-    }
-  }
-
-  // --------------------------------------------------------------------------
-  // MODEL 1: THE SIGNATURE SCULPTED SELVEDGE DENIM
-  // --------------------------------------------------------------------------
-  buildDenimModel() {
-    const group = new THREE.Group();
-    const parts = [];
-
-    // Load authentic real Indian Garage denim product photo as texture map
-    const texLoader = new THREE.TextureLoader();
-    const realDenimTex = texLoader.load("assets/tigc_live/polo_01.jpg");
-    realDenimTex.wrapS = THREE.RepeatWrapping;
-    realDenimTex.wrapT = THREE.RepeatWrapping;
-    realDenimTex.repeat.set(1.5, 1.5);
-
-    // Realistic Ring-Spun Twill Material with Photographic Depth
-    const mat = new THREE.MeshStandardMaterial({
-      color: 0x1b2c48, // Deep Indigo
-      roughness: 0.75,
-      metalness: 0.05,
-      map: realDenimTex,
-      normalMap: this.textures.twillNormal,
-      normalScale: new THREE.Vector2(0.6, 0.6)
-    });
-
-    // Golden-Copper Contrast Chain-Stitch Material
-    const threadMat = new THREE.MeshStandardMaterial({
-      color: 0xc88942,
-      roughness: 0.5,
-      metalness: 0.25
-    });
-
-    // Antique Brass Hardware
-    const brassMat = new THREE.MeshStandardMaterial({
-      color: 0xd4af37,
-      metalness: 0.95,
-      roughness: 0.22
-    });
-
-    // 1. Contoured Waistband (SOLID CAPPED - Zero Hollow Funnel Gaping)
-    const waistbandGeo = new THREE.CylinderGeometry(2.42, 2.42, 0.65, 36, 1, false);
-    const waistband = new THREE.Mesh(waistbandGeo, mat);
-    waistband.position.set(0, 3.25, 0);
-    waistband.userData = {
-      name: "Contoured Waistband with Interior Chambray Lining",
-      explodedPos: new THREE.Vector3(0, 5.2, 0),
-      originPos: new THREE.Vector3(0, 3.25, 0)
-    };
-    group.add(waistband);
-    parts.push(waistband);
-
-    // Dual-Needle Golden Top-Stitch Rings on Waistband
-    const stitchRingTopGeo = new THREE.TorusGeometry(2.43, 0.018, 8, 48);
-    stitchRingTopGeo.rotateX(Math.PI / 2);
-    const stitchTop = new THREE.Mesh(stitchRingTopGeo, threadMat);
-    stitchTop.position.set(0, 3.52, 0);
-    waistband.add(stitchTop);
-
-    const stitchRingBotGeo = new THREE.TorusGeometry(2.43, 0.018, 8, 48);
-    stitchRingBotGeo.rotateX(Math.PI / 2);
-    const stitchBot = new THREE.Mesh(stitchRingBotGeo, threadMat);
-    stitchBot.position.set(0, 2.98, 0);
-    waistband.add(stitchBot);
-
-    // 5 Reinforced Belt Loops (Tightly flush against waistband)
-    const loopPositions = [
-      { angle: 0.38, r: 2.45 },
-      { angle: -0.38, r: 2.45 },
-      { angle: 1.57, r: 2.45 },
-      { angle: -1.57, r: 2.45 },
-      { angle: Math.PI, r: 2.45 }
-    ];
-    loopPositions.forEach(lp => {
-      const loopGeo = new THREE.BoxGeometry(0.16, 0.72, 0.06);
-      const loop = new THREE.Mesh(loopGeo, mat);
-      const x = Math.sin(lp.angle) * lp.r;
-      const z = Math.cos(lp.angle) * lp.r;
-      loop.position.set(x, 3.25, z);
-      loop.rotation.y = lp.angle;
-      waistband.add(loop);
-    });
-
-    // Antique Brass Shank Button (Flush on Center Front)
-    const buttonGeo = new THREE.CylinderGeometry(0.24, 0.24, 0.08, 24);
-    buttonGeo.rotateX(Math.PI / 2);
-    const button = new THREE.Mesh(buttonGeo, brassMat);
-    button.position.set(0, 3.25, 2.45);
-    button.userData = {
-      name: "Antique Brass Center Shank Button",
-      explodedPos: new THREE.Vector3(0, 4.2, 3.8),
-      originPos: new THREE.Vector3(0, 3.25, 2.45)
-    };
-    group.add(button);
-    parts.push(button);
-
-    // Genuine Saddle Leather Brand Patch (Flush against rear right curve)
-    const leatherGeo = new THREE.BoxGeometry(0.92, 0.52, 0.04);
-    const leatherMat = new THREE.MeshStandardMaterial({
-      color: 0x8a4823, // Cognac Brown
-      roughness: 0.65,
-      metalness: 0.12
-    });
-    const leatherPatch = new THREE.Mesh(leatherGeo, leatherMat);
-    leatherPatch.position.set(1.35, 3.25, -2.02);
-    leatherPatch.rotation.y = Math.PI + 0.58;
-    leatherPatch.userData = {
-      name: "Embossed Full-Grain Leather Brand Patch",
-      explodedPos: new THREE.Vector3(2.5, 4.2, -4.0),
-      originPos: new THREE.Vector3(1.35, 3.25, -2.02)
-    };
-    group.add(leatherPatch);
-    parts.push(leatherPatch);
-
-    // 2. Pelvic Core & Seat Architecture (SOLID - Smoothly transitions into legs)
-    const pelvisGeo = new THREE.CylinderGeometry(2.42, 2.58, 2.4, 36, 4, false);
-    const pelvis = new THREE.Mesh(pelvisGeo, mat);
-    pelvis.position.set(0, 1.85, 0);
-    pelvis.userData = {
-      name: "Ergonomic South Asian Pelvis Block & Saddle",
-      explodedPos: new THREE.Vector3(0, 1.85, 0),
-      originPos: new THREE.Vector3(0, 1.85, 0)
-    };
-    group.add(pelvis);
-    parts.push(pelvis);
-
-    // Front Fly Placket & Golden J-Stitch Seam
-    const flyPlacketGeo = new THREE.BoxGeometry(0.38, 1.8, 0.04);
-    const flyPlacket = new THREE.Mesh(flyPlacketGeo, mat);
-    flyPlacket.position.set(0, 1.95, 2.55);
-    group.add(flyPlacket);
-
-    const jCurve = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(0.20, 2.7, 2.56),
-      new THREE.Vector3(0.22, 1.7, 2.56),
-      new THREE.Vector3(0.16, 1.25, 2.56),
-      new THREE.Vector3(0.0, 1.05, 2.56)
-    ]);
-    const jStitch = new THREE.Mesh(new THREE.TubeGeometry(jCurve, 20, 0.02, 8, false), threadMat);
-    group.add(jStitch);
-
-    // Rear Pockets (Flush against posterior surface)
-    const backPocketGeo = new THREE.PlaneGeometry(1.05, 1.25);
-    const backPocketL = new THREE.Mesh(backPocketGeo, mat);
-    backPocketL.position.set(-1.18, 1.75, -2.25);
-    backPocketL.rotation.y = Math.PI - 0.50;
-    backPocketL.userData = {
-      name: "Left Rear Pocket with Double Arcuate Stitch",
-      explodedPos: new THREE.Vector3(-1.18, 1.75, -4.2),
-      originPos: new THREE.Vector3(-1.18, 1.75, -2.25)
-    };
-    group.add(backPocketL);
-    parts.push(backPocketL);
-
-    const backPocketR = new THREE.Mesh(backPocketGeo, mat);
-    backPocketR.position.set(1.18, 1.75, -2.25);
-    backPocketR.rotation.y = Math.PI + 0.50;
-    backPocketR.userData = {
-      name: "Right Rear Pocket with Double Arcuate Stitch",
-      explodedPos: new THREE.Vector3(1.18, 1.75, -4.2),
-      originPos: new THREE.Vector3(1.18, 1.75, -2.25)
-    };
-    group.add(backPocketR);
-    parts.push(backPocketR);
-
-    // Front Scoop Pocket Curves (Flush along hip curve)
-    const scoopLCurve = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(-1.1, 2.7, 2.35),
-      new THREE.Vector3(-1.8, 2.3, 1.8),
-      new THREE.Vector3(-2.2, 1.9, 1.2)
-    ]);
-    const scoopL = new THREE.Mesh(new THREE.TubeGeometry(scoopLCurve, 16, 0.03, 8, false), threadMat);
-    scoopL.userData = {
-      name: "Left Scoop Pocket Opening",
-      explodedPos: new THREE.Vector3(-2.5, 2.3, 3.2),
-      originPos: new THREE.Vector3(0, 0, 0)
-    };
-    group.add(scoopL);
-    parts.push(scoopL);
-
-    const scoopRCurve = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(1.1, 2.7, 2.35),
-      new THREE.Vector3(1.8, 2.3, 1.8),
-      new THREE.Vector3(2.2, 1.9, 1.2)
-    ]);
-    const scoopR = new THREE.Mesh(new THREE.TubeGeometry(scoopRCurve, 16, 0.03, 8, false), threadMat);
-    scoopR.userData = {
-      name: "Right Scoop Pocket with Coin Insert",
-      explodedPos: new THREE.Vector3(2.5, 2.3, 3.2),
-      originPos: new THREE.Vector3(0, 0, 0)
-    };
-    group.add(scoopR);
-    parts.push(scoopR);
-
-    // 3. Ergonomic Inseam & Tapered Legs (Continuous South Asian Silhouette)
-    const legCurveL = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(-1.22, 1.1, 0),
-      new THREE.Vector3(-1.24, 0.0, 0.05),
-      new THREE.Vector3(-1.18, -1.3, 0.15),
-      new THREE.Vector3(-1.10, -2.8, 0.05),
-      new THREE.Vector3(-1.05, -4.4, 0)
-    ]);
-    const leftLeg = new THREE.Mesh(new THREE.TubeGeometry(legCurveL, 36, 1.15, 24, false), mat);
-    leftLeg.userData = {
-      name: "Left Leg: 13.5oz Ring-Spun Comfort Stretch Denim",
-      explodedPos: new THREE.Vector3(-2.8, 0, 0),
-      originPos: new THREE.Vector3(0, 0, 0)
-    };
-    group.add(leftLeg);
-    parts.push(leftLeg);
-
-    const legCurveR = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(1.22, 1.1, 0),
-      new THREE.Vector3(1.24, 0.0, 0.05),
-      new THREE.Vector3(1.18, -1.3, 0.15),
-      new THREE.Vector3(1.10, -2.8, 0.05),
-      new THREE.Vector3(1.05, -4.4, 0)
-    ]);
-    const rightLeg = new THREE.Mesh(new THREE.TubeGeometry(legCurveR, 36, 1.15, 24, false), mat);
-    rightLeg.userData = {
-      name: "Right Leg: 13.5oz Ring-Spun Comfort Stretch Denim",
-      explodedPos: new THREE.Vector3(2.8, 0, 0),
-      originPos: new THREE.Vector3(0, 0, 0)
-    };
-    group.add(rightLeg);
-    parts.push(rightLeg);
-
-    // 4. Ankle Turn-Up Cuffs with Selvedge Line
-    const cuffGeo = new THREE.TorusGeometry(1.10, 0.08, 12, 32);
-    cuffGeo.rotateX(Math.PI / 2);
-    const cuffMat = new THREE.MeshStandardMaterial({ color: 0xa4bad9, roughness: 0.8 });
-    const cuffL = new THREE.Mesh(cuffGeo, cuffMat);
-    cuffL.position.set(-1.05, -4.38, 0);
-    group.add(cuffL);
-
-    const cuffR = new THREE.Mesh(cuffGeo, cuffMat);
-    cuffR.position.set(1.05, -4.38, 0);
-    group.add(cuffR);
-
-    // Outseam Golden Chain-Stitching (Runs down the outer edge of both legs)
-    const outseamLCurve = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(-2.45, 3.25, 0),
-      new THREE.Vector3(-2.60, 1.85, 0),
-      new THREE.Vector3(-2.38, 0.0, 0.05),
-      new THREE.Vector3(-2.30, -1.3, 0.15),
-      new THREE.Vector3(-2.18, -4.4, 0)
-    ]);
-    const outseamL = new THREE.Mesh(new THREE.TubeGeometry(outseamLCurve, 32, 0.02, 8, false), threadMat);
-    group.add(outseamL);
-
-    const outseamRCurve = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(2.45, 3.25, 0),
-      new THREE.Vector3(2.60, 1.85, 0),
-      new THREE.Vector3(2.38, 0.0, 0.05),
-      new THREE.Vector3(2.30, -1.3, 0.15),
-      new THREE.Vector3(2.18, -4.4, 0)
-    ]);
-    const outseamR = new THREE.Mesh(new THREE.TubeGeometry(outseamRCurve, 32, 0.02, 8, false), threadMat);
-    group.add(outseamR);
-
-    group.userData = { parts, material: mat };
-    group.visible = false;
-    this.showroomGroup.add(group);
-    this.garments.denim = group;
-  }
-  buildShirtModel() {
-    const group = new THREE.Group();
-    const parts = [];
-
-    const mat = new THREE.MeshStandardMaterial({
-      color: 0x9e1b21,
-      roughness: 0.82,
-      metalness: 0.02,
-      normalMap: this.textures.twillNormal,
-      normalScale: new THREE.Vector2(0.4, 0.4)
-    });
-
-    // Torso Body
-    const torsoGeo = new THREE.CylinderGeometry(2.4, 2.6, 6.2, 32, 2, true);
-    const torso = new THREE.Mesh(torsoGeo, mat);
-    torso.position.set(0, 0, 0);
-    torso.userData = {
-      name: "60s Combed Cotton Torso with Enzyme Velvet Soft-Finish",
-      explodedPos: new THREE.Vector3(0, 0, -2.5),
-      originPos: new THREE.Vector3(0, 0, 0)
-    };
-    group.add(torso);
-    parts.push(torso);
-
-    // Cuban Notch Lapel Collar (Folded open)
-    const collarLeftGeo = new THREE.BoxGeometry(1.6, 0.9, 0.12);
-    collarLeftGeo.rotateZ(0.35);
-    const collarL = new THREE.Mesh(collarLeftGeo, mat);
-    collarL.position.set(-1.1, 3.4, 2.2);
-    group.add(collarL);
-
-    const collarRightGeo = new THREE.BoxGeometry(1.6, 0.9, 0.12);
-    collarRightGeo.rotateZ(-0.35);
-    const collarR = new THREE.Mesh(collarRightGeo, mat);
-    collarR.position.set(1.1, 3.4, 2.2);
-    group.add(collarR);
-
-    // Front Button Placket
-    const placketGeo = new THREE.BoxGeometry(0.35, 6.0, 0.08);
-    const placket = new THREE.Mesh(placketGeo, mat);
-    placket.position.set(0, 0.1, 2.5);
-    group.add(placket);
-
-    // Trocas Pearl Buttons along Placket
-    const pearlMat = new THREE.MeshStandardMaterial({ color: 0xf5f3ea, roughness: 0.18, metalness: 0.1 });
-    for (let b = 0; b < 6; b++) {
-      const btnGeo = new THREE.CylinderGeometry(0.14, 0.14, 0.06, 16);
-      btnGeo.rotateX(Math.PI / 2);
-      const btnMesh = new THREE.Mesh(btnGeo, pearlMat);
-      btnMesh.position.set(0, 2.4 - b * 0.95, 2.56);
-      group.add(btnMesh);
-    }
-
-    // Chest Pocket
-    const pocketGeo = new THREE.BoxGeometry(1.1, 1.3, 0.06);
-    const pocket = new THREE.Mesh(pocketGeo, mat);
-    pocket.position.set(-1.2, 1.2, 2.48);
-    pocket.userData = {
-      name: "Reinforced Chest Bellows Pocket with Pen Slot",
-      explodedPos: new THREE.Vector3(-1.2, 1.2, 4.0),
-      originPos: new THREE.Vector3(-1.2, 1.2, 2.48)
-    };
-    group.add(pocket);
-    parts.push(pocket);
-
-    // Short Sleeves with Cuffs
-    const sleeveLGeo = new THREE.CylinderGeometry(1.1, 1.0, 2.6, 24);
-    sleeveLGeo.rotateZ(0.65);
-    const sleeveL = new THREE.Mesh(sleeveLGeo, mat);
-    sleeveL.position.set(-3.2, 1.8, 0);
-    sleeveL.userData = {
-      name: "Left Armhole Felled Seam & Folded Cuff",
-      explodedPos: new THREE.Vector3(-5.2, 1.8, 0),
-      originPos: new THREE.Vector3(-3.2, 1.8, 0)
-    };
-    group.add(sleeveL);
-    parts.push(sleeveL);
-
-    const sleeveRGeo = new THREE.CylinderGeometry(1.1, 1.0, 2.6, 24);
-    sleeveRGeo.rotateZ(-0.65);
-    const sleeveR = new THREE.Mesh(sleeveRGeo, mat);
-    sleeveR.position.set(3.2, 1.8, 0);
-    sleeveR.userData = {
-      name: "Right Armhole Felled Seam & Folded Cuff",
-      explodedPos: new THREE.Vector3(5.2, 1.8, 0),
-      originPos: new THREE.Vector3(3.2, 1.8, 0)
-    };
-    group.add(sleeveR);
-    parts.push(sleeveR);
-
-    group.userData = { parts, material: mat };
-    group.visible = false;
-    this.showroomGroup.add(group);
-    this.garments.shirt = group;
-  }
-
-  // --------------------------------------------------------------------------
-  // MODEL 3: POLO-LICIOUS 320 GSM WAFFLE KNIT POLO
-  // --------------------------------------------------------------------------
-  buildPoloModel() {
-    const group = new THREE.Group();
-    const parts = [];
-
-    const mat = new THREE.MeshStandardMaterial({
-      color: 0x1b2845,
-      roughness: 0.85,
-      metalness: 0.02,
-      normalMap: this.textures.waffleNormal,
-      normalScale: new THREE.Vector2(1.2, 1.2)
-    });
-
-    // Athletic Torso
-    const torsoGeo = new THREE.CylinderGeometry(2.35, 2.45, 5.8, 32, 4, true);
-    const torso = new THREE.Mesh(torsoGeo, mat);
-    torso.position.set(0, -0.2, 0);
-    torso.userData = {
-      name: "320 GSM Heavyweight Honeycomb Waffle Pique Torso",
-      explodedPos: new THREE.Vector3(0, -0.2, -2.5),
-      originPos: new THREE.Vector3(0, -0.2, 0)
-    };
-    group.add(torso);
-    parts.push(torso);
-
-    // Ribbed Polo Collar (Structured Neckline)
-    const collarGeo = new THREE.CylinderGeometry(1.45, 1.85, 0.9, 24, 1, true);
-    const collarMat = new THREE.MeshStandardMaterial({ color: 0x141e33, roughness: 0.9 });
-    const collar = new THREE.Mesh(collarGeo, collarMat);
-    collar.position.set(0, 3.1, 0.15);
-    collar.userData = {
-      name: "Zero-Roll Fused Knit Collar with Contrast Tipped Piping",
-      explodedPos: new THREE.Vector3(0, 4.8, 0.15),
-      originPos: new THREE.Vector3(0, 3.1, 0.15)
-    };
-    group.add(collar);
-    parts.push(collar);
-
-    // 3-Button Polo Placket
-    const placketGeo = new THREE.BoxGeometry(0.42, 2.2, 0.09);
-    const placket = new THREE.Mesh(placketGeo, collarMat);
-    placket.position.set(0, 1.8, 2.38);
-    group.add(placket);
-
-    // Pearl Buttons (3)
-    const btnMat = new THREE.MeshStandardMaterial({ color: 0xeeeeee, roughness: 0.2, metalness: 0.1 });
-    for (let i = 0; i < 3; i++) {
-      const bGeo = new THREE.CylinderGeometry(0.12, 0.12, 0.05, 16);
-      bGeo.rotateX(Math.PI / 2);
-      const btn = new THREE.Mesh(bGeo, btnMat);
-      btn.position.set(0, 2.45 - i * 0.65, 2.44);
-      group.add(btn);
-    }
-
-    // Ribbed Sleeves with Athletic Band
-    const sleeveLGeo = new THREE.CylinderGeometry(1.05, 0.92, 2.8, 24);
-    sleeveLGeo.rotateZ(0.55);
-    const sleeveL = new THREE.Mesh(sleeveLGeo, mat);
-    sleeveL.position.set(-2.9, 1.6, 0);
-    sleeveL.userData = {
-      name: "Left High-Tension Ribbed Cuff",
-      explodedPos: new THREE.Vector3(-4.8, 1.6, 0),
-      originPos: new THREE.Vector3(-2.9, 1.6, 0)
-    };
-    group.add(sleeveL);
-    parts.push(sleeveL);
-
-    const sleeveRGeo = new THREE.CylinderGeometry(1.05, 0.92, 2.8, 24);
-    sleeveRGeo.rotateZ(-0.55);
-    const sleeveR = new THREE.Mesh(sleeveRGeo, mat);
-    sleeveR.position.set(2.9, 1.6, 0);
-    sleeveR.userData = {
-      name: "Right High-Tension Ribbed Cuff",
-      explodedPos: new THREE.Vector3(4.8, 1.6, 0),
-      originPos: new THREE.Vector3(2.9, 1.6, 0)
-    };
-    group.add(sleeveR);
-    parts.push(sleeveR);
-
-    group.userData = { parts, material: mat };
-    group.visible = false;
-    this.showroomGroup.add(group);
-    this.garments.polo = group;
-  }
-
-  // --------------------------------------------------------------------------
-  // MODEL 4: UTILITY TRUCKER JACKET & OVERSHIRT
-  // --------------------------------------------------------------------------
-  buildJacketModel() {
-    const group = new THREE.Group();
-    const parts = [];
-
-    const mat = new THREE.MeshStandardMaterial({
-      color: 0x4a6a96,
-      roughness: 0.74,
-      metalness: 0.08,
-      normalMap: this.textures.twillNormal,
-      normalScale: new THREE.Vector2(1.0, 1.0)
-    });
-
-    // Boxy Heavyweight Shell
-    const shellGeo = new THREE.CylinderGeometry(2.65, 2.75, 6.4, 32, 2, true);
-    const shell = new THREE.Mesh(shellGeo, mat);
-    shell.position.set(0, 0, 0);
-    shell.userData = {
-      name: "14.5oz Broken-Twill Denim Rigid Outerwear Shell",
-      explodedPos: new THREE.Vector3(0, 0, -2.8),
-      originPos: new THREE.Vector3(0, 0, 0)
-    };
-    group.add(shell);
-    parts.push(shell);
-
-    // Heavy Trucker Collar
-    const collarGeo = new THREE.BoxGeometry(3.6, 0.8, 0.16);
-    const collar = new THREE.Mesh(collarGeo, mat);
-    collar.position.set(0, 3.4, 1.8);
-    collar.userData = {
-      name: "Pointed Heavyweight Workwear Collar",
-      explodedPos: new THREE.Vector3(0, 5.0, 1.8),
-      originPos: new THREE.Vector3(0, 3.4, 1.8)
-    };
-    group.add(collar);
-    parts.push(collar);
-
-    // Dual Flap Bellows Chest Pockets with Brass Hardware
-    const flapGeo = new THREE.BoxGeometry(1.2, 1.1, 0.12);
-    const flapL = new THREE.Mesh(flapGeo, mat);
-    flapL.position.set(-1.25, 1.6, 2.7);
-    flapL.userData = {
-      name: "Left Chest Flap Pocket with Gunmetal Shank Snap",
-      explodedPos: new THREE.Vector3(-1.25, 1.6, 4.4),
-      originPos: new THREE.Vector3(-1.25, 1.6, 2.7)
-    };
-    group.add(flapL);
-    parts.push(flapL);
-
-    const flapR = new THREE.Mesh(flapGeo, mat);
-    flapR.position.set(1.25, 1.6, 2.7);
-    flapR.userData = {
-      name: "Right Chest Flap Pocket with Gunmetal Shank Snap",
-      explodedPos: new THREE.Vector3(1.25, 1.6, 4.4),
-      originPos: new THREE.Vector3(1.25, 1.6, 2.7)
-    };
-    group.add(flapR);
-    parts.push(flapR);
-
-    // Gunmetal Shank Buttons on Flaps
-    const gunmetalMat = new THREE.MeshStandardMaterial({ color: 0x3a3d45, metalness: 0.95, roughness: 0.2 });
-    const bL = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.08, 16), gunmetalMat);
-    bL.rotateX(Math.PI / 2);
-    bL.position.set(-1.25, 1.6, 2.8);
-    group.add(bL);
-
-    const bR = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.08, 16), gunmetalMat);
-    bR.rotateX(Math.PI / 2);
-    bR.position.set(1.25, 1.6, 2.8);
-    group.add(bR);
-
-    // Heavy Trucker Sleeves
-    const sleeveLGeo = new THREE.CylinderGeometry(1.2, 0.95, 5.2, 24);
-    sleeveLGeo.rotateZ(0.35);
-    const sleeveL = new THREE.Mesh(sleeveLGeo, mat);
-    sleeveL.position.set(-3.2, 0.4, 0);
-    sleeveL.userData = {
-      name: "Triple-Needle Felled Left Sleeve & Wrist Gauntlet",
-      explodedPos: new THREE.Vector3(-5.6, 0.4, 0),
-      originPos: new THREE.Vector3(-3.2, 0.4, 0)
-    };
-    group.add(sleeveL);
-    parts.push(sleeveL);
-
-    const sleeveRGeo = new THREE.CylinderGeometry(1.2, 0.95, 5.2, 24);
-    sleeveRGeo.rotateZ(-0.35);
-    const sleeveR = new THREE.Mesh(sleeveRGeo, mat);
-    sleeveR.position.set(3.2, 0.4, 0);
-    sleeveR.userData = {
-      name: "Triple-Needle Felled Right Sleeve & Wrist Gauntlet",
-      explodedPos: new THREE.Vector3(5.6, 0.4, 0),
-      originPos: new THREE.Vector3(3.2, 0.4, 0)
-    };
-    group.add(sleeveR);
-    parts.push(sleeveR);
-
-    group.userData = { parts, material: mat };
-    group.visible = false;
-    this.showroomGroup.add(group);
-    this.garments.jacket = group;
   }
 
   // ==========================================================================
-  // CATEGORY & WASH TRANSITION CONTROLLER
+  // WGSN 3D TURNTABLE CONTROLLER (Smooth 360° Drag & Camera Presets)
   // ==========================================================================
-  setCategory(categoryKey, immediate = false) {
-    if (!this.garments[categoryKey]) return;
-    this.activeCategory = categoryKey;
-    const catData = this.catalogData[categoryKey];
-
-    // Play Audio Feedback
-    if (!immediate && window.soundFX) {
-      if (window.soundFX.playWhoosh) window.soundFX.playWhoosh(1.2);
-      if (window.soundFX.playClickSnap) window.soundFX.playClickSnap();
+  setTurntableFrame(index) {
+    this.currentFrame = ((index % 36) + 36) % 36;
+    const imgEl = document.getElementById('wgsn-turntable-img');
+    if (imgEl) {
+      const frameNum = String(this.currentFrame).padStart(2, '0');
+      imgEl.src = `assets/wgsn_3d/${this.activeCategory}_frames/frame_${frameNum}.webp`;
     }
+  }
 
-    // Toggle 3D Models with GSAP
-    Object.keys(this.garments).forEach(k => {
-      const g = this.garments[k];
-      if (k === categoryKey) {
-        g.visible = true;
-        this.activeGarmentGroup = g;
-        if (!immediate && typeof gsap !== 'undefined') {
-          g.scale.set(0.6, 0.6, 0.6);
-          g.rotation.y += 0.8;
-          gsap.to(g.scale, { x: 1, y: 1, z: 1, duration: 0.65, ease: "back.out(1.4)" });
-          gsap.to(g.rotation, { y: this.drag.currentRotY, duration: 0.65, ease: "power2.out" });
-        } else {
-          g.scale.set(1, 1, 1);
-        }
-      } else {
-        g.visible = false;
-      }
+  setCameraPreset(preset) {
+    let targetFrame = 0;
+    if (preset === 'front') targetFrame = 0;
+    else if (preset === 'three-quarter' || preset === 'threequarter') targetFrame = 5;
+    else if (preset === 'side') targetFrame = 9;
+    else if (preset === 'back') targetFrame = 18;
+
+    this.turntableTargetAngle = (targetFrame / 36) * Math.PI * 2;
+    this.setTurntableFrame(targetFrame);
+
+    document.querySelectorAll('.cam-preset-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-cam') === preset);
     });
 
-    // Reset Explode state on model swap
+    if (window.soundFX && window.soundFX.playClickSnap) {
+      window.soundFX.playClickSnap();
+    }
+  }
+
+  setCategory(catKey, immediate = false) {
+    if (!this.catalogData[catKey]) return;
+    this.activeCategory = catKey;
+    const data = this.catalogData[catKey];
+
+    // Reset frame to Front
+    this.setTurntableFrame(0);
+    this.turntableAngle = 0;
+    this.turntableTargetAngle = 0;
+
+    // Reset Explode Anatomy
     this.isExploded = false;
     const explodeBtn = document.getElementById('btn-explode-anatomy');
     if (explodeBtn) explodeBtn.textContent = 'EXPLODE 3D ANATOMY';
+    const pins = document.getElementById('wgsn-anatomy-pins');
+    if (pins) pins.style.display = 'none';
 
-    // Update UI Content Panels
-    this.updateShowroomUI(catData);
+    // Update UI Content
+    this.updateShowroomUI(data);
 
-    // Update 3D CAD Render Apparel Showcase
-    const categoryPhotos = {
-      denim: { src: "assets/renders_3d/denim_3d.jpg", tag: "3D CAD RENDER • 13.5oz RING-SPUN COMFORT STRETCH DENIM" },
-      shirt: { src: "assets/renders_3d/shirt_3d.jpg", tag: "3D CAD RENDER • TAILORED SOLID OXFORD CASUAL SHIRT" },
-      polo: { src: "assets/renders_3d/polo_3d.jpg", tag: "3D CAD RENDER • POLO-LICIOUS 320 GSM TEXTURED WAFFLE KNIT" },
-      jacket: { src: "assets/renders_3d/jacket_3d.jpg", tag: "3D CAD RENDER • ALL-TERRAIN UTILITY TRUCKER JACKET" }
-    };
-    const photoEl = document.getElementById("real-product-hero-img");
-    const tagEl = document.getElementById("real-product-hud-tag");
-    if (photoEl && categoryPhotos[categoryKey]) {
-      photoEl.src = categoryPhotos[categoryKey].src;
-      if (tagEl) tagEl.textContent = categoryPhotos[categoryKey].tag;
+    // Apply Default Wash
+    const defaultWash = Object.keys(data.washes)[0];
+    this.setWash(defaultWash, immediate);
+
+    if (!immediate && window.soundFX && window.soundFX.playClickSnap) {
+      window.soundFX.playClickSnap();
     }
-
-    // Apply default wash
-    this.setWash(Object.keys(catData.washes)[0], true);
   }
 
   setWash(washKey, immediate = false) {
     const catData = this.catalogData[this.activeCategory];
     if (!catData || !catData.washes[washKey]) return;
     this.activeWash = washKey;
-    const washConfig = catData.washes[washKey];
+    const wash = catData.washes[washKey];
 
-    const currentGarment = this.garments[this.activeCategory];
-    if (!currentGarment || !currentGarment.userData.material) return;
-
-    const mat = currentGarment.userData.material;
-    const targetColor = new THREE.Color(washConfig.color);
-
-    if (!immediate && typeof gsap !== 'undefined') {
-      gsap.to(mat.color, {
-        r: targetColor.r,
-        g: targetColor.g,
-        b: targetColor.b,
-        duration: 0.45,
-        ease: "power2.out"
-      });
-      gsap.to(mat, {
-        roughness: washConfig.roughness,
-        metalness: washConfig.metalness,
-        duration: 0.45
-      });
-      if (window.soundFX && window.soundFX.playClickSnap) {
-        window.soundFX.playClickSnap();
-      }
-    } else {
-      mat.color.copy(targetColor);
-      mat.roughness = washConfig.roughness;
-      mat.metalness = washConfig.metalness;
+    const imgEl = document.getElementById('wgsn-turntable-img');
+    if (imgEl && wash.filter) {
+      imgEl.style.filter = `drop-shadow(0 20px 45px rgba(0,0,0,0.55)) ${wash.filter}`;
     }
 
-    // Update 3D CAD Render Tone Grading for Selected Wash
-    const photoEl = document.getElementById("real-product-hero-img");
-    if (photoEl) {
-      const washFilters = {
-        raw: 'drop-shadow(0 20px 45px rgba(0,0,0,0.55)) brightness(1) contrast(1.05) saturate(1.1)',
-        sunken: 'drop-shadow(0 20px 45px rgba(0,0,0,0.55)) brightness(1.15) contrast(0.95) saturate(1.2) hue-rotate(8deg)',
-        acid: 'drop-shadow(0 20px 45px rgba(0,0,0,0.55)) brightness(1.25) contrast(1.12) saturate(0.65) hue-rotate(15deg)',
-        selvedge: 'drop-shadow(0 20px 45px rgba(0,0,0,0.55)) brightness(0.65) contrast(1.35) saturate(0.2)'
-      };
-      if (washFilters[washKey]) {
-        photoEl.style.filter = washFilters[washKey];
-      }
-    }
-
-    // Update Active Wash Pill UI
-    document.querySelectorAll('.showroom-wash-pill, .denim-wash-pill').forEach(pill => {
-      if (pill.getAttribute('data-wash') === washKey) {
-        pill.classList.add('active');
-      } else {
-        pill.classList.remove('active');
-      }
+    // Update Wash Pill UI
+    document.querySelectorAll('.denim-wash-pill').forEach(pill => {
+      pill.classList.toggle('active', pill.getAttribute('data-wash') === washKey);
     });
+
+    if (!immediate && window.soundFX && window.soundFX.playClickSnap) {
+      window.soundFX.playClickSnap();
+    }
   }
 
   toggleExplode() {
-    const currentGarment = this.garments[this.activeCategory];
-    if (!currentGarment || !currentGarment.userData.parts) return;
-
     this.isExploded = !this.isExploded;
-    const parts = currentGarment.userData.parts;
-
-    if (window.soundFX) {
-      if (this.isExploded && window.soundFX.playAnatomyExplode) {
-        window.soundFX.playAnatomyExplode();
-      } else if (!this.isExploded && window.soundFX.playAnatomyCollapse) {
-        window.soundFX.playAnatomyCollapse();
-      }
-    }
-
-    parts.forEach((p, idx) => {
-      const target = this.isExploded ? p.userData.explodedPos : p.userData.originPos;
-      if (typeof gsap !== 'undefined') {
-        gsap.to(p.position, {
-          x: target.x,
-          y: target.y,
-          z: target.z,
-          duration: 0.6,
-          delay: idx * 0.04,
-          ease: this.isExploded ? "power3.out" : "power2.inOut"
-        });
-      } else {
-        p.position.copy(target);
-      }
-    });
-
     const explodeBtn = document.getElementById('btn-explode-anatomy');
+    const pins = document.getElementById('wgsn-anatomy-pins');
+    const imgEl = document.getElementById('wgsn-turntable-img');
+
     if (explodeBtn) {
       explodeBtn.textContent = this.isExploded ? 'COLLAPSE 3D ANATOMY' : 'EXPLODE 3D ANATOMY';
     }
+
+    if (pins) {
+      pins.style.display = this.isExploded ? 'block' : 'none';
+    }
+
+    if (imgEl) {
+      imgEl.style.transform = this.isExploded ? 'scale(1.08)' : 'scale(1.0)';
+    }
+
+    if (window.soundFX) {
+      if (this.isExploded && window.soundFX.playAnatomyExplode) window.soundFX.playAnatomyExplode();
+      else if (!this.isExploded && window.soundFX.playAnatomyCollapse) window.soundFX.playAnatomyCollapse();
+    }
   }
 
-  // ==========================================================================
-  // DYNAMIC UI UPDATE
-  // ==========================================================================
   updateShowroomUI(data) {
     const titleEl = document.getElementById('showroom-garment-title');
     const subEl = document.getElementById('showroom-garment-sub');
@@ -1244,11 +699,13 @@ class TIGCShowroomEngine {
     const descEl = document.getElementById('showroom-garment-desc');
     const specsContainer = document.getElementById('showroom-specs-container');
     const washesContainer = document.getElementById('showroom-washes-container');
+    const tagEl = document.getElementById('real-product-hud-tag');
 
     if (titleEl) titleEl.textContent = data.title;
     if (subEl) subEl.textContent = data.subtitle;
     if (badgeEl) badgeEl.textContent = data.badge;
     if (descEl) descEl.textContent = data.description;
+    if (tagEl) tagEl.textContent = `WGSN 3D CLO RENDER • ${data.title.toUpperCase()}`;
 
     if (specsContainer) {
       specsContainer.innerHTML = data.specs.map(s => `
@@ -1260,17 +717,12 @@ class TIGCShowroomEngine {
     }
 
     if (washesContainer) {
-      washesContainer.innerHTML = Object.keys(data.washes).map(k => {
-        const hex = data.washes[k].color.toString(16).padStart(6, '0');
-        return `
-          <button class="denim-wash-pill ${k === this.activeWash ? 'active' : ''}" data-wash="${k}">
-            <span class="wash-swatch-dot" style="background: #${hex};"></span>
-            ${data.washes[k].name}
-          </button>
-        `;
-      }).join('');
+      washesContainer.innerHTML = Object.keys(data.washes).map(k => `
+        <button class="denim-wash-pill ${k === this.activeWash ? 'active' : ''}" data-wash="${k}">
+          ${data.washes[k].name.toUpperCase()}
+        </button>
+      `).join('');
 
-      // Wire click events to new wash buttons
       washesContainer.querySelectorAll('.denim-wash-pill').forEach(btn => {
         btn.addEventListener('click', () => {
           this.setWash(btn.getAttribute('data-wash'));
@@ -1278,156 +730,14 @@ class TIGCShowroomEngine {
       });
     }
 
-    // Update active category tab pills
+    // Update Category Pills
     document.querySelectorAll('.category-tab-pill').forEach(pill => {
-      if (pill.getAttribute('data-category') === this.activeCategory) {
-        pill.classList.add('active');
-      } else {
-        pill.classList.remove('active');
-      }
+      pill.classList.toggle('active', pill.getAttribute('data-category') === this.activeCategory);
     });
   }
 
   // ==========================================================================
-  // TIME-ADAPTIVE LIVE WALLPAPER & ATMOSPHERE ENGINE
-  // ==========================================================================
-  initTimeAdaptiveTheme() {
-    this.updateClock();
-    setInterval(() => this.updateClock(), 1000);
-
-    // Wire Time Theme Selector Buttons
-    const themeButtons = document.querySelectorAll('[data-time-mode]');
-    themeButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const mode = btn.getAttribute('data-time-mode');
-        if (mode === 'auto') {
-          this.autoTimeSync = true;
-          this.evaluateCurrentTime();
-        } else {
-          this.autoTimeSync = false;
-          this.applyTheme(mode);
-        }
-        themeButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        if (window.soundFX && window.soundFX.playClickSnap) {
-          window.soundFX.playClickSnap();
-        }
-      });
-    });
-
-    this.evaluateCurrentTime();
-  }
-
-  updateClock() {
-    const clockEl = document.getElementById('live-time-ticker');
-    if (!clockEl) return;
-    const now = new Date();
-    const hrs = String(now.getHours()).padStart(2, '0');
-    const mins = String(now.getMinutes()).padStart(2, '0');
-    const secs = String(now.getSeconds()).padStart(2, '0');
-    clockEl.textContent = `${hrs}:${mins}:${secs} IST`;
-
-    if (this.autoTimeSync && now.getSeconds() === 0) {
-      this.evaluateCurrentTime();
-    }
-  }
-
-  evaluateCurrentTime() {
-    if (!this.autoTimeSync) return;
-    const hour = new Date().getHours();
-    let theme = 'midnight';
-    if (hour >= 6 && hour < 17) {
-      theme = 'daylight';
-    } else if (hour >= 17 && hour < 20) {
-      theme = 'dusk';
-    } else {
-      theme = 'midnight';
-    }
-    this.applyTheme(theme);
-  }
-
-  applyTheme(themeName) {
-    this.timeTheme = themeName;
-    document.documentElement.setAttribute('data-time-theme', themeName);
-
-    const themeBadge = document.getElementById('active-theme-label');
-    if (themeBadge) {
-      if (themeName === 'daylight') themeBadge.innerHTML = '☼ DAYLIGHT MODE';
-      else if (themeName === 'dusk') themeBadge.innerHTML = '◑ DUSK / GOLDEN HOUR';
-      else themeBadge.innerHTML = '☾ MIDNIGHT OBSIDIAN';
-    }
-
-    // Update Three.js lighting atmosphere (Balanced Luxury Studio)
-    if (this.studioAmbient && this.studioKey && this.studioFill) {
-      if (themeName === 'daylight') {
-        this.studioAmbient.intensity = 0.52;
-        this.studioKey.intensity = 1.30;
-        this.studioKey.color.setHex(0xfffaf0);
-        this.studioFill.intensity = 0.55;
-        this.studioFill.color.setHex(0xb0c8f8);
-        if (this.heroAmbientLight) this.heroAmbientLight.intensity = 0.55;
-      } else if (themeName === 'dusk') {
-        this.studioAmbient.intensity = 0.44;
-        this.studioKey.intensity = 1.25;
-        this.studioKey.color.setHex(0xff9944); // Sunset Amber
-        this.studioFill.intensity = 0.60;
-        this.studioFill.color.setHex(0x9d4edd); // Twilight Violet
-        if (this.heroAmbientLight) this.heroAmbientLight.intensity = 0.50;
-      } else {
-        // Midnight Obsidian
-        this.studioAmbient.intensity = 0.40;
-        this.studioKey.intensity = 1.20;
-        this.studioKey.color.setHex(0xffffff);
-        this.studioFill.intensity = 0.65;
-        this.studioFill.color.setHex(0x5271ff); // Deep Indigo
-        if (this.heroAmbientLight) this.heroAmbientLight.intensity = 0.45;
-      }
-    }
-  }
-
-  // ==========================================================================
-  // CAMERA PRESETS (Showroom 3D Multi-Angle Inspection)
-  // ==========================================================================
-  setCameraPreset(preset) {
-    let rotX = 0.08;
-    let rotY = 0.35;
-    if (preset === 'front') {
-      rotX = 0.05;
-      rotY = 0;
-    } else if (preset === 'three-quarter') {
-      rotX = 0.12;
-      rotY = 0.65;
-    } else if (preset === 'side') {
-      rotX = 0.05;
-      rotY = Math.PI / 2;
-    } else if (preset === 'back') {
-      rotX = 0.05;
-      rotY = Math.PI;
-    }
-
-    if (typeof gsap !== 'undefined') {
-      gsap.to(this.drag, {
-        targetRotX: rotX,
-        targetRotY: rotY,
-        duration: 0.75,
-        ease: "power2.out"
-      });
-    } else {
-      this.drag.targetRotX = rotX;
-      this.drag.targetRotY = rotY;
-    }
-
-    document.querySelectorAll('.cam-preset-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.getAttribute('data-cam') === preset);
-    });
-
-    if (window.soundFX && window.soundFX.playClickSnap) {
-      window.soundFX.playClickSnap();
-    }
-  }
-
-  // ==========================================================================
-  // PLAYABLE 3D JOURNEY RUNNER ENGINE (Chrome Dino / Flappy Bird in 3D)
+  // PLAYABLE 3D SIDE-SCROLLER JOURNEY RUNNER ENGINE (Left to Right, Dino/Flappy)
   // ==========================================================================
   startJourneyGame() {
     this.game.mode = 'playing';
@@ -1435,57 +745,66 @@ class TIGCShowroomEngine {
     this.game.units = 10000;
     this.game.currentYearIndex = 0;
     this.game.lap = 1;
+    this.game.playerX = -5.2; // Anchored on the left
     this.game.playerY = 0;
     this.game.playerVelY = 0;
     this.game.isJumping = false;
+    this.game.isMilestonePaused = false;
     this.game.obstacleSpawnTimer = 0;
     this.game.milestoneSpawnTimer = 0;
 
-    // Show HUD and hide overlay modals
+    // Show Game HUD Top Bar
     const hudTop = document.getElementById('game-hud-top');
     if (hudTop) hudTop.style.display = 'flex';
     const overOverlay = document.getElementById('game-over-overlay');
     if (overOverlay) overOverlay.style.display = 'none';
-    const toast = document.getElementById('game-milestone-toast');
-    if (toast) toast.style.display = 'none';
+    const milestoneModal = document.getElementById('game-milestone-modal');
+    if (milestoneModal) milestoneModal.style.display = 'none';
 
-    // Update button text
+    // Update Dock Button Text
     const label = document.getElementById('game-btn-label');
     if (label) label.textContent = 'EXIT TO 3D ORBIT ↺';
 
-    // Enable track grid
-    if (this.game.trackGrid) this.game.trackGrid.visible = true;
+    // Show Horizontal Side-Scroller Runway Track
+    if (this.game.trackGroup) this.game.trackGroup.visible = true;
+    if (this.heroOrbitRing) this.heroOrbitRing.visible = false;
 
-    // Reset player position and scale
+    // Position Player on Left Side in Side Profile
     if (this.heroMonogram) {
-      this.heroMonogram.scale.set(0.68, 0.68, 0.68);
-      this.heroMonogram.position.set(0, -1.8, 2);
-      this.heroMonogram.rotation.set(0, 0, 0);
+      this.heroMonogram.scale.set(0.55, 0.55, 0.55);
+      this.heroMonogram.position.set(this.game.playerX, -1.8, 0);
+      this.heroMonogram.rotation.set(0, 0.35, 0);
     }
 
-    // Dynamic runner perspective camera
+    // Set Camera for Side-Scroller View (Side perspective looking rightwards)
     if (this.heroCamera) {
       if (typeof gsap !== 'undefined') {
-        gsap.to(this.heroCamera.position, { x: 0, y: 1.6, z: 16, duration: 0.8, ease: "power2.out" });
+        gsap.to(this.heroCamera.position, { x: 0, y: 0.2, z: 18, duration: 0.8, ease: "power2.out" });
       } else {
-        this.heroCamera.position.set(0, 1.6, 16);
+        this.heroCamera.position.set(0, 0.2, 18);
       }
     }
 
     this.clearGameObjects();
     this.updateGameHUD();
 
-    // Spawn first milestone gate ahead
-    this.spawnGameMilestone(this.game.years[0]);
+    // Spawn first milestone ahead on the right
+    this.spawnGameMilestone(this.game.years[0], 18);
 
     if (window.soundFX && window.soundFX.playMilestoneChime) {
       window.soundFX.playMilestoneChime();
     }
-    this.showMilestoneToast(this.game.years[0]);
   }
 
   jumpHero() {
     if (this.game.mode !== 'playing') return;
+
+    // If game is paused at a milestone, jumping or tapping immediately resumes the run!
+    if (this.game.isMilestonePaused) {
+      this.resumeFromMilestone();
+      return;
+    }
+
     if (this.game.isJumping) return;
     this.game.isJumping = true;
     this.game.playerVelY = this.game.jumpForce;
@@ -1498,60 +817,63 @@ class TIGCShowroomEngine {
     if (!this.game.worldGroup) return;
     const obsGroup = new THREE.Group();
 
-    // Monolith barrier representing legacy supply chain bottleneck / inventory trap
-    const barrierGeo = new THREE.BoxGeometry(2.4, 1.6, 0.5);
+    // Dark titanium bottleneck monolith
+    const barrierGeo = new THREE.BoxGeometry(1.6, 2.2, 1.2);
     const barrierMat = new THREE.MeshStandardMaterial({
-      color: 0x111625,
+      color: 0x0f172a,
       roughness: 0.35,
-      metalness: 0.8
+      metalness: 0.85
     });
     const barrier = new THREE.Mesh(barrierGeo, barrierMat);
+    barrier.position.y = 1.1;
     obsGroup.add(barrier);
 
-    // Glowing crimson hazard stripes on top
-    const hazardGeo = new THREE.BoxGeometry(2.44, 0.22, 0.54);
-    const hazardMat = new THREE.MeshStandardMaterial({
+    // Glowing Crimson Warning Stripe
+    const stripeGeo = new THREE.BoxGeometry(1.65, 0.25, 1.25);
+    const stripeMat = new THREE.MeshStandardMaterial({
       color: 0xff1e27,
       emissive: 0xff0011,
-      emissiveIntensity: 0.85
+      emissiveIntensity: 0.95
     });
-    const hazard = new THREE.Mesh(hazardGeo, hazardMat);
-    hazard.position.y = 0.8;
-    obsGroup.add(hazard);
+    const stripe = new THREE.Mesh(stripeGeo, stripeMat);
+    stripe.position.y = 2.1;
+    obsGroup.add(stripe);
 
-    obsGroup.position.set(0, -2.4, -65);
+    // Spawns on the far right (x = 20) and travels left toward the player
+    obsGroup.position.set(20, -3.2, 0);
     this.game.worldGroup.add(obsGroup);
     this.game.obstacles.push(obsGroup);
   }
 
-  spawnGameMilestone(yearData) {
+  spawnGameMilestone(yearData, startX = 26) {
     if (!this.game.worldGroup) return;
     const msGroup = new THREE.Group();
 
-    // Archway portal ring
-    const archGeo = new THREE.TorusGeometry(3.2, 0.14, 16, 48);
-    archGeo.rotateX(0);
+    // Golden Triumphal Archway Portal
+    const archGeo = new THREE.TorusGeometry(3.0, 0.14, 16, 48);
+    archGeo.rotateY(Math.PI / 2);
     const archMat = new THREE.MeshStandardMaterial({
       color: 0xffd700,
-      emissive: 0xff9900,
+      emissive: 0xffa500,
       emissiveIntensity: 0.9,
       roughness: 0.2,
       metalness: 0.9
     });
     const arch = new THREE.Mesh(archGeo, archMat);
+    arch.position.y = 2.2;
     msGroup.add(arch);
 
-    // Glowing portal light beam
-    const beamGeo = new THREE.CylinderGeometry(0.08, 0.08, 5.8, 16);
-    const beamMat = new THREE.MeshBasicMaterial({ color: 0xff3b30, transparent: true, opacity: 0.7 });
-    const beamL = new THREE.Mesh(beamGeo, beamMat);
-    beamL.position.set(-3.2, 0, 0);
-    msGroup.add(beamL);
-    const beamR = new THREE.Mesh(beamGeo, beamMat);
-    beamR.position.set(3.2, 0, 0);
-    msGroup.add(beamR);
+    // Golden Gate Pillars
+    const pillarGeo = new THREE.CylinderGeometry(0.12, 0.12, 5.2, 16);
+    const pillarMat = new THREE.MeshBasicMaterial({ color: 0xffcc00 });
+    const p1 = new THREE.Mesh(pillarGeo, pillarMat);
+    p1.position.set(0, 1.0, 3.0);
+    msGroup.add(p1);
+    const p2 = new THREE.Mesh(pillarGeo, pillarMat);
+    p2.position.set(0, 1.0, -3.0);
+    msGroup.add(p2);
 
-    msGroup.position.set(0, -1.0, -75);
+    msGroup.position.set(startX, -3.2, 0);
     msGroup.userData = { yearData: yearData, passed: false };
     this.game.worldGroup.add(msGroup);
     this.game.milestones.push(msGroup);
@@ -1559,15 +881,54 @@ class TIGCShowroomEngine {
 
   clearGameObjects() {
     if (!this.game.worldGroup) return;
-    this.game.obstacles.forEach(obs => {
-      this.game.worldGroup.remove(obs);
-    });
+    this.game.obstacles.forEach(obs => this.game.worldGroup.remove(obs));
     this.game.obstacles = [];
-
-    this.game.milestones.forEach(ms => {
-      this.game.worldGroup.remove(ms);
-    });
+    this.game.milestones.forEach(ms => this.game.worldGroup.remove(ms));
     this.game.milestones = [];
+  }
+
+  showMilestoneModal(yearData) {
+    this.game.isMilestonePaused = true;
+
+    const modal = document.getElementById('game-milestone-modal');
+    const yearEl = document.getElementById('milestone-modal-year');
+    const titleEl = document.getElementById('milestone-modal-title');
+    const descEl = document.getElementById('milestone-modal-desc');
+    const unitsEl = document.getElementById('milestone-modal-units');
+    const hlEl = document.getElementById('milestone-modal-highlight');
+    const countdownEl = document.getElementById('milestone-countdown');
+
+    if (yearEl) yearEl.textContent = yearData.year;
+    if (titleEl) titleEl.textContent = yearData.title;
+    if (descEl) descEl.textContent = yearData.desc;
+    if (unitsEl) unitsEl.textContent = `+${yearData.unitsGain.toLocaleString()} Units`;
+    if (hlEl) hlEl.textContent = yearData.highlight;
+
+    if (modal) modal.style.display = 'flex';
+
+    // 7-second countdown before auto-resume (gives ample time to read)
+    this.game.milestoneCountdown = 7;
+    if (countdownEl) countdownEl.textContent = `(Space / Tap or ${this.game.milestoneCountdown}s)`;
+
+    if (this.game.milestoneTimerId) clearInterval(this.game.milestoneTimerId);
+    this.game.milestoneTimerId = setInterval(() => {
+      this.game.milestoneCountdown -= 1;
+      if (countdownEl) countdownEl.textContent = `(Space / Tap or ${this.game.milestoneCountdown}s)`;
+      if (this.game.milestoneCountdown <= 0) {
+        this.resumeFromMilestone();
+      }
+    }, 1000);
+  }
+
+  resumeFromMilestone() {
+    if (this.game.milestoneTimerId) {
+      clearInterval(this.game.milestoneTimerId);
+      this.game.milestoneTimerId = null;
+    }
+    const modal = document.getElementById('game-milestone-modal');
+    if (modal) modal.style.display = 'none';
+
+    this.game.isMilestonePaused = false;
   }
 
   gameOver() {
@@ -1600,15 +961,22 @@ class TIGCShowroomEngine {
     if (hudTop) hudTop.style.display = 'none';
     const overOverlay = document.getElementById('game-over-overlay');
     if (overOverlay) overOverlay.style.display = 'none';
-    const toast = document.getElementById('game-milestone-toast');
-    if (toast) toast.style.display = 'none';
+    const milestoneModal = document.getElementById('game-milestone-modal');
+    if (milestoneModal) milestoneModal.style.display = 'none';
 
-    if (this.game.trackGrid) this.game.trackGrid.visible = false;
+    if (this.game.milestoneTimerId) {
+      clearInterval(this.game.milestoneTimerId);
+      this.game.milestoneTimerId = null;
+    }
+
+    if (this.game.trackGroup) this.game.trackGroup.visible = false;
+    if (this.heroOrbitRing) this.heroOrbitRing.visible = true;
     this.clearGameObjects();
 
     if (this.heroMonogram) {
       this.heroMonogram.scale.set(1, 1, 1);
       this.heroMonogram.position.set(0, 0, 0);
+      this.heroMonogram.rotation.set(0, 0, 0);
     }
 
     if (this.heroCamera) {
@@ -1623,228 +991,153 @@ class TIGCShowroomEngine {
     if (label) label.textContent = 'PLAY JOURNEY RUN (SPACE TO JUMP)';
   }
 
-  showMilestoneToast(yearData) {
-    const toast = document.getElementById('game-milestone-toast');
-    const titleEl = document.getElementById('game-toast-title');
-    const subEl = document.getElementById('game-toast-sub');
-    if (!toast || !titleEl || !subEl) return;
-
-    titleEl.textContent = `${yearData.year}: ${yearData.title.toUpperCase()}!`;
-    subEl.textContent = `${yearData.desc} • +${(yearData.unitsGain).toLocaleString()} Units`;
-
-    toast.style.display = 'block';
-    toast.style.animation = 'none';
-    void toast.offsetWidth;
-    toast.style.animation = 'toastPopIn 0.4s ease-out forwards';
-
-    if (this.toastTimeout) clearTimeout(this.toastTimeout);
-    this.toastTimeout = setTimeout(() => {
-      if (toast) toast.style.display = 'none';
-    }, 3400);
-  }
-
   updateGameHUD() {
     const yearEl = document.getElementById('game-disp-year');
     const unitsEl = document.getElementById('game-disp-units');
     const scoreEl = document.getElementById('game-disp-score');
 
-    if (yearEl) yearEl.textContent = this.game.years[this.game.currentYearIndex].year;
+    if (yearEl) yearEl.textContent = `YEAR: ${this.game.years[this.game.currentYearIndex].year}`;
     if (unitsEl) unitsEl.textContent = Math.floor(this.game.units).toLocaleString();
     if (scoreEl) scoreEl.textContent = Math.floor(this.game.score);
   }
 
   // ==========================================================================
-  // EVENT BINDINGS (Drag, Hover, Sound, Kinetic Rotation)
+  // DYNAMIC TIME-ADAPTIVE ATMOSPHERE (Apple macOS / iOS Live Wallpaper)
+  // ==========================================================================
+  initTimeAdaptiveTheme() {
+    this.updateClock();
+    setInterval(() => this.updateClock(), 1000);
+
+    const themeButtons = document.querySelectorAll('[data-time-mode]');
+    themeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const mode = btn.getAttribute('data-time-mode');
+        if (mode === 'auto') {
+          this.autoTimeSync = true;
+          this.evaluateCurrentTime();
+        } else {
+          this.autoTimeSync = false;
+          this.applyTheme(mode);
+        }
+        themeButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+
+    this.evaluateCurrentTime();
+  }
+
+  updateClock() {
+    const clockEl = document.getElementById('live-time-ticker');
+    if (!clockEl) return;
+    const now = new Date();
+    const hrs = String(now.getHours()).padStart(2, '0');
+    const mins = String(now.getMinutes()).padStart(2, '0');
+    const secs = String(now.getSeconds()).padStart(2, '0');
+    clockEl.textContent = `${hrs}:${mins}:${secs} IST`;
+
+    if (this.autoTimeSync && now.getSeconds() === 0) {
+      this.evaluateCurrentTime();
+    }
+  }
+
+  evaluateCurrentTime() {
+    if (!this.autoTimeSync) return;
+    const hour = new Date().getHours();
+    let theme = 'midnight';
+    if (hour >= 6 && hour < 17) theme = 'daylight';
+    else if (hour >= 17 && hour < 20) theme = 'dusk';
+    else theme = 'midnight';
+    this.applyTheme(theme);
+  }
+
+  applyTheme(themeName) {
+    this.timeTheme = themeName;
+    document.documentElement.setAttribute('data-time-theme', themeName);
+
+    if (this.studioAmbient && this.studioKey && this.studioFill) {
+      if (themeName === 'daylight') {
+        this.studioAmbient.intensity = 0.55;
+        this.studioKey.intensity = 1.30;
+        this.studioKey.color.setHex(0xfffaf0);
+        this.studioFill.intensity = 0.55;
+        this.studioFill.color.setHex(0xb0c8f8);
+        if (this.heroAmbientLight) this.heroAmbientLight.intensity = 0.55;
+      } else if (themeName === 'dusk') {
+        this.studioAmbient.intensity = 0.44;
+        this.studioKey.intensity = 1.25;
+        this.studioKey.color.setHex(0xff9944);
+        this.studioFill.intensity = 0.60;
+        this.studioFill.color.setHex(0x9d4edd);
+        if (this.heroAmbientLight) this.heroAmbientLight.intensity = 0.50;
+      } else {
+        this.studioAmbient.intensity = 0.40;
+        this.studioKey.intensity = 1.20;
+        this.studioKey.color.setHex(0xffffff);
+        this.studioFill.intensity = 0.65;
+        this.studioFill.color.setHex(0x5271ff);
+        if (this.heroAmbientLight) this.heroAmbientLight.intensity = 0.45;
+      }
+    }
+  }
+
+  // ==========================================================================
+  // EVENT BINDINGS (Consolidated Mouse, Touch, Keyboard & Responsive Controls)
   // ==========================================================================
   bindEvents() {
-    // 0. 3D Perspective Tilt on CAD Apparel Blueprint Stage
-    const showroomViewport = document.getElementById("showroom-viewport") || document.getElementById("showroom-photo-stage");
-    const photoCard = document.getElementById("real-product-card-3d");
-
-    if (showroomViewport && photoCard) {
-      showroomViewport.addEventListener("mousemove", (e) => {
-        const rect = showroomViewport.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        const rotY = (x / (rect.width / 2)) * 14;
-        const rotX = -(y / (rect.height / 2)) * 14;
-        photoCard.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(1.04, 1.04, 1.04)`;
-      });
-
-      showroomViewport.addEventListener("mouseleave", () => {
-        photoCard.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
-      });
-    }
-
-    // 0B. Hero Kinetic G-Unit Monogram Interactive Drag & Spatial Audio Tones
-    if (this.heroContainer) {
-      this.heroContainer.addEventListener('mousedown', (e) => {
-        this.heroDrag.isDragging = true;
-        this.heroDrag.lastX = e.clientX;
-        this.heroDrag.lastY = e.clientY;
-        if (window.soundFX && window.soundFX.playEmblemTone) {
-          window.soundFX.playEmblemTone(0.65);
-        }
-      });
-
-      window.addEventListener('mouseup', () => {
-        this.heroDrag.isDragging = false;
-      });
-
-      window.addEventListener('mousemove', (e) => {
-        if (!this.heroDrag.isDragging) return;
-        const deltaX = e.clientX - this.heroDrag.lastX;
-        const deltaY = e.clientY - this.heroDrag.lastY;
-        this.heroDrag.lastX = e.clientX;
-        this.heroDrag.lastY = e.clientY;
-
-        this.heroDrag.targetRotY += deltaX * 0.01;
-        this.heroDrag.targetRotX += deltaY * 0.008;
-
-        const velocity = Math.hypot(deltaX, deltaY);
-        if (window.soundFX && window.soundFX.playEmblemTone && velocity > 2) {
-          window.soundFX.playEmblemTone(Math.min(1.0, velocity * 0.04));
-        }
-      });
-
-      this.heroContainer.addEventListener('mouseenter', () => {
-        if (window.soundFX && window.soundFX.playHoverTick) {
-          window.soundFX.playHoverTick();
-        }
-        if (window.soundFX && window.soundFX.playEmblemTone) {
-          window.soundFX.playEmblemTone(0.35);
-        }
-      });
-
-      this.heroContainer.addEventListener('touchstart', (e) => {
-        if (e.touches.length === 1) {
-          this.heroDrag.isDragging = true;
-          this.heroDrag.lastX = e.touches[0].clientX;
-          this.heroDrag.lastY = e.touches[0].clientY;
-          if (window.soundFX && window.soundFX.playEmblemTone) {
-            window.soundFX.playEmblemTone(0.65);
-          }
-        }
-      }, { passive: true });
-
-      window.addEventListener('touchend', () => {
-        this.heroDrag.isDragging = false;
-      });
-
-      window.addEventListener('touchmove', (e) => {
-        if (!this.heroDrag.isDragging || e.touches.length !== 1) return;
-        const deltaX = e.touches[0].clientX - this.heroDrag.lastX;
-        const deltaY = e.touches[0].clientY - this.heroDrag.lastY;
-        this.heroDrag.lastX = e.touches[0].clientX;
-        this.heroDrag.lastY = e.touches[0].clientY;
-
-        this.heroDrag.targetRotY += deltaX * 0.012;
-        this.heroDrag.targetRotX += deltaY * 0.01;
-
-        const velocity = Math.hypot(deltaX, deltaY);
-        if (window.soundFX && window.soundFX.playEmblemTone && velocity > 2) {
-          window.soundFX.playEmblemTone(Math.min(1.0, velocity * 0.04));
-        }
-      }, { passive: true });
-    }
-    // 1. Category Switcher Tabs
-    document.querySelectorAll('.category-tab-pill').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const cat = btn.getAttribute('data-category');
-        if (cat) this.setCategory(cat);
-      });
-    });
-
-    // 2. Explode Anatomy Button
-    const explodeBtn = document.getElementById('btn-explode-anatomy');
-    if (explodeBtn) {
-      explodeBtn.addEventListener('click', () => this.toggleExplode());
-    }
-
-    // 4. Mouse Move Tracking for Parallax
-    window.addEventListener('mousemove', (e) => {
-      this.mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-      this.mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-    });
-
-    // 5. 3D Showroom Drag to Rotate with Foley Velocity
-    if (this.showroomContainer) {
-      this.showroomContainer.addEventListener('mousedown', (e) => {
-        this.drag.isDragging = true;
-        this.drag.lastX = e.clientX;
-        this.drag.lastY = e.clientY;
+    // 1. WGSN 3D Turntable Drag & Horizontal Swipe (Mouse & Touch)
+    const turntableWrap = document.getElementById('wgsn-turntable-wrapper');
+    if (turntableWrap) {
+      const startDrag = (clientX) => {
+        this.isTurntableDragging = true;
+        this.turntableStartX = clientX;
+        turntableWrap.style.cursor = 'grabbing';
         if (window.soundFX && window.soundFX.startRotationLoop) {
           window.soundFX.startRotationLoop();
         }
-      });
+      };
 
-      window.addEventListener('mouseup', () => {
-        if (this.drag.isDragging) {
-          this.drag.isDragging = false;
-          if (window.soundFX && window.soundFX.stopRotationLoop) {
-            window.soundFX.stopRotationLoop();
-          }
-        }
-      });
+      const moveDrag = (clientX) => {
+        if (!this.isTurntableDragging) return;
+        const dx = clientX - this.turntableStartX;
+        this.turntableStartX = clientX;
 
-      window.addEventListener('mousemove', (e) => {
-        if (!this.drag.isDragging) return;
-        const deltaX = e.clientX - this.drag.lastX;
-        const deltaY = e.clientY - this.drag.lastY;
-        this.drag.lastX = e.clientX;
-        this.drag.lastY = e.clientY;
+        // Scrub frames smoothly through 360 degrees
+        this.turntableAngle = (this.turntableAngle - dx * 0.014 + Math.PI * 2) % (Math.PI * 2);
+        const frameIdx = Math.floor((this.turntableAngle / (Math.PI * 2)) * 36) % 36;
+        this.setTurntableFrame(frameIdx);
 
-        this.drag.targetRotY += deltaX * 0.008;
-        this.drag.targetRotX += deltaY * 0.006;
-        this.drag.targetRotX = Math.max(-0.6, Math.min(0.6, this.drag.targetRotX));
-
-        // Update velocity for audio modulation
-        const velocity = Math.hypot(deltaX, deltaY);
         if (window.soundFX && window.soundFX.updateRotationSpeed) {
-          window.soundFX.updateRotationSpeed(velocity * 0.04);
+          window.soundFX.updateRotationSpeed(Math.abs(dx) * 0.08);
         }
-      });
+      };
 
-      // Touch Drag Support for Mobile
-      this.showroomContainer.addEventListener('touchstart', (e) => {
-        if (e.touches.length === 1) {
-          this.drag.isDragging = true;
-          this.drag.lastX = e.touches[0].clientX;
-          this.drag.lastY = e.touches[0].clientY;
-          if (window.soundFX && window.soundFX.startRotationLoop) {
-            window.soundFX.startRotationLoop();
-          }
-        }
-      }, { passive: true });
-
-      window.addEventListener('touchend', () => {
-        if (this.drag.isDragging) {
-          this.drag.isDragging = false;
+      const endDrag = () => {
+        if (this.isTurntableDragging) {
+          this.isTurntableDragging = false;
+          turntableWrap.style.cursor = 'grab';
           if (window.soundFX && window.soundFX.stopRotationLoop) {
             window.soundFX.stopRotationLoop();
           }
         }
-      });
+      };
 
+      // Mouse
+      turntableWrap.addEventListener('mousedown', (e) => startDrag(e.clientX));
+      window.addEventListener('mousemove', (e) => moveDrag(e.clientX));
+      window.addEventListener('mouseup', endDrag);
+
+      // Touch (Pan-y allows page to scroll vertically while dragging rotates 3D horizontally)
+      turntableWrap.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) startDrag(e.touches[0].clientX);
+      }, { passive: true });
       window.addEventListener('touchmove', (e) => {
-        if (!this.drag.isDragging || e.touches.length !== 1) return;
-        const deltaX = e.touches[0].clientX - this.drag.lastX;
-        const deltaY = e.touches[0].clientY - this.drag.lastY;
-        this.drag.lastX = e.touches[0].clientX;
-        this.drag.lastY = e.touches[0].clientY;
-
-        this.drag.targetRotY += deltaX * 0.01;
-        this.drag.targetRotX += deltaY * 0.008;
-        this.drag.targetRotX = Math.max(-0.6, Math.min(0.6, this.drag.targetRotX));
-
-        const velocity = Math.hypot(deltaX, deltaY);
-        if (window.soundFX && window.soundFX.updateRotationSpeed) {
-          window.soundFX.updateRotationSpeed(velocity * 0.05);
-        }
+        if (this.isTurntableDragging && e.touches.length === 1) moveDrag(e.touches[0].clientX);
       }, { passive: true });
+      window.addEventListener('touchend', endDrag);
     }
 
-    // 6. Camera Preset Buttons (Front, 3/4 View, Side, Back)
+    // 2. Camera Preset Angle Buttons
     document.querySelectorAll('.cam-preset-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -1853,7 +1146,67 @@ class TIGCShowroomEngine {
       });
     });
 
-    // 7. Playable 3D Journey Runner Controls
+    // 3. Category Switcher Tabs (Denim, Shirt, Polo, Jacket, Carpenter)
+    document.querySelectorAll('.category-tab-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cat = btn.getAttribute('data-category');
+        if (cat) this.setCategory(cat);
+      });
+    });
+
+    // 4. Explode Anatomy Button
+    const explodeBtn = document.getElementById('btn-explode-anatomy');
+    if (explodeBtn) {
+      explodeBtn.addEventListener('click', () => this.toggleExplode());
+    }
+
+    // 5. Hero Canvas Interactions (Jump in Game Mode / Orbit in 3D View)
+    if (this.heroContainer) {
+      // Mouse down / Touch start on Hero Stage
+      const handleHeroAction = (e, clientX, clientY) => {
+        if (this.game.mode === 'playing') {
+          e.preventDefault();
+          this.jumpHero();
+          return;
+        }
+        this.heroDrag.isDragging = true;
+        this.heroDrag.lastX = clientX;
+        this.heroDrag.lastY = clientY;
+        if (window.soundFX && window.soundFX.playEmblemTone) {
+          window.soundFX.playEmblemTone(0.65);
+        }
+      };
+
+      this.heroContainer.addEventListener('mousedown', (e) => handleHeroAction(e, e.clientX, e.clientY));
+      this.heroContainer.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) handleHeroAction(e, e.touches[0].clientX, e.touches[0].clientY);
+      }, { passive: false });
+
+      window.addEventListener('mouseup', () => { this.heroDrag.isDragging = false; });
+      window.addEventListener('touchend', () => { this.heroDrag.isDragging = false; });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!this.heroDrag.isDragging || this.game.mode === 'playing') return;
+        const dx = e.clientX - this.heroDrag.lastX;
+        const dy = e.clientY - this.heroDrag.lastY;
+        this.heroDrag.lastX = e.clientX;
+        this.heroDrag.lastY = e.clientY;
+        this.heroDrag.targetRotY += dx * 0.01;
+        this.heroDrag.targetRotX += dy * 0.008;
+      });
+
+      window.addEventListener('touchmove', (e) => {
+        if (!this.heroDrag.isDragging || this.game.mode === 'playing' || e.touches.length !== 1) return;
+        const dx = e.touches[0].clientX - this.heroDrag.lastX;
+        const dy = e.touches[0].clientY - this.heroDrag.lastY;
+        this.heroDrag.lastX = e.touches[0].clientX;
+        this.heroDrag.lastY = e.touches[0].clientY;
+        this.heroDrag.targetRotY += dx * 0.012;
+        this.heroDrag.targetRotX += dy * 0.01;
+      }, { passive: true });
+    }
+
+    // 6. Playable Game Control Buttons
     const gameToggleBtn = document.getElementById('btn-toggle-journey-game');
     if (gameToggleBtn) {
       gameToggleBtn.addEventListener('click', (e) => {
@@ -1882,29 +1235,31 @@ class TIGCShowroomEngine {
       });
     }
 
-    // Spacebar Jump Hop & Restart
+    const continueBtn = document.getElementById('btn-milestone-continue');
+    if (continueBtn) {
+      continueBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.resumeFromMilestone();
+      });
+    }
+
+    // Spacebar Jump & Continue
     window.addEventListener('keydown', (e) => {
       if (e.code === 'Space' && !e.target.matches('input, textarea')) {
+        e.preventDefault();
         if (this.game.mode === 'playing') {
-          e.preventDefault();
-          this.jumpHero();
+          if (this.game.isMilestonePaused) {
+            this.resumeFromMilestone();
+          } else {
+            this.jumpHero();
+          }
         } else if (this.game.mode === 'gameover') {
-          e.preventDefault();
           this.restartJourneyGame();
         }
       }
     });
 
-    // Tap / Click on Canvas to Jump during Game Mode
-    if (this.heroContainer) {
-      this.heroContainer.addEventListener('click', () => {
-        if (this.game.mode === 'playing') {
-          this.jumpHero();
-        }
-      });
-    }
-
-    // 8. Window Resize
+    // 7. Window Resize
     window.addEventListener('resize', () => {
       if (this.heroContainer && this.heroRenderer && this.heroCamera) {
         const w = this.heroContainer.clientWidth;
@@ -1931,95 +1286,93 @@ class TIGCShowroomEngine {
 
     const t = performance.now() * 0.001;
 
-    // 1. Hero Monogram / 3D Journey Game Mode
+    // 1. Hero Stage: Playable Side-Scroller Runner or Free 3D Orbit
     if (this.game.mode === 'playing') {
-      // Step Game Perspective Grid
-      if (this.game.trackGrid) {
-        this.game.trackGrid.position.z = (this.game.trackGrid.position.z + this.game.speed) % 10;
-      }
-
-      // Player jump & gravity
-      if (this.game.isJumping) {
-        this.game.playerVelY += this.game.gravity;
-        this.game.playerY += this.game.playerVelY;
-        if (this.game.playerY <= 0) {
-          this.game.playerY = 0;
-          this.game.playerVelY = 0;
-          this.game.isJumping = false;
-        }
-      }
-
-      const strideBounce = this.game.isJumping ? 0 : Math.sin(t * 14) * 0.12;
-      if (this.heroMonogram) {
-        this.heroMonogram.position.y = -1.8 + this.game.playerY + strideBounce;
-        this.heroMonogram.rotation.x = this.game.playerVelY * 1.8;
-        this.heroMonogram.rotation.y = Math.sin(t * 4) * 0.15;
-        this.heroMonogram.rotation.z = Math.sin(t * 8) * 0.04;
-      }
-
-      // Obstacle Spawner (Legacy bottlenecks to hop over)
-      this.game.obstacleSpawnTimer += 1;
-      if (this.game.obstacleSpawnTimer > 135) {
-        this.spawnGameObstacle();
-        this.game.obstacleSpawnTimer = 0;
-      }
-
-      // Milestone Portal Spawner (Historic Years 2012 -> 2027)
-      this.game.milestoneSpawnTimer += 1;
-      if (this.game.milestoneSpawnTimer > 310) {
-        const nextIdx = (this.game.currentYearIndex + 1) % this.game.years.length;
-        this.spawnGameMilestone(this.game.years[nextIdx]);
-        this.game.milestoneSpawnTimer = 0;
-      }
-
-      // Move & check collision for obstacles
-      for (let i = this.game.obstacles.length - 1; i >= 0; i--) {
-        const obs = this.game.obstacles[i];
-        obs.position.z += this.game.speed;
-
-        // Collision box when obstacle reaches player (player at z = 2)
-        if (obs.position.z > 0.8 && obs.position.z < 2.8) {
-          if (this.game.playerY < 1.05) {
-            this.gameOver();
-            return;
+      if (!this.game.isMilestonePaused) {
+        // Player Jump Physics
+        if (this.game.isJumping) {
+          this.game.playerVelY += this.game.gravity;
+          this.game.playerY += this.game.playerVelY;
+          if (this.game.playerY <= 0) {
+            this.game.playerY = 0;
+            this.game.playerVelY = 0;
+            this.game.isJumping = false;
           }
         }
 
-        if (obs.position.z > 14) {
-          this.game.worldGroup.remove(obs);
-          this.game.obstacles.splice(i, 1);
+        // Gallop running stride bobbing
+        const strideBounce = this.game.isJumping ? 0 : Math.sin(t * 14) * 0.12;
+        if (this.heroMonogram) {
+          this.heroMonogram.position.set(this.game.playerX, -1.8 + this.game.playerY + strideBounce, 0);
+          this.heroMonogram.rotation.z = this.game.isJumping ? this.game.playerVelY * 2.2 : Math.sin(t * 12) * 0.08;
+          this.heroMonogram.rotation.y = 0.35 + Math.sin(t * 4) * 0.1;
         }
-      }
 
-      // Move & trigger milestones
-      for (let j = this.game.milestones.length - 1; j >= 0; j--) {
-        const ms = this.game.milestones[j];
-        ms.position.z += this.game.speed;
-        ms.rotation.z += 0.015;
+        // Spawners
+        this.game.obstacleSpawnTimer += 1;
+        if (this.game.obstacleSpawnTimer > 150) {
+          this.spawnGameObstacle();
+          this.game.obstacleSpawnTimer = 0;
+        }
 
-        if (!ms.userData.passed && ms.position.z >= 2.0) {
-          ms.userData.passed = true;
-          const yData = ms.userData.yearData;
-          this.game.currentYearIndex = this.game.years.findIndex(y => y.year === yData.year);
-          this.game.units += yData.unitsGain;
-          if (window.soundFX && window.soundFX.playMilestoneChime) {
-            window.soundFX.playMilestoneChime();
+        this.game.milestoneSpawnTimer += 1;
+        if (this.game.milestoneSpawnTimer > 360) {
+          const nextIdx = (this.game.currentYearIndex + 1) % this.game.years.length;
+          this.spawnGameMilestone(this.game.years[nextIdx], 24);
+          this.game.milestoneSpawnTimer = 0;
+        }
+
+        // Move Obstacles Leftward
+        for (let i = this.game.obstacles.length - 1; i >= 0; i--) {
+          const obs = this.game.obstacles[i];
+          obs.position.x -= this.game.speed;
+
+          // Collision check against player (at x = -5.2)
+          if (Math.abs(obs.position.x - this.game.playerX) < 1.35) {
+            if (this.game.playerY < 1.1) {
+              this.gameOver();
+              return;
+            }
           }
-          this.showMilestoneToast(yData);
+
+          if (obs.position.x < -20) {
+            this.game.worldGroup.remove(obs);
+            this.game.obstacles.splice(i, 1);
+          }
         }
 
-        if (ms.position.z > 16) {
-          this.game.worldGroup.remove(ms);
-          this.game.milestones.splice(j, 1);
+        // Move Milestones Leftward
+        for (let j = this.game.milestones.length - 1; j >= 0; j--) {
+          const ms = this.game.milestones[j];
+          ms.position.x -= this.game.speed;
+
+          // Reached Player
+          if (!ms.userData.passed && ms.position.x <= this.game.playerX) {
+            ms.userData.passed = true;
+            const yData = ms.userData.yearData;
+            this.game.currentYearIndex = this.game.years.findIndex(y => y.year === yData.year);
+            this.game.units += yData.unitsGain;
+
+            if (window.soundFX && window.soundFX.playMilestoneChime) {
+              window.soundFX.playMilestoneChime();
+            }
+
+            // Display Readable Milestone Modal & Pause Movement
+            this.showMilestoneModal(yData);
+          }
+
+          if (ms.position.x < -22) {
+            this.game.worldGroup.remove(ms);
+            this.game.milestones.splice(j, 1);
+          }
         }
+
+        this.game.score += 0.25;
+        this.game.units += 4;
+        this.updateGameHUD();
       }
-
-      this.game.score += 0.25;
-      this.game.units += 4;
-      this.updateGameHUD();
-
     } else if (this.game.mode === 'orbit') {
-      // Hero Monogram Interactive Drag, Damping & Gentle Idle Orbit
+      // Free 3D View: Interactive Drag Damping & Idle Orbit
       this.heroDrag.rotX += (this.heroDrag.targetRotX - this.heroDrag.rotX) * 0.08;
       this.heroDrag.rotY += (this.heroDrag.targetRotY - this.heroDrag.rotY) * 0.08;
       if (!this.heroDrag.isDragging) {
@@ -2027,8 +1380,8 @@ class TIGCShowroomEngine {
       }
 
       if (this.heroMonogram) {
-        this.heroMonogram.rotation.y = this.heroDrag.rotY + Math.sin(t * 0.6) * 0.12 + this.mouse.x * 0.25;
-        this.heroMonogram.rotation.x = this.heroDrag.rotX + Math.cos(t * 0.5) * 0.10 - this.mouse.y * 0.18;
+        this.heroMonogram.rotation.y = this.heroDrag.rotY + Math.sin(t * 0.6) * 0.12;
+        this.heroMonogram.rotation.x = this.heroDrag.rotX + Math.cos(t * 0.5) * 0.10;
         this.heroMonogram.position.y = Math.sin(t * 1.2) * 0.28;
       }
     }
@@ -2041,18 +1394,12 @@ class TIGCShowroomEngine {
       this.heroRenderer.render(this.heroScene, this.heroCamera);
     }
 
-    // 2. Showroom Smooth Inertial Rotation Damping
-    this.drag.currentRotX += (this.drag.targetRotX - this.drag.currentRotX) * 0.08;
-    this.drag.currentRotY += (this.drag.targetRotY - this.drag.currentRotY) * 0.08;
-
-    // Gentle auto-orbit when idle
-    if (!this.drag.isDragging) {
-      this.drag.targetRotY += 0.002;
+    // 2. Showroom Studio Background Render
+    if (this.showroomPedestal) {
+      this.showroomPedestal.rotation.y = t * 0.06;
     }
-
-    if (this.showroomGroup) {
-      this.showroomGroup.rotation.x = this.drag.currentRotX;
-      this.showroomGroup.rotation.y = this.drag.currentRotY;
+    if (this.showroomParticles) {
+      this.showroomParticles.rotation.y = t * 0.02;
     }
 
     if (this.showroomRenderer && this.showroomScene && this.showroomCamera) {

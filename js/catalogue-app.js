@@ -5,6 +5,8 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initCatalogueSoundInteractions();
+  initFastNavigation();
+  initMobileNavigation();
   initLookbookFilter();
   initVelocityScrubber();
   initTriForceCardTilts();
@@ -12,6 +14,62 @@ document.addEventListener('DOMContentLoaded', () => {
   initPartnershipModal();
   init3DStudio();
 });
+
+// ============================================================================
+// 00. FAST HEADER NAVIGATION & MOBILE GLASS DRAWER
+// ============================================================================
+function initFastNavigation() {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href && href !== '#' && href.startsWith('#')) {
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          const navHeight = 78;
+          const top = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+          window.scrollTo({ top, behavior: 'smooth' });
+
+          const drawer = document.getElementById('mobile-nav-drawer');
+          if (drawer) drawer.style.display = 'none';
+
+          if (window.soundFX && window.soundFX.playClickSnap) {
+            window.soundFX.playClickSnap();
+          }
+        }
+      }
+    });
+  });
+}
+
+function initMobileNavigation() {
+  const toggleBtn = document.getElementById('btn-mobile-menu-toggle');
+  const drawer = document.getElementById('mobile-nav-drawer');
+  const closeBtn = document.getElementById('btn-mobile-drawer-close');
+
+  if (toggleBtn && drawer) {
+    toggleBtn.addEventListener('click', () => {
+      const isVisible = drawer.style.display === 'flex';
+      drawer.style.display = isVisible ? 'none' : 'flex';
+      if (window.soundFX) window.soundFX.playClickSnap();
+    });
+  }
+
+  if (closeBtn && drawer) {
+    closeBtn.addEventListener('click', () => {
+      drawer.style.display = 'none';
+      if (window.soundFX) window.soundFX.playClickSnap();
+    });
+  }
+
+  if (drawer) {
+    drawer.addEventListener('click', (e) => {
+      if (e.target === drawer) {
+        drawer.style.display = 'none';
+      }
+    });
+  }
+}
 
 // ============================================================================
 // 01. SOUND DESIGN & FOLEY AUDIO INTERACTIONS

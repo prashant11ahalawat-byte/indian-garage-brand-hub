@@ -76,8 +76,32 @@
         </div>
         <span id="sound-toggle-label">FX</span>
       </button>
+
+      <!-- Mobile Navigation Hamburger Button -->
+      <button class="mobile-menu-btn" id="btn-mobile-menu-toggle" title="Toggle Navigation Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+
+  <!-- Mobile Navigation Glass Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-nav-drawer" style="display: none;">
+    <div class="mobile-drawer-header">
+      <span class="mobile-drawer-title">INDIAN GARAGE</span>
+      <button class="mobile-drawer-close" id="btn-mobile-drawer-close">✕</button>
+    </div>
+    <div class="mobile-drawer-links">
+      <a href="#why-partner" class="mobile-drawer-link">Why Partner With Us</a>
+      <a href="#showroom" class="mobile-drawer-link">3D Apparel Studio (WGSN)</a>
+      <a href="#about-us" class="mobile-drawer-link">About Us & Genesis</a>
+      <a href="#velocity" class="mobile-drawer-link">14-Day Micro-Batch Velocity</a>
+      <a href="#ecosystem" class="mobile-drawer-link">Retail & Quick Commerce</a>
+      <a href="#media-center" class="mobile-drawer-link">National Media & SKY</a>
+      <a href="#social-hub" class="mobile-drawer-link">Social Media & Mottos</a>
+      <a href="#contact-desks" class="mobile-drawer-link">Corporate Contact Desks</a>
+      <a href="https://tigc.in" target="_blank" class="mobile-drawer-cta">Shop on tigc.in ↗</a>
+    </div>
+  </div>
 
   <!-- ======================================================================
        HERO: ARCHITECTURAL 2-COLUMN LUXURY SHOWCASE
@@ -157,11 +181,32 @@
         </div>
       </div>
 
-      <!-- Milestone Pop-Up Toast -->
-      <div class="game-milestone-toast" id="game-milestone-toast" style="display: none;">
-        <span class="milestone-badge">MILESTONE UNLOCKED</span>
-        <div class="milestone-headline" id="game-toast-title">2023: ADITYA BIRLA TMRW UNION!</div>
-        <div class="milestone-sub" id="game-toast-sub">₹155 Crore Series B Backing • +50,000 Units</div>
+      <!-- Milestone Showcase Modal (Ample time to read brand history) -->
+      <div class="game-milestone-modal" id="game-milestone-modal" style="display: none;">
+        <div class="milestone-modal-card">
+          <div class="milestone-modal-header">
+            <span class="milestone-badge">MILESTONE UNLOCKED</span>
+            <span class="milestone-modal-year" id="milestone-modal-year">2023</span>
+          </div>
+          <h3 class="milestone-modal-title" id="milestone-modal-title">Aditya Birla Group (TMRW) Union</h3>
+          <p class="milestone-modal-desc" id="milestone-modal-desc">
+            ₹155 Crore Series B Growth Capital • Strategic partnership with TMRW House of Brands, ensuring long-term corporate governance, 30–45 day supplier payment cycles, and rapid national retail expansion.
+          </p>
+          <div class="milestone-modal-stat-bar">
+            <div>
+              <span class="stat-lbl">Offtake Unlocked</span>
+              <strong class="stat-val" id="milestone-modal-units">+4,500,000 Units</strong>
+            </div>
+            <div>
+              <span class="stat-lbl">Strategic Milestone</span>
+              <strong class="stat-val highlight" id="milestone-modal-highlight">₹155 Cr Series B</strong>
+            </div>
+          </div>
+          <button class="btn-milestone-continue" id="btn-milestone-continue">
+            <span>CONTINUE RUNNING ➔</span>
+            <span class="countdown-tag" id="milestone-countdown">(Space / Tap or 7s)</span>
+          </button>
+        </div>
       </div>
 
       <!-- Game Over / Victory Modal Overlay -->
@@ -344,6 +389,9 @@
       </button>
       <button class="category-tab-pill" data-category="jacket">
         <span class="tab-led"></span> All-Terrain Trucker Jackets
+      </button>
+      <button class="category-tab-pill" data-category="carpenter">
+        <span class="tab-led"></span> Utility Carpenter Trousers
       </button>
     </div>
 
@@ -720,6 +768,106 @@
         </div>
       </div>
     </div>
+
+    <!-- Omnichannel Retail & 10-Minute Quick Commerce Network -->
+    <div style="margin-top: 48px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 12px; margin-bottom: 8px;">
+        <div>
+          <span class="section-eyebrow">DISTRIBUTION PARTNERS & QUICK COMMERCE</span>
+          <h3 style="font-family: var(--font-title); font-size: 24px; font-weight: 700; color: var(--text-pure); margin: 6px 0 0;">
+            Where India Shops Indian Garage
+          </h3>
+        </div>
+        <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">
+          500,000 – 600,000 Units Sold Monthly Across Key Channels
+        </span>
+      </div>
+
+      <div class="retail-ecosystem-grid">
+        <!-- Myntra -->
+        <a href="https://www.myntra.com/the-indian-garage-co" target="_blank" rel="noopener noreferrer" class="retail-channel-card">
+          <div>
+            <span class="retail-badge crimson">TOP 10 BRAND</span>
+            <div class="retail-name">Myntra</div>
+            <p class="retail-desc">Consistently ranked in the Top 10 highest-selling apparel brands nationwide with 10M+ product impressions.</p>
+          </div>
+          <div class="retail-link-cta">Shop on Myntra ↗</div>
+        </a>
+
+        <!-- AJIO -->
+        <a href="https://www.ajio.com/b/the-indian-garage-co" target="_blank" rel="noopener noreferrer" class="retail-channel-card">
+          <div>
+            <span class="retail-badge emerald">#1 EXTERNAL BRAND</span>
+            <div class="retail-name">AJIO</div>
+            <p class="retail-desc">Ranked as the #1 external apparel brand on Reliance AJIO with industry-leading catalog turnover.</p>
+          </div>
+          <div class="retail-link-cta">Shop on AJIO ↗</div>
+        </a>
+
+        <!-- Flipkart -->
+        <a href="https://www.flipkart.com/mens-shirts/the-indian-garage-co~brand/pr?sid=clo,ash,axc,mmk" target="_blank" rel="noopener noreferrer" class="retail-channel-card">
+          <div>
+            <span class="retail-badge cyan">MASS VOLUME LEADER</span>
+            <div class="retail-name">Flipkart</div>
+            <p class="retail-desc">Mass-market dominance across Tier 2, 3, and 4 Bharat with massive daily casualwear order volumes.</p>
+          </div>
+          <div class="retail-link-cta">Shop on Flipkart ↗</div>
+        </a>
+
+        <!-- Zepto Quick Commerce -->
+        <a href="https://www.zepto.com/brand/the-indian-garage-co" target="_blank" rel="noopener noreferrer" class="retail-channel-card">
+          <div>
+            <span class="retail-badge amber">10-MINUTE QUICK COMMERCE</span>
+            <div class="retail-name">Zepto</div>
+            <p class="retail-desc">Pioneering instant 10-minute wardrobe fashion delivery across metro dark stores in Bengaluru, Mumbai, and Delhi.</p>
+          </div>
+          <div class="retail-link-cta">Shop on Zepto ↗</div>
+        </a>
+
+        <!-- Nykaa Fashion -->
+        <a href="https://www.nykaafashion.com/designers/the-indian-garage-co/c/74764" target="_blank" rel="noopener noreferrer" class="retail-channel-card">
+          <div>
+            <span class="retail-badge crimson">CURATED PREMIUM</span>
+            <div class="retail-name">Nykaa Fashion</div>
+            <p class="retail-desc">Contemporary silhouettes and curated trend edits for style-forward urban youth.</p>
+          </div>
+          <div class="retail-link-cta">Shop on Nykaa Fashion ↗</div>
+        </a>
+
+        <!-- Nykaa Man -->
+        <a href="https://www.nykaaman.com/brands/the-indian-garage-co/c/74976" target="_blank" rel="noopener noreferrer" class="retail-channel-card">
+          <div>
+            <span class="retail-badge emerald">MENSWEAR SPECIALIST</span>
+            <div class="retail-name">Nykaa Man</div>
+            <p class="retail-desc">Dedicated grooming and menswear destination featuring our core denim, shackets, and waffle polos.</p>
+          </div>
+          <div class="retail-link-cta">Shop on Nykaa Man ↗</div>
+        </a>
+      </div>
+
+      <!-- Reddit Community Quality Consensus -->
+      <a href="https://www.reddit.com/r/IndianFashionAddicts/comments/1snns1j/is_the_indian_garage_co_quality_good/" target="_blank" rel="noopener noreferrer" class="reddit-review-box">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: #FF4500; display: flex; align-items: center; justify-content: center; font-weight: 900; color: #fff; font-size: 20px; flex-shrink: 0;">
+            r/
+          </div>
+          <div>
+            <div style="font-size: 11px; font-weight: 800; letter-spacing: 0.08em; color: #FF4500; text-transform: uppercase;">
+              COMMUNITY SENTIMENT // REDDIT r/IndianFashionAddicts
+            </div>
+            <div style="font-family: var(--font-title); font-size: 16px; font-weight: 700; color: var(--text-pure); margin-top: 4px;">
+              "Is The Indian Garage Co. quality good? The fabrics, fitting and durability punch well above the price tag."
+            </div>
+            <div style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">
+              Overwhelmingly positive grassroots consensus from India's largest fashion enthusiast community.
+            </div>
+          </div>
+        </div>
+        <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; color: #FF4500; display: flex; align-items: center; gap: 6px; padding: 10px 18px; background: rgba(255, 69, 0, 0.12); border: 1px solid rgba(255, 69, 0, 0.3); border-radius: 9999px;">
+          Read Reddit Thread ↗
+        </div>
+      </a>
+    </div>
   </section>
 
   <!-- ======================================================================
@@ -926,29 +1074,29 @@
 
     <!-- 5 Live Connected Social Channels -->
     <div class="social-channels-grid">
-      <a href="https://www.instagram.com/theindiangarageco/" target="_blank" class="social-channel-card">
+      <a href="https://www.instagram.com/theindiangarageco_/" target="_blank" rel="noopener noreferrer" class="social-channel-card">
         <div class="social-card-top">
           <div class="social-icon-box ig">📸</div>
-          <span class="social-followers">360K+ FOLLOWERS</span>
+          <span class="social-followers">360K+ COMMUNITY</span>
         </div>
-        <div class="social-handle">@theindiangarageco</div>
+        <div class="social-handle">@theindiangarageco_</div>
         <div class="social-name">Instagram Official</div>
-        <p class="social-desc">Daily outfit drops, high-street styling guides, customer fit checks, and campaign reels featuring Suryakumar Yadav.</p>
+        <p class="social-desc">Daily high-velocity outfit drops, high-street styling guides, customer fit checks, and campaign reels featuring Suryakumar Yadav.</p>
         <div class="social-link-cta">Follow on Instagram ↗</div>
       </a>
 
-      <a href="https://www.linkedin.com/company/the-indian-garage-co/" target="_blank" class="social-channel-card">
+      <a href="https://in.linkedin.com/company/indiangarge" target="_blank" rel="noopener noreferrer" class="social-channel-card">
         <div class="social-card-top">
           <div class="social-icon-box li">💼</div>
           <span class="social-followers">ENTERPRISE NETWORK</span>
         </div>
-        <div class="social-handle">The Indian Garage Co.</div>
+        <div class="social-handle">indiangarge</div>
         <div class="social-name">LinkedIn Corporate</div>
         <p class="social-desc">Corporate announcements, supply chain milestones, leadership hiring, and Aditya Birla Group TMRW partnership updates.</p>
         <div class="social-link-cta">Connect on LinkedIn ↗</div>
       </a>
 
-      <a href="https://www.youtube.com/@TheIndianGarageCo" target="_blank" class="social-channel-card">
+      <a href="https://www.youtube.com/@TheIndianGarageCo" target="_blank" rel="noopener noreferrer" class="social-channel-card">
         <div class="social-card-top">
           <div class="social-icon-box yt">📺</div>
           <span class="social-followers">85M+ IMPRESSIONS</span>
@@ -959,12 +1107,12 @@
         <div class="social-link-cta">Watch on YouTube ↗</div>
       </a>
 
-      <a href="https://www.facebook.com/TheIndianGarageCo/" target="_blank" class="social-channel-card">
+      <a href="https://www.facebook.com/tigc2010/" target="_blank" rel="noopener noreferrer" class="social-channel-card">
         <div class="social-card-top">
           <div class="social-icon-box fb">📘</div>
           <span class="social-followers">ACTIVE COMMUNITY</span>
         </div>
-        <div class="social-handle">TheIndianGarageCo</div>
+        <div class="social-handle">tigc2010</div>
         <div class="social-name">Facebook Community</div>
         <p class="social-desc">Nationwide customer reviews, festive collection announcements, and local store opening alerts across India.</p>
         <div class="social-link-cta">Join on Facebook ↗</div>
