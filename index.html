@@ -47,10 +47,11 @@
     <div class="nav-links-cluster">
       <a href="#why-partner" class="nav-link-pill">Why Partner</a>
       <a href="#showroom" class="nav-link-pill">3D Studio</a>
-      <a href="#story" class="nav-link-pill">Our Story</a>
+      <a href="#about-us" class="nav-link-pill">About Us</a>
       <a href="#velocity" class="nav-link-pill">Agile Velocity</a>
-      <a href="#sky-arena" class="nav-link-pill">Ambassador</a>
-      <a href="#partner-hub" class="nav-link-pill">Partner Hub</a>
+      <a href="#media-center" class="nav-link-pill">Media</a>
+      <a href="#social-hub" class="nav-link-pill">Social Hub</a>
+      <a href="#partner-hub" class="nav-link-pill">Contact</a>
     </div>
 
     <!-- Actions: Shop tigc.in CTA + Time Theme + Sound FX -->
@@ -136,14 +137,62 @@
       </div>
     </div>
 
-    <!-- Right Column: Seamless Floating 3D Kinetic Emblem Stage -->
-    <div class="hero-emblem-stage-container">
+    <!-- Right Column: Seamless Floating 3D Kinetic Emblem Stage + Playable Journey Run -->
+    <div class="hero-emblem-stage-container" id="hero-game-wrapper">
       <div id="hero-3d-podium-canvas" class="hero-ambient-canvas">
         <!-- Three.js Hero Monogram Canvas injected here -->
       </div>
-      <div class="hero-emblem-audio-pill">
-        <span class="emblem-audio-dot"></span>
-        <span>♫ Interactive 3D Emblem • Drag with Spatial Audio</span>
+
+      <!-- Playable Game HUD Top Bar -->
+      <div class="game-hud-top" id="game-hud-top" style="display: none;">
+        <div class="game-hud-chip milestone-year" id="game-hud-year">
+          <span class="hud-led"></span>
+          <span id="game-disp-year">YEAR: 2012</span>
+        </div>
+        <div class="game-hud-chip units" id="game-hud-units">
+          <span>UNITS:</span> <strong id="game-disp-units">0</strong>
+        </div>
+        <div class="game-hud-chip score" id="game-hud-score">
+          <span>SCORE:</span> <strong id="game-disp-score">0</strong>
+        </div>
+      </div>
+
+      <!-- Milestone Pop-Up Toast -->
+      <div class="game-milestone-toast" id="game-milestone-toast" style="display: none;">
+        <span class="milestone-badge">MILESTONE UNLOCKED</span>
+        <div class="milestone-headline" id="game-toast-title">2023: ADITYA BIRLA TMRW UNION!</div>
+        <div class="milestone-sub" id="game-toast-sub">₹155 Crore Series B Backing • +50,000 Units</div>
+      </div>
+
+      <!-- Game Over / Victory Modal Overlay -->
+      <div class="game-over-overlay" id="game-over-overlay" style="display: none;">
+        <div class="game-over-card">
+          <div class="game-over-badge" id="game-over-badge">JOURNEY PAUSED</div>
+          <h3 class="game-over-title" id="game-over-title">Encountered Legacy Supply Delays!</h3>
+          <p class="game-over-desc" id="game-over-desc">
+            Traditional 6-month seasonal cycles trapped inventory. Indian Garage operates on a 14-day velocity!
+          </p>
+          <div class="game-over-stats">
+            <div><span>Peak Milestone:</span> <strong id="game-over-max-year">2025</strong></div>
+            <div><span>Total Offtake:</span> <strong id="game-over-final-units">420,000 Units</strong></div>
+          </div>
+          <div class="game-over-actions">
+            <button class="btn-game-primary" id="btn-restart-game">RESTART JOURNEY ↻</button>
+            <button class="btn-game-ghost" id="btn-mode-inspect">FREE 3D VIEW 👁️</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dual Mode Control Dock at Bottom -->
+      <div class="hero-game-controls-dock">
+        <button class="hero-game-btn" id="btn-toggle-journey-game">
+          <span class="game-icon">🕹️</span>
+          <span id="game-btn-label">PLAY JOURNEY RUN (SPACE TO JUMP)</span>
+        </button>
+        <span class="game-audio-pill" id="hero-audio-status-pill">
+          <span class="emblem-audio-dot"></span>
+          <span>Spatial Audio Active</span>
+        </span>
       </div>
     </div>
   </section>
@@ -311,10 +360,21 @@
           </div>
         </div>
 
-        <div class="showroom-viewport-container" id="showroom-viewport" style="position: relative; width: 100%; height: 500px; overflow: hidden; border-radius: 20px; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at center, rgba(30, 41, 59, 0.35) 0%, rgba(10, 15, 26, 0.95) 100%);">
-          <!-- 3D Perspective Card Stage -->
-          <div class="real-product-card-3d" id="real-product-card-3d" style="max-width: 440px; width: 90%; height: 92%; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: transform 0.12s cubic-bezier(0.16, 1, 0.3, 1);">
-            <img id="real-product-hero-img" src="assets/renders_3d/denim_3d.jpg" alt="3D CAD Render" style="max-height: 90%; max-width: 100%; object-fit: contain; filter: drop-shadow(0 20px 50px rgba(0,0,0,0.65)); border-radius: 16px; transition: filter 0.3s ease;">
+        <div class="showroom-viewport-container" id="showroom-viewport">
+          <!-- Genuine WebGL Three.js 3D Garment Stage (Rotatable 360°, Zoomable, Explodable) -->
+          <div id="showroom-3d-stage" class="showroom-3d-canvas-stage"></div>
+
+          <!-- 3D Camera Angles & Explode Anatomy HUD Controls -->
+          <div class="showroom-3d-hud-overlay">
+            <div class="showroom-camera-presets">
+              <button class="cam-preset-btn active" data-cam="front">FRONT</button>
+              <button class="cam-preset-btn" data-cam="three-quarter">3/4 VIEW</button>
+              <button class="cam-preset-btn" data-cam="side">SIDE</button>
+              <button class="cam-preset-btn" data-cam="back">BACK</button>
+            </div>
+            <button class="btn-explode-control" id="btn-explode-anatomy">
+              EXPLODE 3D ANATOMY
+            </button>
           </div>
         </div>
 
@@ -371,7 +431,8 @@
   <!-- ======================================================================
        SECTION 04: THE INDIAN GARAGE SAGA & PHILOSOPHY
        ====================================================================== -->
-  <section class="catalogue-section" id="story">
+  <section class="catalogue-section" id="about-us">
+    <a id="story" style="position: absolute; top: -80px;"></a>
     <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
       <div>
         <span class="section-eyebrow">OUR GENESIS</span>
@@ -748,70 +809,277 @@
   </section>
 
   <!-- ======================================================================
-       SECTION 08: SURYAKUMAR YADAV (SKY) KINETIC ARENA
+       SECTION 08: NATIONAL MEDIA & CAMPAIGNS (FEAT. SKY & #FREESTYLEIT)
        ====================================================================== -->
-  <section class="catalogue-section" id="sky-arena">
+  <section class="catalogue-section" id="media-center">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
+      <div>
+        <span class="section-eyebrow">NATIONAL CAMPAIGNS & REPUTATION</span>
+        <h2 class="section-headline">Dominating India's Cultural Fashion Dialogue</h2>
+      </div>
+      <div>
+        <span class="hero-status-pill">85M+ Video Impressions • 1.5M+ Community</span>
+      </div>
+    </div>
+
+    <p class="section-lead-copy">
+      From viral nationwide campaigns with Indian T20 Captain Suryakumar Yadav to prime-time media headlines across national business dailies, Indian Garage is the voice of self-expression for young, aspirational India.
+    </p>
+
+    <!-- Ambassador Showcase Hero Banner -->
     <div class="sky-arena-container">
       <div>
         <span style="font-family: var(--font-mono); font-size: 11px; background: var(--tigc-crimson); color: #fff; padding: 4px 10px; border-radius: 4px; font-weight: 700;">
-          OFFICIAL BRAND AMBASSADOR
+          OFFICIAL BRAND AMBASSADOR • SURYAKUMAR YADAV (SKY)
         </span>
         <h3 class="sky-huge-callout">
           "BE UNSTOPPABLE.<br>DRESS FOR <span>THE CHASE.</span>"
         </h3>
-        <p style="font-size: 15px; line-height: 1.6; color: var(--text-muted); max-width: 540px;">
-          World No. 1 T20 Batsman & Indian Captain Suryakumar Yadav embodies the fearless 360-degree attitude of Indian Garage. Delivering over 85 Million high-impact digital and stadium impressions nationwide.
+        <p style="font-size: 15px; line-height: 1.6; color: var(--text-muted); max-width: 560px;">
+          World No. 1 T20 Batsman & Indian Captain Suryakumar Yadav is the living embodiment of Indian Garage. Created in partnership with DDB Mudra, our <strong>#FreeStyleIt</strong> national campaign celebrates freedom, fearless self-expression, and uncompromised style on and off the field.
         </p>
+        <div style="margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="https://www.youtube.com/@TheIndianGarageCo" target="_blank" class="btn-shop-tigc" style="background: rgba(255,255,255,0.08); border: 1px solid var(--glass-border); color: #fff !important; box-shadow: none;">
+            Watch #FreeStyleIt Films ↗
+          </a>
+        </div>
       </div>
 
       <div class="sky-stats-cluster">
         <div class="sky-stat-card">
-          <div class="sky-stat-number">1.5M+</div>
+          <div class="sky-stat-number">85M+</div>
+          <div class="sky-stat-caption">Campaign Video Impressions</div>
+        </div>
+        <div class="sky-stat-card">
+          <div class="sky-stat-number emerald">1.5M+</div>
           <div class="sky-stat-caption">Social Community Reach</div>
         </div>
         <div class="sky-stat-card">
-          <div class="sky-stat-number emerald">85M+</div>
-          <div class="sky-stat-caption">Campaign Video Impressions</div>
+          <div class="sky-stat-number" style="color: var(--accent-cyan);">#1</div>
+          <div class="sky-stat-caption">External Brand On AJIO</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 Verified Media Headlines Grid -->
+    <div style="margin-top: 36px;">
+      <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); text-transform: uppercase; margin-bottom: 16px;">
+        PRESS RELEASES & INDUSTRY HEADLINES
+      </div>
+      <div class="media-press-grid">
+        <div class="press-card">
+          <div class="press-source">THE ECONOMIC TIMES</div>
+          <h4 class="press-headline">"Aditya Birla's TMRW joins hands with The Indian Garage Co. in milestone D2C union."</h4>
+          <p class="press-summary">
+            ABFRL’s digital-first brand umbrella TMRW commits strategic growth capital and institutional depth to accelerate Indian Garage toward a ₹1,000 Crore horizon.
+          </p>
+          <div class="press-tag">INSTITUTIONAL EXPANSION</div>
+        </div>
+
+        <div class="press-card">
+          <div class="press-source">RETAIL4GROWTH</div>
+          <h4 class="press-headline">"Indian Garage unveils bold brand identity and accelerates nationwide retail store rollout."</h4>
+          <p class="press-summary">
+            Unveiling a refreshed visual identity and dropping 'Co' to become Indian Garage, the brand plans 100 Exclusive Brand Outlets across Tier 1 and 2 cities.
+          </p>
+          <div class="press-tag">OFFLINE OMNICHANNEL</div>
+        </div>
+
+        <div class="press-card">
+          <div class="press-source">AFAQS!</div>
+          <h4 class="press-headline">"#FreeStyleIt campaign: Fashion that liberates modern consumers from conformity."</h4>
+          <p class="press-summary">
+            Partnering with creative agency DDB Mudra, Indian Garage's campaign starring Suryakumar Yadav emphasizes personal versatility and fashion without rules.
+          </p>
+          <div class="press-tag">BRAND CAMPAIGN</div>
+        </div>
+
+        <div class="press-card">
+          <div class="press-source">PASSIONATE IN MARKETING</div>
+          <h4 class="press-headline">"Positioned for the Everyday Hero: How Indian Garage scaled to ₹500 Cr GMV."</h4>
+          <p class="press-summary">
+            A comprehensive look at Indian Garage's high-velocity 14-day supply engine, South Asian fit calibration, and market dominance as AJIO's #1 external brand.
+          </p>
+          <div class="press-tag">MARKET LEADERSHIP</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ======================================================================
-       SECTION 09: HEADQUARTERS & DESIGNER CONTACT CARD
+       SECTION 09: SOCIAL MEDIA & BRAND MOTTOS HUB
        ====================================================================== -->
-  <section class="catalogue-section" style="padding-top: 0;">
-    <div class="headquarters-showcase-box">
+  <section class="catalogue-section" id="social-hub">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
       <div>
-        <div class="hq-title-badge">INDIAN GARAGE HEADQUARTERS & DESIGN STUDIO</div>
-        <h3 class="hq-headline">Direct Partnership Contact</h3>
-        <p style="font-size: 14.5px; line-height: 1.6; color: var(--text-muted); max-width: 620px;">
-          Whether exploring a high-volume manufacturing contract, supplying specialty fabrics, or proposing a premier mall/high-street retail footprint, our design, sourcing, and BD directors connect promptly.
-        </p>
+        <span class="section-eyebrow">COMMUNITY & DIGITAL CULTURE</span>
+        <h2 class="section-headline">Connect Live Across Our Social Ecosystem</h2>
+      </div>
+      <div>
+        <span class="hero-status-pill">Official Verified Channels • Daily Drops</span>
+      </div>
+    </div>
 
-        <div class="hq-address-p">
-          <strong style="color: #FFFFFF; display: block; margin-bottom: 6px;">The Indian Garage Company Pvt. Ltd.</strong>
-          No. 3/A, SY No. 38/3, 38/4, GB Palya, Hongasandra,<br>
-          Bangalore South, Begur, Bangalore - 560068, Karnataka, India
+    <p class="section-lead-copy">
+      Explore our latest collections, behind-the-scenes factory craft, customer community reels, and real-time trend releases across all verified social handles.
+    </p>
+
+    <!-- 5 Live Connected Social Channels -->
+    <div class="social-channels-grid">
+      <a href="https://www.instagram.com/theindiangarageco/" target="_blank" class="social-channel-card">
+        <div class="social-card-top">
+          <div class="social-icon-box ig">📸</div>
+          <span class="social-followers">360K+ FOLLOWERS</span>
+        </div>
+        <div class="social-handle">@theindiangarageco</div>
+        <div class="social-name">Instagram Official</div>
+        <p class="social-desc">Daily outfit drops, high-street styling guides, customer fit checks, and campaign reels featuring Suryakumar Yadav.</p>
+        <div class="social-link-cta">Follow on Instagram ↗</div>
+      </a>
+
+      <a href="https://www.linkedin.com/company/the-indian-garage-co/" target="_blank" class="social-channel-card">
+        <div class="social-card-top">
+          <div class="social-icon-box li">💼</div>
+          <span class="social-followers">ENTERPRISE NETWORK</span>
+        </div>
+        <div class="social-handle">The Indian Garage Co.</div>
+        <div class="social-name">LinkedIn Corporate</div>
+        <p class="social-desc">Corporate announcements, supply chain milestones, leadership hiring, and Aditya Birla Group TMRW partnership updates.</p>
+        <div class="social-link-cta">Connect on LinkedIn ↗</div>
+      </a>
+
+      <a href="https://www.youtube.com/@TheIndianGarageCo" target="_blank" class="social-channel-card">
+        <div class="social-card-top">
+          <div class="social-icon-box yt">📺</div>
+          <span class="social-followers">85M+ IMPRESSIONS</span>
+        </div>
+        <div class="social-handle">@TheIndianGarageCo</div>
+        <div class="social-name">YouTube Channel</div>
+        <p class="social-desc">Official brand films, TVCs, behind-the-scenes shoots with SKY, and 14-day agile factory pod documentaries.</p>
+        <div class="social-link-cta">Watch on YouTube ↗</div>
+      </a>
+
+      <a href="https://www.facebook.com/TheIndianGarageCo/" target="_blank" class="social-channel-card">
+        <div class="social-card-top">
+          <div class="social-icon-box fb">📘</div>
+          <span class="social-followers">ACTIVE COMMUNITY</span>
+        </div>
+        <div class="social-handle">TheIndianGarageCo</div>
+        <div class="social-name">Facebook Community</div>
+        <p class="social-desc">Nationwide customer reviews, festive collection announcements, and local store opening alerts across India.</p>
+        <div class="social-link-cta">Join on Facebook ↗</div>
+      </a>
+
+      <a href="https://twitter.com/indiangarageco" target="_blank" class="social-channel-card">
+        <div class="social-card-top">
+          <div class="social-icon-box tw">🐦</div>
+          <span class="social-followers">LIVE DISPATCHES</span>
+        </div>
+        <div class="social-handle">@indiangarageco</div>
+        <div class="social-name">Twitter / X</div>
+        <p class="social-desc">Real-time drops, customer support dispatch, retail event coverage, and fast-fashion commentary.</p>
+        <div class="social-link-cta">Follow on X ↗</div>
+      </a>
+    </div>
+
+    <!-- Official Brand Mottos Banner -->
+    <div class="brand-mottos-banner">
+      <div class="motto-tag">CULTURAL CALLING CARDS & MOTTO SUITE</div>
+      <div class="mottos-row">
+        <div class="motto-item">
+          <span class="motto-number">01</span>
+          <span class="motto-text">"FOR EVERYDAY HEROES"</span>
+        </div>
+        <div class="motto-item">
+          <span class="motto-number">02</span>
+          <span class="motto-text">"#FREESTYLEIT"</span>
+        </div>
+        <div class="motto-item">
+          <span class="motto-number">03</span>
+          <span class="motto-text">"BE UNSTOPPABLE. DRESS FOR THE CHASE."</span>
+        </div>
+        <div class="motto-item">
+          <span class="motto-number">04</span>
+          <span class="motto-text">"14-DAY VELOCITY. ZERO SHORTCUTS."</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SECTION 10: CORPORATE DIRECTORY & CONTACT DESKS
+       ====================================================================== -->
+  <section class="catalogue-section" id="contact-desks" style="padding-top: 0;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; margin-bottom: 32px;">
+      <div>
+        <span class="section-eyebrow">ENTERPRISE CONTACT DESKS</span>
+        <h2 class="section-headline">Connect With Our Corporate Directorate</h2>
+      </div>
+      <div>
+        <span class="hero-status-pill">Dedicated Functional Desks • 24-Hr SLA</span>
+      </div>
+    </div>
+
+    <!-- 5 Institutional Department Desks -->
+    <div class="corporate-directory-grid">
+      <!-- Desk 1: Corporate HQ -->
+      <div class="directory-desk-card featured">
+        <div class="desk-badge">REGISTERED CORPORATE HQ</div>
+        <h3 class="desk-title">The Indian Garage Company Pvt. Ltd.</h3>
+        <p class="desk-desc">
+          No. 3/A, SY No. 38/3, 38/4, GB Palya, Hongasandra, Bangalore South, Begur, Bangalore - 560068, Karnataka, India
+        </p>
+        <div class="desk-meta">
+          <span>CORPORATE ENTITY:</span> <strong>CIN U18109KA2020PTC135890</strong>
         </div>
       </div>
 
-      <div class="hq-designer-block">
-        <div class="designer-avatar-row">
-          <div class="designer-avatar-circle" style="background: var(--apple-crimson-gradient); font-size: 16px; font-weight: 800;">IG</div>
-          <div>
-            <div class="designer-meta-name">Corporate Sourcing & BD Desk</div>
-            <div class="designer-meta-role">THE INDIAN GARAGE COMPANY PVT. LTD.</div>
-          </div>
-        </div>
-
-        <p class="designer-quote-text">
-          "We are actively onboarding high-capacity garment manufacturing pods, textile mills, and retail mall partners. Connect directly with our sourcing desk."
+      <!-- Desk 2: Manufacturing & Sourcing -->
+      <div class="directory-desk-card">
+        <div class="desk-badge crimson">SUPPLY CHAIN & MANUFACTURING</div>
+        <h3 class="desk-title">Manufacturing & Mill Sourcing Desk</h3>
+        <p class="desk-desc">
+          Active onboarding for garment stitching pods (FOB/CMT), spinning & weaving mills, and sustainable wash laundries.
         </p>
-
-        <button class="btn-contact-direct btn-open-partner-modal">
-          Initiate Sourcing Inquiry ↗
+        <button class="btn-desk-action btn-open-partner-modal">
+          Submit Factory Allocation ↗
         </button>
+      </div>
+
+      <!-- Desk 3: Retail Franchise -->
+      <div class="directory-desk-card">
+        <div class="desk-badge emerald">RETAIL & REAL ESTATE</div>
+        <h3 class="desk-title">100 EBO Retail Expansion Desk</h3>
+        <p class="desk-desc">
+          Direct engagement for premier mall developers, high-street landlords, and franchise partners (FOFO & FOCO formats).
+        </p>
+        <button class="btn-desk-action btn-open-partner-modal">
+          Propose Retail Property ↗
+        </button>
+      </div>
+
+      <!-- Desk 4: Media & PR -->
+      <div class="directory-desk-card">
+        <div class="desk-badge cyan">MEDIA & ALLIANCES</div>
+        <h3 class="desk-title">Press, Media & Brand Alliances</h3>
+        <p class="desk-desc">
+          Journalist inquiries, campaign media kits, brand collaboration proposals, and executive interviews.
+        </p>
+        <a href="mailto:media@tigc.in" class="btn-desk-action">
+          Email Media Office ↗
+        </a>
+      </div>
+
+      <!-- Desk 5: Careers -->
+      <div class="directory-desk-card">
+        <div class="desk-badge amber">PEOPLE & CULTURE</div>
+        <h3 class="desk-title">Careers & Leadership Talent</h3>
+        <p class="desk-desc">
+          Join one of India's fastest-growing fashion enterprises across apparel design, merchandising, supply chain, and retail tech.
+        </p>
+        <a href="https://www.linkedin.com/company/the-indian-garage-co/" target="_blank" class="btn-desk-action">
+          Explore Open Roles ↗
+        </a>
       </div>
     </div>
   </section>
@@ -824,8 +1092,10 @@
       <span style="color: #FFFFFF; font-weight: 600;">INDIAN GARAGE</span> • Part of TMRW (Aditya Birla Group) House of Brands
     </div>
     <div style="display: flex; gap: 24px; flex-wrap: wrap;">
-      <a href="#collections" style="color: #FFFFFF; text-decoration: none;">Real Collections</a>
-      <a href="#partner-hub" style="color: var(--tigc-crimson-bright); text-decoration: none;">Manufacturing Partnership ↗</a>
+      <a href="#about-us" style="color: #FFFFFF; text-decoration: none;">About Indian Garage</a>
+      <a href="#media-center" style="color: #FFFFFF; text-decoration: none;">Media & Press</a>
+      <a href="#social-hub" style="color: #FFFFFF; text-decoration: none;">Social Hub</a>
+      <a href="#partner-hub" style="color: var(--tigc-crimson-bright); text-decoration: none;">Sourcing Directorate ↗</a>
       <a href="https://tigc.in" target="_blank" style="color: #FFFFFF; text-decoration: none;">Official Store (tigc.in) ↗</a>
       <a href="https://www.tmrw.in" target="_blank" style="color: var(--accent-emerald); text-decoration: none;">TMRW House of Brands (tmrw.in) ↗</a>
       <a href="brand-book.html" style="color: var(--text-muted); text-decoration: none;">Internal Guidelines ↗</a>

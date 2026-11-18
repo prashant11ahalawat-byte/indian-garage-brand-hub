@@ -22,13 +22,17 @@ function initCatalogueSoundInteractions() {
   const waveBars = document.getElementById('sound-wave-bars');
 
   if (soundToggleBtn && window.soundFX) {
-    soundToggleBtn.addEventListener('click', () => {
+    soundToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       const isEnabled = window.soundFX.toggleSound();
-      if (soundLabel) soundLabel.textContent = isEnabled ? 'SOUND FX: ON' : 'SOUND FX: OFF';
+      soundToggleBtn.classList.toggle('muted', !isEnabled);
+      if (soundLabel) soundLabel.textContent = isEnabled ? 'FX: ON' : 'FX: OFF';
       if (waveBars) {
-        waveBars.style.opacity = isEnabled ? '1' : '0.3';
+        waveBars.style.opacity = isEnabled ? '1' : '0.25';
       }
-      if (isEnabled) window.soundFX.playClickSnap();
+      if (isEnabled) {
+        window.soundFX.playClickSnap();
+      }
     });
   }
 

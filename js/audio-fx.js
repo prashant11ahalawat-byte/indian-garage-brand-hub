@@ -341,6 +341,98 @@ class InteractiveSoundFX {
     this.playClickSnap();
     setTimeout(() => this.playClickSnap(), 40);
   }
+
+  // 8. 3D Journey Game: Jump Hop Sound (Smooth energetic synth hop)
+  playJumpSound() {
+    if (!this.isEnabled) return;
+    this.ensureContext();
+    if (!this.ctx) return;
+
+    try {
+      const t = this.ctx.currentTime;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(260, t);
+      osc.frequency.exponentialRampToValueAtTime(740, t + 0.14);
+
+      gain.gain.setValueAtTime(0.18, t);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.15);
+
+      osc.connect(gain);
+      gain.connect(this.masterGain);
+
+      osc.start(t);
+      osc.stop(t + 0.15);
+      this.triggerWaveVisual();
+    } catch (e) {}
+  }
+
+  // 9. 3D Journey Game: Milestone Portal Pass Chime (Major Triad Uplift)
+  playMilestoneChime() {
+    if (!this.isEnabled) return;
+    this.ensureContext();
+    if (!this.ctx) return;
+
+    try {
+      const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+      notes.forEach((freq, idx) => {
+        const t = this.ctx.currentTime + idx * 0.055;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, t);
+
+        gain.gain.setValueAtTime(0.12, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.32);
+
+        osc.connect(gain);
+        gain.connect(this.masterGain);
+
+        osc.start(t);
+        osc.stop(t + 0.32);
+      });
+      this.triggerWaveVisual();
+    } catch (e) {}
+  }
+
+  // 10. 3D Journey Game: Obstacle Bump / Crash Sound
+  playCrashSound() {
+    if (!this.isEnabled) return;
+    this.ensureContext();
+    if (!this.ctx) return;
+
+    try {
+      const t = this.ctx.currentTime;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(140, t);
+      osc.frequency.exponentialRampToValueAtTime(45, t + 0.22);
+
+      gain.gain.setValueAtTime(0.25, t);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.22);
+
+      osc.connect(gain);
+      gain.connect(this.masterGain);
+
+      osc.start(t);
+      osc.stop(t + 0.22);
+      this.triggerWaveVisual();
+    } catch (e) {}
+  }
 }
 
 window.soundFX = new InteractiveSoundFX();
+
+// Auto-unlock AudioContext on first user interaction anywhere
+['pointerdown', 'keydown', 'touchstart'].forEach(evt => {
+  window.addEventListener(evt, () => {
+    if (window.soundFX && window.soundFX.ensureContext) {
+      window.soundFX.ensureContext();
+    }
+  }, { once: true, passive: true });
+});

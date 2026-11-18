@@ -52,6 +52,35 @@ class TIGCShowroomEngine {
       currentRotY: 0.35
     };
 
+    // Playable 3D Journey Runner Game Engine (Chrome Dino / Flappy Bird in 3D)
+    this.game = {
+      mode: 'orbit', // 'orbit', 'playing', 'gameover'
+      score: 0,
+      units: 0,
+      currentYearIndex: 0,
+      years: [
+        { year: "2012", title: "Indore Garage Bootstrap", desc: "₹10 Lakh Seed • 4-Person Pod", unitsGain: 10000 },
+        { year: "2015", title: "E-Commerce Velocity Surge", desc: "Top 10 on Myntra • #1 External on Ajio", unitsGain: 120000 },
+        { year: "2020", title: "14-Day Micro-Batch Engine", desc: "2.8M Pairs Denim Sold • Zero Trapped Stock", unitsGain: 2800000 },
+        { year: "2023", title: "Aditya Birla Group TMRW Union", desc: "₹155 Crore Series B Growth Capital", unitsGain: 4500000 },
+        { year: "2025", title: "₹204 Cr Revenue & 18 Retail Stores", desc: "Doubled YoY Revenue • 600K Units/Month", unitsGain: 6500000 },
+        { year: "2027", title: "The ₹1,000 Crore Horizon", desc: "100 Exclusive Brand Outlets Nationwide", unitsGain: 12000000 }
+      ],
+      lap: 1,
+      speed: 0.26,
+      playerY: 0,
+      playerVelY: 0,
+      isJumping: false,
+      gravity: -0.018,
+      jumpForce: 0.40,
+      obstacles: [],
+      milestones: [],
+      trackGrid: null,
+      worldGroup: null,
+      obstacleSpawnTimer: 0,
+      milestoneSpawnTimer: 0
+    };
+
     // Textures Cache
     this.textures = {};
 
@@ -252,6 +281,16 @@ class TIGCShowroomEngine {
     this.heroRimLight = new THREE.DirectionalLight(0x4080ff, 0.95);
     this.heroRimLight.position.set(-12, -8, 10);
     this.heroScene.add(this.heroRimLight);
+
+    // Playable 3D Journey Game World Group & Perspective Grid
+    this.game.worldGroup = new THREE.Group();
+    this.heroScene.add(this.game.worldGroup);
+
+    const trackGrid = new THREE.GridHelper(240, 50, 0xe50914, 0x1e293b);
+    trackGrid.position.y = -3.6;
+    trackGrid.visible = false;
+    this.game.trackGrid = trackGrid;
+    this.game.worldGroup.add(trackGrid);
 
     // Official Symmetrical Indian Garage G-Unit Monogram (Adobe Illustrator Exact Vectors)
     // Part 0: Right Bottom G-Bracket with Crossbar
@@ -1347,6 +1386,274 @@ class TIGCShowroomEngine {
   }
 
   // ==========================================================================
+  // CAMERA PRESETS (Showroom 3D Multi-Angle Inspection)
+  // ==========================================================================
+  setCameraPreset(preset) {
+    let rotX = 0.08;
+    let rotY = 0.35;
+    if (preset === 'front') {
+      rotX = 0.05;
+      rotY = 0;
+    } else if (preset === 'three-quarter') {
+      rotX = 0.12;
+      rotY = 0.65;
+    } else if (preset === 'side') {
+      rotX = 0.05;
+      rotY = Math.PI / 2;
+    } else if (preset === 'back') {
+      rotX = 0.05;
+      rotY = Math.PI;
+    }
+
+    if (typeof gsap !== 'undefined') {
+      gsap.to(this.drag, {
+        targetRotX: rotX,
+        targetRotY: rotY,
+        duration: 0.75,
+        ease: "power2.out"
+      });
+    } else {
+      this.drag.targetRotX = rotX;
+      this.drag.targetRotY = rotY;
+    }
+
+    document.querySelectorAll('.cam-preset-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-cam') === preset);
+    });
+
+    if (window.soundFX && window.soundFX.playClickSnap) {
+      window.soundFX.playClickSnap();
+    }
+  }
+
+  // ==========================================================================
+  // PLAYABLE 3D JOURNEY RUNNER ENGINE (Chrome Dino / Flappy Bird in 3D)
+  // ==========================================================================
+  startJourneyGame() {
+    this.game.mode = 'playing';
+    this.game.score = 0;
+    this.game.units = 10000;
+    this.game.currentYearIndex = 0;
+    this.game.lap = 1;
+    this.game.playerY = 0;
+    this.game.playerVelY = 0;
+    this.game.isJumping = false;
+    this.game.obstacleSpawnTimer = 0;
+    this.game.milestoneSpawnTimer = 0;
+
+    // Show HUD and hide overlay modals
+    const hudTop = document.getElementById('game-hud-top');
+    if (hudTop) hudTop.style.display = 'flex';
+    const overOverlay = document.getElementById('game-over-overlay');
+    if (overOverlay) overOverlay.style.display = 'none';
+    const toast = document.getElementById('game-milestone-toast');
+    if (toast) toast.style.display = 'none';
+
+    // Update button text
+    const label = document.getElementById('game-btn-label');
+    if (label) label.textContent = 'EXIT TO 3D ORBIT ↺';
+
+    // Enable track grid
+    if (this.game.trackGrid) this.game.trackGrid.visible = true;
+
+    // Reset player position and scale
+    if (this.heroMonogram) {
+      this.heroMonogram.scale.set(0.68, 0.68, 0.68);
+      this.heroMonogram.position.set(0, -1.8, 2);
+      this.heroMonogram.rotation.set(0, 0, 0);
+    }
+
+    // Dynamic runner perspective camera
+    if (this.heroCamera) {
+      if (typeof gsap !== 'undefined') {
+        gsap.to(this.heroCamera.position, { x: 0, y: 1.6, z: 16, duration: 0.8, ease: "power2.out" });
+      } else {
+        this.heroCamera.position.set(0, 1.6, 16);
+      }
+    }
+
+    this.clearGameObjects();
+    this.updateGameHUD();
+
+    // Spawn first milestone gate ahead
+    this.spawnGameMilestone(this.game.years[0]);
+
+    if (window.soundFX && window.soundFX.playMilestoneChime) {
+      window.soundFX.playMilestoneChime();
+    }
+    this.showMilestoneToast(this.game.years[0]);
+  }
+
+  jumpHero() {
+    if (this.game.mode !== 'playing') return;
+    if (this.game.isJumping) return;
+    this.game.isJumping = true;
+    this.game.playerVelY = this.game.jumpForce;
+    if (window.soundFX && window.soundFX.playJumpSound) {
+      window.soundFX.playJumpSound();
+    }
+  }
+
+  spawnGameObstacle() {
+    if (!this.game.worldGroup) return;
+    const obsGroup = new THREE.Group();
+
+    // Monolith barrier representing legacy supply chain bottleneck / inventory trap
+    const barrierGeo = new THREE.BoxGeometry(2.4, 1.6, 0.5);
+    const barrierMat = new THREE.MeshStandardMaterial({
+      color: 0x111625,
+      roughness: 0.35,
+      metalness: 0.8
+    });
+    const barrier = new THREE.Mesh(barrierGeo, barrierMat);
+    obsGroup.add(barrier);
+
+    // Glowing crimson hazard stripes on top
+    const hazardGeo = new THREE.BoxGeometry(2.44, 0.22, 0.54);
+    const hazardMat = new THREE.MeshStandardMaterial({
+      color: 0xff1e27,
+      emissive: 0xff0011,
+      emissiveIntensity: 0.85
+    });
+    const hazard = new THREE.Mesh(hazardGeo, hazardMat);
+    hazard.position.y = 0.8;
+    obsGroup.add(hazard);
+
+    obsGroup.position.set(0, -2.4, -65);
+    this.game.worldGroup.add(obsGroup);
+    this.game.obstacles.push(obsGroup);
+  }
+
+  spawnGameMilestone(yearData) {
+    if (!this.game.worldGroup) return;
+    const msGroup = new THREE.Group();
+
+    // Archway portal ring
+    const archGeo = new THREE.TorusGeometry(3.2, 0.14, 16, 48);
+    archGeo.rotateX(0);
+    const archMat = new THREE.MeshStandardMaterial({
+      color: 0xffd700,
+      emissive: 0xff9900,
+      emissiveIntensity: 0.9,
+      roughness: 0.2,
+      metalness: 0.9
+    });
+    const arch = new THREE.Mesh(archGeo, archMat);
+    msGroup.add(arch);
+
+    // Glowing portal light beam
+    const beamGeo = new THREE.CylinderGeometry(0.08, 0.08, 5.8, 16);
+    const beamMat = new THREE.MeshBasicMaterial({ color: 0xff3b30, transparent: true, opacity: 0.7 });
+    const beamL = new THREE.Mesh(beamGeo, beamMat);
+    beamL.position.set(-3.2, 0, 0);
+    msGroup.add(beamL);
+    const beamR = new THREE.Mesh(beamGeo, beamMat);
+    beamR.position.set(3.2, 0, 0);
+    msGroup.add(beamR);
+
+    msGroup.position.set(0, -1.0, -75);
+    msGroup.userData = { yearData: yearData, passed: false };
+    this.game.worldGroup.add(msGroup);
+    this.game.milestones.push(msGroup);
+  }
+
+  clearGameObjects() {
+    if (!this.game.worldGroup) return;
+    this.game.obstacles.forEach(obs => {
+      this.game.worldGroup.remove(obs);
+    });
+    this.game.obstacles = [];
+
+    this.game.milestones.forEach(ms => {
+      this.game.worldGroup.remove(ms);
+    });
+    this.game.milestones = [];
+  }
+
+  gameOver() {
+    this.game.mode = 'gameover';
+    if (window.soundFX && window.soundFX.playCrashSound) {
+      window.soundFX.playCrashSound();
+    }
+
+    const currentYear = this.game.years[this.game.currentYearIndex];
+    const maxYearEl = document.getElementById('game-over-max-year');
+    if (maxYearEl) maxYearEl.textContent = currentYear.year;
+
+    const finalUnitsEl = document.getElementById('game-over-final-units');
+    if (finalUnitsEl) finalUnitsEl.textContent = Math.floor(this.game.units).toLocaleString() + ' Units';
+
+    const overlay = document.getElementById('game-over-overlay');
+    if (overlay) overlay.style.display = 'flex';
+  }
+
+  restartJourneyGame() {
+    const overlay = document.getElementById('game-over-overlay');
+    if (overlay) overlay.style.display = 'none';
+    this.startJourneyGame();
+  }
+
+  setFreeInspectMode() {
+    this.game.mode = 'orbit';
+
+    const hudTop = document.getElementById('game-hud-top');
+    if (hudTop) hudTop.style.display = 'none';
+    const overOverlay = document.getElementById('game-over-overlay');
+    if (overOverlay) overOverlay.style.display = 'none';
+    const toast = document.getElementById('game-milestone-toast');
+    if (toast) toast.style.display = 'none';
+
+    if (this.game.trackGrid) this.game.trackGrid.visible = false;
+    this.clearGameObjects();
+
+    if (this.heroMonogram) {
+      this.heroMonogram.scale.set(1, 1, 1);
+      this.heroMonogram.position.set(0, 0, 0);
+    }
+
+    if (this.heroCamera) {
+      if (typeof gsap !== 'undefined') {
+        gsap.to(this.heroCamera.position, { x: 0, y: 0, z: 22, duration: 0.8, ease: "power2.out" });
+      } else {
+        this.heroCamera.position.set(0, 0, 22);
+      }
+    }
+
+    const label = document.getElementById('game-btn-label');
+    if (label) label.textContent = 'PLAY JOURNEY RUN (SPACE TO JUMP)';
+  }
+
+  showMilestoneToast(yearData) {
+    const toast = document.getElementById('game-milestone-toast');
+    const titleEl = document.getElementById('game-toast-title');
+    const subEl = document.getElementById('game-toast-sub');
+    if (!toast || !titleEl || !subEl) return;
+
+    titleEl.textContent = `${yearData.year}: ${yearData.title.toUpperCase()}!`;
+    subEl.textContent = `${yearData.desc} • +${(yearData.unitsGain).toLocaleString()} Units`;
+
+    toast.style.display = 'block';
+    toast.style.animation = 'none';
+    void toast.offsetWidth;
+    toast.style.animation = 'toastPopIn 0.4s ease-out forwards';
+
+    if (this.toastTimeout) clearTimeout(this.toastTimeout);
+    this.toastTimeout = setTimeout(() => {
+      if (toast) toast.style.display = 'none';
+    }, 3400);
+  }
+
+  updateGameHUD() {
+    const yearEl = document.getElementById('game-disp-year');
+    const unitsEl = document.getElementById('game-disp-units');
+    const scoreEl = document.getElementById('game-disp-score');
+
+    if (yearEl) yearEl.textContent = this.game.years[this.game.currentYearIndex].year;
+    if (unitsEl) unitsEl.textContent = Math.floor(this.game.units).toLocaleString();
+    if (scoreEl) scoreEl.textContent = Math.floor(this.game.score);
+  }
+
+  // ==========================================================================
   // EVENT BINDINGS (Drag, Hover, Sound, Kinetic Rotation)
   // ==========================================================================
   bindEvents() {
@@ -1454,19 +1761,6 @@ class TIGCShowroomEngine {
       explodeBtn.addEventListener('click', () => this.toggleExplode());
     }
 
-    // 3. Sound FX Toggle
-    const soundBtn = document.getElementById('btn-sound-toggle');
-    if (soundBtn) {
-      soundBtn.addEventListener('click', () => {
-        if (window.soundFX) {
-          const isEnabled = window.soundFX.toggleSound();
-          soundBtn.classList.toggle('muted', !isEnabled);
-          const label = document.getElementById('sound-toggle-label');
-          if (label) label.textContent = isEnabled ? 'SOUND FX: ON' : 'SOUND FX: MUTED';
-        }
-      });
-    }
-
     // 4. Mouse Move Tracking for Parallax
     window.addEventListener('mousemove', (e) => {
       this.mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
@@ -1550,7 +1844,67 @@ class TIGCShowroomEngine {
       }, { passive: true });
     }
 
-    // 6. Window Resize
+    // 6. Camera Preset Buttons (Front, 3/4 View, Side, Back)
+    document.querySelectorAll('.cam-preset-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const mode = btn.getAttribute('data-cam');
+        if (mode) this.setCameraPreset(mode);
+      });
+    });
+
+    // 7. Playable 3D Journey Runner Controls
+    const gameToggleBtn = document.getElementById('btn-toggle-journey-game');
+    if (gameToggleBtn) {
+      gameToggleBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (this.game.mode === 'playing') {
+          this.setFreeInspectMode();
+        } else {
+          this.startJourneyGame();
+        }
+      });
+    }
+
+    const restartGameBtn = document.getElementById('btn-restart-game');
+    if (restartGameBtn) {
+      restartGameBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.restartJourneyGame();
+      });
+    }
+
+    const inspectModeBtn = document.getElementById('btn-mode-inspect');
+    if (inspectModeBtn) {
+      inspectModeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.setFreeInspectMode();
+      });
+    }
+
+    // Spacebar Jump Hop & Restart
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space' && !e.target.matches('input, textarea')) {
+        if (this.game.mode === 'playing') {
+          e.preventDefault();
+          this.jumpHero();
+        } else if (this.game.mode === 'gameover') {
+          e.preventDefault();
+          this.restartJourneyGame();
+        }
+      }
+    });
+
+    // Tap / Click on Canvas to Jump during Game Mode
+    if (this.heroContainer) {
+      this.heroContainer.addEventListener('click', () => {
+        if (this.game.mode === 'playing') {
+          this.jumpHero();
+        }
+      });
+    }
+
+    // 8. Window Resize
     window.addEventListener('resize', () => {
       if (this.heroContainer && this.heroRenderer && this.heroCamera) {
         const w = this.heroContainer.clientWidth;
@@ -1577,17 +1931,106 @@ class TIGCShowroomEngine {
 
     const t = performance.now() * 0.001;
 
-    // 1. Hero Monogram Interactive Drag, Damping & Gentle Idle Orbit
-    this.heroDrag.rotX += (this.heroDrag.targetRotX - this.heroDrag.rotX) * 0.08;
-    this.heroDrag.rotY += (this.heroDrag.targetRotY - this.heroDrag.rotY) * 0.08;
-    if (!this.heroDrag.isDragging) {
-      this.heroDrag.targetRotY += 0.003;
-    }
+    // 1. Hero Monogram / 3D Journey Game Mode
+    if (this.game.mode === 'playing') {
+      // Step Game Perspective Grid
+      if (this.game.trackGrid) {
+        this.game.trackGrid.position.z = (this.game.trackGrid.position.z + this.game.speed) % 10;
+      }
 
-    if (this.heroMonogram) {
-      this.heroMonogram.rotation.y = this.heroDrag.rotY + Math.sin(t * 0.6) * 0.12 + this.mouse.x * 0.25;
-      this.heroMonogram.rotation.x = this.heroDrag.rotX + Math.cos(t * 0.5) * 0.10 - this.mouse.y * 0.18;
-      this.heroMonogram.position.y = Math.sin(t * 1.2) * 0.28;
+      // Player jump & gravity
+      if (this.game.isJumping) {
+        this.game.playerVelY += this.game.gravity;
+        this.game.playerY += this.game.playerVelY;
+        if (this.game.playerY <= 0) {
+          this.game.playerY = 0;
+          this.game.playerVelY = 0;
+          this.game.isJumping = false;
+        }
+      }
+
+      const strideBounce = this.game.isJumping ? 0 : Math.sin(t * 14) * 0.12;
+      if (this.heroMonogram) {
+        this.heroMonogram.position.y = -1.8 + this.game.playerY + strideBounce;
+        this.heroMonogram.rotation.x = this.game.playerVelY * 1.8;
+        this.heroMonogram.rotation.y = Math.sin(t * 4) * 0.15;
+        this.heroMonogram.rotation.z = Math.sin(t * 8) * 0.04;
+      }
+
+      // Obstacle Spawner (Legacy bottlenecks to hop over)
+      this.game.obstacleSpawnTimer += 1;
+      if (this.game.obstacleSpawnTimer > 135) {
+        this.spawnGameObstacle();
+        this.game.obstacleSpawnTimer = 0;
+      }
+
+      // Milestone Portal Spawner (Historic Years 2012 -> 2027)
+      this.game.milestoneSpawnTimer += 1;
+      if (this.game.milestoneSpawnTimer > 310) {
+        const nextIdx = (this.game.currentYearIndex + 1) % this.game.years.length;
+        this.spawnGameMilestone(this.game.years[nextIdx]);
+        this.game.milestoneSpawnTimer = 0;
+      }
+
+      // Move & check collision for obstacles
+      for (let i = this.game.obstacles.length - 1; i >= 0; i--) {
+        const obs = this.game.obstacles[i];
+        obs.position.z += this.game.speed;
+
+        // Collision box when obstacle reaches player (player at z = 2)
+        if (obs.position.z > 0.8 && obs.position.z < 2.8) {
+          if (this.game.playerY < 1.05) {
+            this.gameOver();
+            return;
+          }
+        }
+
+        if (obs.position.z > 14) {
+          this.game.worldGroup.remove(obs);
+          this.game.obstacles.splice(i, 1);
+        }
+      }
+
+      // Move & trigger milestones
+      for (let j = this.game.milestones.length - 1; j >= 0; j--) {
+        const ms = this.game.milestones[j];
+        ms.position.z += this.game.speed;
+        ms.rotation.z += 0.015;
+
+        if (!ms.userData.passed && ms.position.z >= 2.0) {
+          ms.userData.passed = true;
+          const yData = ms.userData.yearData;
+          this.game.currentYearIndex = this.game.years.findIndex(y => y.year === yData.year);
+          this.game.units += yData.unitsGain;
+          if (window.soundFX && window.soundFX.playMilestoneChime) {
+            window.soundFX.playMilestoneChime();
+          }
+          this.showMilestoneToast(yData);
+        }
+
+        if (ms.position.z > 16) {
+          this.game.worldGroup.remove(ms);
+          this.game.milestones.splice(j, 1);
+        }
+      }
+
+      this.game.score += 0.25;
+      this.game.units += 4;
+      this.updateGameHUD();
+
+    } else if (this.game.mode === 'orbit') {
+      // Hero Monogram Interactive Drag, Damping & Gentle Idle Orbit
+      this.heroDrag.rotX += (this.heroDrag.targetRotX - this.heroDrag.rotX) * 0.08;
+      this.heroDrag.rotY += (this.heroDrag.targetRotY - this.heroDrag.rotY) * 0.08;
+      if (!this.heroDrag.isDragging) {
+        this.heroDrag.targetRotY += 0.003;
+      }
+
+      if (this.heroMonogram) {
+        this.heroMonogram.rotation.y = this.heroDrag.rotY + Math.sin(t * 0.6) * 0.12 + this.mouse.x * 0.25;
+        this.heroMonogram.rotation.x = this.heroDrag.rotX + Math.cos(t * 0.5) * 0.10 - this.mouse.y * 0.18;
+        this.heroMonogram.position.y = Math.sin(t * 1.2) * 0.28;
+      }
     }
 
     if (this.heroParticles) {
