@@ -50,6 +50,7 @@
       <a href="#about-us" class="nav-link-pill">About Us</a>
       <a href="#velocity" class="nav-link-pill">Agile Velocity</a>
       <a href="#media-center" class="nav-link-pill">Media</a>
+      <a href="#store-locator" class="nav-link-pill">Stores</a>
       <a href="#social-hub" class="nav-link-pill">Social Hub</a>
       <a href="#partner-hub" class="nav-link-pill">Contact</a>
     </div>
@@ -96,6 +97,7 @@
       <a href="#about-us" class="mobile-drawer-link">About Us & Genesis</a>
       <a href="#velocity" class="mobile-drawer-link">14-Day Micro-Batch Velocity</a>
       <a href="#ecosystem" class="mobile-drawer-link">Retail & Quick Commerce</a>
+      <a href="#store-locator" class="mobile-drawer-link">18 Retail Stores & Maps</a>
       <a href="#media-center" class="mobile-drawer-link">National Media & SKY</a>
       <a href="#social-hub" class="mobile-drawer-link">Social Media & Mottos</a>
       <a href="#contact-desks" class="mobile-drawer-link">Corporate Contact Desks</a>
@@ -427,16 +429,13 @@
         </div>
 
         <div class="denim-hud-bottom">
-          <!-- Dynamic Wash Selector Pills -->
-          <div class="denim-wash-pills-row" id="showroom-washes-container">
-            <button class="denim-wash-pill active" data-wash="raw">RAW DARK INDIGO</button>
-            <button class="denim-wash-pill" data-wash="sunken">SUN-WASHED MID BLUE</button>
-            <button class="denim-wash-pill" data-wash="acid">VINTAGE ACID WASH</button>
-            <button class="denim-wash-pill" data-wash="selvedge">OBSIDIAN BLACK SELVEDGE</button>
+          <div class="showroom-rotation-hint">
+            <span class="rotation-hint-icon">🔄</span>
+            <span>Drag horizontally or swipe to inspect 360° • Click presets for instant angles</span>
           </div>
 
-          <a href="https://tigc.in" target="_blank" class="btn-shop-tigc" style="padding: 9px 18px; font-size: 12.5px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-            <span>Shop on tigc.in</span> ↗
+          <a href="https://tigc.in" target="_blank" rel="noopener noreferrer" class="btn-shop-tigc">
+            <span>Shop Category on tigc.in</span> ↗
           </a>
         </div>
       </div>
@@ -711,6 +710,11 @@
               <span>Myntra Menswear</span>
             </div>
           </div>
+          <div style="margin-top: 18px;">
+            <a href="#retail-network" class="btn-catalogue-ghost" style="padding: 8px 16px; font-size: 11.5px; border-radius: 9999px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+              Explore Marketplace Network ↓
+            </a>
+          </div>
         </div>
       </div>
 
@@ -738,6 +742,11 @@
               <span>City Coverage</span>
             </div>
           </div>
+          <div style="margin-top: 18px;">
+            <a href="#store-locator" class="btn-catalogue-ghost" style="padding: 8px 16px; font-size: 11.5px; border-radius: 9999px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-color: rgba(16, 185, 129, 0.4); color: var(--apple-mint);">
+              View 18 Store Locations & Maps ↓
+            </a>
+          </div>
         </div>
       </div>
 
@@ -764,6 +773,11 @@
               <strong>tigc.in</strong>
               <span>Official Hub</span>
             </div>
+          </div>
+          <div style="margin-top: 18px;">
+            <a href="https://tigc.in" target="_blank" rel="noopener noreferrer" class="btn-catalogue-ghost" style="padding: 8px 16px; font-size: 11.5px; border-radius: 9999px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-color: rgba(6, 182, 212, 0.4); color: var(--apple-cyan);">
+              Visit tigc.in Flagship ↗
+            </a>
           </div>
         </div>
       </div>
@@ -867,6 +881,291 @@
           Read Reddit Thread ↗
         </div>
       </a>
+    </div>
+
+    <!-- Retail Stores & Exclusive Brand Outlet (EBO) Locator Showcase -->
+    <div class="store-locator-showcase" id="store-locator">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
+        <div>
+          <span class="section-eyebrow">NATIONWIDE PHYSICAL FOOTPRINT • 18 LIVE OUTLETS</span>
+          <h3 style="font-family: var(--font-title); font-size: 26px; font-weight: 700; color: var(--text-pure); margin: 6px 0 0;">
+            Exclusive Brand Outlets (EBOs) & Flagship Stores
+          </h3>
+        </div>
+        <div>
+          <span class="hero-status-pill">100 EBO Expansion Target • Click for Google Maps</span>
+        </div>
+      </div>
+
+      <p class="section-lead-copy" style="margin-top: 12px; margin-bottom: 0;">
+        Experience Indian Garage fit, tactile denim weights, and styling in person. Visit our high-street flagships and premier mall stores across India. Click any location for direct real-time Google Maps navigation.
+      </p>
+
+      <!-- Store City Filter Tabs -->
+      <div class="store-filter-bar">
+        <button class="store-filter-pill active" data-city="all">All Stores (12+)</button>
+        <button class="store-filter-pill" data-city="bengaluru">Bengaluru (2)</button>
+        <button class="store-filter-pill" data-city="mumbai-pune">Mumbai & Pune (3)</button>
+        <button class="store-filter-pill" data-city="hyderabad">Hyderabad (2)</button>
+        <button class="store-filter-pill" data-city="lucknow">Lucknow (2)</button>
+        <button class="store-filter-pill" data-city="kerala">Kerala (2)</button>
+        <button class="store-filter-pill" data-city="karnataka">Hubballi (1)</button>
+      </div>
+
+      <!-- Stores Cards Grid -->
+      <div class="stores-cards-grid" id="stores-grid-container">
+        <!-- Store 1: Bengaluru Brigade Road Flagship -->
+        <div class="store-location-card" data-city="bengaluru">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge flagship">FLAGSHIP EBO</span>
+              <span class="store-city-tag">Bengaluru</span>
+            </div>
+            <h4 class="store-name">Brigade Road High-Street Flagship</h4>
+            <p class="store-address">Shanthala Nagar, Ashok Nagar, Brigade Road, Bengaluru, Karnataka 560001</p>
+          </div>
+          <div>
+            <div class="store-hours">
+              <span class="store-hours-dot"></span>
+              <span>10:30 AM – 9:30 PM • Open All 7 Days</span>
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=The+Indian+Garage+Co+Brigade+Road+Bengaluru" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>📍</span> <span>Open in Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 2: Bengaluru Bharatiya City Mall -->
+        <div class="store-location-card" data-city="bengaluru">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge">PREMIER MALL EBO</span>
+              <span class="store-city-tag">Bengaluru</span>
+            </div>
+            <h4 class="store-name">Bhartiya Mall of Bengaluru</h4>
+            <p class="store-address">Unit No-18UG, Upper Ground Floor, Thanisandra Main Road, Bengaluru, Karnataka 560064</p>
+          </div>
+          <div>
+            <div class="store-hours">
+              <span class="store-hours-dot"></span>
+              <span>11:00 AM – 10:00 PM • Mall Outlets</span>
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=The+Indian+Garage+Co+Bhartiya+Mall+of+Bengaluru" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>📍</span> <span>Open in Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 3: Mumbai Sky City Mall Borivali -->
+        <div class="store-location-card" data-city="mumbai-pune">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge flagship">METRO FLAGSHIP</span>
+              <span class="store-city-tag">Mumbai</span>
+            </div>
+            <h4 class="store-name">Sky City Mall (Borivali East)</h4>
+            <p class="store-address">Lower Ground Level, Off Western Express Highway, Borivali, Mumbai, Maharashtra 400066</p>
+          </div>
+          <div>
+            <div class="store-hours">
+              <span class="store-hours-dot"></span>
+              <span>11:00 AM – 10:00 PM • Open All 7 Days</span>
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=The+Indian+Garage+Co+Sky+City+Mall+Borivali+Mumbai" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>📍</span> <span>Open in Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 4: Pune Amanora Mall -->
+        <div class="store-location-card" data-city="mumbai-pune">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge">PREMIER MALL EBO</span>
+              <span class="store-city-tag">Pune</span>
+            </div>
+            <h4 class="store-name">Amanora Mall (Hadapsar)</h4>
+            <p class="store-address">East Block, Hadapsar - Kharadi Bypass Road, Hadapsar, Pune, Maharashtra 411028</p>
+          </div>
+          <div>
+            <div class="store-hours">
+              <span class="store-hours-dot"></span>
+              <span>11:00 AM – 9:30 PM • Open All 7 Days</span>
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=The+Indian+Garage+Co+Amanora+Mall+Pune" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>📍</span> <span>Open in Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 5: Pune Elpro City Square Mall -->
+        <div class="store-location-card" data-city="mumbai-pune">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge">PREMIER MALL EBO</span>
+              <span class="store-city-tag">Pune</span>
+            </div>
+            <h4 class="store-name">Elpro City Square Mall</h4>
+            <p class="store-address">Near Chinchwad Station, Chinchwad, Pune, Maharashtra 411033</p>
+          </div>
+          <div>
+            <div class="store-hours">
+              <span class="store-hours-dot"></span>
+              <span>11:00 AM – 9:30 PM • Open All 7 Days</span>
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=The+Indian+Garage+Co+Elpro+City+Square+Mall+Pune" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>📍</span> <span>Open in Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 6: Hyderabad Sarath City Capital Mall -->
+        <div class="store-location-card" data-city="hyderabad">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge flagship">FLAGSHIP EBO</span>
+              <span class="store-city-tag">Hyderabad</span>
+            </div>
+            <h4 class="store-name">Sarath City Capital Mall</h4>
+            <p class="store-address">Lower Ground Floor, Gachibowli - Miyapur Road, Kondapur, Hyderabad, Telangana 500084</p>
+          </div>
+          <div>
+            <div class="store-hours">
+              <span class="store-hours-dot"></span>
+              <span>10:30 AM – 10:00 PM • Open All 7 Days</span>
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=The+Indian+Garage+Co+Sarath+City+Capital+Mall+Hyderabad" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>📍</span> <span>Open in Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 7: Hyderabad Vanasthalipuram EBO -->
+        <div class="store-location-card" data-city="hyderabad">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge">HIGH-STREET EBO</span>
+              <span class="store-city-tag">Hyderabad</span>
+            </div>
+            <h4 class="store-name">Vanasthalipuram Main Road EBO</h4>
+            <p class="store-address">Main Commercial Road, Vanasthalipuram, Hyderabad, Telangana 500070</p>
+          </div>
+          <div>
+            <div class="store-hours">
+              <span class="store-hours-dot"></span>
+              <span>10:00 AM – 9:30 PM • Open All 7 Days</span>
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=The+Indian+Garage+Co+Vanasthalipuram+Hyderabad" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>📍</span> <span>Open in Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 8: Lucknow Phoenix Palasio Mall -->
+        <div class="store-location-card" data-city="lucknow">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge flagship">FLAGSHIP EBO</span>
+              <span class="store-city-tag">Lucknow</span>
+            </div>
+            <h4 class="store-name">Phoenix Palasio Mall</h4>
+            <p class="store-address">Sector 7, Gomti Nagar Extension, Lucknow, Uttar Pradesh 226010</p>
+          </div>
+          <div>
+            <div class="store-hours">
+              <span class="store-hours-dot"></span>
+              <span>11:00 AM – 10:00 PM • Open All 7 Days</span>
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=The+Indian+Garage+Co+Phoenix+Palasio+Mall+Lucknow" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>📍</span> <span>Open in Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 9: Lucknow Lulu Mall -->
+        <div class="store-location-card" data-city="lucknow">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge">PREMIER MALL EBO</span>
+              <span class="store-city-tag">Lucknow</span>
+            </div>
+            <h4 class="store-name">Lulu Mall (Golf City)</h4>
+            <p class="store-address">Amar Shaheed Path, Golf City, Sector B Ansal API, Lucknow, Uttar Pradesh 226030</p>
+          </div>
+          <div>
+            <div class="store-hours">
+              <span class="store-hours-dot"></span>
+              <span>10:00 AM – 10:00 PM • Open All 7 Days</span>
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=The+Indian+Garage+Co+Lulu+Mall+Lucknow" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>📍</span> <span>Open in Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 10: Kochi Lulu Mall -->
+        <div class="store-location-card" data-city="kerala">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge flagship">SOUTH INDIA FLAGSHIP</span>
+              <span class="store-city-tag">Kochi</span>
+            </div>
+            <h4 class="store-name">Lulu Mall Kochi (Edappally)</h4>
+            <p class="store-address">Old NH 17, Edappally, Kochi, Kerala 682024</p>
+          </div>
+          <div>
+            <div class="store-hours">
+              <span class="store-hours-dot"></span>
+              <span>10:00 AM – 10:00 PM • Open All 7 Days</span>
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=The+Indian+Garage+Co+Lulu+Mall+Kochi" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>📍</span> <span>Open in Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 11: Trivandrum Lulu Mall -->
+        <div class="store-location-card" data-city="kerala">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge">PREMIER MALL EBO</span>
+              <span class="store-city-tag">Thiruvananthapuram</span>
+            </div>
+            <h4 class="store-name">Lulu Mall Trivandrum</h4>
+            <p class="store-address">TC 91/270, Anayara, Thiruvananthapuram, Kerala 695029</p>
+          </div>
+          <div>
+            <div class="store-hours">
+              <span class="store-hours-dot"></span>
+              <span>10:00 AM – 10:00 PM • Open All 7 Days</span>
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=The+Indian+Garage+Co+Lulu+Mall+Trivandrum" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>📍</span> <span>Open in Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 12: Hubballi Urban Oasis Mall -->
+        <div class="store-location-card" data-city="karnataka">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge">REGIONAL EBO</span>
+              <span class="store-city-tag">Hubballi</span>
+            </div>
+            <h4 class="store-name">Urban Oasis Mall EBO</h4>
+            <p class="store-address">Gokul Road, Hubballi, Karnataka 580030</p>
+          </div>
+          <div>
+            <div class="store-hours">
+              <span class="store-hours-dot"></span>
+              <span>10:30 AM – 9:30 PM • Open All 7 Days</span>
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=The+Indian+Garage+Co+Urban+Oasis+Mall+Hubli" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>📍</span> <span>Open in Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1130,25 +1429,95 @@
       </a>
     </div>
 
-    <!-- Official Brand Mottos Banner -->
-    <div class="brand-mottos-banner">
-      <div class="motto-tag">CULTURAL CALLING CARDS & MOTTO SUITE</div>
-      <div class="mottos-row">
-        <div class="motto-item">
-          <span class="motto-number">01</span>
-          <span class="motto-text">"FOR EVERYDAY HEROES"</span>
+    <!-- Cultural Calling Cards & Brand Motto Suite (Apple VisionOS Glass Bento) -->
+    <div class="brand-mottos-suite-wrapper">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 12px; margin-bottom: 8px;">
+        <div>
+          <span class="section-eyebrow">CULTURAL CALLING CARDS & MOTTO SUITE</span>
+          <h3 style="font-family: var(--font-title); font-size: 24px; font-weight: 700; color: var(--text-pure); margin: 6px 0 0;">
+            The Philosophy of New India's Youth
+          </h3>
         </div>
-        <div class="motto-item">
-          <span class="motto-number">02</span>
-          <span class="motto-text">"#FREESTYLEIT"</span>
+        <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">
+          4 Cultural Pillars Championed Nationwide
+        </span>
+      </div>
+
+      <div class="brand-mottos-grid">
+        <!-- Card 1: For Everyday Heroes -->
+        <div class="motto-calling-card crimson">
+          <div class="motto-card-header">
+            <div class="motto-card-icon">⚡</div>
+            <span class="motto-card-index">PILLAR 01</span>
+          </div>
+          <div>
+            <div class="motto-card-context">The Core Identity Anthem</div>
+            <h4 class="motto-card-quote">"FOR EVERYDAY HEROES"</h4>
+          </div>
+          <p class="motto-card-desc">
+            Engineered for the resilient dreamers, everyday hustlers, and self-made youth of New India who move at lightning speed and demand fashion that keeps pace without compromise.
+          </p>
+          <div class="motto-card-badge">
+            <span>🏷️</span>
+            <span>#EverydayHeroes • Universal High-Street Fit</span>
+          </div>
         </div>
-        <div class="motto-item">
-          <span class="motto-number">03</span>
-          <span class="motto-text">"BE UNSTOPPABLE. DRESS FOR THE CHASE."</span>
+
+        <!-- Card 2: #FreeStyleIt -->
+        <div class="motto-calling-card emerald">
+          <div class="motto-card-header">
+            <div class="motto-card-icon">🎯</div>
+            <span class="motto-card-index">PILLAR 02</span>
+          </div>
+          <div>
+            <div class="motto-card-context">The Cultural Movement</div>
+            <h4 class="motto-card-quote">"#FREESTYLEIT"</h4>
+          </div>
+          <p class="motto-card-desc">
+            Championed alongside Brand Ambassador Suryakumar Yadav (SKY). Break free from rigid wardrobe norms and curate spontaneous, energetic looks across South Asian streets.
+          </p>
+          <div class="motto-card-badge">
+            <span>🏏</span>
+            <span>#FreestyleIt • Suryakumar Yadav Campaign</span>
+          </div>
         </div>
-        <div class="motto-item">
-          <span class="motto-number">04</span>
-          <span class="motto-text">"14-DAY VELOCITY. ZERO SHORTCUTS."</span>
+
+        <!-- Card 3: Be Unstoppable -->
+        <div class="motto-calling-card cyan">
+          <div class="motto-card-header">
+            <div class="motto-card-icon">🚀</div>
+            <span class="motto-card-index">PILLAR 03</span>
+          </div>
+          <div>
+            <div class="motto-card-context">The Relentless Mindset</div>
+            <h4 class="motto-card-quote">"BE UNSTOPPABLE. DRESS FOR THE CHASE."</h4>
+          </div>
+          <p class="motto-card-desc">
+            From sunrise commutes and startup workspaces to evening social runs. Durable, high-recovery fabrics that withstand 50,000+ Martindale cycles while maintaining effortless drape.
+          </p>
+          <div class="motto-card-badge">
+            <span>💨</span>
+            <span>#Unstoppable • 2% Memory Snapback Lycra</span>
+          </div>
+        </div>
+
+        <!-- Card 4: 14-Day Velocity -->
+        <div class="motto-calling-card amber">
+          <div class="motto-card-header">
+            <div class="motto-card-icon">⏱️</div>
+            <span class="motto-card-index">PILLAR 04</span>
+          </div>
+          <div>
+            <div class="motto-card-context">The Agile Craft Code</div>
+            <h4 class="motto-card-quote">"14-DAY VELOCITY. ZERO SHORTCUTS."</h4>
+          </div>
+          <p class="motto-card-desc">
+            Concept-to-rack speed in two weeks. 100+ decentralized micro-batch factory pods producing 550,000+ units monthly with strict Aditya Birla TMRW quality compliance.
+          </p>
+          <div class="motto-card-badge">
+            <span>🏭</span>
+            <span>#VelocityEngine • 88% 45-Day Sell-Through</span>
+          </div>
         </div>
       </div>
     </div>

@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFastNavigation();
   initMobileNavigation();
   initLookbookFilter();
+  initStoreFilter();
   initVelocityScrubber();
   initTriForceCardTilts();
   initPartnershipTerminal();
@@ -382,6 +383,34 @@ function initLookbookFilter() {
           showroomSection.scrollIntoView({ behavior: 'smooth' });
         }
         if (window.soundFX) window.soundFX.playAnatomyExpand();
+      }
+    });
+  });
+}
+
+// ============================================================================
+// 08. RETAIL STORES & EBO LOCATOR FILTER
+// ============================================================================
+function initStoreFilter() {
+  const storeFilterBtns = document.querySelectorAll('.store-filter-pill');
+  const storeCards = document.querySelectorAll('.store-location-card');
+
+  storeFilterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      storeFilterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const city = btn.getAttribute('data-city');
+      storeCards.forEach(card => {
+        if (city === 'all' || card.getAttribute('data-city') === city) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (window.soundFX && window.soundFX.playClickSnap) {
+        window.soundFX.playClickSnap();
       }
     });
   });

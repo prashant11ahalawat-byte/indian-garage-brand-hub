@@ -638,34 +638,14 @@ class TIGCShowroomEngine {
     // Update UI Content
     this.updateShowroomUI(data);
 
-    // Apply Default Wash
-    const defaultWash = Object.keys(data.washes)[0];
-    this.setWash(defaultWash, immediate);
-
     if (!immediate && window.soundFX && window.soundFX.playClickSnap) {
       window.soundFX.playClickSnap();
     }
   }
 
   setWash(washKey, immediate = false) {
-    const catData = this.catalogData[this.activeCategory];
-    if (!catData || !catData.washes[washKey]) return;
+    // Wash filters disabled per brand specifications to preserve 100% photorealistic CLO 3D color accuracy
     this.activeWash = washKey;
-    const wash = catData.washes[washKey];
-
-    const imgEl = document.getElementById('wgsn-turntable-img');
-    if (imgEl && wash.filter) {
-      imgEl.style.filter = `drop-shadow(0 20px 45px rgba(0,0,0,0.55)) ${wash.filter}`;
-    }
-
-    // Update Wash Pill UI
-    document.querySelectorAll('.denim-wash-pill').forEach(pill => {
-      pill.classList.toggle('active', pill.getAttribute('data-wash') === washKey);
-    });
-
-    if (!immediate && window.soundFX && window.soundFX.playClickSnap) {
-      window.soundFX.playClickSnap();
-    }
   }
 
   toggleExplode() {
@@ -716,19 +696,7 @@ class TIGCShowroomEngine {
       `).join('');
     }
 
-    if (washesContainer) {
-      washesContainer.innerHTML = Object.keys(data.washes).map(k => `
-        <button class="denim-wash-pill ${k === this.activeWash ? 'active' : ''}" data-wash="${k}">
-          ${data.washes[k].name.toUpperCase()}
-        </button>
-      `).join('');
 
-      washesContainer.querySelectorAll('.denim-wash-pill').forEach(btn => {
-        btn.addEventListener('click', () => {
-          this.setWash(btn.getAttribute('data-wash'));
-        });
-      });
-    }
 
     // Update Category Pills
     document.querySelectorAll('.category-tab-pill').forEach(pill => {
