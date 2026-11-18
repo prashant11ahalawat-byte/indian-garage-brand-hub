@@ -63,8 +63,8 @@ class TIGCShowroomEngine {
     this.catalogData = {
       denim: {
         title: "13.5oz Ring-Spun Comfort Stretch Denim",
-        subtitle: "CHAPTER 01 // HIGH-VELOCITY BOTTOMWEAR",
-        badge: "2.8M+ PAIRS SOLD ANNUALLY",
+        subtitle: "High-Velocity Bottomwear",
+        badge: "2.8M+ Pairs Sold Annually",
         description: "Engineered specifically for the South Asian morphological contour. Features an anti-gap lumbar rise, dual-tone copper chain-stitching, 14-point reinforced bartacks, and 2% memory elastane that guarantees 98.4% shape retention across 200+ washes.",
         specs: [
           { label: "Fabric Weight", val: "13.5 oz / yd² Heavy Warp" },
@@ -75,16 +75,16 @@ class TIGCShowroomEngine {
           { label: "Pricing Segment", val: "₹1,199 – ₹1,899 (High-Volume Sweetspot)" }
         ],
         washes: {
-          raw: { name: "Raw Dark Indigo", color: 0x18243b, roughness: 0.70, metalness: 0.10 },
-          sunken: { name: "Sun-Washed Mid Blue", color: 0x3d649d, roughness: 0.78, metalness: 0.05 },
-          acid: { name: "Vintage Acid Wash", color: 0x7692b8, roughness: 0.85, metalness: 0.02 },
-          selvedge: { name: "Obsidian Black Selvedge", color: 0x14161a, roughness: 0.65, metalness: 0.12 }
+          raw: { name: "Raw Dark Indigo", color: 0x152238, roughness: 0.72, metalness: 0.08 },
+          sunken: { name: "Sun-Washed Mid Blue", color: 0x2b4c7e, roughness: 0.78, metalness: 0.05 },
+          acid: { name: "Vintage Acid Wash", color: 0x546e8e, roughness: 0.84, metalness: 0.02 },
+          selvedge: { name: "Obsidian Black Selvedge", color: 0x141619, roughness: 0.68, metalness: 0.12 }
         }
       },
       shirt: {
         title: "Signature Checked & Cuban Collar Casuals",
-        subtitle: "CHAPTER 02 // 450+ MONTHLY ACTIVE STYLES",
-        badge: "1.9M+ UNITS PRODUCED",
+        subtitle: "450+ Monthly Active Styles",
+        badge: "1.9M+ Units Produced",
         description: "Our signature top-wear powerhouse. Crafted from 60s compact combed cotton and airy French linen blends, finished with a velvet peach enzyme wash. Designed with reinforced collar bands, curved hem ergonomics, and high-density lock stitching.",
         specs: [
           { label: "Fabric Construction", val: "60s Compact Combed Cotton / Linen Blend" },
@@ -103,8 +103,8 @@ class TIGCShowroomEngine {
       },
       polo: {
         title: "Polo-licious 320 GSM Heavyweight Knits",
-        subtitle: "CHAPTER 03 // ELEVATED SMART CASUALS",
-        badge: "TOP-RATED ACROSS ALL PLATFORMS",
+        subtitle: "Elevated Smart Casuals",
+        badge: "Top-Rated Across Platforms",
         description: "Indian Garage's breakthrough luxury knitwear. Custom-developed 320 GSM honeycomb waffle and double-pique cotton that provides structural drape, zero clinginess in humid climates, and micro-ribbed cuffs that never lose tension.",
         specs: [
           { label: "Yarn Density", val: "300 – 320 GSM Ultra-Heavyweight Knit" },
@@ -123,8 +123,8 @@ class TIGCShowroomEngine {
       },
       jacket: {
         title: "All-Terrain Denim Truckers & Utility Overshirts",
-        subtitle: "CHAPTER 04 // INDUSTRIAL STREET OUTERWEAR",
-        badge: "HIGH-DENSITY HARDWARE",
+        subtitle: "Heavyweight All-Weather Outerwear",
+        badge: "High-Density Hardware",
         description: "Heavy-duty outerwear engineered for trans-seasonal layered styling. Constructed with 14.5oz rigid broken-twill denim, anti-corrosive gunmetal shank buttons, reinforced chest bellows pockets, and adjustable waist cinches.",
         specs: [
           { label: "Outer Shell", val: "14.5 oz Rigid Broken-Twill Denim" },
@@ -238,18 +238,18 @@ class TIGCShowroomEngine {
     this.heroRenderer.setSize(w, h);
     this.heroRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     this.heroRenderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.heroRenderer.toneMappingExposure = 1.25;
+    this.heroRenderer.toneMappingExposure = 1.05;
     this.heroContainer.appendChild(this.heroRenderer.domElement);
 
-    // Hero Lights
-    this.heroAmbientLight = new THREE.AmbientLight(0xffffff, 0.85);
+    // Hero Luxury Studio Illumination (Apple Titanium & Ruby Speculars)
+    this.heroAmbientLight = new THREE.AmbientLight(0xffffff, 0.5);
     this.heroScene.add(this.heroAmbientLight);
 
-    this.heroKeyLight = new THREE.DirectionalLight(0xff2a35, 3.8);
-    this.heroKeyLight.position.set(10, 12, 14);
+    this.heroKeyLight = new THREE.DirectionalLight(0xff3344, 1.6);
+    this.heroKeyLight.position.set(10, 14, 14);
     this.heroScene.add(this.heroKeyLight);
 
-    this.heroRimLight = new THREE.DirectionalLight(0x4080ff, 2.5);
+    this.heroRimLight = new THREE.DirectionalLight(0x4080ff, 0.95);
     this.heroRimLight.position.set(-12, -8, 10);
     this.heroScene.add(this.heroRimLight);
 
@@ -401,23 +401,23 @@ class TIGCShowroomEngine {
     this.showroomRenderer.setSize(w, h);
     this.showroomRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     this.showroomRenderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.showroomRenderer.toneMappingExposure = 1.3;
+    this.showroomRenderer.toneMappingExposure = 1.0;
     this.showroomContainer.appendChild(this.showroomRenderer.domElement);
 
-    // Studio Illumination
-    this.studioAmbient = new THREE.AmbientLight(0xffffff, 0.9);
+    // Photographic Studio Illumination (Balanced Soft Light, Zero White Bleaching)
+    this.studioAmbient = new THREE.AmbientLight(0xffffff, 0.45);
     this.showroomScene.add(this.studioAmbient);
 
-    this.studioKey = new THREE.DirectionalLight(0xffffff, 2.6);
-    this.studioKey.position.set(10, 15, 14);
+    this.studioKey = new THREE.DirectionalLight(0xfff8f0, 1.35);
+    this.studioKey.position.set(8, 14, 12);
     this.showroomScene.add(this.studioKey);
 
-    this.studioFill = new THREE.DirectionalLight(0x7596ff, 1.5);
-    this.studioFill.position.set(-12, -8, -6);
+    this.studioFill = new THREE.DirectionalLight(0x7090d0, 0.6);
+    this.studioFill.position.set(-10, -4, -6);
     this.showroomScene.add(this.studioFill);
 
-    this.studioCrimsonRim = new THREE.DirectionalLight(0xff2a35, 1.8);
-    this.studioCrimsonRim.position.set(0, -12, 8);
+    this.studioCrimsonRim = new THREE.DirectionalLight(0xe50914, 0.65);
+    this.studioCrimsonRim.position.set(0, 10, -12);
     this.showroomScene.add(this.studioCrimsonRim);
 
     // Showroom Root Group
@@ -457,109 +457,303 @@ class TIGCShowroomEngine {
     const group = new THREE.Group();
     const parts = [];
 
+    // Base Denim Material with Authentic Ring-Spun Twill Weave
     const mat = new THREE.MeshStandardMaterial({
-      color: 0x18243b,
-      roughness: 0.70,
-      metalness: 0.10,
+      color: 0x152238, // Raw Dark Indigo
+      roughness: 0.72,
+      metalness: 0.08,
       normalMap: this.textures.twillNormal,
-      normalScale: new THREE.Vector2(0.8, 0.8)
+      normalScale: new THREE.Vector2(0.9, 0.9)
     });
 
-    // 1. Contoured Waistband & Yoke
-    const waistbandGeo = new THREE.CylinderGeometry(2.7, 2.65, 1.0, 32, 2, true);
+    // Golden-Copper Contrast Thread Material
+    const threadMat = new THREE.MeshStandardMaterial({
+      color: 0xc98a4b,
+      roughness: 0.5,
+      metalness: 0.2
+    });
+
+    // Antique Brass Metal Hardware
+    const brassMat = new THREE.MeshStandardMaterial({
+      color: 0xd4af37,
+      metalness: 0.92,
+      roughness: 0.25
+    });
+
+    // Copper Rivet Material
+    const copperMat = new THREE.MeshStandardMaterial({
+      color: 0xb8653b,
+      metalness: 0.95,
+      roughness: 0.22
+    });
+
+    // 1. Contoured Waistband & Belt Ring
+    const waistbandGeo = new THREE.CylinderGeometry(2.45, 2.42, 0.55, 36, 1, true);
     const waistband = new THREE.Mesh(waistbandGeo, mat);
-    waistband.position.set(0, 3.2, 0);
+    waistband.position.set(0, 3.25, 0);
     waistband.userData = {
       name: "Ergonomic Lumbar Waistband & Anti-Gaping Yoke",
-      explodedPos: new THREE.Vector3(0, 5.0, 0),
-      originPos: new THREE.Vector3(0, 3.2, 0)
+      explodedPos: new THREE.Vector3(0, 5.2, 0),
+      originPos: new THREE.Vector3(0, 3.25, 0)
     };
     group.add(waistband);
     parts.push(waistband);
 
-    // Belt Loops (5 detailed anchors)
-    for (let i = 0; i < 5; i++) {
-      const angle = (i / 5) * Math.PI * 1.8 - Math.PI * 0.9;
-      const loopGeo = new THREE.BoxGeometry(0.22, 1.15, 0.12);
+    // Waistband Golden Top-Stitch Rings (Dual Needle)
+    const stitchRingTopGeo = new THREE.TorusGeometry(2.46, 0.018, 8, 48);
+    stitchRingTopGeo.rotateX(Math.PI / 2);
+    const stitchTop = new THREE.Mesh(stitchRingTopGeo, threadMat);
+    stitchTop.position.set(0, 3.48, 0);
+    waistband.add(stitchTop);
+
+    const stitchRingBotGeo = new THREE.TorusGeometry(2.44, 0.018, 8, 48);
+    stitchRingBotGeo.rotateX(Math.PI / 2);
+    const stitchBot = new THREE.Mesh(stitchRingBotGeo, threadMat);
+    stitchBot.position.set(0, 3.02, 0);
+    waistband.add(stitchBot);
+
+    // 5 Reinforced Belt Loops with Bartacks
+    const loopPositions = [
+      { angle: 0.35, r: 2.48 },
+      { angle: -0.35, r: 2.48 },
+      { angle: 1.55, r: 2.46 },
+      { angle: -1.55, r: 2.46 },
+      { angle: Math.PI, r: 2.44 }
+    ];
+    loopPositions.forEach(lp => {
+      const loopGeo = new THREE.BoxGeometry(0.18, 0.68, 0.08);
       const loop = new THREE.Mesh(loopGeo, mat);
-      loop.position.set(Math.sin(angle) * 2.72, 3.2, Math.cos(angle) * 2.72);
-      loop.rotation.y = angle;
-      group.add(loop);
-    }
+      const x = Math.sin(lp.angle) * lp.r;
+      const z = Math.cos(lp.angle) * lp.r;
+      loop.position.set(x, 3.25, z);
+      loop.rotation.y = lp.angle;
+      waistband.add(loop);
 
-    // Heavy Brass Shank Button on Waistband
-    const buttonGeo = new THREE.CylinderGeometry(0.26, 0.26, 0.12, 20);
+      const bartackGeo = new THREE.BoxGeometry(0.2, 0.04, 0.1);
+      const btTop = new THREE.Mesh(bartackGeo, threadMat);
+      btTop.position.set(0, 0.3, 0.01);
+      loop.add(btTop);
+      const btBot = new THREE.Mesh(bartackGeo, threadMat);
+      btBot.position.set(0, -0.3, 0.01);
+      loop.add(btBot);
+    });
+
+    // Antique Brass Waistband Shank Button (Embossed Center)
+    const buttonGeo = new THREE.CylinderGeometry(0.25, 0.25, 0.08, 24);
     buttonGeo.rotateX(Math.PI / 2);
-    const buttonMat = new THREE.MeshStandardMaterial({ color: 0xd4af37, metalness: 0.95, roughness: 0.22 });
-    const button = new THREE.Mesh(buttonGeo, buttonMat);
-    button.position.set(0, 3.2, 2.73);
+    const button = new THREE.Mesh(buttonGeo, brassMat);
+    button.position.set(0, 3.25, 2.48);
+    button.userData = {
+      name: "Die-Cast Antique Brass Shank Button",
+      explodedPos: new THREE.Vector3(0, 4.2, 3.8),
+      originPos: new THREE.Vector3(0, 3.25, 2.48)
+    };
     group.add(button);
+    parts.push(button);
 
-    // 2. Left Leg (Sculpted Inseam with Knee Contour & Ankle Taper)
+    // 2. Pelvic Core, Hips & Seat (Seamlessly connects waistband to thighs)
+    const pelvisGeo = new THREE.CylinderGeometry(2.42, 2.62, 2.4, 36, 4, true);
+    const pelvis = new THREE.Mesh(pelvisGeo, mat);
+    pelvis.position.set(0, 1.85, 0);
+    pelvis.userData = {
+      name: "Morphological Pelvic Architecture & Saddle",
+      explodedPos: new THREE.Vector3(0, 1.85, 0),
+      originPos: new THREE.Vector3(0, 1.85, 0)
+    };
+    group.add(pelvis);
+    parts.push(pelvis);
+
+    // Front Fly Placket & Signature Curved J-Stitch
+    const flyPlacketGeo = new THREE.BoxGeometry(0.42, 1.9, 0.06);
+    const flyPlacket = new THREE.Mesh(flyPlacketGeo, mat);
+    flyPlacket.position.set(0, 1.95, 2.58);
+    group.add(flyPlacket);
+
+    // J-Stitch Curve in Golden Thread
+    const jStitchPoints = [
+      new THREE.Vector3(0.22, 2.8, 2.62),
+      new THREE.Vector3(0.24, 1.6, 2.62),
+      new THREE.Vector3(0.18, 1.2, 2.62),
+      new THREE.Vector3(0.0, 1.0, 2.62)
+    ];
+    const jCurve = new THREE.CatmullRomCurve3(jStitchPoints);
+    const jStitchGeo = new THREE.TubeGeometry(jCurve, 20, 0.02, 8, false);
+    const jStitch = new THREE.Mesh(jStitchGeo, threadMat);
+    group.add(jStitch);
+
+    // Crotch Saddle Reinforcement Bridge (eliminates empty space)
+    const saddleGeo = new THREE.CylinderGeometry(0.7, 0.7, 1.8, 16);
+    saddleGeo.rotateX(Math.PI / 2);
+    const saddle = new THREE.Mesh(saddleGeo, mat);
+    saddle.position.set(0, 0.75, 0);
+    group.add(saddle);
+
+    // 3. Ergonomic Front Scoop Pockets (Curved against hip)
+    const scoopLeftGeo = new THREE.TorusGeometry(1.0, 0.08, 8, 16, Math.PI * 0.45);
+    scoopLeftGeo.rotateZ(Math.PI * 0.3);
+    const scoopL = new THREE.Mesh(scoopLeftGeo, threadMat);
+    scoopL.position.set(-1.6, 2.3, 1.9);
+    scoopL.userData = {
+      name: "Left Scoop Pocket with Double-Felled Stitching",
+      explodedPos: new THREE.Vector3(-2.8, 2.3, 3.4),
+      originPos: new THREE.Vector3(-1.6, 2.3, 1.9)
+    };
+    group.add(scoopL);
+    parts.push(scoopL);
+
+    const scoopRightGeo = new THREE.TorusGeometry(1.0, 0.08, 8, 16, Math.PI * 0.45);
+    scoopRightGeo.rotateZ(Math.PI * 0.75);
+    const scoopR = new THREE.Mesh(scoopRightGeo, threadMat);
+    scoopR.position.set(1.6, 2.3, 1.9);
+    scoopR.userData = {
+      name: "Right Scoop Pocket with Coin Pocket Insert",
+      explodedPos: new THREE.Vector3(2.8, 2.3, 3.4),
+      originPos: new THREE.Vector3(1.6, 2.3, 1.9)
+    };
+    group.add(scoopR);
+    parts.push(scoopR);
+
+    // Copper Rivets on Scoop Corners
+    const rivetL1 = new THREE.Mesh(new THREE.SphereGeometry(0.08, 12, 12), copperMat);
+    rivetL1.position.set(-1.95, 2.7, 1.6);
+    group.add(rivetL1);
+
+    const rivetL2 = new THREE.Mesh(new THREE.SphereGeometry(0.08, 12, 12), copperMat);
+    rivetL2.position.set(-1.15, 1.85, 2.35);
+    group.add(rivetL2);
+
+    const rivetR1 = new THREE.Mesh(new THREE.SphereGeometry(0.08, 12, 12), copperMat);
+    rivetR1.position.set(1.95, 2.7, 1.6);
+    group.add(rivetR1);
+
+    const rivetR2 = new THREE.Mesh(new THREE.SphereGeometry(0.08, 12, 12), copperMat);
+    rivetR2.position.set(1.15, 1.85, 2.35);
+    group.add(rivetR2);
+
+    // Coin Pocket (Right Front) with Tiny Rivet
+    const coinPocketGeo = new THREE.BoxGeometry(0.65, 0.65, 0.04);
+    const coinPocket = new THREE.Mesh(coinPocketGeo, mat);
+    coinPocket.position.set(1.45, 2.45, 2.15);
+    coinPocket.rotation.y = -0.35;
+    group.add(coinPocket);
+
+    const coinRivet = new THREE.Mesh(new THREE.SphereGeometry(0.06, 12, 12), copperMat);
+    coinRivet.position.set(1.7, 2.7, 2.05);
+    group.add(coinRivet);
+
+    // 4. Rear Pentagonal Patch Pockets with Arcuate Signature Stitch
+    const pocketShape = new THREE.Shape();
+    pocketShape.moveTo(-0.6, 0.7);
+    pocketShape.lineTo(0.6, 0.7);
+    pocketShape.lineTo(0.6, -0.4);
+    pocketShape.lineTo(0, -0.75);
+    pocketShape.lineTo(-0.6, -0.4);
+    pocketShape.closePath();
+
+    const pocketGeom = new THREE.ShapeGeometry(pocketShape);
+    
+    // Left Rear Patch Pocket
+    const backPocketL = new THREE.Mesh(pocketGeom, mat);
+    backPocketL.position.set(-1.15, 1.75, -2.55);
+    backPocketL.rotation.y = Math.PI - 0.12;
+    backPocketL.userData = {
+      name: "Left Rear Pocket with Double-Arcuate Thread Stitch",
+      explodedPos: new THREE.Vector3(-1.15, 1.75, -4.5),
+      originPos: new THREE.Vector3(-1.15, 1.75, -2.55)
+    };
+    group.add(backPocketL);
+    parts.push(backPocketL);
+
+    // Right Rear Patch Pocket
+    const backPocketR = new THREE.Mesh(pocketGeom, mat);
+    backPocketR.position.set(1.15, 1.75, -2.55);
+    backPocketR.rotation.y = Math.PI + 0.12;
+    backPocketR.userData = {
+      name: "Right Rear Pocket with Double-Arcuate Thread Stitch",
+      explodedPos: new THREE.Vector3(1.15, 1.75, -4.5),
+      originPos: new THREE.Vector3(1.15, 1.75, -2.55)
+    };
+    group.add(backPocketR);
+    parts.push(backPocketR);
+
+    // Vintage Cognac Leather Brand Patch on Rear-Right Waistband
+    const leatherGeo = new THREE.BoxGeometry(0.95, 0.55, 0.05);
+    const leatherMat = new THREE.MeshStandardMaterial({
+      color: 0x8a4823,
+      roughness: 0.65,
+      metalness: 0.12
+    });
+    const leatherPatch = new THREE.Mesh(leatherGeo, leatherMat);
+    leatherPatch.position.set(1.35, 3.25, -2.42);
+    leatherPatch.rotation.y = Math.PI + 0.25;
+    leatherPatch.userData = {
+      name: "Embossed Full-Grain Saddle Leather Waistband Patch",
+      explodedPos: new THREE.Vector3(2.5, 4.2, -4.2),
+      originPos: new THREE.Vector3(1.35, 3.25, -2.42)
+    };
+    group.add(leatherPatch);
+    parts.push(leatherPatch);
+
+    // 5. Left Leg (Sculpted South Asian Ergonomic Taper)
     const legCurveL = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(-1.3, 2.7, 0),
-      new THREE.Vector3(-1.45, 1.2, 0.15), // Hip Flare
-      new THREE.Vector3(-1.35, -0.8, 0.05), // Knee ergonomic bend
-      new THREE.Vector3(-1.15, -2.8, -0.05), // Calf
-      new THREE.Vector3(-1.0, -4.5, 0)       // Ankle Cuff
+      new THREE.Vector3(-1.22, 1.1, 0),
+      new THREE.Vector3(-1.26, 0.0, 0.05),
+      new THREE.Vector3(-1.20, -1.3, 0.16),
+      new THREE.Vector3(-1.12, -2.8, 0.06),
+      new THREE.Vector3(-1.05, -4.4, 0)
     ]);
-    const leftLegGeo = new THREE.TubeGeometry(legCurveL, 32, 1.25, 24, false);
+    const leftLegGeo = new THREE.TubeGeometry(legCurveL, 36, 1.18, 24, false);
     const leftLeg = new THREE.Mesh(leftLegGeo, mat);
     leftLeg.userData = {
-      name: "Left Inseam: 13.5oz Ring-Spun Cotton Warp",
-      explodedPos: new THREE.Vector3(-3.2, 0, 0),
+      name: "Left Inseam: 13.5oz Ring-Spun Cotton Warp (2% Lycra)",
+      explodedPos: new THREE.Vector3(-2.8, 0, 0),
       originPos: new THREE.Vector3(0, 0, 0)
     };
     group.add(leftLeg);
     parts.push(leftLeg);
 
-    // 3. Right Leg (Mirror Curve)
+    // 6. Right Leg (Mirrored Curve)
     const legCurveR = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(1.3, 2.7, 0),
-      new THREE.Vector3(1.45, 1.2, 0.15),
-      new THREE.Vector3(1.35, -0.8, 0.05),
-      new THREE.Vector3(1.15, -2.8, -0.05),
-      new THREE.Vector3(1.0, -4.5, 0)
+      new THREE.Vector3(1.22, 1.1, 0),
+      new THREE.Vector3(1.26, 0.0, 0.05),
+      new THREE.Vector3(1.20, -1.3, 0.16),
+      new THREE.Vector3(1.12, -2.8, 0.06),
+      new THREE.Vector3(1.05, -4.4, 0)
     ]);
-    const rightLegGeo = new THREE.TubeGeometry(legCurveR, 32, 1.25, 24, false);
+    const rightLegGeo = new THREE.TubeGeometry(legCurveR, 36, 1.18, 24, false);
     const rightLeg = new THREE.Mesh(rightLegGeo, mat);
     rightLeg.userData = {
-      name: "Right Inseam: 2% Lycra Memory Snapback Core",
-      explodedPos: new THREE.Vector3(3.2, 0, 0),
+      name: "Right Inseam: 13.5oz Ring-Spun Cotton Warp (2% Lycra)",
+      explodedPos: new THREE.Vector3(2.8, 0, 0),
       originPos: new THREE.Vector3(0, 0, 0)
     };
     group.add(rightLeg);
     parts.push(rightLeg);
 
-    // 4. Front Scoop Pockets & Coin Pocket with Rivet
-    const pocketGeo = new THREE.BoxGeometry(1.2, 1.4, 0.1);
-    const pocket = new THREE.Mesh(pocketGeo, mat);
-    pocket.position.set(-1.15, 2.2, 2.55);
-    pocket.userData = {
-      name: "Front Scoop Pocket with Zinc-Alloy Security Rivet",
-      explodedPos: new THREE.Vector3(-1.15, 2.2, 4.2),
-      originPos: new THREE.Vector3(-1.15, 2.2, 2.55)
-    };
-    group.add(pocket);
-    parts.push(pocket);
-
-    // Rivet on pocket
-    const rivetGeo = new THREE.SphereGeometry(0.09, 12, 12);
-    const rivetMat = new THREE.MeshStandardMaterial({ color: 0xb87333, metalness: 0.9, roughness: 0.3 });
-    const rivet = new THREE.Mesh(rivetGeo, rivetMat);
-    rivet.position.set(-1.65, 2.6, 2.62);
-    group.add(rivet);
-
-    // Selvedge Cuff Accent Trim (White with Red Core Line)
-    const cuffGeo = new THREE.TorusGeometry(1.05, 0.08, 12, 28);
+    // 7. Folded Selvedge Turn-Up Cuffs at Hem
+    const cuffGeo = new THREE.TorusGeometry(1.12, 0.09, 12, 32);
     cuffGeo.rotateX(Math.PI / 2);
-    const cuffMat = new THREE.MeshStandardMaterial({ color: 0xdb2128, roughness: 0.4 });
+    const cuffMat = new THREE.MeshStandardMaterial({
+      color: 0x9fb5d4,
+      roughness: 0.8
+    });
     const cuffL = new THREE.Mesh(cuffGeo, cuffMat);
-    cuffL.position.set(-1.0, -4.4, 0);
+    cuffL.position.set(-1.05, -4.38, 0);
     group.add(cuffL);
+
     const cuffR = new THREE.Mesh(cuffGeo, cuffMat);
-    cuffR.position.set(1.0, -4.4, 0);
+    cuffR.position.set(1.05, -4.38, 0);
     group.add(cuffR);
+
+    // Red Selvedge Ticker Line on Outseam Cuffs
+    const selvedgeTickerMat = new THREE.MeshStandardMaterial({ color: 0xdb2128, roughness: 0.3 });
+    const tickerL = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.35, 0.16), selvedgeTickerMat);
+    tickerL.position.set(-2.18, -4.38, 0);
+    group.add(tickerL);
+
+    const tickerR = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.35, 0.16), selvedgeTickerMat);
+    tickerR.position.set(2.18, -4.38, 0);
+    group.add(tickerR);
 
     group.userData = { parts, material: mat };
     group.visible = false;
@@ -1000,20 +1194,24 @@ class TIGCShowroomEngine {
     if (descEl) descEl.textContent = data.description;
 
     if (specsContainer) {
-      specsContainer.innerHTML = data.specs.map((s, idx) => `
+      specsContainer.innerHTML = data.specs.map(s => `
         <div class="denim-spec-card">
-          <div class="spec-card-num">SPEC 0${idx + 1} // ${s.label.toUpperCase()}</div>
+          <div class="spec-card-num">${s.label}</div>
           <div class="spec-card-title">${s.val}</div>
         </div>
       `).join('');
     }
 
     if (washesContainer) {
-      washesContainer.innerHTML = Object.keys(data.washes).map(k => `
-        <button class="denim-wash-pill ${k === this.activeWash ? 'active' : ''}" data-wash="${k}">
-          ${data.washes[k].name.toUpperCase()}
-        </button>
-      `).join('');
+      washesContainer.innerHTML = Object.keys(data.washes).map(k => {
+        const hex = data.washes[k].color.toString(16).padStart(6, '0');
+        return `
+          <button class="denim-wash-pill ${k === this.activeWash ? 'active' : ''}" data-wash="${k}">
+            <span class="wash-swatch-dot" style="background: #${hex};"></span>
+            ${data.washes[k].name}
+          </button>
+        `;
+      }).join('');
 
       // Wire click events to new wash buttons
       washesContainer.querySelectorAll('.denim-wash-pill').forEach(btn => {
@@ -1102,24 +1300,30 @@ class TIGCShowroomEngine {
       else themeBadge.innerHTML = '☾ MIDNIGHT OBSIDIAN';
     }
 
-    // Update Three.js lighting atmosphere
+    // Update Three.js lighting atmosphere (Balanced Luxury Studio)
     if (this.studioAmbient && this.studioKey && this.studioFill) {
       if (themeName === 'daylight') {
-        this.studioAmbient.intensity = 1.1;
-        this.studioKey.color.setHex(0xffffff);
+        this.studioAmbient.intensity = 0.52;
+        this.studioKey.intensity = 1.30;
+        this.studioKey.color.setHex(0xfffaf0);
+        this.studioFill.intensity = 0.55;
         this.studioFill.color.setHex(0xb0c8f8);
-        if (this.heroAmbientLight) this.heroAmbientLight.intensity = 0.95;
+        if (this.heroAmbientLight) this.heroAmbientLight.intensity = 0.55;
       } else if (themeName === 'dusk') {
-        this.studioAmbient.intensity = 0.85;
-        this.studioKey.color.setHex(0xffaa44); // Sunset Amber
+        this.studioAmbient.intensity = 0.44;
+        this.studioKey.intensity = 1.25;
+        this.studioKey.color.setHex(0xff9944); // Sunset Amber
+        this.studioFill.intensity = 0.60;
         this.studioFill.color.setHex(0x9d4edd); // Twilight Violet
-        if (this.heroAmbientLight) this.heroAmbientLight.intensity = 0.8;
+        if (this.heroAmbientLight) this.heroAmbientLight.intensity = 0.50;
       } else {
         // Midnight Obsidian
-        this.studioAmbient.intensity = 0.75;
+        this.studioAmbient.intensity = 0.40;
+        this.studioKey.intensity = 1.20;
         this.studioKey.color.setHex(0xffffff);
+        this.studioFill.intensity = 0.65;
         this.studioFill.color.setHex(0x5271ff); // Deep Indigo
-        if (this.heroAmbientLight) this.heroAmbientLight.intensity = 0.65;
+        if (this.heroAmbientLight) this.heroAmbientLight.intensity = 0.45;
       }
     }
   }

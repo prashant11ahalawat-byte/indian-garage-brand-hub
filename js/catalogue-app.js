@@ -58,72 +58,72 @@ function initVelocityScrubber() {
 
   const velocityStages = {
     1: {
-      stage: "STAGE 01 // SOCIAL AI SIGNAL HARVESTING",
+      stage: "Phase 01 • Social AI Signal Harvesting",
       title: "2.4M Social Signals & Global Runway Scraping",
       desc: "Neural scrapers analyze over 2.4 Million social signals, street style drops, and Pinterest boards weekly to isolate breakout silhouettes and fabric weights before legacy brands notice."
     },
     2: {
-      stage: "STAGE 02 // MOODBOARDING & SILHOUETTE SELECT",
+      stage: "Phase 02 • Rapid Prototyping & Fabric Pairing",
       title: "Rapid Prototyping & Fabric Pairing",
       desc: "Design pods in Indore and Bengaluru map identified trends to proven South Asian morphological pattern blocks and allocate pre-tested raw fabric stock."
     },
     3: {
-      stage: "STAGE 03 // 3D CAD MORPHOLOGICAL DRAFTING",
+      stage: "Phase 03 • Virtual Pattern Calibration",
       title: "Virtual Pattern Grading & Indian Body Calibration",
       desc: "Digital 3D samples constructed on virtual South Asian avatars, locking waist-rise tension and thigh ease without cutting physical sample fabric."
     },
     4: {
-      stage: "STAGE 04 // DIGITAL NESTING & TEXTILE ALLOCATION",
+      stage: "Phase 04 • Zero-Waste Digital Nesting",
       title: "Zero-Waste Fabric Optimization",
       desc: "Automated algorithmic pattern nesting achieves 94% textile utilization across ring-spun cotton and waffle-knit rolls, eliminating cutting waste."
     },
     5: {
-      stage: "STAGE 05 // HIGH-SPEED CNC LASER CUTTING",
+      stage: "Phase 05 • High-Speed CNC Laser Cutting",
       title: "Automated Multi-Ply Precision Cutting",
       desc: "Computer-controlled laser cutting tables slice 300-unit test batches in under 45 minutes with microscopic edge precision and zero fraying."
     },
     6: {
-      stage: "STAGE 06 // DECENTRALIZED POD ASSEMBLY",
+      stage: "Phase 06 • Decentralized Factory Pod Assembly",
       title: "100+ Agile Factory Pods in Motion",
       desc: "Specialized modular manufacturing pods in Indore, Surat, and Tirupur stitch garments with 14-point military-grade bartack reinforcements."
     },
     7: {
-      stage: "STAGE 07 // SUSTAINABLE OZONE & LASER WASH",
+      stage: "Phase 07 • Sustainable Waterless Ozone Wash",
       title: "Eco-Friendly Finishing & Water Reduction",
       desc: "Denim and casuals undergo waterless ozone bleaching and laser whiskering, slashing chemical and water use by 65% compared to conventional mills."
     },
     8: {
-      stage: "STAGE 08 // HEAT CURING & PEACH SOFT-FINISH",
+      stage: "Phase 08 • Heat Curing & Peach Soft-Finish",
       title: "Shrinkage Stabilization & Velvet Touch",
       desc: "Sanforization chambers lock shrinkage to under 1.5%, followed by an organic enzyme velvet wash for luxurious all-day skin comfort."
     },
     9: {
-      stage: "STAGE 09 // AQL 1.5 MILITARY INTEGRITY AUDIT",
+      stage: "Phase 09 • AQL 1.5 Integrity Audit",
       title: "Tensile Pull Tests & Laundry Stress Cycles",
       desc: "Garments pass military-grade tensile pull tests, wash-shrinkage checks, and zipper cycle endurance tests across 200+ simulated domestic laundry runs."
     },
     10: {
-      stage: "STAGE 10 // DIGITAL SERIALIZATION & RF TAGGING",
+      stage: "Phase 10 • Digital RFID Serialization",
       title: "Smart Inventory Tracking & Packaging",
       desc: "Every single piece receives unique RFID serialization and barcode tracking for realtime shelf inventory reconciliation."
     },
     11: {
-      stage: "STAGE 11 // INDORE CENTRAL HUB DISPATCH",
+      stage: "Phase 11 • Central Hub Express Dispatch",
       title: "Automated Sorting & Fleet Allocation",
       desc: "Indore central logistics facility routes batches directly to express transit networks serving metro corridors within 24 hours."
     },
     12: {
-      stage: "STAGE 12 // OMNICHANNEL SHELF SYNCHRONIZATION",
+      stage: "Phase 12 • Omnichannel Shelf Synchronization",
       title: "Simultaneous EBO & E-Commerce Dark Store Drop",
       desc: "Micro-batch inventory arrives simultaneously at 20+ flagship EBO stores (Bengaluru, Lucknow, Kochi) and top e-commerce fulfillment dark stores."
     },
     13: {
-      stage: "STAGE 13 // CAMPAIGN LAUNCH & LIVE DIGITAL DROP",
+      stage: "Phase 13 • Performance Digital Drop",
       title: "Targeted Performance Ads & VIP Member Drop",
       desc: "Styles go live on tigc.in, Myntra, Flipkart, and Ajio with real-time conversion pixel tracking and instant push notifications."
     },
     14: {
-      stage: "STAGE 14 // 48-HR ALGORITHMIC SCALE OR KILL",
+      stage: "Phase 14 • 48-Hour Algorithmic Scale or Kill",
       title: "88% Sell-Through Trigger: Mass Scale or Discontinue",
       desc: "Our demand engine tracks 48-hour sell-through velocity. Top performers trigger automated mass-production repeat batches; sluggish styles are discontinued with zero dead-stock residue."
     }
@@ -193,19 +193,19 @@ function initPartnershipTerminal() {
     const unitRate = parseFloat(sliderRate.value);
     const multiplier = selectCategory ? parseFloat(selectCategory.value) || 1.0 : 1.0;
 
-    if (dispCapacity) dispCapacity.textContent = `${monthlyUnits.toLocaleString()} UNITS / MONTH`;
-    if (dispRate) dispRate.textContent = `₹${unitRate.toLocaleString()} / PIECE`;
+    if (dispCapacity) dispCapacity.textContent = `${monthlyUnits.toLocaleString()} units / month`;
+    if (dispRate) dispRate.textContent = `₹${unitRate.toLocaleString()} / piece`;
 
     const effectiveMonthlyUnits = Math.round(monthlyUnits * multiplier);
     const annualUnits = effectiveMonthlyUnits * 12;
     const monthlyVal = effectiveMonthlyUnits * unitRate;
     const annualVal = monthlyVal * 12;
 
-    if (outAnnualUnits) outAnnualUnits.textContent = `${(annualUnits / 1000).toFixed(0)}K UNITS / YR`;
+    if (outAnnualUnits) outAnnualUnits.textContent = `${(annualUnits / 1000).toFixed(0)}K Units / Year`;
     if (outMonthlyVal) outMonthlyVal.textContent = `₹${(monthlyVal / 100000).toFixed(1)} L`;
     if (outAnnualVal) outAnnualVal.textContent = `₹${(annualVal / 10000000).toFixed(2)} CR`;
-    if (outPayment) outPayment.textContent = `30–45 DAYS (TMRW)`;
-    if (outVelocity) outVelocity.textContent = `14-DAY SPRINT`;
+    if (outPayment) outPayment.textContent = `30–45 Days (TMRW)`;
+    if (outVelocity) outVelocity.textContent = `14-Day Sprint`;
   }
 
   [sliderCapacity, sliderRate, selectCategory].filter(Boolean).forEach(input => {
