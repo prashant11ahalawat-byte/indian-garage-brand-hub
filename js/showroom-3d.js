@@ -95,8 +95,8 @@ class TIGCShowroomEngine {
         },
         {
           year: "2025",
-          title: "₹204 Cr Revenue & 18 Retail Stores",
-          desc: "Doubled top-line revenue year-over-year from ₹101 Cr to ₹204 Cr (FY25). Moving 550,000+ units monthly, expanding our omnichannel footprint to 18 live Exclusive Brand Outlets, and crossing ₹100 Cr on D2C.",
+          title: "₹204 Cr Revenue & 25 Retail Stores",
+          desc: "Doubled top-line revenue year-over-year from ₹101 Cr to ₹204 Cr (FY25). Moving 550,000+ units monthly, expanding our omnichannel footprint to ~25 live Exclusive Brand Outlets, and crossing ₹100 Cr on D2C.",
           highlight: "Doubled YoY to ₹204 Cr",
           unitsGain: 6500000
         },

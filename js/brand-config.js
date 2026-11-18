@@ -19,7 +19,7 @@ window.BRAND_PRESETS = {
     fy25Revenue: "₹204 Crore (More than doubled from ₹101 Crore)",
     d2cScale: "₹100 Crore D2C (tigc.in)",
     marketDominance: "#1 External Brand on AJIO // Top 10 on Myntra",
-    retailFootprint: "18 Live Retail Stores (Targeting 100 EBOs)",
+    retailFootprint: "25 Live Retail Stores (Targeting 100 EBOs)",
     brandAmbassador: "Suryakumar Yadav (SKY) — Indian T20 Captain",
     version: "v2.5 Brand Dossier Edition",
     updated: "November 2026",
@@ -64,7 +64,7 @@ window.BRAND_PRESETS = {
       d2cScale: "₹100 Crore D2C Business (tigc.in)",
       denimUnitsSold: "2,800,000+ pairs annually",
       averageSellThrough: "88% in 45 days",
-      ebosLive: "18 Live Retail Stores across India",
+      ebosLive: "25 Live Retail Stores across India",
       ebosRoadmap: "100 Exclusive Brand Outlets (EBOs) Target",
       supplyChainVelocity: "14 Days Concept-to-Shelf"
     },
