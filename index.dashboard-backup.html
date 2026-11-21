@@ -1,0 +1,1867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indian Garage — Brand Introduction & Digital Dossier</title>
+  
+  <!-- Local Core Engine Libraries (Lusion/Active Theory Stack) -->
+  <script src="js/lib/three.min.js"></script>
+  <script src="js/lib/gsap.min.js"></script>
+
+  <!-- Typography: Bebas Neue, Space Grotesk, JetBrains Mono, Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/catalogue.css?v=2.6">
+</head>
+<body>
+
+  <!-- Living Liquid Aurora Caustic System (Apple iOS 27 / VisionOS) -->
+  <div class="ios-ambient-caustics">
+    <div class="liquid-orb orb-1"></div>
+    <div class="liquid-orb orb-2"></div>
+    <div class="liquid-orb orb-3"></div>
+    <div class="liquid-orb orb-4"></div>
+  </div>
+
+  <!-- ======================================================================
+       PERSISTENT TOP DUAL-PORTAL NAVIGATION DOCK
+       ====================================================================== -->
+  <nav class="catalogue-nav-dock">
+    <a href="#hero" class="nav-brand-lockup">
+      <div class="nav-monogram-box">
+        <!-- Official Vector G-Unit Monogram (Pixel-Perfect Bounding Box) -->
+        <svg viewBox="952 942 256 256" style="width: 100%; height: 100%; display: block;" fill="none">
+          <path fill="#E50914" d="M1207.66,1140.2c-.17,31.44-28.4,55.96-59.93,55.96h-59.22s-.04-.02-.04-.04v-45.84s.02-.05.04-.05h52.3c11.46,0,20.76-9.26,20.76-20.7v-33.99s-.03-.05-.05-.05h-54.43s-.04-.02-.04-.04v-45.66s.02-.05.04-.05h100.59v90.48Z"/>
+          <path fill="#E50914" d="M1207.76,1015.53h-45.96s-.05-.02-.05-.04v-6.22c0-11.29-9.52-20.44-21.25-20.44h-51.98s-.04-.02-.04-.04v-46.01s.02-.04.04-.04h57.51c32.58,0,61.64,25.34,61.74,56.67l.05,16.09s-.03.04-.05.04"/>
+          <path fill="#E50914" d="M953.21,1140.21c.17,31.44,28.4,55.96,59.93,55.96h59.22s.04-.02.04-.04v-45.84s-.02-.05-.04-.05h-52.3c-11.46,0-20.76-9.26-20.76-20.7v-33.99s.03-.05.05-.05h54.43s.04-.02.04-.04v-45.66s-.02-.05-.04-.05h-100.59v90.48Z"/>
+          <path fill="#E50914" d="M953.12,1015.53h45.96s.05-.02.05-.04v-6.22c0-11.29,9.52-20.44,21.25-20.44h51.98s.04-.02.04-.04v-46.02s-.02-.04-.04-.04h-57.51c-32.58,0-61.64,25.34-61.74,56.67l-.05,16.09s.03.04.05.04"/>
+        </svg>
+      </div>
+      <span class="nav-brand-title">INDIAN GARAGE</span>
+    </a>
+
+    <!-- Center Navigation Links -->
+    <div class="nav-links-cluster">
+      <a href="#why-partner" class="nav-link-pill">Why Partner</a>
+      <a href="#showroom" class="nav-link-pill">3D Studio</a>
+      <a href="#about-us" class="nav-link-pill">About Us</a>
+      <a href="#velocity" class="nav-link-pill">Agile Velocity</a>
+      <a href="#media-center" class="nav-link-pill">Media</a>
+      <a href="#store-locator" class="nav-link-pill">Stores</a>
+      <a href="#social-hub" class="nav-link-pill">Social Hub</a>
+      <a href="#partner-hub" class="nav-link-pill">Contact</a>
+    </div>
+
+    <!-- Actions: Shop tigc.in CTA + Time Theme + Sound FX -->
+    <div class="nav-actions-cluster">
+      <a href="https://tigc.in" target="_blank" class="nav-shop-cta-btn" title="Shop Official Store on tigc.in">
+        <span>Shop tigc.in</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+      </a>
+
+      <!-- Compact Dynamic Atmosphere Switcher -->
+      <div class="nav-theme-compact" title="Dynamic Atmosphere (macOS Live Mode)">
+        <span class="nav-clock-text" id="live-time-ticker">--:-- IST</span>
+        <button class="nav-mode-icon-btn active" data-time-mode="auto" title="Auto Mode">⚡</button>
+        <button class="nav-mode-icon-btn" data-time-mode="daylight" title="Day Mode">☼</button>
+        <button class="nav-mode-icon-btn" data-time-mode="midnight" title="Night Mode">☾</button>
+      </div>
+
+      <!-- Tactile Sound Toggle -->
+      <button class="sound-toggle-btn compact" id="btn-sound-toggle" title="Toggle Sound FX">
+        <div class="sound-wave-bars" id="sound-wave-bars">
+          <span></span><span></span><span></span>
+        </div>
+        <span id="sound-toggle-label">FX</span>
+      </button>
+
+      <!-- Mobile Navigation Hamburger Button -->
+      <button class="mobile-menu-btn" id="btn-mobile-menu-toggle" title="Toggle Navigation Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Navigation Glass Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-nav-drawer" style="display: none;">
+    <div class="mobile-drawer-header">
+      <span class="mobile-drawer-title">INDIAN GARAGE</span>
+      <button class="mobile-drawer-close" id="btn-mobile-drawer-close">✕</button>
+    </div>
+    <div class="mobile-drawer-links">
+      <a href="#why-partner" class="mobile-drawer-link">Why Partner With Us</a>
+      <a href="#showroom" class="mobile-drawer-link">3D Apparel Studio (WGSN)</a>
+      <a href="#about-us" class="mobile-drawer-link">About Us & Genesis</a>
+      <a href="#velocity" class="mobile-drawer-link">14-Day Micro-Batch Velocity</a>
+      <a href="#ecosystem" class="mobile-drawer-link">Retail & Quick Commerce</a>
+      <a href="#store-locator" class="mobile-drawer-link">23 Retail Stores & Maps</a>
+      <a href="#media-center" class="mobile-drawer-link">National Media & SKY</a>
+      <a href="#social-hub" class="mobile-drawer-link">Social Media & Mottos</a>
+      <a href="#contact-desks" class="mobile-drawer-link">Corporate Contact Desks</a>
+      <a href="https://tigc.in" target="_blank" class="mobile-drawer-cta">Shop on tigc.in ↗</a>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       HERO: ARCHITECTURAL 2-COLUMN LUXURY SHOWCASE
+       ====================================================================== -->
+  <section class="hero-stage-section" id="hero">
+    <!-- Left Column: Editorial Introduction & Scaled Metrics -->
+    <div class="hero-content-layer">
+      <div class="hero-status-pill">
+        <span>●</span> Backed by Aditya Birla Group (TMRW) • India's Fast-Fashion Titan
+      </div>
+
+      <h1 class="hero-huge-headline">
+        THE FAST-FASHION<br>
+        POWERHOUSE OF<br>
+        <span class="gradient-accent">NEW INDIA.</span>
+      </h1>
+
+      <p class="hero-manifesto-sub">
+        Welcome to <strong>Indian Garage</strong>. Selling <strong>500,000 to 600,000 garments monthly</strong> and more than doubling our revenue to <strong>₹204 Crore in FY25</strong>, we are one of India’s fastest-growing D2C fashion powerhouses. Powered by zero brand tax, agile supply velocity, and the institutional stability of Aditya Birla Group's TMRW.
+      </p>
+
+      <!-- 6 Real Commercial Scale Metric Cards (From Official Pitch) -->
+      <div class="hero-kpi-ticker-row">
+        <div class="kpi-ticker-item">
+          <div class="kpi-ticker-val" style="color: var(--tigc-crimson-bright);">₹500 CR</div>
+          <div class="kpi-ticker-label">Current GMV (Targeting ₹1,000 Cr)</div>
+        </div>
+        <div class="kpi-ticker-item">
+          <div class="kpi-ticker-val">500K–600K</div>
+          <div class="kpi-ticker-label">Garments Sold / Month (~7M/Yr)</div>
+        </div>
+        <div class="kpi-ticker-item">
+          <div class="kpi-ticker-val" style="color: var(--accent-emerald);">₹204 CR</div>
+          <div class="kpi-ticker-label">FY25 Revenue (Doubled YoY from ₹101 Cr)</div>
+        </div>
+        <div class="kpi-ticker-item">
+          <div class="kpi-ticker-val">#1 ON AJIO</div>
+          <div class="kpi-ticker-label">Top 10 Highest-Selling on Myntra</div>
+        </div>
+        <div class="kpi-ticker-item">
+          <div class="kpi-ticker-val" style="color: var(--accent-cyan);">₹100 CR</div>
+          <div class="kpi-ticker-label">Proprietary D2C Run-Rate (tigc.in)</div>
+        </div>
+        <div class="kpi-ticker-item">
+          <div class="kpi-ticker-val">23 STORES</div>
+          <div class="kpi-ticker-label">Live Retail EBOs (Targeting 100 Outlets)</div>
+        </div>
+      </div>
+
+      <div class="hero-cta-group">
+        <a href="https://tigc.in" target="_blank" class="btn-catalogue-primary">
+          Explore tigc.in ↗
+        </a>
+        <a href="#why-partner" class="btn-catalogue-ghost">
+          Why Partner With Us ↓
+        </a>
+      </div>
+    </div>
+
+    <!-- Right Column: Seamless Floating 3D Kinetic Emblem Stage + Playable Journey Run -->
+    <div class="hero-emblem-stage-container" id="hero-game-wrapper">
+      <div id="hero-3d-podium-canvas" class="hero-ambient-canvas">
+        <!-- Three.js Hero Monogram Canvas injected here -->
+      </div>
+
+      <!-- Playable Game HUD Top Bar -->
+      <div class="game-hud-top" id="game-hud-top" style="display: none;">
+        <div class="game-hud-chip milestone-year" id="game-hud-year">
+          <span class="hud-led"></span>
+          <span id="game-disp-year">YEAR: 2012</span>
+        </div>
+        <div class="game-hud-chip units" id="game-hud-units">
+          <span>UNITS:</span> <strong id="game-disp-units">0</strong>
+        </div>
+        <div class="game-hud-chip score" id="game-hud-score">
+          <span>SCORE:</span> <strong id="game-disp-score">0</strong>
+        </div>
+      </div>
+
+      <!-- Milestone Showcase Modal (Ample time to read brand history) -->
+      <div class="game-milestone-modal" id="game-milestone-modal" style="display: none;">
+        <div class="milestone-modal-card">
+          <div class="milestone-modal-header">
+            <span class="milestone-badge">MILESTONE UNLOCKED</span>
+            <span class="milestone-modal-year" id="milestone-modal-year">2023</span>
+          </div>
+          <h3 class="milestone-modal-title" id="milestone-modal-title">Aditya Birla Group (TMRW) Union</h3>
+          <p class="milestone-modal-desc" id="milestone-modal-desc">
+            ₹155 Crore Series B Growth Capital • Strategic partnership with TMRW House of Brands, ensuring long-term corporate governance, 30–45 day supplier payment cycles, and rapid national retail expansion.
+          </p>
+          <div class="milestone-modal-stat-bar">
+            <div>
+              <span class="stat-lbl">Offtake Unlocked</span>
+              <strong class="stat-val" id="milestone-modal-units">+4,500,000 Units</strong>
+            </div>
+            <div>
+              <span class="stat-lbl">Strategic Milestone</span>
+              <strong class="stat-val highlight" id="milestone-modal-highlight">₹155 Cr Series B</strong>
+            </div>
+          </div>
+          <button class="btn-milestone-continue" id="btn-milestone-continue">
+            <span>CONTINUE RUNNING ➔</span>
+            <span class="countdown-tag" id="milestone-countdown">(Space / Tap or 7s)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Game Over / Victory Modal Overlay -->
+      <div class="game-over-overlay" id="game-over-overlay" style="display: none;">
+        <div class="game-over-card">
+          <div class="game-over-badge" id="game-over-badge">JOURNEY PAUSED</div>
+          <h3 class="game-over-title" id="game-over-title">Encountered Legacy Supply Delays!</h3>
+          <p class="game-over-desc" id="game-over-desc">
+            Traditional 6-month seasonal cycles trapped inventory. Indian Garage operates on a 14-day velocity!
+          </p>
+          <div class="game-over-stats">
+            <div><span>Peak Milestone:</span> <strong id="game-over-max-year">2025</strong></div>
+            <div><span>Total Offtake:</span> <strong id="game-over-final-units">420,000 Units</strong></div>
+          </div>
+          <div class="game-over-actions">
+            <button class="btn-game-primary" id="btn-restart-game">RESTART JOURNEY ↻</button>
+            <button class="btn-game-ghost" id="btn-mode-inspect">FREE 3D VIEW 👁️</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dual Mode Control Dock at Bottom -->
+      <div class="hero-game-controls-dock">
+        <button class="hero-game-btn" id="btn-toggle-journey-game">
+          <span class="game-icon">🕹️</span>
+          <span id="game-btn-label">PLAY JOURNEY RUN <span class="game-btn-sub">(SPACE TO JUMP)</span></span>
+        </button>
+        <span class="game-audio-pill" id="hero-audio-status-pill">
+          <span class="emblem-audio-dot"></span>
+          <span>Spatial Audio Active</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SECTION 01: WHY PARTNER WITH INDIAN GARAGE? (THE STRATEGIC ADVANTAGE)
+       ====================================================================== -->
+  <section class="catalogue-section" id="why-partner">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <div>
+        <span class="section-eyebrow">STRATEGIC ADVANTAGE</span>
+        <h2 class="section-headline">Why Industry Leaders Partner With Indian Garage</h2>
+      </div>
+      <div>
+        <span class="hero-status-pill">TMRW (Aditya Birla Group) Backed • Enterprise Execution</span>
+      </div>
+    </div>
+
+    <p class="section-lead-copy">
+      As one of India's fastest-growing D2C and fast-fashion powerhouses, we are scaling rapidly toward ₹1,000 Crore GMV. We are actively onboarding reliable manufacturing pods, textile mills, wash specialists, and retail partners to support our explosive expansion.
+    </p>
+
+    <!-- 5 Bento Strategic Cards (Translating Partnership Pitch into High-End Architecture) -->
+    <div class="why-partner-grid">
+      <!-- 1. Proven Scale -->
+      <div class="partner-bento-card featured">
+        <div>
+          <div class="partner-bento-badge">
+            <span>●</span> Proven Scale • High-Volume Offtake
+          </div>
+          <div class="partner-bento-metric crimson">500,000–600,000</div>
+          <h3 class="partner-bento-title">Garments Sold Every Month</h3>
+          <p class="partner-bento-desc">
+            We are one of the highest-volume fashion players in India. Moving over 6.5 to 7.2 Million garments annually, our supply partners enjoy non-stop year-round production allocation, predictable batch orders, and zero seasonal troughs.
+          </p>
+        </div>
+        <div class="partner-bento-footnote">
+          <span>HIGH-VOLUME THROUGHPUT</span>
+          <strong style="color: var(--accent-emerald);">88% SELL-THROUGH IN 45 DAYS</strong>
+        </div>
+      </div>
+
+      <!-- 2. Market Dominance -->
+      <div class="partner-bento-card">
+        <div>
+          <div class="partner-bento-badge emerald">
+            <span>●</span> Market Dominance • Pan-India Demand
+          </div>
+          <div class="partner-bento-metric">#1 ON AJIO</div>
+          <h3 class="partner-bento-title">Top 10 Highest-Selling on Myntra</h3>
+          <p class="partner-bento-desc">
+            Indian Garage is consistently ranked as the #1 external brand on AJIO and a permanent fixture in Myntra’s Top 10 highest-selling fashion brands. Beyond our marketplace dominance on Flipkart and Amazon, we have grown our own D2C channel (tigc.in) to ₹100 Crores.
+          </p>
+        </div>
+        <div class="partner-bento-footnote">
+          <span>OMNIPRESENT DEMAND</span>
+          <span>MYNTRA • AJIO • FLIPKART • D2C</span>
+        </div>
+      </div>
+
+      <!-- 3. Explosive Growth -->
+      <div class="partner-bento-card">
+        <div>
+          <div class="partner-bento-badge cyan">
+            <span>●</span> Compounding Growth • 102% YoY Expansion
+          </div>
+          <div class="partner-bento-metric" style="color: var(--accent-cyan);">₹204 CRORE</div>
+          <h3 class="partner-bento-title">Revenue Doubled in FY25 (Up from ₹101 Cr)</h3>
+          <p class="partner-bento-desc">
+            We more than doubled our top-line revenue in the last fiscal year alone—surging from ₹101 Crore in FY24 to ₹204 Crore in FY25. Operating at ₹500 Crore GMV and targeting ₹1,000 Crore, our partners grow alongside a compounding titan.
+          </p>
+        </div>
+        <div class="partner-bento-footnote">
+          <span>EBITDA POSITIVE DISCIPLINE</span>
+          <strong style="color: var(--text-pure);">RUNNING AT ₹500 CR GMV</strong>
+        </div>
+      </div>
+
+      <!-- 4. Omnichannel Expansion -->
+      <div class="partner-bento-card">
+        <div>
+          <div class="partner-bento-badge">
+            <span>●</span> Omnichannel Reach • 23 Stores Live
+          </div>
+          <div class="partner-bento-metric">23 STORES</div>
+          <h3 class="partner-bento-title">Targeting 100 Exclusive Outlets (EBOs)</h3>
+          <p class="partner-bento-desc">
+            Beyond our massive digital presence, Indian Garage has expanded to 23 retail stores across India. We are aggressively targeting 100 Exclusive Brand Outlets across Tier 1, Tier 2, and Tier 3 high streets and premier shopping malls.
+          </p>
+        </div>
+        <div class="partner-bento-footnote">
+          <span>OFFLINE FOOTPRINT</span>
+          <span>BENGALURU • MUMBAI • INDORE • LUCKNOW</span>
+        </div>
+      </div>
+
+      <!-- 5. Strong Corporate Backing -->
+      <div class="partner-bento-card span-2 featured">
+        <div>
+          <div class="partner-bento-badge emerald">
+            <span>●</span> Institutional Security • Aditya Birla Group (TMRW)
+          </div>
+          <div class="partner-bento-metric" style="color: var(--accent-emerald);">TMRW HOUSE OF BRANDS</div>
+          <h3 class="partner-bento-title">Long-Term Stability & Professional Corporate Standards</h3>
+          <p class="partner-bento-desc">
+            Indian Garage is proudly backed by <strong>TMRW</strong>, the digital-first House of Brands venture by <strong>Aditya Birla Group</strong>. For our manufacturing and supply partners, this means unmatched financial security, punctual 30–45 day payment cycles, enterprise ERP integration, and the highest standards of corporate governance.
+          </p>
+        </div>
+        <div class="partner-bento-footnote">
+          <span>FINANCIAL STABILITY</span>
+          <strong>ADITYA BIRLA GROUP CORPORATE GOVERNANCE</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SECTION 02: MULTI-CATEGORY 3D CAD APPAREL STUDIO & BLUEPRINT
+       ====================================================================== -->
+  <section class="catalogue-section" id="showroom">
+    <div class="section-header-lockup">
+      <div class="section-header-left">
+        <span class="section-eyebrow" id="showroom-garment-sub">3D CAD APPAREL SPECIFICATION • RAW INDIGO</span>
+        <h2 class="section-headline" id="showroom-garment-title">13.5oz Ring-Spun Comfort Stretch Denim</h2>
+      </div>
+      <div class="section-header-actions">
+        <span class="hero-status-pill" id="showroom-garment-badge">2.8M+ Pairs Sold Annually</span>
+        <a href="https://tigc.in" target="_blank" class="nav-shop-cta-btn" style="box-shadow: none;">
+          <span>Explore All on tigc.in</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <p class="section-lead-copy" id="showroom-garment-desc">
+      Inspect Indian Garage's multi-category apparel catalog in 3D CAD precision. From 13.5oz comfort-stretch selvedge denim to tailored combed cotton casuals and 320 GSM waffle polos. Hover to inspect in 3D perspective space, or toggle wash treatments below.
+    </p>
+
+    <!-- Multi-Category Selection Tabs -->
+    <div class="category-tabs-bar">
+      <button class="category-tab-pill active" data-category="denim">
+        <span class="tab-led"></span> 13.5oz Comfort Denim
+      </button>
+      <button class="category-tab-pill" data-category="shirt">
+        <span class="tab-led"></span> Tailored Casual Shirts
+      </button>
+      <button class="category-tab-pill" data-category="polo">
+        <span class="tab-led"></span> Polo-licious 320 GSM Knits
+      </button>
+      <button class="category-tab-pill" data-category="jacket">
+        <span class="tab-led"></span> All-Terrain Trucker Jackets
+      </button>
+      <button class="category-tab-pill" data-category="carpenter">
+        <span class="tab-led"></span> Utility Carpenter Trousers
+      </button>
+    </div>
+
+    <div class="denim-lab-grid">
+      <!-- 3D CAD Perspective Stage Wrapper -->
+      <div class="denim-3d-stage-wrapper">
+        <div class="denim-hud-top" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="color: var(--tigc-crimson-bright); font-weight: 700;">● 3D CAD APPAREL STUDIO</span>
+            <span style="color: var(--text-muted); font-size: 12px;">• Interactive Blueprint Inspector</span>
+          </div>
+          <div class="real-product-hud-tag" id="real-product-hud-tag" style="font-family: var(--font-body); font-size: 11px; font-weight: 700; color: var(--text-pure); background: var(--glass-thin); border: 1px solid var(--glass-border); padding: 4px 12px; border-radius: 9999px;">
+            3D CAD RENDER • 13.5oz RING-SPUN COMFORT STRETCH DENIM
+          </div>
+        </div>
+
+        <div class="showroom-viewport-container" id="showroom-viewport">
+          <!-- Genuine WebGL Three.js 3D Garment Stage (Rotatable 360°, Zoomable, Explodable) -->
+          <div id="showroom-3d-stage" class="showroom-3d-canvas-stage"></div>
+
+          <!-- 3D Camera Angles & Explode Anatomy HUD Controls -->
+          <div class="showroom-3d-hud-overlay">
+            <div class="showroom-camera-presets">
+              <button class="cam-preset-btn active" data-cam="front">FRONT</button>
+              <button class="cam-preset-btn" data-cam="three-quarter">3/4 VIEW</button>
+              <button class="cam-preset-btn" data-cam="side">SIDE</button>
+              <button class="cam-preset-btn" data-cam="back">BACK</button>
+            </div>
+            <button class="btn-explode-control" id="btn-explode-anatomy">
+              EXPLODE 3D ANATOMY
+            </button>
+          </div>
+        </div>
+
+        <div class="denim-hud-bottom">
+          <div class="showroom-rotation-hint">
+            <span class="rotation-hint-icon">🔄</span>
+            <span>Drag horizontally or swipe to inspect 360° • Click presets for instant angles</span>
+          </div>
+
+          <a href="https://tigc.in" target="_blank" rel="noopener noreferrer" class="btn-shop-tigc">
+            <span>Shop Category on tigc.in</span> ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- Specification Cards Column (Universal Operational & Commercial Specs) -->
+      <div class="denim-spec-cards-col" id="showroom-specs-container">
+        <div class="denim-spec-card">
+          <div class="spec-card-num">Production Turnaround</div>
+          <div class="spec-card-title">14-Day Micro-Batch Sprint (Concept-to-Rack)</div>
+        </div>
+
+        <div class="denim-spec-card">
+          <div class="spec-card-num">Quality Standard</div>
+          <div class="spec-card-title">Aditya Birla TMRW AQL 1.5 Compliance</div>
+        </div>
+
+        <div class="denim-spec-card">
+          <div class="spec-card-num">Fit Engineering</div>
+          <div class="spec-card-title">Calibrated South Asian Ergonomic Patterning</div>
+        </div>
+
+        <div class="denim-spec-card">
+          <div class="spec-card-num">Supply Model</div>
+          <div class="spec-card-title">Asset-Light 100+ Decentralized Factory Pods</div>
+        </div>
+
+        <div class="denim-spec-card">
+          <div class="spec-card-num">Sell-Through Velocity</div>
+          <div class="spec-card-title">88% in 45 Days (Fast-Fashion Benchmark)</div>
+        </div>
+
+        <div class="denim-spec-card">
+          <div class="spec-card-num">Pricing Segment</div>
+          <div class="spec-card-title">₹1,199 – ₹1,899 (High-Volume Sweetspot)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SECTION 04: THE INDIAN GARAGE SAGA & PHILOSOPHY
+       ====================================================================== -->
+  <section class="catalogue-section" id="about-us">
+    <a id="story" style="position: absolute; top: -80px;"></a>
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <div>
+        <span class="section-eyebrow">OUR GENESIS</span>
+        <h2 class="section-headline">From an Indore Garage to India's Fast-Fashion Titan</h2>
+      </div>
+      <div>
+        <span class="hero-status-pill">Bootstrapped to ₹500 Cr GMV • TMRW House of Brands</span>
+      </div>
+    </div>
+
+    <p class="section-lead-copy">
+      The definitive journey of Anant Tanted's ₹10 Lakh bootstrap in Indore, the revolutionary Zero Brand Tax philosophy, and the landmark partnership with Aditya Birla Group's TMRW to build India's ₹1,000 Crore fashion conglomerate.
+    </p>
+
+    <!-- High-Impact Founder Quote Card -->
+    <div class="story-manifesto-card">
+      <div class="story-quote-mark">“</div>
+      <div class="story-quote-text">
+        Every self-made story starts in a garage. Four walls, raw energy, and the belief that <span>Indian men deserve world-class high-street fashion</span> without paying a brand tax.
+      </div>
+      <div class="story-founder-row">
+        <div class="story-founder-avatar">AT</div>
+        <div class="story-founder-meta">
+          <div class="story-founder-name">ANANT TANTED</div>
+          <div class="story-founder-role">FOUNDER & CEO, INDIAN GARAGE</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Narrative Core Pillars (Split View) -->
+    <div class="story-narrative-split">
+      <div class="story-narrative-block">
+        <div>
+          <div class="story-narrative-tag">THE REVOLUTION</div>
+          <h3 class="story-narrative-title">The "Zero Brand Tax" Philosophy</h3>
+          <p class="story-narrative-p">
+            In 2012, young Indian men faced a binary trap: pay a 400% inflated price for an imported label just to wear an embroidered logo, or settle for uninspired domestic garments with poor fits and low-grade poly-mix fabrics. Anant Tanted established Indian Garage on a non-negotiable premise: <strong>Zero Brand Tax</strong>. Every single rupee goes into 13.5oz ring-spun denim warp, 320 GSM combed cotton, double-needle lock stitching, and calibrated South Asian rise ergonomics.
+          </p>
+        </div>
+        <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-emerald); font-weight: 700; margin-top: 20px;">
+          ✓ Honest Value • 100% Product Integrity • Zero Logo Markup
+        </div>
+      </div>
+
+      <div class="story-narrative-block">
+        <div>
+          <div class="story-narrative-tag">OPERATIONAL EXCELLENCE</div>
+          <h3 class="story-narrative-title">100+ Decentralized Agile Factory Pods</h3>
+          <p class="story-narrative-p">
+            While legacy brands built monolithic, debt-heavy garment factories with 6-month rigid scheduling, Indian Garage architected a modern, asset-light manufacturing web across Indore, Surat, and Tirupur. Over 100 specialized decentralized pods execute synchronized micro-batches. This eliminates capital-intensive dead stock, slashes idle factory capacity, and powers our legendary 14-day concept-to-rack velocity machine.
+          </p>
+        </div>
+        <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan); font-weight: 700; margin-top: 20px;">
+          ✓ Agile Supply • 6.5M+ Annual Units • 88% Sell-Through
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 Strategic Pillars Grid -->
+    <div class="story-pillars-grid">
+      <div class="story-pillar-card">
+        <div class="story-pillar-num">01</div>
+        <div class="story-pillar-title">Agile Micro-Batch Supply</div>
+        <div class="story-pillar-desc">
+          Operating an asset-light decentralized manufacturing web of 100+ specialized factory pods across Indore, Surat, and Tirupur. Real-time marketplace demand analytics guide rapid 14-day re-orders, keeping inventory lean with an 88% sell-through rate.
+        </div>
+      </div>
+
+      <div class="story-pillar-card">
+        <div class="story-pillar-num">02</div>
+        <div class="story-pillar-title">Tailored for the Indian Body</div>
+        <div class="story-pillar-desc">
+          Proprietary morphological pattern blocks that eliminate waistband gaping when riding motorbikes or sitting, engineered specifically for South Asian bone structures.
+        </div>
+      </div>
+
+      <div class="story-pillar-card">
+        <div class="story-pillar-num">03</div>
+        <div class="story-pillar-title">Aditya Birla / TMRW Backing</div>
+        <div class="story-pillar-desc">
+          Backed by Aditya Birla Group's digital venture TMRW, combining entrepreneurial speed with enterprise supply chain scale, corporate governance, and nationwide retail leverage.
+        </div>
+      </div>
+
+      <div class="story-pillar-card">
+        <div class="story-pillar-num">04</div>
+        <div class="story-pillar-title">Omnichannel EBO Network</div>
+        <div class="story-pillar-desc">
+          23 live retail stores scaling toward a target of 100 Exclusive Brand Outlets across Tier 1, 2, and 3 high streets and premier shopping malls.
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Chronology Timeline -->
+    <div class="story-timeline-section-title">CHRONOLOGY • THE INDIAN GARAGE EXPANSION SAGA (2012 — 2027)</div>
+    <div class="story-timeline-grid">
+      <div class="story-timeline-card">
+        <div class="story-timeline-year">2012</div>
+        <div class="story-timeline-badge">THE GARAGE BOOTSTRAP</div>
+        <div class="story-timeline-title">₹10 Lakh Loan in Indore</div>
+        <div class="story-timeline-desc">
+          Anant Tanted bootstraps with 4 sewing machines and zero external safety nets, creating high-street shirts for young Indian college students.
+        </div>
+      </div>
+
+      <div class="story-timeline-card">
+        <div class="story-timeline-year">2016</div>
+        <div class="story-timeline-badge">E-COMMERCE DOMINANCE</div>
+        <div class="story-timeline-title">#1 Fast-Fashion Menswear</div>
+        <div class="story-timeline-desc">
+          Surges to the top rankings on Myntra, Flipkart, and Amazon, establishing national customer love while remaining consistently EBITDA positive.
+        </div>
+      </div>
+
+      <div class="story-timeline-card">
+        <div class="story-timeline-year">2020</div>
+        <div class="story-timeline-badge">SUPPLY CHAIN REVOLUTION</div>
+        <div class="story-timeline-title">14-Day Micro-Batch Engine</div>
+        <div class="story-timeline-desc">
+          Pioneered decentralized pod assembly and automated replenishment algorithms, eliminating the need for 6-month speculative seasonal inventories.
+        </div>
+      </div>
+
+      <div class="story-timeline-card featured">
+        <div class="story-timeline-year">2023</div>
+        <div class="story-timeline-badge" style="color: var(--tigc-crimson-bright);">TMRW PARTNERSHIP</div>
+        <div class="story-timeline-title">Aditya Birla Group Union</div>
+        <div class="story-timeline-desc">
+          TMRW partners with Indian Garage to build India's premier multi-brand fast-fashion powerhouse.
+        </div>
+      </div>
+
+      <div class="story-timeline-card">
+        <div class="story-timeline-year">2025</div>
+        <div class="story-timeline-badge">102% YOY EXPLOSION</div>
+        <div class="story-timeline-title">₹204 Cr & 23 Retail Stores</div>
+        <div class="story-timeline-desc">
+          Revenue doubled YoY to ₹204 Crore; operating at ₹500 Cr GMV with 500K–600K units sold monthly and 23 live retail stores across India.
+        </div>
+      </div>
+
+      <div class="story-timeline-card featured">
+        <div class="story-timeline-year">2027</div>
+        <div class="story-timeline-badge" style="color: var(--accent-cyan);">THE 1,000 CR HORIZON</div>
+        <div class="story-timeline-title">₹1,000 Cr & 100 Outlets</div>
+        <div class="story-timeline-desc">
+          Roadmap to 100 Exclusive Brand Outlets nationwide and pan-Asian international expansion across GCC and Southeast Asia.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SECTION 05: KINETIC 14-DAY VELOCITY MACHINE
+       ====================================================================== -->
+  <section class="catalogue-section" id="velocity">
+    <span class="section-eyebrow">SUPPLY CHAIN AGILITY</span>
+    <h2 class="section-headline">The 14-Day Velocity Machine</h2>
+    <p class="section-lead-copy">
+      How we outperform legacy fashion conglomerates: drag the interactive timeline slider below to scrub through our 14-day concept-to-rack micro-batch sprint.
+    </p>
+
+    <div class="velocity-engine-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+        <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); text-transform: uppercase;">
+          Micro-Batch Sprint • Scrub from Day 01 to Day 14
+        </span>
+        <span style="font-family: var(--font-mono); font-size: 11px; color: var(--tigc-crimson-bright); font-weight: 700;">
+          88% Sell-Through • Zero Dead Stock
+        </span>
+      </div>
+
+      <div class="velocity-scrubber-wrapper">
+        <input type="range" class="velocity-range-input" id="velocity-scrubber" min="1" max="14" step="1" value="1">
+      </div>
+
+      <div class="velocity-stage-display">
+        <div>
+          <div class="velocity-day-big" id="velocity-disp-day">DAY 01</div>
+          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--tigc-crimson-bright); font-weight: 700; margin-top: 4px;" id="velocity-disp-stage">
+            Phase 01 • Live Marketplace Demand Intelligence
+          </div>
+        </div>
+        <div>
+          <div class="velocity-step-title" id="velocity-disp-title">
+            Real-Time Search & Consumer Sell-Through Signals
+          </div>
+          <div class="velocity-step-desc" id="velocity-disp-desc">
+            Rather than relying on speculative 6-month seasonal forecasts, our data desk continuously tracks live search trends, cart additions, and category sell-through velocity across Myntra, Ajio, and tigc.in to spot breakout styles instantly.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SECTION 05: THE INDIAN GARAGE COMMERCIAL ECOSYSTEM & SCALE
+       ====================================================================== -->
+  <section class="catalogue-section" id="ecosystem">
+    <span class="section-eyebrow">OMNICHANNEL DOMINANCE</span>
+    <h2 class="section-headline">The Indian Garage Commercial Ecosystem</h2>
+    <p class="section-lead-copy">
+      A compounding fashion enterprise: from #1 rankings across top marketplaces to our rapid 100-store offline retail rollout and ₹100 Crore D2C flagship platform.
+    </p>
+
+    <div class="triforce-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+      <!-- Pillar 1: Marketplaces -->
+      <div class="triforce-card featured">
+        <div>
+          <div class="triforce-share-badge">MARKETPLACE DOMINANCE</div>
+          <div class="triforce-brand-name">#1 ON AJIO • TOP 10 MYNTRA</div>
+          <p class="triforce-brand-desc">
+            Consistently ranked as the #1 external fashion brand on AJIO and a permanent Top 10 bestseller on Myntra. High-velocity volume across Flipkart and Amazon, moving 500,000 to 600,000 garments every month.
+          </p>
+        </div>
+        <div>
+          <div class="triforce-stats-row">
+            <div class="triforce-stat-item">
+              <strong>550K+</strong>
+              <span>Monthly Units Sold</span>
+            </div>
+            <div class="triforce-stat-item">
+              <strong>#1 AJIO</strong>
+              <span>External Ranking</span>
+            </div>
+            <div class="triforce-stat-item">
+              <strong>Top 10</strong>
+              <span>Myntra Menswear</span>
+            </div>
+          </div>
+          <div style="margin-top: 18px;">
+            <a href="#retail-network" onclick="document.getElementById('retail-network')?.scrollIntoView({behavior: 'smooth', block: 'start'});" class="btn-catalogue-ghost" style="padding: 8px 16px; font-size: 11.5px; border-radius: 9999px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+              Explore Marketplace Network ↓
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pillar 2: Retail EBO Network -->
+      <div class="triforce-card">
+        <div>
+          <div class="triforce-share-badge" style="color: var(--accent-emerald);">OMNICHANNEL OFFLINE</div>
+          <div class="triforce-brand-name">23 LIVE RETAIL STORES</div>
+          <p class="triforce-brand-desc">
+            High-street and premier shopping mall presence across Bengaluru, Mumbai, Pune, Hyderabad, Delhi NCR, and Lucknow. Aggressively expanding toward a target of 100 Exclusive Brand Outlets (EBOs) across Tier 1, 2, and 3 cities.
+          </p>
+        </div>
+        <div>
+          <div class="triforce-stats-row">
+            <div class="triforce-stat-item">
+              <strong>23 Live</strong>
+              <span>Current Footprint</span>
+            </div>
+            <div class="triforce-stat-item">
+              <strong>100 EBOs</strong>
+              <span>Expansion Target</span>
+            </div>
+            <div class="triforce-stat-item">
+              <strong>Tier 1–3</strong>
+              <span>City Coverage</span>
+            </div>
+          </div>
+          <div style="margin-top: 18px;">
+            <a href="#store-locator" onclick="document.getElementById('store-locator')?.scrollIntoView({behavior: 'smooth', block: 'start'});" class="btn-catalogue-ghost" style="padding: 8px 16px; font-size: 11.5px; border-radius: 9999px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-color: rgba(16, 185, 129, 0.4); color: var(--apple-mint);">
+              View 23 Store Locations & Directions ↓
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pillar 3: D2C Flagship -->
+      <div class="triforce-card">
+        <div>
+          <div class="triforce-share-badge" style="color: var(--accent-cyan);">PROPRIETARY D2C</div>
+          <div class="triforce-brand-name">₹100 CRORE D2C (tigc.in)</div>
+          <p class="triforce-brand-desc">
+            Our direct-to-consumer flagship at tigc.in operates at a ₹100 Crore run-rate with high repeat customer loyalty, rapid trend testing, and direct consumer engagement with zero intermediary brand tax.
+          </p>
+        </div>
+        <div>
+          <div class="triforce-stats-row">
+            <div class="triforce-stat-item">
+              <strong>₹100 CR</strong>
+              <span>Annual D2C Scale</span>
+            </div>
+            <div class="triforce-stat-item">
+              <strong>Direct</strong>
+              <span>Consumer Channel</span>
+            </div>
+            <div class="triforce-stat-item">
+              <strong>tigc.in</strong>
+              <span>Official Hub</span>
+            </div>
+          </div>
+          <div style="margin-top: 18px;">
+            <a href="https://tigc.in" target="_blank" rel="noopener noreferrer" class="btn-catalogue-ghost" style="padding: 8px 16px; font-size: 11.5px; border-radius: 9999px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-color: rgba(6, 182, 212, 0.4); color: var(--apple-cyan);">
+              Visit tigc.in Flagship ↗
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Omnichannel Retail & 10-Minute Quick Commerce Network -->
+    <div style="margin-top: 48px;" id="retail-network">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 12px; margin-bottom: 8px;">
+        <div>
+          <span class="section-eyebrow">DISTRIBUTION PARTNERS & QUICK COMMERCE</span>
+          <h3 style="font-family: var(--font-title); font-size: 24px; font-weight: 700; color: var(--text-pure); margin: 6px 0 0;">
+            Where India Shops Indian Garage
+          </h3>
+        </div>
+        <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">
+          500,000 – 600,000 Units Sold Monthly Across Key Channels
+        </span>
+      </div>
+
+      <div class="retail-ecosystem-grid">
+        <!-- Amazon -->
+        <a href="https://www.amazon.in/s?k=the+indian+garage+co" target="_blank" rel="noopener noreferrer" class="retail-channel-card">
+          <div>
+            <span class="retail-badge amber">PAN-INDIA SCALE</span>
+            <div class="retail-name">Amazon</div>
+            <p class="retail-desc">Official storefront on Amazon India featuring high-velocity denim, shirts, and casual staples with Prime fulfillment.</p>
+          </div>
+          <div class="retail-link-cta">Shop on Amazon ↗</div>
+        </a>
+
+        <!-- Myntra -->
+        <a href="https://www.myntra.com/the-indian-garage-co" target="_blank" rel="noopener noreferrer" class="retail-channel-card">
+          <div>
+            <span class="retail-badge crimson">TOP 10 BRAND</span>
+            <div class="retail-name">Myntra</div>
+            <p class="retail-desc">Consistently ranked in the Top 10 highest-selling apparel brands nationwide with 10M+ product impressions.</p>
+          </div>
+          <div class="retail-link-cta">Shop on Myntra ↗</div>
+        </a>
+
+        <!-- AJIO -->
+        <a href="https://www.ajio.com/b/the-indian-garage-co" target="_blank" rel="noopener noreferrer" class="retail-channel-card">
+          <div>
+            <span class="retail-badge emerald">#1 EXTERNAL BRAND</span>
+            <div class="retail-name">AJIO</div>
+            <p class="retail-desc">Ranked as the #1 external apparel brand on Reliance AJIO with industry-leading catalog turnover.</p>
+          </div>
+          <div class="retail-link-cta">Shop on AJIO ↗</div>
+        </a>
+
+        <!-- Flipkart -->
+        <a href="https://www.flipkart.com/mens-shirts/the-indian-garage-co~brand/pr?sid=clo,ash,axc,mmk" target="_blank" rel="noopener noreferrer" class="retail-channel-card">
+          <div>
+            <span class="retail-badge cyan">MASS VOLUME LEADER</span>
+            <div class="retail-name">Flipkart</div>
+            <p class="retail-desc">Mass-market dominance across Tier 2, 3, and 4 Bharat with massive daily casualwear order volumes.</p>
+          </div>
+          <div class="retail-link-cta">Shop on Flipkart ↗</div>
+        </a>
+
+        <!-- Styli (Landmark Group) -->
+        <a href="https://stylishop.com" target="_blank" rel="noopener noreferrer" class="retail-channel-card">
+          <div>
+            <span class="retail-badge emerald">GCC & PAN-ASIA</span>
+            <div class="retail-name">Styli</div>
+            <p class="retail-desc">Landmark Group's digital fast-fashion powerhouse expanding Indian Garage silhouettes across Saudi Arabia, UAE, and GCC markets.</p>
+          </div>
+          <div class="retail-link-cta">Shop on Styli ↗</div>
+        </a>
+
+        <!-- Blypp -->
+        <a href="https://blypp.com" target="_blank" rel="noopener noreferrer" class="retail-channel-card">
+          <div>
+            <span class="retail-badge cyan">NEXT-GEN COMMERCE</span>
+            <div class="retail-name">Blypp</div>
+            <p class="retail-desc">Interactive social discovery and video commerce platform connecting viral wardrobe drops with youth shoppers.</p>
+          </div>
+          <div class="retail-link-cta">Shop on Blypp ↗</div>
+        </a>
+
+        <!-- Tata CLiQ -->
+        <a href="https://www.tatacliq.com/the-indian-garage-co/c-mbh11a00171" target="_blank" rel="noopener noreferrer" class="retail-channel-card">
+          <div>
+            <span class="retail-badge crimson">ENTERPRISE FASHION</span>
+            <div class="retail-name">Tata CLiQ</div>
+            <p class="retail-desc">Curated department store channel serving conscious consumers looking for smart casuals and high-density knits.</p>
+          </div>
+          <div class="retail-link-cta">Shop on Tata CLiQ ↗</div>
+        </a>
+
+        <!-- Zepto Quick Commerce -->
+        <a href="https://www.zepto.com/brand/the-indian-garage-co" target="_blank" rel="noopener noreferrer" class="retail-channel-card">
+          <div>
+            <span class="retail-badge amber">10-MINUTE QUICK COMMERCE</span>
+            <div class="retail-name">Zepto</div>
+            <p class="retail-desc">Pioneering instant 10-minute wardrobe fashion delivery across metro dark stores in Bengaluru, Mumbai, and Delhi.</p>
+          </div>
+          <div class="retail-link-cta">Shop on Zepto ↗</div>
+        </a>
+
+        <!-- Nykaa Fashion -->
+        <a href="https://www.nykaafashion.com/designers/the-indian-garage-co/c/74764" target="_blank" rel="noopener noreferrer" class="retail-channel-card">
+          <div>
+            <span class="retail-badge crimson">CURATED PREMIUM</span>
+            <div class="retail-name">Nykaa Fashion</div>
+            <p class="retail-desc">Contemporary silhouettes and curated trend edits for style-forward urban youth.</p>
+          </div>
+          <div class="retail-link-cta">Shop on Nykaa Fashion ↗</div>
+        </a>
+
+        <!-- Nykaa Man -->
+        <a href="https://www.nykaaman.com/brands/the-indian-garage-co/c/74976" target="_blank" rel="noopener noreferrer" class="retail-channel-card">
+          <div>
+            <span class="retail-badge emerald">MENSWEAR SPECIALIST</span>
+            <div class="retail-name">Nykaa Man</div>
+            <p class="retail-desc">Dedicated grooming and menswear destination featuring our core denim, shackets, and waffle polos.</p>
+          </div>
+          <div class="retail-link-cta">Shop on Nykaa Man ↗</div>
+        </a>
+      </div>
+
+      <!-- Reddit Community Quality Consensus -->
+      <a href="https://www.reddit.com/r/IndianFashionAddicts/comments/1snns1j/is_the_indian_garage_co_quality_good/" target="_blank" rel="noopener noreferrer" class="reddit-review-box">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: #FF4500; display: flex; align-items: center; justify-content: center; font-weight: 900; color: #fff; font-size: 20px; flex-shrink: 0;">
+            r/
+          </div>
+          <div>
+            <div style="font-size: 11px; font-weight: 800; letter-spacing: 0.08em; color: #FF4500; text-transform: uppercase;">
+              COMMUNITY SENTIMENT // REDDIT r/IndianFashionAddicts
+            </div>
+            <div style="font-family: var(--font-title); font-size: 16px; font-weight: 700; color: var(--text-pure); margin-top: 4px;">
+              "Is The Indian Garage Co. quality good? The fabrics, fitting and durability punch well above the price tag."
+            </div>
+            <div style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">
+              Overwhelmingly positive grassroots consensus from India's largest fashion enthusiast community.
+            </div>
+          </div>
+        </div>
+        <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; color: #FF4500; display: flex; align-items: center; gap: 6px; padding: 10px 18px; background: rgba(255, 69, 0, 0.12); border: 1px solid rgba(255, 69, 0, 0.3); border-radius: 9999px;">
+          Read Reddit Thread ↗
+        </div>
+      </a>
+    </div>
+
+    <!-- Retail Stores & Exclusive Brand Outlet (EBO) Locator Showcase -->
+    <div class="store-locator-showcase" id="store-locator">
+      <div class="section-header-lockup">
+        <div class="section-header-left">
+          <span class="section-eyebrow">NATIONWIDE PHYSICAL FOOTPRINT • 23 LIVE OUTLETS</span>
+          <h3 style="font-family: var(--font-title); font-size: 26px; font-weight: 700; color: var(--text-pure); margin: 6px 0 0;">
+            Exclusive Brand Outlets (EBOs) & Flagship Stores
+          </h3>
+        </div>
+        <div class="section-header-actions">
+          <span class="hero-status-pill">23 Verified Stores • Roadmap to 100 EBOs • Live Google Maps Directions</span>
+        </div>
+      </div>
+
+      <p class="section-lead-copy" style="margin-top: 12px; margin-bottom: 0;">
+        Experience Indian Garage fit, tactile fabric textures, and urban styling in person across 23 exclusive brand outlets in key fashion hubs. Click for 1-click turn-by-turn Google Maps navigation directions.
+      </p>
+
+      <!-- Store City Filter Tabs -->
+      <div class="store-filter-bar">
+        <button class="store-filter-pill active" data-city="all">All Stores (23)</button>
+        <button class="store-filter-pill" data-city="bengaluru">Bengaluru (4)</button>
+        <button class="store-filter-pill" data-city="mumbai-pune">Mumbai & Pune (5)</button>
+        <button class="store-filter-pill" data-city="hyderabad">Hyderabad (2)</button>
+        <button class="store-filter-pill" data-city="lucknow">Lucknow (2)</button>
+        <button class="store-filter-pill" data-city="kerala">Kerala (2)</button>
+        <button class="store-filter-pill" data-city="indore">Indore (2)</button>
+        <button class="store-filter-pill" data-city="delhi-ncr">Delhi NCR (2)</button>
+        <button class="store-filter-pill" data-city="rajasthan">Jaipur (1)</button>
+        <button class="store-filter-pill" data-city="andhra">Guntur (1)</button>
+        <button class="store-filter-pill" data-city="karnataka">Karnataka Reg. (2)</button>
+      </div>
+
+      <!-- Stores Cards Grid (23 Verified Locations with 1-Click Direct Directions) -->
+      <div class="stores-cards-grid" id="stores-grid-container">
+        <!-- Store 1: Brigade Road High-Street Flagship -->
+        <div class="store-location-card" data-city="bengaluru">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge flagship">FLAGSHIP EBO</span>
+              <span class="store-city-tag">Bengaluru</span>
+            </div>
+            <h4 class="store-name">Brigade Road High-Street Flagship</h4>
+            <p class="store-address">Ground Floor, No. 175, Brigade Road, Shanthala Nagar, Ashok Nagar, Bengaluru, Karnataka 560025</p>
+          </div>
+          <div>
+            <div class="store-hours"><span class="store-hours-dot"></span><span>10:30 AM – 9:30 PM • Open All 7 Days</span></div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=The+Indian+Garage+Co+Brigade+Road+Bengaluru" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>🧭</span> <span>Get Directions on Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 2: Bhartiya Mall of Bengaluru -->
+        <div class="store-location-card" data-city="bengaluru">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge">PREMIER MALL EBO</span>
+              <span class="store-city-tag">Bengaluru</span>
+            </div>
+            <h4 class="store-name">Bhartiya Mall of Bengaluru</h4>
+            <p class="store-address">Unit No-18UG, Upper Ground Floor, Thanisandra Main Road, Kannuru, Bengaluru, Karnataka 560064</p>
+          </div>
+          <div>
+            <div class="store-hours"><span class="store-hours-dot"></span><span>11:00 AM – 10:00 PM • Mall Hours</span></div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=The+Indian+Garage+Co+Bhartiya+Mall+of+Bengaluru" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>🧭</span> <span>Get Directions on Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 3: AGB Layout High-Street EBO -->
+        <div class="store-location-card" data-city="bengaluru">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge">HIGH-STREET EBO</span>
+              <span class="store-city-tag">Bengaluru</span>
+            </div>
+            <h4 class="store-name">AGB Layout High-Street EBO</h4>
+            <p class="store-address">Atmiya Geleyara Balaga, Hesarghatta Main Road, AGB Layout, Bengaluru North, Karnataka 560090</p>
+          </div>
+          <div>
+            <div class="store-hours"><span class="store-hours-dot"></span><span>10:30 AM – 9:30 PM • Open All 7 Days</span></div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=The+Indian+Garage+Co+AGB+Layout+Bengaluru" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>🧭</span> <span>Get Directions on Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 4: Chikkajala Airport Expressway EBO -->
+        <div class="store-location-card" data-city="bengaluru">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge">EXPRESSWAY EBO</span>
+              <span class="store-city-tag">Bengaluru</span>
+            </div>
+            <h4 class="store-name">Chikkajala Airport Expressway EBO</h4>
+            <p class="store-address">Ground Floor, International Airport Road, NH 44, Jala Hobli, Devanahalli, Bengaluru, Karnataka 562157</p>
+          </div>
+          <div>
+            <div class="store-hours"><span class="store-hours-dot"></span><span>10:00 AM – 9:30 PM • Open All 7 Days</span></div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=The+Indian+Garage+Co+Chikkajala+Bengaluru" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>🧭</span> <span>Get Directions on Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 5: Amanora Mall (Hadapsar) -->
+        <div class="store-location-card" data-city="mumbai-pune">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge">PREMIER MALL EBO</span>
+              <span class="store-city-tag">Pune</span>
+            </div>
+            <h4 class="store-name">Amanora Mall (Hadapsar)</h4>
+            <p class="store-address">First Floor, East Block, Amanora Mall, Hadapsar-Kharadi Bypass Road, Hadapsar, Pune, Maharashtra 411028</p>
+          </div>
+          <div>
+            <div class="store-hours"><span class="store-hours-dot"></span><span>11:00 AM – 9:30 PM • Open All 7 Days</span></div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=The+Indian+Garage+Co+Amanora+Mall+Pune" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>🧭</span> <span>Get Directions on Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 6: Elpro City Square Mall -->
+        <div class="store-location-card" data-city="mumbai-pune">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge">PREMIER MALL EBO</span>
+              <span class="store-city-tag">Pune</span>
+            </div>
+            <h4 class="store-name">Elpro City Square Mall</h4>
+            <p class="store-address">First Floor, Elpro City Square Mall, Chinchwad Gaon, Pimpri-Chinchwad, Pune, Maharashtra 411033</p>
+          </div>
+          <div>
+            <div class="store-hours"><span class="store-hours-dot"></span><span>11:00 AM – 9:30 PM • Open All 7 Days</span></div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=The+Indian+Garage+Co+Elpro+City+Square+Mall+Pune" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>🧭</span> <span>Get Directions on Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 7: Phoenix Mall of the Millennium -->
+        <div class="store-location-card" data-city="mumbai-pune">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge flagship">EXPANSION FLAGSHIP</span>
+              <span class="store-city-tag">Pune</span>
+            </div>
+            <h4 class="store-name">Phoenix Mall of the Millennium</h4>
+            <p class="store-address">Sayaji Hotel Road, Shankar Kalat Nagar, Wakad, Pune, Maharashtra 411057</p>
+          </div>
+          <div>
+            <div class="store-hours"><span class="store-hours-dot"></span><span>11:00 AM – 10:00 PM • Open All 7 Days</span></div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=The+Indian+Garage+Co+Phoenix+Mall+of+the+Millennium+Wakad+Pune" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>🧭</span> <span>Get Directions on Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 8: Galleria Mall (Hiranandani Powai) -->
+        <div class="store-location-card" data-city="mumbai-pune">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge">HIGH-STREET EBO</span>
+              <span class="store-city-tag">Mumbai</span>
+            </div>
+            <h4 class="store-name">Galleria Mall (Hiranandani Powai)</h4>
+            <p class="store-address">Ground Floor, Galleria Mall, Central Ave, Hiranandani Gardens, Powai, Mumbai, Maharashtra 400076</p>
+          </div>
+          <div>
+            <div class="store-hours"><span class="store-hours-dot"></span><span>11:00 AM – 9:30 PM • Open All 7 Days</span></div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=The+Indian+Garage+Co+Galleria+Mall+Powai+Mumbai" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>🧭</span> <span>Get Directions on Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 9: Oberoi Sky City Mall (Borivali East) -->
+        <div class="store-location-card" data-city="mumbai-pune">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge flagship">METRO FLAGSHIP</span>
+              <span class="store-city-tag">Mumbai</span>
+            </div>
+            <h4 class="store-name">Oberoi Sky City Mall (Borivali East)</h4>
+            <p class="store-address">Lower Ground Level, Off Western Express Highway, Borivali East, Mumbai, Maharashtra 400066</p>
+          </div>
+          <div>
+            <div class="store-hours"><span class="store-hours-dot"></span><span>11:00 AM – 10:00 PM • Open All 7 Days</span></div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=The+Indian+Garage+Co+Sky+City+Mall+Borivali+Mumbai" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>🧭</span> <span>Get Directions on Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 10: Sarath City Capital Mall -->
+        <div class="store-location-card" data-city="hyderabad">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge flagship">FLAGSHIP EBO</span>
+              <span class="store-city-tag">Hyderabad</span>
+            </div>
+            <h4 class="store-name">Sarath City Capital Mall</h4>
+            <p class="store-address">Lower Ground Floor, Gachibowli - Miyapur Road, Whitefields, Kondapur, Hyderabad, Telangana 500084</p>
+          </div>
+          <div>
+            <div class="store-hours"><span class="store-hours-dot"></span><span>10:30 AM – 10:00 PM • Open All 7 Days</span></div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=The+Indian+Garage+Co+Sarath+City+Capital+Mall+Hyderabad" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>🧭</span> <span>Get Directions on Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 11: Vanasthalipuram Main Road EBO -->
+        <div class="store-location-card" data-city="hyderabad">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge">HIGH-STREET EBO</span>
+              <span class="store-city-tag">Hyderabad</span>
+            </div>
+            <h4 class="store-name">Vanasthalipuram Main Road EBO</h4>
+            <p class="store-address">Main Commercial Road, Vanasthalipuram, L.B. Nagar, Hyderabad, Telangana 500070</p>
+          </div>
+          <div>
+            <div class="store-hours"><span class="store-hours-dot"></span><span>10:00 AM – 9:30 PM • Open All 7 Days</span></div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=The+Indian+Garage+Co+Vanasthalipuram+Hyderabad" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>🧭</span> <span>Get Directions on Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 12: Phoenix Palassio Mall -->
+        <div class="store-location-card" data-city="lucknow">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge flagship">FLAGSHIP EBO</span>
+              <span class="store-city-tag">Lucknow</span>
+            </div>
+            <h4 class="store-name">Phoenix Palassio Mall</h4>
+            <p class="store-address">Sector 7, Gomti Nagar Extension, Amar Shaheed Path, Lucknow, Uttar Pradesh 226010</p>
+          </div>
+          <div>
+            <div class="store-hours"><span class="store-hours-dot"></span><span>11:00 AM – 10:00 PM • Open All 7 Days</span></div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=The+Indian+Garage+Co+Phoenix+Palasio+Mall+Lucknow" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>🧭</span> <span>Get Directions on Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 13: Crown Mall (Faizabad Road) -->
+        <div class="store-location-card" data-city="lucknow">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge">HIGH-STREET MALL EBO</span>
+              <span class="store-city-tag">Lucknow</span>
+            </div>
+            <h4 class="store-name">Crown Mall (Faizabad Road)</h4>
+            <p class="store-address">Shop No. 7, Ground Floor, Crown Mall, Opposite BBD University, Faizabad / Ayodhya Road, Lucknow, Uttar Pradesh 226028</p>
+          </div>
+          <div>
+            <div class="store-hours"><span class="store-hours-dot"></span><span>10:30 AM – 9:30 PM • Open All 7 Days</span></div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=The+Indian+Garage+Co+Crown+Mall+Lucknow" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>🧭</span> <span>Get Directions on Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 14: Lulu International Shopping Mall -->
+        <div class="store-location-card" data-city="kerala">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge flagship">SOUTH INDIA FLAGSHIP</span>
+              <span class="store-city-tag">Kochi</span>
+            </div>
+            <h4 class="store-name">Lulu International Shopping Mall</h4>
+            <p class="store-address">Old NH 17, Edappally, Kochi, Kerala 682024</p>
+          </div>
+          <div>
+            <div class="store-hours"><span class="store-hours-dot"></span><span>10:00 AM – 10:00 PM • Open All 7 Days</span></div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=The+Indian+Garage+Co+Lulu+Mall+Kochi" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>🧭</span> <span>Get Directions on Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 15: Lulu Mall Trivandrum -->
+        <div class="store-location-card" data-city="kerala">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge">PREMIER MALL EBO</span>
+              <span class="store-city-tag">Thiruvananthapuram</span>
+            </div>
+            <h4 class="store-name">Lulu Mall Trivandrum</h4>
+            <p class="store-address">TC 91/270, Akkulam Bridge, Anayara, Thiruvananthapuram, Kerala 695029</p>
+          </div>
+          <div>
+            <div class="store-hours"><span class="store-hours-dot"></span><span>10:00 AM – 10:00 PM • Open All 7 Days</span></div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=The+Indian+Garage+Co+Lulu+Mall+Trivandrum" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>🧭</span> <span>Get Directions on Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 16: Pacific Mall (Mansarovar) -->
+        <div class="store-location-card" data-city="rajasthan">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge flagship">22ND STORE MILESTONE</span>
+              <span class="store-city-tag">Jaipur</span>
+            </div>
+            <h4 class="store-name">Pacific Mall (Mansarovar)</h4>
+            <p class="store-address">Shipra Path, VT Road, Mansarovar, Jaipur, Rajasthan 302020</p>
+          </div>
+          <div>
+            <div class="store-hours"><span class="store-hours-dot"></span><span>11:00 AM – 10:00 PM • Open All 7 Days</span></div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=The+Indian+Garage+Co+Pacific+Mall+Jaipur" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>🧭</span> <span>Get Directions on Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 17: Lakshmipuram Commercial Hub EBO -->
+        <div class="store-location-card" data-city="andhra">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge">21ST STORE MILESTONE</span>
+              <span class="store-city-tag">Guntur</span>
+            </div>
+            <h4 class="store-name">Lakshmipuram Commercial Hub EBO</h4>
+            <p class="store-address">Ground Floor, Main Road, Near Old Bus Stand, Lakshmipuram, Guntur, Andhra Pradesh 522007</p>
+          </div>
+          <div>
+            <div class="store-hours"><span class="store-hours-dot"></span><span>10:00 AM – 9:30 PM • Open All 7 Days</span></div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=The+Indian+Garage+Co+Lakshmipuram+Guntur" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>🧭</span> <span>Get Directions on Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 18: Treasure Island Mall (MG Road) -->
+        <div class="store-location-card" data-city="indore">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge flagship">ORIGIN CITY EBO</span>
+              <span class="store-city-tag">Indore</span>
+            </div>
+            <h4 class="store-name">Treasure Island Mall (MG Road)</h4>
+            <p class="store-address">11, MG Road, South Tukoganj, Indore, Madhya Pradesh 452001</p>
+          </div>
+          <div>
+            <div class="store-hours"><span class="store-hours-dot"></span><span>11:00 AM – 9:30 PM • Open All 7 Days</span></div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=The+Indian+Garage+Co+Treasure+Island+Mall+Indore" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>🧭</span> <span>Get Directions on Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 19: Phoenix Citadel Mall -->
+        <div class="store-location-card" data-city="indore">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge">PREMIER MALL EBO</span>
+              <span class="store-city-tag">Indore</span>
+            </div>
+            <h4 class="store-name">Phoenix Citadel Mall</h4>
+            <p class="store-address">Ground Floor, MR 10 Road, Jhalaria Junction, Indore, Madhya Pradesh 452016</p>
+          </div>
+          <div>
+            <div class="store-hours"><span class="store-hours-dot"></span><span>11:00 AM – 10:00 PM • Open All 7 Days</span></div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=The+Indian+Garage+Co+Phoenix+Citadel+Mall+Indore" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>🧭</span> <span>Get Directions on Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 20: Vegas Mall (Dwarka Sector 14) -->
+        <div class="store-location-card" data-city="delhi-ncr">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge flagship">METRO FLAGSHIP</span>
+              <span class="store-city-tag">New Delhi</span>
+            </div>
+            <h4 class="store-name">Vegas Mall (Dwarka Sector 14)</h4>
+            <p class="store-address">Plot No. 6, Sector 14, Dwarka, New Delhi 110078</p>
+          </div>
+          <div>
+            <div class="store-hours"><span class="store-hours-dot"></span><span>11:00 AM – 10:00 PM • Open All 7 Days</span></div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=The+Indian+Garage+Co+Vegas+Mall+Dwarka+Delhi" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>🧭</span> <span>Get Directions on Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 21: DLF Mall of India (Sector 18) -->
+        <div class="store-location-card" data-city="delhi-ncr">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge">PREMIER MALL EBO</span>
+              <span class="store-city-tag">Noida / NCR</span>
+            </div>
+            <h4 class="store-name">DLF Mall of India (Sector 18)</h4>
+            <p class="store-address">Plot No. M-03, Sector 18, Noida, Uttar Pradesh 201301</p>
+          </div>
+          <div>
+            <div class="store-hours"><span class="store-hours-dot"></span><span>11:00 AM – 10:00 PM • Open All 7 Days</span></div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=The+Indian+Garage+Co+DLF+Mall+of+India+Noida" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>🧭</span> <span>Get Directions on Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 22: Urban Oasis Mall EBO -->
+        <div class="store-location-card" data-city="karnataka">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge">REGIONAL EBO</span>
+              <span class="store-city-tag">Hubballi</span>
+            </div>
+            <h4 class="store-name">Urban Oasis Mall EBO</h4>
+            <p class="store-address">Gokul Road, Hubballi, Karnataka 580030</p>
+          </div>
+          <div>
+            <div class="store-hours"><span class="store-hours-dot"></span><span>10:30 AM – 9:30 PM • Open All 7 Days</span></div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=The+Indian+Garage+Co+Urban+Oasis+Mall+Hubli" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>🧭</span> <span>Get Directions on Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 23: Nexus Fiza Mall (Pandeshwar) -->
+        <div class="store-location-card" data-city="karnataka">
+          <div>
+            <div class="store-card-header">
+              <span class="store-type-badge">COASTAL EBO</span>
+              <span class="store-city-tag">Mangaluru</span>
+            </div>
+            <h4 class="store-name">Nexus Fiza Mall (Pandeshwar)</h4>
+            <p class="store-address">Mangaladevi Temple Road, Pandeshwar, Mangaluru, Karnataka 575001</p>
+          </div>
+          <div>
+            <div class="store-hours"><span class="store-hours-dot"></span><span>10:30 AM – 9:30 PM • Open All 7 Days</span></div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=The+Indian+Garage+Co+Nexus+Fiza+Mall+Mangaluru" target="_blank" rel="noopener noreferrer" class="btn-store-maps">
+              <span>🧭</span> <span>Get Directions on Google Maps ↗</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SECTION 07: STRATEGIC PARTNERSHIP & SOURCING TERMINAL
+       ====================================================================== -->
+  <section class="catalogue-section" id="partner-hub">
+    <span class="section-eyebrow">SOURCING & CAPACITY SIMULATOR</span>
+    <h2 class="section-headline">The Manufacturing & Sourcing Simulator</h2>
+    <p class="section-lead-copy">
+      Explore production offtake with Indian Garage. We are currently selling 500,000 to 600,000 garments/month and expanding to 1,000,000 units/month. Model your dedicated facility allocation below.
+    </p>
+
+    <div class="franchise-terminal-box">
+      <!-- Input Sliders -->
+      <div>
+        <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); text-transform: uppercase; margin-bottom: 24px;">
+          Partner Parameters • Select Capability & Capacity:
+        </div>
+
+        <div class="terminal-slider-card">
+          <div class="terminal-slider-label-row">
+            <span class="terminal-slider-name">Monthly Capacity Dedicated to Indian Garage</span>
+            <span class="terminal-slider-val" id="term-disp-capacity">40,000 units / month</span>
+          </div>
+          <input type="range" class="velocity-range-input" id="term-slider-capacity" min="10000" max="150000" step="5000" value="40000">
+        </div>
+
+        <div class="terminal-slider-card">
+          <div class="terminal-slider-label-row">
+            <span class="terminal-slider-name">Average Unit FOB Supply Rate Band</span>
+            <span class="terminal-slider-val" id="term-disp-rate">₹480 / piece</span>
+          </div>
+          <input type="range" class="velocity-range-input" id="term-slider-rate" min="300" max="1000" step="25" value="480">
+        </div>
+
+        <div class="terminal-slider-card">
+          <div class="terminal-slider-label-row">
+            <span class="terminal-slider-name">Garment Specialization / Capability</span>
+          </div>
+          <select id="term-select-category" style="width: 100%; background: rgba(0,0,0,0.5); border: 1px solid var(--border-subtle); color: #fff; padding: 12px; border-radius: 6px; font-family: var(--font-mono); font-size: 12px;">
+            <option value="1.0" selected>Tailored Casual Shirts & Woven Casuals (100% Combed Cotton)</option>
+            <option value="1.15">13.5oz Ring-Spun Comfort Stretch Denim & Jeans</option>
+            <option value="0.95">Polo-licious 320 GSM Heavyweight Waffle & Pique Knits</option>
+            <option value="1.30">Heavyweight Outerwear, Truckers & Canvas Utility Cargos</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Live Terminal Outputs -->
+      <div class="terminal-output-column">
+        <div>
+          <div class="terminal-payback-banner">
+            <span>PROJECTED ANNUAL OFFTAKE VOLUME</span>
+            <strong id="term-out-annual-units">480K Units / Year</strong>
+          </div>
+
+          <div class="terminal-kpi-subgrid">
+            <div class="terminal-subitem">
+              <div class="terminal-subitem-label">Monthly Offtake Value</div>
+              <div class="terminal-subitem-val" id="term-out-monthly-val" style="color: var(--tigc-crimson-bright);">₹1.92 CR</div>
+            </div>
+
+            <div class="terminal-subitem">
+              <div class="terminal-subitem-label">Annual Contract Potential</div>
+              <div class="terminal-subitem-val" id="term-out-annual-val">₹23.04 CR</div>
+            </div>
+
+            <div class="terminal-subitem">
+              <div class="terminal-subitem-label">Payment Security Window</div>
+              <div class="terminal-subitem-val" id="term-out-payment" style="color: var(--accent-emerald);">30–45 DAYS (TMRW)</div>
+            </div>
+
+            <div class="terminal-subitem">
+              <div class="terminal-subitem-label">Turnaround Protocol</div>
+              <div class="terminal-subitem-val" id="term-out-velocity">14-Day Sprint</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <button class="btn-catalogue-primary btn-open-partner-modal" id="btn-open-partner-pitch" style="width: 100%; justify-content: center;">
+            Submit Manufacturing / Vendor Pitch ↗
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SECTION 08: NATIONAL MEDIA & CAMPAIGNS (FEAT. SKY & #FREESTYLEIT)
+       ====================================================================== -->
+  <section class="catalogue-section" id="media-center">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <div>
+        <span class="section-eyebrow">NATIONAL CAMPAIGNS & REPUTATION</span>
+        <h2 class="section-headline">Dominating India's Cultural Fashion Dialogue</h2>
+      </div>
+      <div>
+        <span class="hero-status-pill">85M+ Video Impressions • 1.5M+ Community</span>
+      </div>
+    </div>
+
+    <p class="section-lead-copy">
+      From viral nationwide campaigns with Indian T20 Captain Suryakumar Yadav to prime-time media headlines across national business dailies, Indian Garage is the voice of self-expression for young, aspirational India.
+    </p>
+
+    <!-- Ambassador Showcase Hero Banner -->
+    <div class="sky-arena-container">
+      <div>
+        <span style="font-family: var(--font-mono); font-size: 11px; background: var(--tigc-crimson); color: #fff; padding: 4px 10px; border-radius: 4px; font-weight: 700;">
+          OFFICIAL BRAND AMBASSADOR • SURYAKUMAR YADAV (SKY)
+        </span>
+        <h3 class="sky-huge-callout">
+          "BE UNSTOPPABLE.<br>DRESS FOR <span>THE CHASE.</span>"
+        </h3>
+        <p style="font-size: 15px; line-height: 1.6; color: var(--text-muted); max-width: 560px;">
+          World No. 1 T20 Batsman & Indian Captain Suryakumar Yadav is the living embodiment of Indian Garage. Created in partnership with DDB Mudra, our <strong>#FreeStyleIt</strong> national campaign celebrates freedom, fearless self-expression, and uncompromised style on and off the field.
+        </p>
+        <div style="margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="https://www.youtube.com/@TheIndianGarageCo" target="_blank" class="btn-shop-tigc" style="background: rgba(255,255,255,0.08); border: 1px solid var(--glass-border); color: #fff !important; box-shadow: none;">
+            Watch #FreeStyleIt Films ↗
+          </a>
+        </div>
+      </div>
+
+      <div class="sky-stats-cluster">
+        <div class="sky-stat-card">
+          <div class="sky-stat-number">85M+</div>
+          <div class="sky-stat-caption">Campaign Video Impressions</div>
+        </div>
+        <div class="sky-stat-card">
+          <div class="sky-stat-number emerald">1.5M+</div>
+          <div class="sky-stat-caption">Social Community Reach</div>
+        </div>
+        <div class="sky-stat-card">
+          <div class="sky-stat-number" style="color: var(--accent-cyan);">#1</div>
+          <div class="sky-stat-caption">External Brand On AJIO</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 Verified Media Headlines Grid -->
+    <div style="margin-top: 36px;">
+      <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); text-transform: uppercase; margin-bottom: 16px;">
+        PRESS RELEASES & INDUSTRY HEADLINES
+      </div>
+      <div class="media-press-grid">
+        <div class="press-card">
+          <div class="press-source">THE ECONOMIC TIMES</div>
+          <h4 class="press-headline">"Aditya Birla's TMRW joins hands with The Indian Garage Co. in milestone D2C union."</h4>
+          <p class="press-summary">
+            ABFRL’s digital-first brand umbrella TMRW commits strategic growth capital and institutional depth to accelerate Indian Garage toward a ₹1,000 Crore horizon.
+          </p>
+          <div class="press-tag">INSTITUTIONAL EXPANSION</div>
+        </div>
+
+        <div class="press-card">
+          <div class="press-source">RETAIL4GROWTH</div>
+          <h4 class="press-headline">"Indian Garage unveils bold brand identity and accelerates nationwide retail store rollout."</h4>
+          <p class="press-summary">
+            Unveiling a refreshed visual identity and dropping 'Co' to become Indian Garage, the brand plans 100 Exclusive Brand Outlets across Tier 1 and 2 cities.
+          </p>
+          <div class="press-tag">OFFLINE OMNICHANNEL</div>
+        </div>
+
+        <div class="press-card">
+          <div class="press-source">AFAQS!</div>
+          <h4 class="press-headline">"#FreeStyleIt campaign: Fashion that liberates modern consumers from conformity."</h4>
+          <p class="press-summary">
+            Partnering with creative agency DDB Mudra, Indian Garage's campaign starring Suryakumar Yadav emphasizes personal versatility and fashion without rules.
+          </p>
+          <div class="press-tag">BRAND CAMPAIGN</div>
+        </div>
+
+        <div class="press-card">
+          <div class="press-source">PASSIONATE IN MARKETING</div>
+          <h4 class="press-headline">"Positioned for the Everyday Hero: How Indian Garage scaled to ₹500 Cr GMV."</h4>
+          <p class="press-summary">
+            A comprehensive look at Indian Garage's high-velocity 14-day supply engine, South Asian fit calibration, and market dominance as AJIO's #1 external brand.
+          </p>
+          <div class="press-tag">MARKET LEADERSHIP</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SECTION 09: SOCIAL MEDIA & BRAND MOTTOS HUB
+       ====================================================================== -->
+  <section class="catalogue-section" id="social-hub">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <div>
+        <span class="section-eyebrow">COMMUNITY & DIGITAL CULTURE</span>
+        <h2 class="section-headline">Connect Live Across Our Social Ecosystem</h2>
+      </div>
+      <div>
+        <span class="hero-status-pill">Official Verified Channels • Daily Drops</span>
+      </div>
+    </div>
+
+    <p class="section-lead-copy">
+      Explore our latest collections, behind-the-scenes factory craft, customer community reels, and real-time trend releases across all verified social handles.
+    </p>
+
+    <!-- 5 Live Connected Social Channels -->
+    <div class="social-channels-grid">
+      <a href="https://www.instagram.com/theindiangarageco_/" target="_blank" rel="noopener noreferrer" class="social-channel-card">
+        <div class="social-card-top">
+          <div class="social-icon-box ig">📸</div>
+          <span class="social-followers">360K+ COMMUNITY</span>
+        </div>
+        <div class="social-handle">@theindiangarageco_</div>
+        <div class="social-name">Instagram Official</div>
+        <p class="social-desc">Daily high-velocity outfit drops, high-street styling guides, customer fit checks, and campaign reels featuring Suryakumar Yadav.</p>
+        <div class="social-link-cta">Follow on Instagram ↗</div>
+      </a>
+
+      <a href="https://in.linkedin.com/company/indiangarge" target="_blank" rel="noopener noreferrer" class="social-channel-card">
+        <div class="social-card-top">
+          <div class="social-icon-box li">💼</div>
+          <span class="social-followers">ENTERPRISE NETWORK</span>
+        </div>
+        <div class="social-handle">indiangarge</div>
+        <div class="social-name">LinkedIn Corporate</div>
+        <p class="social-desc">Corporate announcements, supply chain milestones, leadership hiring, and Aditya Birla Group TMRW partnership updates.</p>
+        <div class="social-link-cta">Connect on LinkedIn ↗</div>
+      </a>
+
+      <a href="https://www.youtube.com/@TheIndianGarageCo" target="_blank" rel="noopener noreferrer" class="social-channel-card">
+        <div class="social-card-top">
+          <div class="social-icon-box yt">📺</div>
+          <span class="social-followers">85M+ IMPRESSIONS</span>
+        </div>
+        <div class="social-handle">@TheIndianGarageCo</div>
+        <div class="social-name">YouTube Channel</div>
+        <p class="social-desc">Official brand films, TVCs, behind-the-scenes shoots with SKY, and 14-day agile factory pod documentaries.</p>
+        <div class="social-link-cta">Watch on YouTube ↗</div>
+      </a>
+
+      <a href="https://www.facebook.com/tigc2010/" target="_blank" rel="noopener noreferrer" class="social-channel-card">
+        <div class="social-card-top">
+          <div class="social-icon-box fb">📘</div>
+          <span class="social-followers">ACTIVE COMMUNITY</span>
+        </div>
+        <div class="social-handle">tigc2010</div>
+        <div class="social-name">Facebook Community</div>
+        <p class="social-desc">Nationwide customer reviews, festive collection announcements, and local store opening alerts across India.</p>
+        <div class="social-link-cta">Join on Facebook ↗</div>
+      </a>
+
+      <a href="https://twitter.com/indiangarageco" target="_blank" class="social-channel-card">
+        <div class="social-card-top">
+          <div class="social-icon-box tw">🐦</div>
+          <span class="social-followers">LIVE DISPATCHES</span>
+        </div>
+        <div class="social-handle">@indiangarageco</div>
+        <div class="social-name">Twitter / X</div>
+        <p class="social-desc">Real-time drops, customer support dispatch, retail event coverage, and fast-fashion commentary.</p>
+        <div class="social-link-cta">Follow on X ↗</div>
+      </a>
+    </div>
+
+    <!-- Cultural Calling Cards & Brand Motto Suite (Apple VisionOS Glass Bento) -->
+    <div class="brand-mottos-suite-wrapper">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 12px; margin-bottom: 8px;">
+        <div>
+          <span class="section-eyebrow">CULTURAL CALLING CARDS & MOTTO SUITE</span>
+          <h3 style="font-family: var(--font-title); font-size: 24px; font-weight: 700; color: var(--text-pure); margin: 6px 0 0;">
+            The Philosophy of New India's Youth
+          </h3>
+        </div>
+        <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">
+          4 Cultural Pillars Championed Nationwide
+        </span>
+      </div>
+
+      <div class="brand-mottos-grid">
+        <!-- Card 1: For Everyday Heroes -->
+        <div class="motto-calling-card crimson">
+          <div class="motto-card-header">
+            <div class="motto-card-icon">⚡</div>
+            <span class="motto-card-index">PILLAR 01</span>
+          </div>
+          <div>
+            <div class="motto-card-context">The Core Identity Anthem</div>
+            <h4 class="motto-card-quote">"FOR EVERYDAY HEROES"</h4>
+          </div>
+          <p class="motto-card-desc">
+            Engineered for the resilient dreamers, everyday hustlers, and self-made youth of New India who move at lightning speed and demand fashion that keeps pace without compromise.
+          </p>
+          <div class="motto-card-badge">
+            <span>🏷️</span>
+            <span>#EverydayHeroes • Universal High-Street Fit</span>
+          </div>
+        </div>
+
+        <!-- Card 2: #FreeStyleIt -->
+        <div class="motto-calling-card emerald">
+          <div class="motto-card-header">
+            <div class="motto-card-icon">🎯</div>
+            <span class="motto-card-index">PILLAR 02</span>
+          </div>
+          <div>
+            <div class="motto-card-context">The Cultural Movement</div>
+            <h4 class="motto-card-quote">"#FREESTYLEIT"</h4>
+          </div>
+          <p class="motto-card-desc">
+            Championed alongside Brand Ambassador Suryakumar Yadav (SKY). Break free from rigid wardrobe norms and curate spontaneous, energetic looks across South Asian streets.
+          </p>
+          <div class="motto-card-badge">
+            <span>🏏</span>
+            <span>#FreestyleIt • Suryakumar Yadav Campaign</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Be Unstoppable -->
+        <div class="motto-calling-card cyan">
+          <div class="motto-card-header">
+            <div class="motto-card-icon">🚀</div>
+            <span class="motto-card-index">PILLAR 03</span>
+          </div>
+          <div>
+            <div class="motto-card-context">The Relentless Mindset</div>
+            <h4 class="motto-card-quote">"BE UNSTOPPABLE. DRESS FOR THE CHASE."</h4>
+          </div>
+          <p class="motto-card-desc">
+            From sunrise commutes and startup workspaces to evening social runs. Durable, high-recovery fabrics that withstand 50,000+ Martindale cycles while maintaining effortless drape.
+          </p>
+          <div class="motto-card-badge">
+            <span>💨</span>
+            <span>#Unstoppable • 2% Memory Snapback Lycra</span>
+          </div>
+        </div>
+
+        <!-- Card 4: 14-Day Velocity -->
+        <div class="motto-calling-card amber">
+          <div class="motto-card-header">
+            <div class="motto-card-icon">⏱️</div>
+            <span class="motto-card-index">PILLAR 04</span>
+          </div>
+          <div>
+            <div class="motto-card-context">The Agile Craft Code</div>
+            <h4 class="motto-card-quote">"14-DAY VELOCITY. ZERO SHORTCUTS."</h4>
+          </div>
+          <p class="motto-card-desc">
+            Concept-to-rack speed in two weeks. 100+ decentralized micro-batch factory pods producing 550,000+ units monthly with strict Aditya Birla TMRW quality compliance.
+          </p>
+          <div class="motto-card-badge">
+            <span>🏭</span>
+            <span>#VelocityEngine • 88% 45-Day Sell-Through</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SECTION 10: CORPORATE DIRECTORY & CONTACT DESKS
+       ====================================================================== -->
+  <section class="catalogue-section" id="contact-desks" style="padding-top: 0;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; margin-bottom: 32px;">
+      <div>
+        <span class="section-eyebrow">ENTERPRISE CONTACT DESKS</span>
+        <h2 class="section-headline">Connect With Our Corporate Directorate</h2>
+      </div>
+      <div>
+        <span class="hero-status-pill">Dedicated Functional Desks • 24-Hr SLA</span>
+      </div>
+    </div>
+
+    <!-- 5 Institutional Department Desks -->
+    <div class="corporate-directory-grid">
+      <!-- Desk 1: Corporate HQ -->
+      <div class="directory-desk-card featured">
+        <div class="desk-badge">REGISTERED CORPORATE HQ</div>
+        <h3 class="desk-title">The Indian Garage Company Pvt. Ltd.</h3>
+        <p class="desk-desc">
+          No. 3/A, SY No. 38/3, 38/4, GB Palya, Hongasandra, Bangalore South, Begur, Bangalore - 560068, Karnataka, India
+        </p>
+        <div class="desk-meta">
+          <span>CORPORATE ENTITY:</span> <strong>CIN U18109KA2020PTC135890</strong>
+        </div>
+      </div>
+
+      <!-- Desk 2: Manufacturing & Sourcing -->
+      <div class="directory-desk-card">
+        <div class="desk-badge crimson">SUPPLY CHAIN & MANUFACTURING</div>
+        <h3 class="desk-title">Manufacturing & Mill Sourcing Desk</h3>
+        <p class="desk-desc">
+          Active onboarding for garment stitching pods (FOB/CMT), spinning & weaving mills, and sustainable wash laundries.
+        </p>
+        <button class="btn-desk-action btn-open-partner-modal">
+          Submit Factory Allocation ↗
+        </button>
+      </div>
+
+      <!-- Desk 3: Retail Franchise -->
+      <div class="directory-desk-card">
+        <div class="desk-badge emerald">RETAIL & REAL ESTATE</div>
+        <h3 class="desk-title">100 EBO Retail Expansion Desk</h3>
+        <p class="desk-desc">
+          Direct engagement for premier mall developers, high-street landlords, and franchise partners (FOFO & FOCO formats).
+        </p>
+        <button class="btn-desk-action btn-open-partner-modal">
+          Propose Retail Property ↗
+        </button>
+      </div>
+
+      <!-- Desk 4: Media & PR -->
+      <div class="directory-desk-card">
+        <div class="desk-badge cyan">MEDIA & ALLIANCES</div>
+        <h3 class="desk-title">Press, Media & Brand Alliances</h3>
+        <p class="desk-desc">
+          Journalist inquiries, campaign media kits, brand collaboration proposals, and executive interviews.
+        </p>
+        <a href="mailto:media@tigc.in" class="btn-desk-action">
+          Email Media Office ↗
+        </a>
+      </div>
+
+      <!-- Desk 5: Careers -->
+      <div class="directory-desk-card">
+        <div class="desk-badge amber">PEOPLE & CULTURE</div>
+        <h3 class="desk-title">Careers & Leadership Talent</h3>
+        <p class="desk-desc">
+          Join one of India's fastest-growing fashion enterprises across apparel design, merchandising, supply chain, and retail tech.
+        </p>
+        <a href="https://www.linkedin.com/company/the-indian-garage-co/" target="_blank" class="btn-desk-action">
+          Explore Open Roles ↗
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       FOOTER
+       ====================================================================== -->
+  <footer class="catalogue-footer">
+    <div>
+      <span style="color: #FFFFFF; font-weight: 600;">INDIAN GARAGE</span> • Part of TMRW (Aditya Birla Group) House of Brands
+    </div>
+    <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+      <a href="#about-us" style="color: #FFFFFF; text-decoration: none;">About Indian Garage</a>
+      <a href="#media-center" style="color: #FFFFFF; text-decoration: none;">Media & Press</a>
+      <a href="#social-hub" style="color: #FFFFFF; text-decoration: none;">Social Hub</a>
+      <a href="#partner-hub" style="color: var(--tigc-crimson-bright); text-decoration: none;">Sourcing Directorate ↗</a>
+      <a href="https://tigc.in" target="_blank" style="color: #FFFFFF; text-decoration: none;">Official Store (tigc.in) ↗</a>
+      <a href="https://www.tmrw.in" target="_blank" style="color: var(--accent-emerald); text-decoration: none;">TMRW House of Brands (tmrw.in) ↗</a>
+      <a href="brand-book.html" style="color: var(--text-muted); text-decoration: none;">Internal Guidelines ↗</a>
+    </div>
+  </footer>
+
+  <!-- SOURCING & PARTNERSHIP INQUIRY MODAL -->
+  <div id="partner-pitch-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 9999; backdrop-filter: blur(10px); align-items: center; justify-content: center; padding: 20px;">
+    <div style="background: #0E131E; border: 1px solid var(--border-accent); border-radius: 14px; max-width: 540px; width: 100%; padding: 36px; position: relative; box-shadow: 0 24px 60px rgba(0,0,0,0.8);">
+      <button id="btn-close-partner-modal" style="position: absolute; top: 16px; right: 16px; background: transparent; border: none; font-size: 22px; color: #fff; cursor: pointer;">✕</button>
+      <div style="font-family: var(--font-mono); font-size: 11px; color: var(--tigc-crimson-bright); font-weight: 700; margin-bottom: 6px;">INDIAN GARAGE • SOURCING & STRATEGIC PARTNERSHIPS</div>
+      <h3 style="font-family: var(--font-display); font-size: 32px; color: #FFFFFF; margin-bottom: 8px;">Partner With Indian Garage</h3>
+      <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.5;">
+        Connect directly with our Corporate Sourcing Directorate. We are reviewing capacity allocations for 500,000 to 1,000,000 units/month scaling across India.
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <input type="text" id="partner-name" placeholder="Contact Person Name & Title" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: #fff; padding: 12px; border-radius: 6px; font-family: var(--font-mono); font-size: 13px;">
+        <input type="text" id="partner-company" placeholder="Company / Manufacturing Unit / Mill Name" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: #fff; padding: 12px; border-radius: 6px; font-family: var(--font-mono); font-size: 13px;">
+        <select id="partner-type" style="background: #151A26; border: 1px solid var(--border-subtle); color: #fff; padding: 12px; border-radius: 6px; font-family: var(--font-mono); font-size: 13px;">
+          <option value="garment_factory">Garment Stitching Pod (FOB / CMT)</option>
+          <option value="fabric_mill">Fabric Mill (Knits / Denim / Woven Cottons)</option>
+          <option value="wash_plant">Denim Laundry / Sustainable Laser Wash Facility</option>
+          <option value="retail_partner">Retail Mall / High-Street EBO Franchisee</option>
+          <option value="accessories">Trims, Zippers, Thread & Packaging Supplier</option>
+        </select>
+        <input type="tel" id="partner-phone" placeholder="Mobile / WhatsApp Number" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: #fff; padding: 12px; border-radius: 6px; font-family: var(--font-mono); font-size: 13px;">
+        <input type="text" id="partner-city" placeholder="Factory / Facility City & State (e.g. Surat / Tirupur / Indore)" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: #fff; padding: 12px; border-radius: 6px; font-family: var(--font-mono); font-size: 13px;">
+        <button class="btn-catalogue-primary" id="btn-submit-partner-pitch" style="width: 100%; justify-content: center; margin-top: 8px;">
+          SUBMIT PARTNERSHIP PROPOSAL
+        </button>
+      </div>
+
+      <div id="partner-success-msg" style="display: none; margin-top: 16px; font-family: var(--font-mono); font-size: 13px; color: var(--accent-emerald); text-align: center;">
+        ✓ Proposal received. The Indian Garage Sourcing Directorate will connect via WhatsApp within 24 hours.
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Scripts (v2.6 Cache-Busted) -->
+  <script src="js/audio-fx.js?v=2.6"></script>
+  <script src="js/showroom-3d.js?v=2.6"></script>
+  <script src="js/catalogue-app.js?v=2.6"></script>
+</body>
+</html>
