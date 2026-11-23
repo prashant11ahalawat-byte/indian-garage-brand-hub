@@ -1,5 +1,5 @@
 /**
- * THE INDIAN GARAGE CO. — "BUILT IN LAYERS" EXPERIENTIAL CONTROLLER
+ * INDIAN GARAGE — "BUILT IN LAYERS" EXPERIENTIAL CONTROLLER
  * Bagel-Stacking 3D Layer Mechanics, Natural Scroll/Click Stepper & Store Directory
  */
 

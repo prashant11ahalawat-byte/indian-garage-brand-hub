@@ -1,5 +1,5 @@
 /* ==========================================================================
-   THE INDIAN GARAGE CO. — "BUILT IN LAYERS" EXPERIENTIAL BRAND HUB
+   INDIAN GARAGE — "BUILT IN LAYERS" EXPERIENTIAL BRAND HUB
    Inspired by Bagel-Stacking Layer Mechanics & Apple Editorial Design
    ========================================================================== */
 
@@ -140,48 +140,39 @@ body[data-active-layer="4"] .ambient-lighting-layer {
 .brand-logo-link {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   text-decoration: none;
   color: var(--text-pure);
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.brand-tg-badge {
-  width: 36px;
-  height: 36px;
-  border-radius: 9px;
-  background: linear-gradient(135deg, #1f0507 0%, #3d070b 100%);
-  border: 1px solid rgba(229, 9, 20, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 800;
-  color: var(--tigc-ruby);
-  box-shadow: 0 0 14px rgba(229, 9, 20, 0.3);
+.brand-logo-link:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
 }
 
-.brand-header-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.brand-header-title {
-  font-family: var(--font-display);
-  font-size: 15px;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  line-height: 1.1;
-  color: var(--text-pure);
+.brand-header-official-logo {
+  height: 25px;
+  width: auto;
+  max-width: 175px;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
 }
 
 .brand-header-sub {
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--text-dim);
-  letter-spacing: 0.05em;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--tigc-ruby);
+  background: rgba(229, 9, 20, 0.12);
+  border: 1px solid rgba(229, 9, 20, 0.35);
+  padding: 3px 8px;
+  border-radius: 999px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-top: 2px;
+  display: inline-flex;
+  align-items: center;
 }
 
 /* Layer Navigator Pills (Header Center) */
@@ -692,21 +683,39 @@ body[data-active-layer="4"] .stack-layer-card[data-layer="4"] {
   padding: 24px 0;
 }
 
-.foundation-seal-badge {
-  width: 90px;
-  height: 90px;
-  border-radius: 24px;
-  background: linear-gradient(135deg, #1f0507 0%, #3d070b 100%);
-  border: 1px solid rgba(229, 9, 20, 0.6);
+.foundation-official-logo-stage {
   display: flex;
-  align-items: center;
   justify-content: center;
-  font-family: var(--font-display);
-  font-size: 38px;
-  font-weight: 800;
+  align-items: center;
+  margin: 0 auto 16px;
+  padding: 16px 28px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  max-width: 420px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.foundation-official-logo-img {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  max-height: 48px;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 4px 18px rgba(229, 9, 20, 0.35));
+}
+
+.foundation-brand-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
   color: var(--tigc-ruby);
-  box-shadow: 0 0 30px rgba(229, 9, 20, 0.35);
-  margin-bottom: 18px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
 }
 
 .foundation-title-lockup {
@@ -715,6 +724,7 @@ body[data-active-layer="4"] .stack-layer-card[data-layer="4"] {
   font-weight: 800;
   color: var(--text-pure);
   margin-bottom: 6px;
+  letter-spacing: 0.02em;
 }
 
 .foundation-sub-lockup {
@@ -1301,6 +1311,16 @@ body[data-active-layer="4"] .stack-layer-card[data-layer="4"] {
   flex-wrap: wrap;
 }
 
+.footer-official-logo-img {
+  height: 22px;
+  width: auto;
+  max-width: 150px;
+  object-fit: contain;
+  display: block;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
+}
+
 .footer-brand-side p {
   font-size: 12px;
   color: var(--text-dim);
@@ -1369,6 +1389,13 @@ body[data-active-layer="4"] .stack-layer-card[data-layer="4"] {
   .brand-header-inner {
     padding: 10px 16px;
   }
+  .brand-header-official-logo {
+    height: 21px;
+    max-width: 140px;
+  }
+  .brand-header-sub {
+    display: none;
+  }
   .layer-nav-pills {
     display: none; /* Keep clean on small mobile screens */
   }
@@ -1386,6 +1413,13 @@ body[data-active-layer="4"] .stack-layer-card[data-layer="4"] {
   }
   .stack-layer-card {
     padding: 22px;
+  }
+  .foundation-official-logo-stage {
+    padding: 12px 18px;
+    max-width: 280px;
+  }
+  .foundation-official-logo-img {
+    max-height: 38px;
   }
   .stores-directory-grid {
     grid-template-columns: 1fr;
